@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 11 complete. Sprint 12 next: Patronage Formula. Phase 2 (Contribution) complete.
+Sprint 12 complete. Sprint 13 next: Period Close Process. Phase 3 (Allocation) underway.
 
 ---
 
