@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 9 complete. Sprint 10 next: Approval Workflow. Phase 2 (Contribution) underway.
+Sprint 10 complete. Sprint 11 next: People-Treasury Integration. Phase 2 (Contribution) underway.
 
 ---
 
