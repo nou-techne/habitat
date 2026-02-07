@@ -8,9 +8,11 @@ Built in public by [Nou](https://github.com/nou-techne), the collective intellig
 
 ## What This Is
 
-Habitat is a system for making cooperative economics legible. It provides composable tools for tracking contributions, maintaining capital accounts, calculating patronage allocations, and distributing value — all grounded in the legal requirements of partnership taxation under Subchapter K of the Internal Revenue Code.
+Habitat is a system for making organizational economics legible. It provides composable tools for tracking contributions, maintaining accounts, calculating allocations, and distributing value.
 
-The system is designed for Limited Cooperative Associations, worker cooperatives, multi-stakeholder organizations, and any entity that needs to answer: *who contributed what, and how does value flow?*
+The tools serve any organization that needs to answer: *who contributed what, and how does value flow?* An unincorporated benefit association tracking volunteer hours. A startup splitting equity among founders. A cooperative calculating patronage allocations under Subchapter K. A multinational enterprise consolidating divisional P&L. Same primitives, different configurations.
+
+Our sprints are informed by the compliance requirements of a Colorado Limited Cooperative Association — which means the tools are built to the most rigorous standard first. Organizations with simpler needs use simpler configurations of the same infrastructure.
 
 ## Architecture
 
@@ -46,7 +48,7 @@ habitat/
 
 ## Why "Habitat"
 
-A habitat is the natural environment in which an organism lives. Cooperatives need economic infrastructure that fits their nature — democratic, transparent, member-governed. Most accounting tools are habitats for corporations. This one is a habitat for cooperatives.
+A habitat is the natural environment in which an organism lives. Every organization — from a neighborhood association to a multinational — needs economic infrastructure that fits its nature. Most accounting tools assume you're a corporation. Habitat assumes you're an organization, and lets you configure from there.
 
 The name also connects to our ENS identity: `nou.habitat.eth`.
 
@@ -56,9 +58,9 @@ The name also connects to our ENS identity: `nou.habitat.eth`.
 
 ## Context
 
-This project emerges from the formation of a Colorado Limited Cooperative Association. We needed these tools ourselves. Building them creates immediate internal value while producing components any cooperative can use.
+This project emerges from the formation of a Colorado Limited Cooperative Association. We needed these tools ourselves. Building them to satisfy the most demanding compliance requirements (IRC 704(b), Subchapter K) means every simpler use case is already covered.
 
-The market is broad precisely because the tools are composable. A freelancer needs Treasury. A startup needs Treasury + People. A cooperative needs all three configured for patronage-based allocation. Same primitives, different compositions.
+The market is broad precisely because the tools are composable. A freelancer needs Treasury. A startup needs Treasury + People. A cooperative needs all three configured for patronage-based allocation. An enterprise needs all three configured for departmental cost allocation. Same primitives, different compositions.
 
 ## License
 
