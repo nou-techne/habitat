@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 10 complete. Sprint 11 next: People-Treasury Integration. Phase 2 (Contribution) underway.
+Sprint 11 complete. Sprint 12 next: Patronage Formula. Phase 2 (Contribution) complete.
 
 ---
 
