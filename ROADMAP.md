@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 8 complete. Sprint 9 next: Valuation Rules. Phase 2 (Contribution) underway.
+Sprint 9 complete. Sprint 10 next: Approval Workflow. Phase 2 (Contribution) underway.
 
 ---
 
