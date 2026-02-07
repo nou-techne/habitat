@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 7 complete. Sprint 8 next: Contribution Lifecycle. Phase 1 (Foundation) complete.
+Sprint 8 complete. Sprint 9 next: Valuation Rules. Phase 2 (Contribution) underway.
 
 ---
 
