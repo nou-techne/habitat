@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 4 complete. Sprint 5 next: Transaction Model.
+Sprint 5 complete. Sprint 6 next: Balance Computation.
 
 ---
 
