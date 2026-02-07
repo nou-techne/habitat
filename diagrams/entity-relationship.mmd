@@ -1,0 +1,175 @@
+---
+title: "Composable Organization Tools: Entity-Relationship Model"
+---
+erDiagram
+
+    %% Core REA Foundation
+    AGENT {
+        uuid id PK
+        string type "individual|organization|role|system"
+        string name
+        timestamp created_at
+        json attributes
+    }
+
+    RESOURCE_TYPE {
+        uuid id PK
+        string category "financial|temporal|intellectual|physical|social"
+        string name
+        string unit_of_measure
+    }
+
+    EVENT {
+        uuid id PK
+        string event_type
+        timestamp occurred_at
+        timestamp recorded_at
+        uuid actor_id FK
+        json payload
+    }
+
+    %% Treasury Domain
+    ACCOUNT {
+        uuid id PK
+        uuid owner_id FK
+        uuid resource_type_id FK
+        string name
+        string account_type "asset|liability|equity|revenue|expense"
+        uuid parent_account_id FK
+        string status "active|archived"
+    }
+
+    TRANSACTION {
+        uuid id PK
+        uuid event_id FK
+        timestamp occurred_at
+        string description
+        string status "pending|recorded|reconciled|voided"
+    }
+
+    ENTRY {
+        uuid id PK
+        uuid transaction_id FK
+        uuid account_id FK
+        decimal amount
+        string memo
+    }
+
+    PERIOD {
+        uuid id PK
+        date start_date
+        date end_date
+        string status "open|closing|closed"
+        timestamp closed_at
+    }
+
+    %% People Domain
+    PROFILE {
+        uuid id PK
+        uuid agent_id FK
+        string display_name
+        string email
+        string status "invited|active|departed"
+        timestamp joined_at
+    }
+
+    ROLE_DEFINITION {
+        uuid id PK
+        string name
+        string description
+        json permissions
+    }
+
+    ROLE_ASSIGNMENT {
+        uuid id PK
+        uuid profile_id FK
+        uuid role_id FK
+        timestamp assigned_at
+        timestamp expires_at
+    }
+
+    CONTRIBUTION {
+        uuid id PK
+        uuid profile_id FK
+        uuid event_id FK
+        string contribution_type
+        decimal quantity
+        string unit
+        decimal valued_amount
+        string status "draft|pending|approved|rejected|applied"
+        uuid approved_by FK
+    }
+
+    STAKE {
+        uuid id PK
+        uuid profile_id FK
+        string stake_type "equity|membership|patronage|token"
+        decimal quantity
+        timestamp granted_at
+        json vesting_schedule
+    }
+
+    %% Agreements Domain
+    AGREEMENT {
+        uuid id PK
+        string name
+        string agreement_type "operating|membership|service|investment"
+        string status "draft|active|suspended|terminated"
+        timestamp effective_from
+        timestamp effective_until
+    }
+
+    PARTY {
+        uuid id PK
+        uuid agreement_id FK
+        uuid agent_id FK
+        string party_role "principal|member|investor|provider"
+        timestamp joined_at
+    }
+
+    TERM {
+        uuid id PK
+        uuid agreement_id FK
+        string term_type "allocation|distribution|contribution|governance"
+        string name
+        json formula_definition
+    }
+
+    CALCULATION {
+        uuid id PK
+        uuid term_id FK
+        uuid period_id FK
+        string status "draft|final|applied"
+        json inputs_snapshot
+        json results
+        timestamp computed_at
+    }
+
+    %% Relationships
+    AGENT ||--o{ PROFILE : "has"
+    AGENT ||--o{ ACCOUNT : "owns"
+    AGENT ||--o{ PARTY : "participates_as"
+    AGENT ||--o{ EVENT : "triggers"
+
+    RESOURCE_TYPE ||--o{ ACCOUNT : "measures"
+
+    ACCOUNT ||--o{ ENTRY : "affected_by"
+    ACCOUNT ||--o{ ACCOUNT : "contains"
+
+    TRANSACTION ||--|{ ENTRY : "contains"
+    TRANSACTION ||--|| EVENT : "caused_by"
+
+    PERIOD ||--o{ CALCULATION : "bounds"
+
+    PROFILE ||--o{ ROLE_ASSIGNMENT : "has"
+    PROFILE ||--o{ CONTRIBUTION : "makes"
+    PROFILE ||--o{ STAKE : "holds"
+
+    ROLE_DEFINITION ||--o{ ROLE_ASSIGNMENT : "assigned_through"
+
+    CONTRIBUTION ||--|| EVENT : "recorded_as"
+
+    AGREEMENT ||--|{ PARTY : "involves"
+    AGREEMENT ||--|{ TERM : "contains"
+
+    TERM ||--o{ CALCULATION : "computed_by"

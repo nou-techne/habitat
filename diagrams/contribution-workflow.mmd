@@ -1,0 +1,63 @@
+---
+title: "Composable Organization Tools: Contribution to Capital Account Workflow"
+---
+sequenceDiagram
+    autonumber
+
+    participant M as Member
+    participant P as People Tool
+    participant EB as Event Bus
+    participant T as Treasury Tool
+    participant A as Agreements Tool
+
+    Note over M,A: Phase 1: Contribution Logging
+    M->>P: Log contribution<br/>(type: labor, hours: 10, rate: $100)
+    P->>P: Validate contribution data
+    P->>P: Create contribution record<br/>(status: pending)
+    P-->>M: Contribution logged<br/>(awaiting approval)
+
+    Note over M,A: Phase 2: Approval Workflow
+    M->>P: Request approval
+    P->>P: Route to approver
+    rect rgb(240, 248, 255)
+        Note over P: Administrator reviews
+        P->>P: Approve contribution<br/>(status: approved)
+    end
+    P->>EB: Publish event<br/>(contribution.approved)
+
+    Note over M,A: Phase 3: Capital Account Update
+    EB->>T: Deliver event<br/>(contribution.approved)
+    T->>T: Lookup member's capital account
+    T->>T: Calculate value<br/>($100/hr x 10 hrs = $1,000)
+    T->>T: Create transaction<br/>(credit capital account)
+    T->>T: Create offsetting entry<br/>(debit contributed capital)
+    T->>T: Validate transaction balances
+    T->>T: Record transaction
+    T->>EB: Publish event<br/>(transaction.recorded)
+
+    Note over M,A: Phase 4: Contribution Applied
+    EB->>P: Deliver event<br/>(transaction.recorded)
+    P->>P: Update contribution<br/>(status: applied)
+    P-->>M: Notification:<br/>Contribution applied to capital account
+
+    Note over M,A: Phase 5: Allocation Calculation (Period End)
+    rect rgb(255, 250, 240)
+        Note over A: Administrator triggers allocation
+        A->>P: Query: Get approved contributions<br/>(by member, by type, for period)
+        P-->>A: Contribution summaries
+        A->>T: Query: Get revenue attribution<br/>(by member, for period)
+        T-->>A: Revenue summaries
+        A->>A: Execute allocation formula<br/>(weighted sum, normalize)
+        A->>A: Generate calculation results<br/>(member X gets Y%)
+    end
+
+    A->>A: Finalize calculation<br/>(status: final)
+    A->>EB: Publish event<br/>(calculation.applied)
+
+    EB->>T: Deliver event<br/>(calculation.applied)
+    T->>T: Create allocation transactions<br/>(credit each member's capital)
+    T->>T: Debit retained earnings
+    T->>EB: Publish event<br/>(allocations.recorded)
+
+    EB->>P: Deliver event<br/>(allocations.recorded)
+    P-->>M: Notification:<br/>Period allocation complete

@@ -1,0 +1,81 @@
+---
+title: "Composable Organization Tools: Allocation Calculation Process"
+---
+flowchart TB
+
+    Start([Period End Trigger])
+
+    subgraph Inputs["1. Gather Inputs"]
+        GetContrib["Query People Tool <br/> Get contributions by member, type"]
+        GetRevenue["Query Treasury Tool <br/> Get revenue attribution by member"]
+        GetBalances["Query Treasury Tool <br/> Get capital account balances"]
+        GetConfig["Load Agreement Terms <br/> Get formula configuration"]
+    end
+
+    subgraph Normalize["2. Normalize Data"]
+        ConvertUnits["Convert all contributions <br/> to comparable units (USD)"]
+        FilterPeriod["Filter to current period"]
+        AggByMember["Aggregate by member"]
+    end
+
+    subgraph Calculate["3. Apply Formula"]
+        ApplyWeights["Apply category weights <br/> (labor: 40%, revenue: 30%, <br/> cash: 20%, community: 10%)"]
+        SumWeighted["Sum weighted values <br/> per member"]
+        CalcTotal["Calculate total <br/> weighted sum"]
+        CalcPct["Calculate percentages <br/> (member / total)"]
+    end
+
+    subgraph Threshold["4. Apply Thresholds"]
+        CheckMin{"Member % <br/> above minimum?"}
+        ZeroOut["Set allocation to 0%"]
+        Keep["Keep calculated %"]
+        Renormalize["Renormalize remaining <br/> to sum to 100%"]
+    end
+
+    subgraph Output["5. Generate Results"]
+        CreateResults["Create calculation record <br/> with inputs snapshot"]
+        CalcAmounts["Multiply percentages <br/> by pool amount"]
+        Preview["Generate preview <br/> for admin review"]
+    end
+
+    subgraph Apply["6. Apply Results"]
+        AdminReview{"Admin <br/> approves?"}
+        Reject["Void calculation <br/> Return to draft"]
+        Finalize["Finalize calculation"]
+        PublishEvent["Publish <br/> calculation.applied event"]
+        CreateTxns["Treasury creates <br/> allocation transactions"]
+    end
+
+    Finish([Allocation Complete])
+
+    Start --> Inputs
+    GetContrib --> Normalize
+    GetRevenue --> Normalize
+    GetBalances --> Normalize
+    GetConfig --> Calculate
+
+    ConvertUnits --> FilterPeriod
+    FilterPeriod --> AggByMember
+    AggByMember --> ApplyWeights
+
+    ApplyWeights --> SumWeighted
+    SumWeighted --> CalcTotal
+    CalcTotal --> CalcPct
+
+    CalcPct --> CheckMin
+    CheckMin -->|No| ZeroOut
+    CheckMin -->|Yes| Keep
+    ZeroOut --> Renormalize
+    Keep --> Renormalize
+
+    Renormalize --> CreateResults
+    CreateResults --> CalcAmounts
+    CalcAmounts --> Preview
+
+    Preview --> AdminReview
+    AdminReview -->|No| Reject
+    AdminReview -->|Yes| Finalize
+    Reject --> Start
+    Finalize --> PublishEvent
+    PublishEvent --> CreateTxns
+    CreateTxns --> Finish

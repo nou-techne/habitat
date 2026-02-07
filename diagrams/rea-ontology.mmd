@@ -1,0 +1,137 @@
+---
+title: "Composable Organization Tools: REA Ontology Foundation"
+---
+classDiagram
+    direction TB
+
+    class Agent {
+        +UUID id
+        +String type
+        +String name
+        +Map attributes
+        +Timestamp created_at
+        +participatesIn(Event)
+        +owns(Resource)
+        +relatesTo(Agent)
+    }
+
+    class Resource {
+        +UUID id
+        +String type
+        +String name
+        +String unit
+        +Decimal quantity
+        +affectedBy(Event)
+        +heldBy(Agent)
+    }
+
+    class Event {
+        +UUID id
+        +String event_type
+        +Timestamp occurred_at
+        +Timestamp recorded_at
+        +Map payload
+        +triggeredBy(Agent)
+        +affects(Resource)
+        +involves(Agent)
+    }
+
+    class AgentRelationship {
+        +UUID from_agent
+        +UUID to_agent
+        +String relationship_type
+        +Timestamp valid_from
+        +Timestamp valid_until
+    }
+
+    %% Tool-Specific Extensions
+
+    class Account {
+        +UUID owner_id
+        +String account_type
+        +UUID parent_id
+        +getBalance(asOf)
+    }
+
+    class Transaction {
+        +String status
+        +validate()
+        +record()
+        +void()
+    }
+
+    class Entry {
+        +UUID account_id
+        +Decimal amount
+    }
+
+    class Profile {
+        +UUID agent_id
+        +String display_name
+        +String status
+    }
+
+    class Contribution {
+        +String contribution_type
+        +Decimal quantity
+        +Decimal valued_amount
+        +String status
+        +approve()
+        +reject()
+    }
+
+    class Stake {
+        +String stake_type
+        +Decimal quantity
+        +Map vesting_schedule
+    }
+
+    class Agreement {
+        +String agreement_type
+        +String status
+        +activate()
+        +suspend()
+        +terminate()
+    }
+
+    class Term {
+        +String term_type
+        +Map formula_definition
+        +evaluate(inputs)
+    }
+
+    class Calculation {
+        +String status
+        +Map inputs_snapshot
+        +Map results
+        +execute()
+        +finalize()
+        +apply()
+    }
+
+    %% REA Core Relationships
+    Agent "1" --> "*" Event : triggers
+    Agent "1" --> "*" Resource : owns
+    Agent "*" --> "*" Agent : relates to
+    Event "*" --> "*" Resource : affects
+    Event "*" --> "*" Agent : involves
+    AgentRelationship "*" --> "2" Agent : connects
+
+    %% Treasury Extensions
+    Account --|> Resource : extends
+    Transaction --|> Event : extends
+    Entry "*" --> "1" Transaction : part of
+    Entry "*" --> "1" Account : affects
+    Account "*" --> "1" Agent : owned by
+
+    %% People Extensions
+    Profile --|> Agent : extends
+    Contribution --|> Event : extends
+    Contribution "*" --> "1" Profile : made by
+    Stake "*" --> "1" Profile : held by
+
+    %% Agreements Extensions
+    Agreement "*" --> "*" Agent : involves
+    Term "*" --> "1" Agreement : part of
+    Calculation "*" --> "1" Term : executes
+    Calculation --|> Event : extends

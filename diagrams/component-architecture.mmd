@@ -1,0 +1,100 @@
+---
+title: "Composable Organization Tools: Component Architecture"
+---
+flowchart TB
+
+    subgraph Presentation["Presentation Layer"]
+        WebApp["Web Application"]
+        MobileApp["Mobile Application"]
+        API["Public API"]
+        Webhooks["Webhook Endpoints"]
+    end
+
+    subgraph Application["Application Layer"]
+        subgraph TreasuryApp["Treasury Components"]
+            T_AcctSvc["Account Service"]
+            T_TxnSvc["Transaction Service"]
+            T_BalSvc["Balance Service"]
+            T_RptSvc["Report Service"]
+        end
+
+        subgraph PeopleApp["People Components"]
+            P_ProfileSvc["Profile Service"]
+            P_ContribSvc["Contribution Service"]
+            P_ApprovalSvc["Approval Service"]
+            P_StakeSvc["Stake Service"]
+        end
+
+        subgraph AgreementsApp["Agreements Components"]
+            A_AgreementSvc["Agreement Service"]
+            A_TermSvc["Term Service"]
+            A_FormulaSvc["Formula Service"]
+            A_CalcSvc["Calculation Service"]
+        end
+    end
+
+    subgraph Core["Core Services Layer"]
+        IdentitySvc["Identity Service"]
+        EventSvc["Event Service"]
+        AuthzSvc["Authorization Service"]
+        ConfigSvc["Configuration Service"]
+        NotifySvc["Notification Service"]
+        AuditSvc["Audit Service"]
+    end
+
+    subgraph Infrastructure["Infrastructure Layer"]
+        EventStore[("Event Store")]
+        StateDB[("State Database")]
+        Cache[("Cache")]
+        FileStore[("Document Storage")]
+        Queue[("Message Queue")]
+    end
+
+    subgraph Integration["Integration Layer"]
+        BankAdapter["Bank Adapter"]
+        AcctAdapter["Accounting Adapter"]
+        ChainAdapter["Blockchain Adapter"]
+        WebhookDispatch["Webhook Dispatcher"]
+    end
+
+    %% Presentation to Application
+    WebApp --> TreasuryApp
+    WebApp --> PeopleApp
+    WebApp --> AgreementsApp
+    MobileApp --> PeopleApp
+    API --> Application
+
+    %% Application to Core
+    TreasuryApp --> IdentitySvc
+    TreasuryApp --> EventSvc
+    TreasuryApp --> AuthzSvc
+
+    PeopleApp --> IdentitySvc
+    PeopleApp --> EventSvc
+    PeopleApp --> AuthzSvc
+
+    AgreementsApp --> IdentitySvc
+    AgreementsApp --> EventSvc
+    AgreementsApp --> AuthzSvc
+
+    Application --> ConfigSvc
+    Application --> NotifySvc
+    Application --> AuditSvc
+
+    %% Core to Infrastructure
+    EventSvc --> EventStore
+    EventSvc --> Queue
+    IdentitySvc --> StateDB
+    AuthzSvc --> StateDB
+    ConfigSvc --> StateDB
+    AuditSvc --> EventStore
+    Application --> StateDB
+    Application --> Cache
+    P_ContribSvc --> FileStore
+
+    %% Integration Connections
+    T_TxnSvc <--> BankAdapter
+    T_RptSvc --> AcctAdapter
+    T_TxnSvc <--> ChainAdapter
+    EventSvc --> WebhookDispatch
+    Webhooks --> WebhookDispatch

@@ -1,0 +1,83 @@
+---
+title: "Composable Organization Tools: Entity State Lifecycles"
+---
+stateDiagram-v2
+    direction TB
+
+    state "Contribution Lifecycle" as Contribution {
+        [*] --> Draft: member creates
+        Draft --> Pending: submit for review
+        Pending --> Approved: admin approves
+        Pending --> Rejected: admin rejects
+        Approved --> Applied: downstream effects complete
+        Applied --> [*]
+        Rejected --> [*]
+
+        note right of Draft: Member editing
+        note right of Pending: Awaiting review
+        note right of Applied: Capital account updated
+    }
+
+    state "Transaction Lifecycle" as Transaction {
+        [*] --> TxPending: entries created
+        TxPending --> Recorded: validation passes
+        Recorded --> Reconciled: matched to external
+        Recorded --> Voided: reversal posted
+        Reconciled --> Voided: reversal posted
+        Reconciled --> [*]
+        Voided --> [*]
+
+        note right of TxPending: Entries not balanced
+        note right of Recorded: Affects balances
+        note right of Voided: Offset entries exist
+    }
+
+    state "Agreement Lifecycle" as Agreement {
+        [*] --> AgDraft: create agreement
+        AgDraft --> Active: all parties acknowledge
+        Active --> Suspended: admin suspends
+        Suspended --> Active: admin reactivates
+        Active --> Terminated: agreement ends
+        Suspended --> Terminated: agreement ends
+        Terminated --> [*]
+
+        note right of AgDraft: Terms being defined
+        note right of Active: Terms in effect
+        note right of Suspended: Terms paused
+    }
+
+    state "Calculation Lifecycle" as Calculation {
+        [*] --> CalcDraft: formula executed
+        CalcDraft --> Final: admin approves results
+        CalcDraft --> CalcVoided: admin rejects
+        Final --> CalcApplied: effects triggered
+        CalcApplied --> [*]
+        CalcVoided --> [*]
+
+        note right of CalcDraft: Preview mode
+        note right of Final: Locked results
+        note right of CalcApplied: Transactions created
+    }
+
+    state "Period Lifecycle" as Period {
+        [*] --> Open: period created
+        Open --> Closing: admin initiates close
+        Closing --> Closed: all items resolved
+        Closed --> [*]
+
+        note right of Open: Accepts transactions
+        note right of Closing: Final calculations
+        note right of Closed: Balance checkpoint
+    }
+
+    state "Profile Lifecycle" as Profile {
+        [*] --> Invited: invitation sent
+        Invited --> PActive: member accepts
+        PActive --> Departed: member leaves
+        Departed --> PActive: member returns
+        Departed --> [*]
+
+        note right of Invited: Awaiting acceptance
+        note right of PActive: Full participation
+        note right of Departed: Historical only
+    }

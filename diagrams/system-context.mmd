@@ -1,0 +1,67 @@
+---
+title: "Composable Organization Tools: System Context Diagram"
+---
+flowchart TB
+
+    subgraph External["External Entities"]
+        Members["Members <br/>Contributors"]
+        Admins["Administrators"]
+        Accountants["Accountants <br/>Tax Preparers"]
+        Banks["Banks <br/>Financial Institutions"]
+        AcctSoftware["Accounting Software <br/>(QuickBooks, Xero)"]
+        Blockchain["Blockchain Networks <br/>(Revnets, Ethereum)"]
+        IdProviders["Identity Providers <br/>(OAuth, SAML)"]
+        ExtApps["Third-Party Applications <br/>(via API/Webhooks)"]
+    end
+
+    subgraph System["Composable Organization Tools"]
+        direction TB
+
+        subgraph Core["Core Platform"]
+            Identity["Identity <br/>Management"]
+            Events["Event <br/>Processing"]
+            Config["Configuration <br/>Management"]
+        end
+
+        subgraph Tools["Tool Suite"]
+            Treasury["Treasury"]
+            People["People"]
+            Agreements["Agreements"]
+        end
+
+        subgraph Interfaces["Interface Layer"]
+            WebUI["Web Interface"]
+            MobileUI["Mobile Interface"]
+            API["REST/GraphQL API"]
+            Webhooks["Webhook System"]
+        end
+
+        Core --- Tools
+        Tools --- Interfaces
+    end
+
+    %% Member Interactions
+    Members -->|"log contributions <br/> view balances <br/> view stakes"| WebUI
+    Members -->|"log contributions"| MobileUI
+
+    %% Admin Interactions
+    Admins -->|"approve contributions <br/> manage accounts <br/> configure terms <br/> execute calculations"| WebUI
+
+    %% Accountant Interactions
+    Accountants -->|"generate reports <br/> close periods <br/> export K-1 data"| WebUI
+
+    %% Bank Integrations
+    Banks <-->|"transaction feeds <br/> payment initiation"| API
+
+    %% Accounting Software
+    AcctSoftware <-->|"journal exports <br/> chart of accounts sync"| API
+
+    %% Blockchain
+    Blockchain <-->|"distribution execution <br/> on-chain events"| API
+
+    %% Identity Providers
+    IdProviders <-->|"authentication <br/> profile sync"| Identity
+
+    %% Third-Party Apps
+    ExtApps <-->|"queries <br/> commands"| API
+    ExtApps <-->|"event notifications"| Webhooks

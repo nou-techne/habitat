@@ -1,0 +1,87 @@
+---
+title: "Composable Organization Tools: Data Flow Diagram"
+---
+flowchart TB
+
+    subgraph External["External Actors"]
+        Member["Member/Contributor"]
+        Admin["Administrator"]
+        Accountant["Accountant"]
+        ExtSys["External Systems<br/>(Banks, Accounting, Blockchain)"]
+    end
+
+    subgraph EventBus["Event Bus (Pub/Sub)"]
+        direction LR
+        Events[("Event Stream")]
+    end
+
+    subgraph Treasury["Treasury Tool"]
+        T_Accounts["Account<br/>Management"]
+        T_Transactions["Transaction<br/>Processing"]
+        T_Balances["Balance<br/>Derivation"]
+        T_Reports["Financial<br/>Reporting"]
+        T_Store[("Treasury<br/>Data")]
+    end
+
+    subgraph People["People Tool"]
+        P_Profiles["Profile<br/>Management"]
+        P_Contributions["Contribution<br/>Logging"]
+        P_Approval["Approval<br/>Workflow"]
+        P_Stakes["Stake<br/>Tracking"]
+        P_Store[("People<br/>Data")]
+    end
+
+    subgraph Agreements["Agreements Tool"]
+        A_Agreements["Agreement<br/>Lifecycle"]
+        A_Terms["Term<br/>Configuration"]
+        A_Formulas["Formula<br/>Engine"]
+        A_Calculations["Calculation<br/>Execution"]
+        A_Store[("Agreements<br/>Data")]
+    end
+
+    %% External Actor Flows
+    Member -->|"log contributions"| P_Contributions
+    Member -->|"view balances"| T_Balances
+    Member -->|"view stakes"| P_Stakes
+
+    Admin -->|"approve contributions"| P_Approval
+    Admin -->|"manage accounts"| T_Accounts
+    Admin -->|"configure terms"| A_Terms
+    Admin -->|"execute calculations"| A_Calculations
+
+    Accountant -->|"generate reports"| T_Reports
+    Accountant -->|"close periods"| T_Transactions
+
+    ExtSys <-->|"bank feeds"| T_Transactions
+    ExtSys <-->|"accounting export"| T_Reports
+
+    %% Internal Tool Data Flows
+    P_Contributions --> P_Store
+    P_Approval --> P_Store
+    P_Profiles --> P_Store
+    P_Stakes --> P_Store
+
+    T_Accounts --> T_Store
+    T_Transactions --> T_Store
+    T_Store --> T_Balances
+    T_Balances --> T_Reports
+
+    A_Agreements --> A_Store
+    A_Terms --> A_Store
+    A_Store --> A_Formulas
+    A_Formulas --> A_Calculations
+
+    %% Event Publication
+    P_Approval -->|"contribution.approved"| Events
+    A_Calculations -->|"calculation.applied"| Events
+    T_Transactions -->|"transaction.recorded"| Events
+
+    %% Event Subscription
+    Events -->|"contribution.approved"| T_Transactions
+    Events -->|"calculation.applied"| T_Transactions
+    Events -->|"calculation.applied"| P_Stakes
+
+    %% Cross-Tool Data Queries
+    P_Store -.->|"contribution data"| A_Formulas
+    T_Store -.->|"balance data"| A_Formulas
+    P_Store -.->|"stake data"| A_Formulas
