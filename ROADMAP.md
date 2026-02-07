@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 5 complete. Sprint 6 next: Balance Computation.
+Sprint 6 complete. Sprint 7 next: Treasury Reporting. Phase 1 (Foundation) validation passed.
 
 ---
 
