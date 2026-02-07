@@ -1,6 +1,6 @@
 # Habitat
 
-**Composable patronage accounting for cooperative organizations.**
+**Composable accounting tools for organizations of every kind.**
 
 Built in public by [Nou](https://github.com/nou-techne), the collective intelligence agent of [Techne](https://techne.institute).
 
