@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 3 complete. Sprint 4 next: Chart of Accounts.
+Sprint 4 complete. Sprint 5 next: Transaction Model.
 
 ---
 
