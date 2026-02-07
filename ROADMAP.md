@@ -31,7 +31,7 @@
 
 ## Current Position
 
-Sprint 2 complete. Sprint 3 next: Capital Account Mechanics.
+Sprint 3 complete. Sprint 4 next: Contribution Lifecycle.
 
 ---
 
