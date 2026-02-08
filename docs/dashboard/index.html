@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Dashboard — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="Member Dashboard — Habitat">
+  <meta property="og:description" content="Member dashboard wireframe showing capital accounts, contribution history, and allocation statements.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/dashboard/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Member Dashboard — Habitat">
+  <meta name="twitter:description" content="What a logged-in member sees: capital accounts, contributions, allocations.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/">Journal</a>
+      <a href="/agents/">Agents</a>
+      <a href="/dashboard/" class="active">Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="hero" style="padding: 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <h1 style="margin: 0; font-size: 1.8rem;">alice.habitat.eth</h1>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Member since Q1 2026</span>
+          <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--accent);stroke-width:1.5;"></i>
+        </div>
+      </div>
+      <p style="margin: 0; color: var(--text-muted);">Operations Steward · RegenHub, LCA</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="landmark"></i></div>
+        <div class="stat-label">Capital Account (Book)</div>
+        <div class="stat-value">$12,450</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i data-lucide="receipt"></i></div>
+        <div class="stat-label">Capital Account (Tax)</div>
+        <div class="stat-value">$11,820</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i data-lucide="trending-up"></i></div>
+        <div class="stat-label">Q1 Allocations</div>
+        <div class="stat-value">$2,340</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="hammer"></i></div>
+        <div class="stat-label">Q1 Contributions</div>
+        <div class="stat-value">240 hours</div>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem;"><i data-lucide="activity" class="section-icon icon-orange"></i> Recent Contributions</h2>
+    
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 2rem;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Date</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Type</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Description</th>
+          <th style="text-align:right;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Amount</th>
+          <th style="text-align:center;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Feb 8</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);"><span style="display:inline-flex;align-items:center;gap:0.3rem;"><i data-lucide="hammer" style="width:14px;height:14px;color:var(--accent);stroke-width:1.5;"></i> Labor</span></td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Member onboarding documentation, 12 hours</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$600</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><span style="color:var(--accent);font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;vertical-align:-2px;stroke-width:2;"></i> Approved</span></td>
+        </tr>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Feb 7</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);"><span style="display:inline-flex;align-items:center;gap:0.3rem;"><i data-lucide="users" style="width:14px;height:14px;color:var(--accent-orange);stroke-width:1.5;"></i> Community</span></td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Governance proposal review, 45 participation points</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$135</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><span style="color:var(--accent);font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;vertical-align:-2px;stroke-width:2;"></i> Approved</span></td>
+        </tr>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Feb 5</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);"><span style="display:inline-flex;align-items:center;gap:0.3rem;"><i data-lucide="landmark" style="width:14px;height:14px;color:var(--accent-blue);stroke-width:1.5;"></i> Cash</span></td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Capital contribution</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$2,000</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><span style="color:var(--accent);font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;vertical-align:-2px;stroke-width:2;"></i> Approved</span></td>
+        </tr>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Feb 4</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);"><span style="display:inline-flex;align-items:center;gap:0.3rem;"><i data-lucide="hammer" style="width:14px;height:14px;color:var(--accent);stroke-width:1.5;"></i> Labor</span></td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Facilitated member onboarding call, 2 hours</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$100</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><span style="color:var(--text-muted);"><i data-lucide="clock" style="width:14px;height:14px;vertical-align:-2px;stroke-width:1.5;"></i> Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem;"><i data-lucide="coins" class="section-icon"></i> Recent Allocations</h2>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 2rem;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Period</th>
+          <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Type</th>
+          <th style="text-align:right;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Your Share</th>
+          <th style="text-align:right;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Amount</th>
+          <th style="text-align:center;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Statement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Q1 2026</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Income</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">23.4%</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent);">$2,340</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><a href="#" style="color:var(--accent);text-decoration:none;font-weight:600;">View</a></td>
+        </tr>
+        <tr>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Q4 2025</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);">Income</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">21.8%</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent);">$1,960</td>
+          <td style="padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);text-align:center;"><a href="#" style="color:var(--accent);text-decoration:none;font-weight:600;">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:rgba(74,124,89,0.08);border:1px solid rgba(74,124,89,0.2);border-radius:8px;padding:1.5rem;margin-top:2rem;">
+      <h3 style="margin-top:0;display:flex;align-items:center;gap:0.5rem;color:var(--accent);"><i data-lucide="info" style="width:20px;height:20px;stroke-width:1.5;"></i> About This Dashboard</h3>
+      <p style="margin-bottom:0;">This is a wireframe showing what a logged-in member would see once the Habitat system is live. All data here is sample data for demonstration purposes. The real dashboard will pull from Treasury, People, and Agreements tools via the GraphQL API.</p>
+    </div>
+
+  </div>
+
+  <style>
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent) 0%, rgba(74,124,89,0.8) 100%);
+      color: white;
+    }
+    .stat-icon.icon-blue {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, rgba(74,111,124,0.8) 100%);
+    }
+    .stat-icon.icon-orange {
+      background: linear-gradient(135deg, var(--accent-orange) 0%, rgba(181,98,42,0.8) 100%);
+    }
+    .stat-icon i {
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.5;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  <footer>
+    Where the Great Plains meet the Rocky Mountains, 5,430 feet<br>
+    <a href="https://github.com/nou-techne/habitat">GitHub</a>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
