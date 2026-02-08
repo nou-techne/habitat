@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Build Journal — Habitat</title>
   <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="Build Journal — Habitat">
+  <meta property="og:description" content="Sprint-by-sprint notes from building coordination infrastructure in public.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nou-techne.github.io/habitat/journal/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Build Journal — Habitat">
+  <meta name="twitter:description" content="Sprint-by-sprint notes from building coordination infrastructure in public.">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <nav>
@@ -22,7 +30,7 @@
     <h1>Build Journal</h1>
     <p class="lead">Sprint-by-sprint notes from building Habitat in public.</p>
 
-    <h2>February 7, 2026 — Day Zero</h2>
+    <h2><i data-lucide="seedling" class="section-icon"></i> Day Zero</h2>
     <p><em>Deep winter. Record low snowpack. Chinook winds. The cooperative was filed yesterday.</em></p>
 
     <h3>What Happened</h3>
@@ -36,7 +44,7 @@
       <li>Identified six gaps between the current design and full Subchapter K compliance (book/tax basis tracking, revaluation events, minimum gain, 704(c) layers, K-1 generation, QIO/DRO)</li>
     </ul>
 
-    <h3>The Pattern</h3>
+    <h3><i data-lucide="layers" class="section-icon"></i> The Pattern</h3>
     <p>The system sits at three concentric layers:</p>
     <ol>
       <li><strong>Patronage accounting</strong> — the legal requirement (capital accounts, allocations, K-1s)</li>
@@ -45,7 +53,7 @@
     </ol>
     <p>Each layer depends on the one inside it. You can't issue service credits without reliable accounting. You can't do reliable accounting without composable tools. You can't compose tools without a shared grammar (REA).</p>
 
-    <h3>What's Next</h3>
+    <h3><i data-lucide="arrow-right" class="section-icon"></i> What's Next</h3>
     <p>Book/tax basis tracking — extending the Treasury tool to maintain dual capital accounts (book value and tax basis) per member. This is the foundation for 704(b) compliance and everything downstream depends on it.</p>
 
     <h3>Inquiry</h3>
@@ -53,14 +61,63 @@
 
     <hr class="divider" style="max-width: 100%; margin: 2.5rem 0;">
 
-    <h2>Where We Are</h2>
-    <p>Phase 1 (Specification) produced 20 sprint documents across four sub-phases: Foundation, Contribution Recognition, Allocation, and Extensions. Phase 2 (Build in Public) is now underway, drawing from five workstreams: Technical Deepening, Protocol &amp; Standards, Communications &amp; Design, Legal &amp; Compliance, and Community &amp; Engagement.</p>
-    <p>The full roadmap and sprint history live in the <a href="https://github.com/nou-techne/habitat" style="color: var(--accent);">repository</a>.</p>
+    <h2><i data-lucide="hammer" class="section-icon"></i> The Build</h2>
+    <p>A full day of sustained sprints produced the complete design specification. Here's what emerged, organized by dependency layer rather than chronological order.</p>
+
+    <h3><i data-lucide="shield-check" class="section-icon"></i> Compliance Concepts</h3>
+    <p>Starting from the six gaps identified in the 704(b) mapping, each concept document closes one gap and creates the foundation for the next:</p>
+    <ul>
+      <li><strong>Book/tax basis tracking</strong> — Dual-ledger design maintaining both book (FMV) and tax (cost basis) capital accounts from a single event stream. 704(c) layer creation when contributed property has built-in gain or loss.</li>
+      <li><strong>Minimum gain tracking</strong> — Partnership and partner minimum gain computation for nonrecourse liabilities. Chargeback mechanics that take priority over the patronage formula.</li>
+      <li><strong>QIO/DRO tracking</strong> — Qualified income offset provisions and deficit restoration obligations. Safe harbor compliance to protect members from unlimited loss exposure.</li>
+      <li><strong>K-1 data assembly</strong> — Mapping patronage allocations to IRS Schedule K-1 boxes. Capital account reconciliation across book, tax, GAAP, and Section 704(b) bases.</li>
+      <li><strong>Revaluation mechanics</strong> — Asset fair market value adjustments, capital account restatements, and reverse 704(c) layer creation when cooperative assets are revalued.</li>
+    </ul>
+
+    <h3><i data-lucide="workflow" class="section-icon"></i> Operational Concepts</h3>
+    <p>With compliance requirements established, the operational layer defines how things actually work:</p>
+    <ul>
+      <li><strong>Contribution lifecycle</strong> — Four contribution types (labor, cash, property, community) each with distinct validation, valuation, and approval workflows. State machine from submission through approval to capital account credit.</li>
+      <li><strong>Patronage formula mechanics</strong> — Weighted four-factor model (40% labor, 30% revenue, 20% cash, 10% community — configurable). Normalization, threshold application, and special allocation sequencing.</li>
+      <li><strong>Period close mechanics</strong> — The orchestration workflow that brings everything together: validate, calculate, allocate, lock, report. Sequential integrity enforcement.</li>
+      <li><strong>Member allocation statements</strong> — Human-readable reports that explain what happened and why. Contribution summaries, patronage explanations, capital account narratives.</li>
+    </ul>
+
+    <h3><i data-lucide="blocks" class="section-icon"></i> Tool Specifications</h3>
+    <p>Three composable tools, each independent, communicating through events:</p>
+    <ul>
+      <li><strong>Treasury</strong> — Event-sourced double-entry accounting engine. Capital accounts, balance computation, journal entries, reporting. The financial backbone.</li>
+      <li><strong>People</strong> — Member lifecycle management. Contribution workflows, valuation rules, approval routing, member directory, ENS identity integration.</li>
+      <li><strong>Agreements</strong> — The policy engine. Allocation calculations, special allocation handlers, period close orchestration, operating agreement versioning, distribution execution.</li>
+    </ul>
+
+    <h3><i data-lucide="server" class="section-icon"></i> Infrastructure</h3>
+    <p>Implementation-ready specifications for the technical foundation:</p>
+    <ul>
+      <li><strong>System overview</strong> — Complete architecture synthesis, compliance coverage verification, implementation phasing.</li>
+      <li><strong>Treasury database schema</strong> — PostgreSQL with event sourcing, materialized views, balance computation functions, double-entry constraints.</li>
+      <li><strong>Event bus specification</strong> — Pub/sub messaging connecting all three tools. Event catalog, routing topology, idempotency patterns, retry policies, schema versioning.</li>
+      <li><strong>GraphQL API specification</strong> — Unified query surface for all tools. Mutations, subscriptions, field-level authorization.</li>
+      <li><strong>Testing strategy</strong> — Unit, integration, and end-to-end tests. Financial invariant verification. 704(b) compliance property-based tests.</li>
+    </ul>
+
+    <h3><i data-lucide="eye" class="section-icon"></i> What We Learned</h3>
+    <p>The most important design decision was the dual-ledger approach: a single event stream producing entries in both book and tax ledgers. This emerged from the 704(b) compliance mapping — the IRS requires both perspectives, and trying to derive one from the other creates reconciliation nightmares. Better to produce both at the point of transaction.</p>
+    <p>The second insight was that special allocations (704(c) layers, minimum gain chargebacks, QIO) must execute <em>before</em> the patronage formula. They're not exceptions to the formula — they're a priority queue that reduces the pool before the formula runs. This ordering is what makes the system compliant.</p>
+
+    <blockquote>The dependency tree revealed itself as we built. Each document created the preconditions for the next. The compliance concepts had to come first because they constrain everything downstream. The tool specifications could only exist once the concepts established what each tool needed to do. The infrastructure specifications could only exist once the tool boundaries were clear. You can't shortcut the order.</blockquote>
+
+    <hr class="divider" style="max-width: 100%; margin: 2.5rem 0;">
+
+    <h2><i data-lucide="compass" class="section-icon"></i> Where We Are</h2>
+    <p>The specification phase produced a complete design across four dependency layers: compliance concepts, operational concepts, tool specifications, and infrastructure. The dependency tree and full document index live in the <a href="https://github.com/nou-techne/habitat" style="color: var(--accent);">repository</a>.</p>
+    <p>Next: People and Agreements database schemas, front-end design system, and the remaining infrastructure gaps (auth, deployment). The tools are ready to be built.</p>
   </div>
 
   <footer>
     Built in the South Boulder Creek watershed, 5,430 feet<br>
     <a href="https://github.com/nou-techne/habitat">GitHub</a>
   </footer>
+  <script>lucide.createIcons();</script>
 </body>
 </html>

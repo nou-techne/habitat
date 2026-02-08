@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Economic Habitat Matrix</title>
+  <title>Economic Habitat Matrix — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="Economic Habitat Matrix — Habitat">
+  <meta property="og:description" content="Interactive map of 49 organizational archetypes across seven ecological zones — from symbiotic to parasitic.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nou-techne.github.io/habitat/matrix/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Economic Habitat Matrix — Habitat">
+  <meta name="twitter:description" content="Interactive map of 49 organizational archetypes across seven ecological zones.">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: linear-gradient(160deg, #f0f4ee 0%, #e3ebe0 45%, #d6dfd2 100%); min-height: 100vh; }
+    /* Matrix page overrides — the React app manages its own layout below the nav */
+    body { background: linear-gradient(160deg, #f0f4ee 0%, #e3ebe0 45%, #d6dfd2 100%); }
   </style>
 </head>
 <body>
-  <nav style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:1.2rem 2rem;">
-    <a href="/habitat/" style="font-size:1.1rem;font-weight:700;color:#2a2f28;text-decoration:none;letter-spacing:0.04em;">Habitat</a>
-    <div style="display:flex;gap:1.8rem;">
-      <a href="/habitat/" style="color:#5a6658;text-decoration:none;font-size:0.92rem;">Home</a>
-      <a href="/habitat/matrix/" style="color:#2a2f28;text-decoration:none;font-size:0.92rem;">Matrix</a>
-      <a href="/habitat/patronage/" style="color:#5a6658;text-decoration:none;font-size:0.92rem;">Patronage</a>
-      <a href="/habitat/thesis/" style="color:#5a6658;text-decoration:none;font-size:0.92rem;">Thesis</a>
-      <a href="/habitat/journal/" style="color:#5a6658;text-decoration:none;font-size:0.92rem;">Journal</a>
+  <nav>
+    <a href="/habitat/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/habitat/">Home</a>
+      <a href="/habitat/matrix/" class="active">Matrix</a>
+      <a href="/habitat/patronage/">Patronage</a>
+      <a href="/habitat/thesis/">Thesis</a>
+      <a href="/habitat/journal/">Journal</a>
     </div>
   </nav>
   <div id="root"></div>
