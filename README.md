@@ -24,9 +24,48 @@ Three concentric layers:
 
 **Patronage Accounting** — Capital accounts, contribution tracking, allocation calculations. IRC Section 704(b) compliance. The legal heartbeat of the cooperative.
 
-**Composable Tools** — Treasury, People, Agreements as independent, event-sourced tools unified by [REA ontology](https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)). Each tool solves one problem well. Together they compose into organizational infrastructure. Legibility-as-product.
+**Composable Tools** — Independent, event-sourced tools unified by [REA ontology](https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)). Each tool solves one problem well. Together they compose into organizational infrastructure. Legibility-as-product.
 
 **Service Credits** — A prepaid medium for information economy infrastructure, redeemable against four resource primitives (compute, transfer, long-term memory, short-term memory). The postage stamp of cooperative infrastructure.
+
+### Tool Suite
+
+The first three tools make organizational economics legible. The next five make organizational capacity legible.
+
+```
+Treasury ─── People ─── Agreements        Foundation (specified)
+    │            │           │
+ Registry    Governance     │             Medium-term
+    │            │           │
+    └────── Ventures ───────┘
+                │
+            Credits                        Ecosystem
+                │
+            Signals
+```
+
+**Foundation** — specified, entering implementation-readiness phase:
+
+| Tool | Purpose |
+|------|---------|
+| **Treasury** | Double-entry accounting, capital accounts, balance computation, reporting |
+| **People** | Contribution lifecycle, valuation, approval workflows, member identity |
+| **Agreements** | Patronage formulas, period close, allocation, distribution, K-1 assembly |
+
+**Medium-term** — the next tools to build:
+
+| Tool | Purpose |
+|------|---------|
+| **Governance** | Proposals, votes, delegations, quorum rules, decision history. The Constraint layer as a standalone composable primitive — every other tool checks Governance for authority |
+| **Registry** | Assets, intellectual property, licenses, physical space, data sets. Treasury tracks value in accounts; Registry tracks value in things. For the studio: the pattern library as commons inventory |
+| **Ventures** | Formation, pattern decomposition, resource allocation, equity alignment, graduation. Where the 1% reciprocity commitment lives — tracked, visible, flowing back through Treasury |
+
+**Ecosystem** — tools that work across organizational boundaries:
+
+| Tool | Purpose |
+|------|---------|
+| **Credits** | Service credit issuance, transfer, redemption, rate cards, clearing between cooperatives. The first tool that must compose across organizations |
+| **Signals** | Pattern recognition across all tools. Organizational health scoring. The Economic Habitat Matrix made operational — deriving an organization's ecological position from its own data |
 
 ## Foundations
 
