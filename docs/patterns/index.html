@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pattern Library — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="Pattern Library — Habitat">
+  <meta property="og:description" content="The seven progressive design patterns that compose all information systems. A practical framework for building coordination infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/patterns/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pattern Library — Habitat">
+  <meta name="twitter:description" content="Seven progressive design patterns. Identity through View. A reusable framework for information systems.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/">Journal</a>
+      <a href="/agents/">Agents</a>
+      <a href="/dashboard/">Dashboard</a>
+      <a href="/patterns/" class="active">Patterns</a>
+    </div>
+  </nav>
+
+  <div class="prose" id="main">
+    <h1>Pattern Library</h1>
+    <p class="lead">The seven progressive design patterns that compose all information systems. A practical framework for building coordination infrastructure.</p>
+
+    <h2><i data-lucide="layers" class="section-icon"></i> The Stack</h2>
+    <p>Every information system is built from a finite set of design patterns, layered in a progressive order. Each layer depends on the ones beneath it. The stack reads bottom-up, like sedimentary rock.</p>
+
+    <div class="pattern-list">
+      <div class="pattern-item">
+        <div class="pattern-number">1</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="fingerprint" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent-blue);"></i> Identity</h3>
+          <p class="pattern-def">Distinguishing one thing from another. Without identity, nothing else is possible.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> Member UUIDs, ENS names (alice.habitat.eth), account codes, transaction IDs
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Product SKUs, customer IDs, order numbers
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> User handles, post IDs, group identifiers
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">2</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="database" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent-blue);"></i> State</h3>
+          <p class="pattern-def">Recording attributes of identifiable things. Once you can distinguish entities, you can describe them.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> Member profiles (name, email, tier), account balances, contribution amounts, operating agreement versions
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Product prices, inventory levels, customer addresses, cart contents
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> Profile bios, follower counts, post text, privacy settings
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">3</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="git-branch" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent);"></i> Relationship</h3>
+          <p class="pattern-def">Connecting identifiable things to each other. Systems emerge from relationships.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> REA ontology (Event connects Resource to Agent), member-to-contribution links, parent-child accounts, allocation-to-member
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Product-to-category, order-to-customer, product-to-supplier, cart-to-items
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> Follower relationships, post-to-author, comment-to-post, group membership
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">4</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="zap" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent-orange);"></i> Event</h3>
+          <p class="pattern-def">Recording that something happened at a point in time. Events are immutable facts.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> ContributionApproved, TransactionRecorded, AllocationApplied, PeriodClosed
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> OrderPlaced, PaymentProcessed, ItemShipped, ProductReturned
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> PostPublished, UserFollowed, CommentPosted, MessageSent
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">5</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="move" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent-orange);"></i> Flow</h3>
+          <p class="pattern-def">Value or information moving between agents. Flows create the dynamics of a system.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> Patronage allocation (surplus → members), service credit distribution, event bus messages, capital account changes
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Money flowing from customer to merchant, inventory flowing from warehouse to customer, commissions flowing to affiliates
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> Notifications flowing to users, messages flowing between accounts, content propagating through the feed
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">6</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="shield" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent);"></i> Constraint</h3>
+          <p class="pattern-def">Rules governing valid states and transitions. Constraints define what the system allows.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> IRC 704(b) compliance, double-entry accounting (debits = credits), formula weights sum to 100%, sequential period integrity
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Inventory can't go negative, refund can't exceed purchase amount, shipping address must be valid
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> Posts have character limits, can't follow yourself, blocked users can't see your content
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-item">
+        <div class="pattern-number">7</div>
+        <div class="pattern-content">
+          <h3><i data-lucide="eye" style="width:18px;height:18px;vertical-align:-3px;stroke-width:1.5;color:var(--accent-blue);"></i> View</h3>
+          <p class="pattern-def">Presenting information for a purpose. Views make the system legible to humans.</p>
+          <div class="pattern-examples">
+            <div class="example-group">
+              <strong>Habitat:</strong> Member allocation statements, balance sheets, homepage, K-1 tax forms, the dashboard
+            </div>
+            <div class="example-group">
+              <strong>E-commerce:</strong> Product listings, shopping cart, order history, tracking page, sales reports
+            </div>
+            <div class="example-group">
+              <strong>Social network:</strong> Feed timeline, profile page, notifications panel, direct message threads
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2><i data-lucide="lightbulb" class="section-icon icon-orange"></i> Using the Framework</h2>
+
+    <h3>Bottom-Up Design</h3>
+    <p>Start with Identity. You can't record State without knowing what thing you're describing. You can't create Relationships without identifiable entities. Work your way up the stack, ensuring each layer is solid before moving to the next.</p>
+
+    <h3>Cross-Domain Patterns</h3>
+    <p>The same patterns appear across wildly different systems. An e-commerce order and a patronage allocation both follow Event → Flow → Constraint → View. The difference is <em>configuration</em>, not fundamental structure. This means:</p>
+    <ul>
+      <li>Solutions from one domain can inform another</li>
+      <li>Tooling can be composable across contexts</li>
+      <li>Patterns are learnable, not domain-specific magic</li>
+    </ul>
+
+    <h3>Compositional Fluency</h3>
+    <p>Knowing the patterns is the first step. Fluency is recognizing which patterns a problem requires and composing them with care. A carpenter knows the joints. A systems designer knows the layers.</p>
+
+    <h3>Habitat's Thesis</h3>
+    <p>If information systems are fully decomposable into this progressive stack, then the fundamental materials of software are finite and learnable — and the real work is <strong>composition</strong>: selecting the right patterns and configuring them for a specific context. Read the <a href="/thesis/" style="color:var(--accent);">full thesis</a>.</p>
+
+    <h2><i data-lucide="book-open" class="section-icon"></i> Further Reading</h2>
+    <ul>
+      <li><a href="/thesis/" style="color:var(--accent);">The Craft of Coordination</a> — How compositional fluency, coordination infrastructure, and ecosystem compounding create compounding value</li>
+      <li><a href="/patronage/" style="color:var(--accent);">Patronage Accounting</a> — The seven-layer stack applied to cooperative patronage systems</li>
+      <li><a href="https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)" style="color:var(--accent);">REA Ontology (Wikipedia)</a> — The accounting model that maps onto layers 1-4</li>
+    </ul>
+
+  </div>
+
+  <style>
+    .pattern-list {
+      margin: 2rem 0;
+    }
+    .pattern-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .pattern-item:last-child {
+      border-bottom: none;
+    }
+    .pattern-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, rgba(74,124,89,0.8) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .pattern-content {
+      flex: 1;
+    }
+    .pattern-content h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    .pattern-def {
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .pattern-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .example-group {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .example-group strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .pattern-item {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .pattern-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/nou-techne/habitat">GitHub</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/agents/">Agents</a>
+      <a href="/dashboard/">Dashboard</a>
+    </div>
+    <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
