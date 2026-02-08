@@ -173,7 +173,7 @@ Period Close Checklist — Q1 2026
 [✓] Step 2: Contribution cutoff applied
 [✓] Step 3: Revenue/expense finalized (3 adjusting entries)
 [✓] Step 4: Income statement generated (Net Income: $3,000)
-[✓] Step 5: Allocation calculated (FINAL, approved by Todd 2026-04-05)
+[✓] Step 5: Allocation calculated (FINAL, approved by operations steward 2026-04-05)
 [✓] Step 6: Capital accounts updated (6 transactions posted)
 [✓] Step 7: Period locked, snapshot captured
 
