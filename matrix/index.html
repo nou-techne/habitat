@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economic Habitat Matrix</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: linear-gradient(145deg, #f4f1eb 0%, #ebe7df 40%, #e4e0d8 100%); min-height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+const { useState, useMemo } = React;
+
+const CELLS = [
+  { x:-3,y:3, label:"Tragic Commons", desc:"Dispersed governance unable to prevent exploitation. Open access resources depleted by dominant actors. The classic failure mode where diffusion without coordination invites predation." },
+  { x:-2,y:3, label:"Colonized Network", desc:"Enabling infrastructure captured by extractors. Platforms that started open but got enclosed. The arc from commons to enclosure, repeated across centuries." },
+  { x:-1,y:3, label:"Contested Space", desc:"Slight governance diffusion, high extraction pressure. Emerging markets and regulatory gaps where rules haven't caught up to exploitation." },
+  { x:0,y:3, label:"Dominant Firm", desc:"Standard monopoly behavior. Self-interested control with market power. The textbook case of concentrated governance serving concentrated benefit." },
+  { x:1,y:3, label:"Consolidator", desc:"Actively concentrating industry. Roll-up strategies, vertical integration. The organism that grows by consuming others in its niche." },
+  { x:2,y:3, label:"Rentier", desc:"Entrenched extraction through captured infrastructure. Tollbooths on essential flows. Owns the path, taxes the passage." },
+  { x:3,y:3, label:"Parasitic", desc:"Maximum extraction, concentrating all capacity. Systemic drain, habitat degradation. The organism that kills its host ecosystem." },
+  { x:-3,y:2, label:"Diffuse Vulnerability", desc:"Distributed but exposed. Uncoordinated small actors facing predation. Like scattered seedlings in an open field without canopy protection." },
+  { x:-2,y:2, label:"Fragmenting Alliance", desc:"Cooperative structures losing coherence under pressure. The cooperative that's coming apart at the seams, members defecting under competitive stress." },
+  { x:-1,y:2, label:"Defensive Network", desc:"Loose coordination against extraction. Trade associations, informal alliances. Organisms clustering for protection rather than mutual benefit." },
+  { x:0,y:2, label:"Conventional Firm", desc:"Standard competitive behavior. Value capture focus, stakeholder tension. The default organizational form in market economies." },
+  { x:1,y:2, label:"Aggressive Competitor", desc:"Growth-oriented concentration. VC-backed scaling, market share focus. The organism that dominates its niche through rapid resource consumption." },
+  { x:2,y:2, label:"Extractive", desc:"PE-style value capture. Leveraged operations, stakeholder squeeze. Financial engineering that mines organizations for short-term yield." },
+  { x:3,y:2, label:"Predatory", desc:"Systematic extraction with concentrated control. Regulatory arbitrage, labor exploitation. Actively degrades the habitat it operates within." },
+  { x:-3,y:1, label:"Dispersed Resilience", desc:"Distributed capacity, slight extraction. Informal economies, subsistence networks. Resilient through redundancy, but still net-taking from the commons." },
+  { x:-2,y:1, label:"Recovering Commons", desc:"Rebuilding shared governance after enclosure. Reclaiming capacity. The forest regrowing after clear-cut, slowly rebuilding soil." },
+  { x:-1,y:1, label:"Emerging Cooperative", desc:"Building shared governance, still competing. Early-stage coordination where the cooperative impulse hasn't yet overcome competitive conditioning." },
+  { x:0,y:1, label:"Small Business", desc:"Limited power, self-focused. Local firms, constrained extraction. Neither contributing to nor significantly degrading the broader ecosystem." },
+  { x:1,y:1, label:"Growth Stage", desc:"Building concentration, seeking leverage. Scaling startups at the inflection point where growth pressure meets governance questions." },
+  { x:2,y:1, label:"Consolidating", desc:"Concentrating control, building power. Regional dominance emerging through acquisition and market pressure." },
+  { x:3,y:1, label:"Captured Legacy", desc:"High control, constrained extraction. Regulated monopolies, declining giants. Maximum concentration but leashed by regulatory oversight." },
+  { x:-3,y:0, label:"Pure Commons", desc:"Fully distributed stewardship, neutral systemic impact. Stable shared resources maintained by collective governance. Neither growing nor shrinking." },
+  { x:-2,y:0, label:"Federation", desc:"Coordinated distribution, balanced exchange. Cooperative networks that sustain themselves through mutual benefit without net extraction or contribution." },
+  { x:-1,y:0, label:"Civic Enterprise", desc:"Slight distribution, equilibrium relationship. B-corps, social enterprises operating at the boundary between market and mission." },
+  { x:0,y:0, label:"Equilibrium", desc:"Self-sustaining, neither extracting nor contributing beyond exchange. The null case: organisms that participate in the ecosystem without altering it." },
+  { x:1,y:0, label:"Efficient Firm", desc:"Slight concentration, balanced impact. Well-run conventional business that takes and gives in roughly equal measure." },
+  { x:2,y:0, label:"Constrained Power", desc:"Concentrated but checked. Regulated industries, contested markets. Power held in tension with external constraints." },
+  { x:3,y:0, label:"Dormant Giant", desc:"Maximum concentration, neutralized power. Antitrust targets, legacy monopolies. The bear in hibernation, dangerous but dormant." },
+  { x:-3,y:-1, label:"Generative Commons", desc:"Distributed stewardship actively building habitat. Community land trusts, open-source foundations. The mycorrhizal network feeding the forest floor." },
+  { x:-2,y:-1, label:"Platform Cooperative", desc:"Shared governance creating shared value. Democratic digital infrastructure where the users are the owners and the product serves the commons." },
+  { x:-1,y:-1, label:"Generative Enterprise", desc:"Slight distribution, net contribution. Worker co-ops, community businesses. Organizations that leave more capacity than they consume." },
+  { x:0,y:-1, label:"Benefit Corporation", desc:"Self-governed, net positive. Stakeholder consideration without distribution of governance. Good intent concentrated in traditional structures." },
+  { x:1,y:-1, label:"Steward-Owned", desc:"Concentrated governance serving broader purpose. Purpose trusts, steward-ownership. Power held in trust for something beyond the holders." },
+  { x:2,y:-1, label:"Anchor Institution", desc:"Significant concentration, community commitment. Universities, hospitals, credit unions. Large organizations whose roots go deep enough to stabilize local economies." },
+  { x:3,y:-1, label:"Benevolent Monopoly", desc:"Maximum control, net positive intent. Public utilities, state enterprises. The question is always: benevolent for whom, and for how long?" },
+  { x:-3,y:-2, label:"Mycelial Network", desc:"Distributed intelligence, ecosystem enrichment. Invisible enabling infrastructure that connects, feeds, and signals across the habitat without centralizing control." },
+  { x:-2,y:-2, label:"Synergistic Mutualist", desc:"Shared governance, active habitat building. Cooperative ecosystems, mutual aid networks. Every exchange leaves both parties and the system stronger." },
+  { x:-1,y:-2, label:"Regenerative Enterprise", desc:"Slight distribution, significant contribution. Restorative businesses that actively rebuild the ecological and social systems they participate in." },
+  { x:0,y:-2, label:"Contributive Firm", desc:"Self-governed, actively strengthening ecosystem. A rare corporate form that generates more capacity than it captures. The organizational unicorn." },
+  { x:1,y:-2, label:"Enabling Platform", desc:"Some concentration, ecosystem focus. Infrastructure providers, standards bodies. Concentrated enough to coordinate, distributed enough in benefit." },
+  { x:2,y:-2, label:"Development Finance", desc:"Concentrated capital for distributed benefit. CDFIs, cooperative banks. Financial power deliberately channeled toward habitat capacity building." },
+  { x:3,y:-2, label:"Public Investment", desc:"State power for habitat development. Infrastructure banks, sovereign wealth funds. Concentrated public capacity deployed for systemic benefit." },
+  { x:-3,y:-3, label:"Living Commons", desc:"Fully distributed, fully generative. Self-organizing ecosystem health. The theoretical ideal where governance and contribution are inseparable from participation itself." },
+  { x:-2,y:-3, label:"Keystone Cooperative", desc:"Distributed governance, maximum habitat contribution. Enabling infrastructure for entire ecosystems. The old-growth tree whose canopy shelters the whole forest." },
+  { x:-1,y:-3, label:"Regenerative Network", desc:"Slight coordination, deep symbiosis. Watershed councils, bioregional alliances. Living systems that heal themselves through relationship." },
+  { x:0,y:-3, label:"Keystone Institution", desc:"Self-governed, essential ecosystem function. Central banks (ideally), core infrastructure. Institutions so vital that the habitat reshapes around them." },
+  { x:1,y:-3, label:"Coordinating Body", desc:"Light concentration for ecosystem coherence. Standards organizations, clearing houses. Just enough structure to enable self-organization at scale." },
+  { x:2,y:-3, label:"Development Authority", desc:"Concentrated capacity for systemic benefit. Regional planning, industrial policy. Power held and deployed for the long game of habitat restoration." },
+  { x:3,y:-3, label:"Benevolent Sovereign", desc:"Maximum concentration for maximum contribution. Idealized state function. The ultimate tension: can concentrated power remain in service to the whole?" },
+];
+
+const ZONES = [
+  { range: [5,6], label: "Parasitic", sub: "Host-killing extraction" },
+  { range: [3,4], label: "Extractive", sub: "Net depletion of habitat" },
+  { range: [1,2], label: "Competitive", sub: "Self-interested exchange" },
+  { range: [-1,0], label: "Commensal", sub: "Neutral coexistence" },
+  { range: [-3,-2],label: "Contributive", sub: "Net habitat enrichment" },
+  { range: [-5,-4],label: "Mutualistic", sub: "Reciprocal strengthening" },
+  { range: [-6,-6],label: "Symbiotic", sub: "Inseparable co-flourishing" },
+];
+
+function getZoneLabel(sum) {
+  for (const z of ZONES) {
+    if (sum >= z.range[0] && sum <= z.range[1]) return z;
+  }
+  return ZONES[3];
+}
+
+function getCellColor(x, y, isSelected, isHovered) {
+  const sum = x + y;
+  const t = (sum + 6) / 12;
+  let h, s, l;
+  if (t <= 0.33) { const p = t / 0.33; h = 160 - p * 30; s = 42 - p * 10; l = 32 + p * 20; }
+  else if (t <= 0.5) { const p = (t - 0.33) / 0.17; h = 130 - p * 80; s = 32 - p * 18; l = 52 + p * 16; }
+  else if (t <= 0.67) { const p = (t - 0.5) / 0.17; h = 50 - p * 20; s = 14 + p * 20; l = 68 - p * 10; }
+  else { const p = (t - 0.67) / 0.33; h = 30 - p * 25; s = 34 + p * 22; l = 58 - p * 20; }
+  if (isSelected) { s += 12; l -= 8; } else if (isHovered) { s += 6; l -= 4; }
+  return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+}
+
+function getCellTextColor(x, y) {
+  const sum = x + y;
+  if (sum <= -4 || sum >= 5) return "#f8f6f2";
+  return "#1a1a1a";
+}
+
+function getCellBorder(x, y, isSelected) {
+  const sum = x + y;
+  const t = (sum + 6) / 12;
+  const alpha = isSelected ? 0.6 : 0.25;
+  if (t <= 0.4) return `rgba(30, 80, 60, ${alpha})`;
+  if (t <= 0.6) return `rgba(80, 70, 50, ${alpha})`;
+  return `rgba(120, 40, 30, ${alpha})`;
+}
+
+function HealthBar({ score }) {
+  const w = Math.abs(score) * 100;
+  const isPositive = score >= 0;
+  return (
+    <div style={{ display:"flex", alignItems:"center", gap:8, marginTop:8 }}>
+      <span style={{ fontSize:11, color:"#777", width:80, textAlign:"right" }}>
+        {isPositive ? "Symbiotic" : "Parasitic"}
+      </span>
+      <div style={{ flex:1, height:6, background:"#e8e4de", borderRadius:3, position:"relative", overflow:"hidden" }}>
+        <div style={{
+          position:"absolute",
+          [isPositive ? "left" : "right"]: "50%",
+          width: `${w/2}%`,
+          height:"100%",
+          background: isPositive
+            ? "linear-gradient(90deg, #a8c4a0, #3d7a4a)"
+            : "linear-gradient(270deg, #c4a08a, #a04030)",
+          borderRadius:3,
+          transition:"width 0.3s ease"
+        }} />
+        <div style={{ position:"absolute", left:"50%", top:0, width:1, height:"100%", background:"#999" }} />
+      </div>
+      <span style={{ fontSize:11, color:"#777", width:20 }}>
+        {score > 0 ? "+" : ""}{(score * 100).toFixed(0)}
+      </span>
+    </div>
+  );
+}
+
+function EconomicHabitatMatrix() {
+  const [selected, setSelected] = useState(null);
+  const [hovered, setHovered] = useState(null);
+
+  const grid = useMemo(() => {
+    const rows = [];
+    for (let y = 3; y >= -3; y--) {
+      const row = [];
+      for (let x = -3; x <= 3; x++) {
+        const cell = CELLS.find(c => c.x === x && c.y === y);
+        if (cell) row.push(cell);
+      }
+      rows.push(row);
+    }
+    return rows;
+  }, []);
+
+  const activeCell = selected || hovered;
+  const healthScore = activeCell ? -((activeCell.x + activeCell.y) / 6) : 0;
+  const zone = activeCell ? getZoneLabel(activeCell.x + activeCell.y) : null;
+
+  return (
+    <div style={{
+      fontFamily: "'Crimson Pro', 'Georgia', serif",
+      background: "linear-gradient(145deg, #f4f1eb 0%, #ebe7df 40%, #e4e0d8 100%)",
+      minHeight: "100vh",
+      padding: "24px 28px",
+      color: "#1a1a1a"
+    }}>
+      <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <h1 style={{ fontSize: 28, fontWeight: 600, color: "#2a2a2a", letterSpacing: "-0.02em", marginBottom: 4 }}>
+          Economic Habitat Matrix
+        </h1>
+        <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 13, color: "#6b6560", marginBottom: 20, lineHeight: 1.5, maxWidth: 640 }}>
+          Mapping organizational behavior as ecological relationship. Each cell represents an archetype
+          defined by how an entity distributes governance and whether it depletes or enriches its habitat.
+        </p>
+
+        <div style={{ display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
+          {/* Grid area */}
+          <div style={{ flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "stretch" }}>
+              {/* Y-axis label */}
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", marginRight: 6, position: "relative" }}>
+                <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, fontWeight: 600, color: "#7a756e", letterSpacing: "0.08em", textTransform: "uppercase", textAlign: "center" }}>
+                  Systemic Relationship
+                </div>
+              </div>
+              {/* Y-axis values */}
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", marginRight: 4, paddingTop: 2, paddingBottom: 2 }}>
+                <span style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:9, color:"#a09890", textAlign:"center" }}>extractive</span>
+                {[3,2,1,0,-1,-2,-3].map(v => (
+                  <span key={v} style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:10, color:"#8a857e", textAlign:"right", width:20 }}>
+                    {v > 0 ? `+${v}` : v}
+                  </span>
+                ))}
+                <span style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:9, color:"#a09890", textAlign:"center" }}>contributive</span>
+              </div>
+              {/* Grid */}
+              <div>
+                {grid.map((row, ri) => (
+                  <div key={ri} style={{ display: "flex", gap: 3, marginBottom: 3 }}>
+                    {row.map((cell) => {
+                      const isSel = selected?.x === cell.x && selected?.y === cell.y;
+                      const isHov = hovered?.x === cell.x && hovered?.y === cell.y;
+                      const bg = getCellColor(cell.x, cell.y, isSel, isHov);
+                      const textCol = getCellTextColor(cell.x, cell.y);
+                      const border = getCellBorder(cell.x, cell.y, isSel);
+                      return (
+                        <div
+                          key={`${cell.x},${cell.y}`}
+                          onClick={() => setSelected(isSel ? null : cell)}
+                          onMouseEnter={() => setHovered(cell)}
+                          onMouseLeave={() => setHovered(null)}
+                          style={{
+                            width: 108, height: 58, background: bg,
+                            border: `1.5px solid ${border}`, borderRadius: 4,
+                            padding: "5px 6px", cursor: "pointer",
+                            display: "flex", flexDirection: "column", justifyContent: "center",
+                            transition: "all 0.2s ease",
+                            transform: (isSel || isHov) ? "scale(1.04)" : "scale(1)",
+                            boxShadow: isSel ? "0 2px 8px rgba(0,0,0,0.15)" : isHov ? "0 1px 4px rgba(0,0,0,0.1)" : "0 0.5px 1px rgba(0,0,0,0.06)",
+                            position: "relative", zIndex: (isSel || isHov) ? 2 : 1
+                          }}
+                        >
+                          <div style={{ fontFamily: "'Crimson Pro', serif", fontSize: 11, fontWeight: 600, color: textCol, lineHeight: 1.2, marginBottom: 1 }}>
+                            {cell.label}
+                          </div>
+                          <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 8, color: textCol, opacity: 0.7, lineHeight: 1.25, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+                            {cell.desc.split('.')[0]}.
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+                {/* X-axis values */}
+                <div style={{ display: "flex", justifyContent: "space-around", marginTop: 4, paddingLeft: 4, paddingRight: 4 }}>
+                  {[-3,-2,-1,0,1,2,3].map(v => (
+                    <span key={v} style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:10, color:"#8a857e", width:108, textAlign:"center" }}>
+                      {v > 0 ? `+${v}` : v}
+                    </span>
+                  ))}
+                </div>
+                {/* X-axis label */}
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop: 4, paddingLeft: 8, paddingRight: 8 }}>
+                  <span style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:9, color:"#a09890" }}>dispersive</span>
+                  <span style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:10, fontWeight:600, color:"#7a756e", letterSpacing:"0.08em", textTransform:"uppercase" }}>Governance Orientation</span>
+                  <span style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:9, color:"#a09890" }}>concentrative</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Detail Panel */}
+          <div style={{ flex: 1, minWidth: 240, maxWidth: 320, position: "sticky", top: 24 }}>
+            {activeCell ? (
+              <div style={{
+                background: "rgba(255,253,249,0.85)", backdropFilter: "blur(8px)",
+                border: `1.5px solid ${getCellBorder(activeCell.x, activeCell.y, true)}`,
+                borderRadius: 8, padding: "16px 18px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.08)"
+              }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 600, color: "#2a2a2a", lineHeight: 1.2, flex: 1 }}>
+                    {activeCell.label}
+                  </h2>
+                  <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, color: "#999", marginLeft: 8, whiteSpace: "nowrap", background: "#f0ece6", padding: "2px 6px", borderRadius: 3 }}>
+                    ({activeCell.x > 0 ? "+" : ""}{activeCell.x}, {activeCell.y > 0 ? "+" : ""}{activeCell.y})
+                  </span>
+                </div>
+                {zone && (
+                  <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 11, fontWeight: 600, color: healthScore >= 0 ? "#3d6b45" : "#8b4030", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>
+                    {zone.label} Zone
+                  </div>
+                )}
+                {zone && (
+                  <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 11, color: "#8a857e", marginBottom: 10, fontStyle: "italic" }}>
+                    {zone.sub}
+                  </div>
+                )}
+                <HealthBar score={healthScore} />
+                <p style={{ fontFamily: "'Crimson Pro', serif", fontSize: 14, lineHeight: 1.55, color: "#3a3530", marginTop: 14 }}>
+                  {activeCell.desc}
+                </p>
+                <div style={{ marginTop: 14, paddingTop: 12, borderTop: "1px solid #e4e0d8" }}>
+                  <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, color: "#999", lineHeight: 1.6 }}>
+                    <div style={{ display:"flex", justifyContent:"space-between" }}>
+                      <span>Governance:</span>
+                      <span style={{ color:"#666" }}>
+                        {activeCell.x <= -2 ? "Highly dispersed" : activeCell.x === -1 ? "Slightly dispersed" : activeCell.x === 0 ? "Self-governed" : activeCell.x === 1 ? "Slightly concentrated" : "Highly concentrated"}
+                      </span>
+                    </div>
+                    <div style={{ display:"flex", justifyContent:"space-between" }}>
+                      <span>Systemic role:</span>
+                      <span style={{ color:"#666" }}>
+                        {activeCell.y >= 2 ? "Net extractor" : activeCell.y === 1 ? "Slight extractor" : activeCell.y === 0 ? "Neutral exchange" : activeCell.y === -1 ? "Net contributor" : "Deep contributor"}
+                      </span>
+                    </div>
+                    <div style={{ display:"flex", justifyContent:"space-between" }}>
+                      <span>Ecological health:</span>
+                      <span style={{ color:"#666" }}>{(healthScore * 100).toFixed(0)}%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ background: "rgba(255,253,249,0.6)", border: "1.5px dashed #d4d0c8", borderRadius: 8, padding: "20px 18px", textAlign: "center" }}>
+                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 12, color: "#999", lineHeight: 1.5 }}>
+                  Hover or click any cell to explore its ecological archetype, systemic role, and habitat impact.
+                </p>
+              </div>
+            )}
+
+            {/* Zone Legend */}
+            <div style={{ marginTop: 16, background: "rgba(255,253,249,0.7)", border: "1px solid #ddd8d0", borderRadius: 8, padding: "14px 16px" }}>
+              <h3 style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, fontWeight: 600, color: "#7a756e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
+                Ecological Zones (diagonal bands)
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                {ZONES.map((z, i) => {
+                  const mid = (z.range[0] + z.range[1]) / 2;
+                  return (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <div style={{
+                        width: 14, height: 14, borderRadius: 3, flexShrink: 0,
+                        background: getCellColor(Math.round(mid/2), Math.round(mid/2), false, false),
+                        border: "1px solid rgba(0,0,0,0.1)"
+                      }} />
+                      <div style={{ fontFamily:"'Nunito Sans',sans-serif", fontSize:11 }}>
+                        <span style={{ fontWeight:600, color:"#4a4540" }}>{z.label}</span>
+                        <span style={{ color:"#999", marginLeft:4 }}>{z.sub}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Axes info */}
+            <div style={{ marginTop: 12, background: "rgba(255,253,249,0.5)", border: "1px solid #ddd8d0", borderRadius: 8, padding: "14px 16px" }}>
+              <h3 style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, fontWeight: 600, color: "#7a756e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
+                Reading the Axes
+              </h3>
+              <div style={{ fontFamily: "'Crimson Pro', serif", fontSize: 12.5, color: "#5a554e", lineHeight: 1.55 }}>
+                <p style={{ marginBottom: 8 }}>
+                  <strong>X: Governance Orientation.</strong> Does this entity concentrate decision-making capacity (right) or disperse it into the ecosystem (left)?
+                </p>
+                <p>
+                  <strong>Y: Systemic Relationship.</strong> Does this entity strengthen habitat carrying capacity (bottom) or deplete it (top)?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<EconomicHabitatMatrix />);
+  </script>
+</body>
+</html>
