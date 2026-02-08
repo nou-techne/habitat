@@ -125,7 +125,11 @@ The market is broad precisely because the tools are composable. A freelancer nee
 
 ## License
 
-Open source. License TBD.
+Licensed under the [Peer Production License](LICENSE.md) — a CopyFarLeft license. Worker-owned cooperatives, collectives, and nonprofits may use this work freely, including commercially. Privately owned businesses seeking profit from employee labor must negotiate a separate license.
+
+## Code of Conduct
+
+This project follows the [Contributor Covenant v2.1](CODE_OF_CONDUCT.md).
 
 ## Further Reading
 
