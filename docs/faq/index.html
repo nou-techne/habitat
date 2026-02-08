@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently asked questions about Habitat — cooperative coordination infrastructure, patronage accounting, REA ontology, and more.">
+  <link rel="canonical" href="https://the-habitat.org/faq/">
+  <title>FAQ — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="FAQ — Habitat">
+  <meta property="og:description" content="Frequently asked questions about Habitat — cooperative coordination infrastructure, patronage accounting, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/faq/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FAQ — Habitat">
+  <meta name="twitter:description" content="Frequently asked questions about Habitat cooperative coordination infrastructure.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; cursor: pointer; background: var(--card-bg); transition: background 0.2s; gap: 1rem; }
+    .faq-question:hover { background: var(--bg); }
+    .faq-question h3 { margin: 0; font-size: 1.1rem; }
+    .faq-chevron { transition: transform 0.3s ease; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 0 1.5rem 1.25rem; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/">Journal</a>
+      <a href="/agents/">Agents</a>
+      <a href="/patterns/">Patterns</a>
+      <a href="/compliance/">Compliance</a>
+    </div>
+  </nav>
+
+  <div class="prose" id="main">
+    <h1>Frequently Asked Questions</h1>
+    <p class="lead">Common questions about Habitat, cooperative coordination, and how the system works.</p>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What is Habitat?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Habitat is coordination infrastructure for cooperatives. It provides the accounting, identity, and governance primitives that cooperative organizations need to operate transparently and distribute value according to contribution. Built as composable tools rather than a monolithic platform, Habitat lets organizations assemble the pieces they need for their specific context.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What is a Limited Cooperative Association (LCA)?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>A Limited Cooperative Association is a legal entity defined under the Uniform Limited Cooperative Association Act (ULCAA). It combines the democratic governance of a cooperative with the ability to accept investor members alongside patron members. Colorado is one of several states that have adopted LCA statutes. Habitat's operating entity, RegenHub LCA, is filed under Colorado law.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Is this a DAO?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>No. Habitat is a legally registered cooperative that uses Ethereum-native tools for coordination. The distinction matters: a DAO typically relies on token-weighted governance and smart contract execution. Habitat uses a legal cooperative structure with patronage-based governance, and employs on-chain tools (ENS identity, Superfluid streaming, event sourcing) as infrastructure rather than as the governance mechanism itself.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Do I need cryptocurrency to participate?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Not necessarily. While Habitat uses Ethereum-based tools for identity and value flows, participation in the cooperative and its governance does not require holding cryptocurrency. Some functions (like claiming an ENS subdomain or receiving streaming payments) interact with on-chain systems, but the cooperative is designed to be accessible regardless of crypto experience.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What is patronage accounting?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Patronage accounting tracks how much each member contributes to and benefits from the cooperative. Surplus is allocated in proportion to patronage rather than capital investment. This is a foundational principle of cooperative economics and is governed by Subchapter K of the Internal Revenue Code. See the <a href="/patronage/">Patronage</a> page for details on how Habitat implements this.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What is REA ontology?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>REA stands for Resource, Event, Agent. It is an accounting ontology developed by William McCarthy that models economic activity as events where agents exchange resources. Unlike traditional double-entry bookkeeping, REA captures the full semantic context of economic exchanges. Habitat uses REA as its foundational data model, making every economic event fully traceable. See the <a href="/matrix/">Economic Habitat Matrix</a> for how REA structures the system.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>How does the solar audit cycle work?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>The solar audit is Habitat's annual review cycle aligned with the solstices and equinoxes. Each quarter maps to a phase: contribution review, allocation calculation, distribution, and planning. This natural rhythm replaces the arbitrary fiscal calendar with cycles tied to seasonal patterns, reinforcing the ecological frame that guides the project. See <a href="/compliance/">Compliance</a> for the audit schedule.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What are service credits?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Service credits are the unit of account for non-monetary contributions to the cooperative. When a member contributes labor, expertise, or other non-capital resources, those contributions are recorded as service credits. These credits factor into patronage calculations and determine how surplus is allocated. They make invisible work visible and countable.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>What is the Peer Production License?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>The Peer Production License (also called CopyFarLeft) allows free use by cooperatives, collectives, commons-based organizations, and non-profits. For-profit enterprises operating under traditional corporate governance must obtain a commercial license. The principle: tools built by cooperatives should benefit cooperatives first. See the <a href="/license/">License</a> page for full details.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>How do agents participate?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Agents in the Habitat system include both human members and software agents. All agents are identified through ENS subdomains under the habitat.eth namespace. Software agents can hold service credit balances, participate in event streams, and execute coordination tasks. The <a href="/agents/">Agents</a> page describes the agent model in detail.</p>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h3>Who built this?</h3>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <p>Habitat is built by Techne, operating as RegenHub, LCA — a Colorado Limited Cooperative Association. It is open source, built in public, and developed collaboratively. The source code is available on <a href="https://github.com/nou-techne/habitat">GitHub</a>. See the <a href="/about/">About</a> page for more.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/nou-techne/habitat">GitHub</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/agents/">Agents</a>
+      <a href="/patterns/">Patterns</a>
+      <a href="/compliance/">Compliance</a>
+    </div>
+    <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
+  </footer>
+  <script>
+    lucide.createIcons();
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      if (item.classList.contains('open')) {
+        answer.style.maxHeight = null;
+        item.classList.remove('open');
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        item.classList.add('open');
+      }
+    }
+  </script>
+</body>
+</html>

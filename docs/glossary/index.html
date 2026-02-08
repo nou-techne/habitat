@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glossary of terms used in the Habitat cooperative coordination system — from 704(b) compliance to watershed contracts.">
+  <link rel="canonical" href="https://the-habitat.org/glossary/">
+  <title>Glossary — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="Glossary — Habitat">
+  <meta property="og:description" content="Glossary of terms used in the Habitat cooperative coordination system.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/glossary/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Glossary — Habitat">
+  <meta name="twitter:description" content="Key terms and definitions for the Habitat cooperative coordination system.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .glossary-term { border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+    .glossary-term:last-child { border-bottom: none; }
+    .glossary-term dt { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--text); }
+    .glossary-term dd { margin: 0; color: var(--text-muted); line-height: 1.7; }
+    .glossary-term dd a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/">Journal</a>
+      <a href="/agents/">Agents</a>
+      <a href="/patterns/">Patterns</a>
+      <a href="/compliance/">Compliance</a>
+    </div>
+  </nav>
+
+  <div class="prose" id="main">
+    <h1>Glossary</h1>
+    <p class="lead">Key terms used throughout the Habitat system.</p>
+
+    <dl>
+      <div class="glossary-term">
+        <dt id="704b">704(b) Compliance</dt>
+        <dd>The IRS regulation under Subchapter K that governs how partnership allocations must have "substantial economic effect." Habitat's patronage formulas are designed to satisfy 704(b) requirements, ensuring allocations reflect genuine economic activity. See <a href="/compliance/">Compliance</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="capital-account">Capital Account</dt>
+        <dd>A ledger tracking each member's economic interest in the cooperative. Capital accounts are adjusted by contributions, allocations of income or loss, and distributions. Maintaining accurate capital accounts is required for 704(b) compliance.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="composable-tools">Composable Tools</dt>
+        <dd>Software components designed to be assembled in different configurations for different contexts, rather than delivered as a monolithic platform. Habitat is built as composable tools — each piece (identity, accounting, governance) works independently and together. See <a href="/patterns/">Patterns</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="contribution-lifecycle">Contribution Lifecycle</dt>
+        <dd>The full arc of a contribution from initiation through verification to allocation. Every contribution passes through stages: proposal, execution, attestation, and recording as an economic event in the REA ledger.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="dro">Deficit Restoration Obligation (DRO)</dt>
+        <dd>A member's obligation to restore a negative capital account balance upon liquidation of the cooperative. DROs ensure that allocations of loss have real economic consequences, which is a requirement for substantial economic effect under 704(b). See <a href="/compliance/">Compliance</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="matrix">Economic Habitat Matrix</dt>
+        <dd>The two-axis framework mapping organizations by governance orientation (concentrate vs. disperse) and systemic relationship (deplete vs. enrich). Habitat is designed for the mutualistic quadrant — dispersed governance, ecosystem enrichment. See <a href="/matrix/">Matrix</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="ens">ENS (Ethereum Name Service)</dt>
+        <dd>A decentralized naming system on Ethereum that maps human-readable names to addresses. Habitat uses ENS subdomains under habitat.eth as the identity layer for all agents. See <a href="/identity/">Identity</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="event-sourcing">Event Sourcing</dt>
+        <dd>An architectural pattern where state changes are stored as a sequence of immutable events rather than overwriting current state. Habitat uses event sourcing to maintain a complete, auditable history of every economic action in the system.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="grant-pool">Grant Pool (pool.habitat.eth)</dt>
+        <dd>The Ethereum address that holds funds designated for ecosystem grants. The grant pool distributes resources to projects and contributors aligned with Habitat's cooperative mission, governed by patronage-weighted decisions.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="lca">Limited Cooperative Association (LCA)</dt>
+        <dd>A legal entity under the Uniform Limited Cooperative Association Act that combines cooperative governance with the ability to accept both patron and investor members. RegenHub, LCA is Habitat's operating entity, filed under Colorado law. See <a href="/faq/">FAQ</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="patronage">Patronage</dt>
+        <dd>The measure of a member's economic participation in the cooperative. Surplus is allocated in proportion to patronage rather than capital investment, ensuring that those who contribute the most receive the most. See <a href="/patronage/">Patronage</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="patronage-formula">Patronage Formula</dt>
+        <dd>The mathematical formula that converts recorded contributions (service credits, capital, and other inputs) into patronage allocations. The formula must satisfy 704(b) substantial economic effect requirements. See <a href="/patronage/">Patronage</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="ppl">Peer Production License</dt>
+        <dd>A CopyFarLeft license that permits free use by cooperatives, collectives, and non-profits while requiring for-profit enterprises under traditional corporate governance to obtain a commercial license. See <a href="/license/">License</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="qio">Qualified Income Offset (QIO)</dt>
+        <dd>A provision allowing members who receive unexpected allocations that create or increase a deficit in their capital account to be allocated income to offset that deficit. QIO is one of the safe harbor provisions under 704(b). See <a href="/compliance/">Compliance</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="rea">REA (Resource, Event, Agent)</dt>
+        <dd>An accounting ontology that models economic activity as events where agents exchange resources. Developed by William McCarthy, REA captures the full semantic context of exchanges rather than reducing them to debits and credits. Habitat uses REA as its foundational data model. See <a href="/matrix/">Matrix</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="service-credits">Service Credits</dt>
+        <dd>The unit of account for non-monetary contributions to the cooperative. Service credits track labor, expertise, and other non-capital inputs, making them visible in patronage calculations.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="seven-patterns">Seven Progressive Design Patterns</dt>
+        <dd>The foundational decomposition of all information systems into seven layered patterns: Identity, State, Relationship, Event, Flow, Constraint, and View. Each layer depends on those beneath it. See <a href="/thesis/">Thesis</a> and <a href="/patterns/">Patterns</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="solar-audit">Solar Audit</dt>
+        <dd>Habitat's annual review cycle aligned with solstices and equinoxes. Each quarter corresponds to a phase of the audit: contribution review, allocation, distribution, and planning. See <a href="/compliance/">Compliance</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="subchapter-k">Subchapter K</dt>
+        <dd>The section of the Internal Revenue Code governing taxation of partnerships and their partners. Cooperatives structured as LCAs operate under Subchapter K, which defines rules for allocations, distributions, and capital account maintenance. See <a href="/compliance/">Compliance</a>.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="superfluid">Superfluid</dt>
+        <dd>An Ethereum protocol for programmable money streams — continuous, real-time token transfers. Habitat uses Superfluid for streaming patronage distributions and ongoing compensation flows rather than discrete periodic payments.</dd>
+      </div>
+
+      <div class="glossary-term">
+        <dt id="watershed">Watershed (watershed.habitat.eth)</dt>
+        <dd>The primary operational Ethereum address for Habitat. Named for the geographic metaphor of water flowing to where it is needed, the watershed contract manages the core treasury and coordination flows.</dd>
+      </div>
+    </dl>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/nou-techne/habitat">GitHub</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/agents/">Agents</a>
+      <a href="/patterns/">Patterns</a>
+      <a href="/compliance/">Compliance</a>
+    </div>
+    <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
