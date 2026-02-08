@@ -82,6 +82,168 @@
   <hr class="divider">
 
   <div class="section">
+    <h2><i data-lucide="calculator" class="section-icon icon-orange"></i> See It Work</h2>
+    <p>Adjust the contribution weights and see how patronage allocation distributes a cooperative's surplus among its members.</p>
+
+    <div id="formula-demo" style="margin-top: 1.5rem;">
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+        <div style="flex: 1; min-width: 280px;">
+          <h3 style="font-size: 1rem; margin-bottom: 1rem;">Weights</h3>
+          <div class="weight-sliders">
+            <div class="slider-row">
+              <label><i data-lucide="hammer" style="width:14px;height:14px;vertical-align:-2px;color:var(--accent);stroke-width:1.5;"></i> Labor</label>
+              <input type="range" id="w-labor" min="0" max="100" value="40" oninput="updateFormula()">
+              <span id="w-labor-val" class="weight-val">40%</span>
+            </div>
+            <div class="slider-row">
+              <label><i data-lucide="trending-up" style="width:14px;height:14px;vertical-align:-2px;color:var(--accent-blue);stroke-width:1.5;"></i> Revenue</label>
+              <input type="range" id="w-revenue" min="0" max="100" value="30" oninput="updateFormula()">
+              <span id="w-revenue-val" class="weight-val">30%</span>
+            </div>
+            <div class="slider-row">
+              <label><i data-lucide="landmark" style="width:14px;height:14px;vertical-align:-2px;color:var(--accent-blue);stroke-width:1.5;"></i> Cash</label>
+              <input type="range" id="w-cash" min="0" max="100" value="20" oninput="updateFormula()">
+              <span id="w-cash-val" class="weight-val">20%</span>
+            </div>
+            <div class="slider-row">
+              <label><i data-lucide="users" style="width:14px;height:14px;vertical-align:-2px;color:var(--accent-orange);stroke-width:1.5;"></i> Community</label>
+              <input type="range" id="w-community" min="0" max="100" value="10" oninput="updateFormula()">
+              <span id="w-community-val" class="weight-val">10%</span>
+            </div>
+          </div>
+          <p id="weight-total" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Total: 100%</p>
+        </div>
+
+        <div style="flex: 1; min-width: 280px;">
+          <h3 style="font-size: 1rem; margin-bottom: 1rem;">Surplus to Allocate</h3>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+            <span style="font-size: 1.1rem; color: var(--text-muted);">$</span>
+            <input type="number" id="surplus" value="50000" min="0" step="1000" oninput="updateFormula()" style="font-family: Georgia, serif; font-size: 1.1rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); width: 140px;">
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table id="allocation-table" style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Member</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Labor Hrs</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Revenue</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Cash</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Community</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Share</th>
+              <th style="text-align:right;padding:0.5rem 0.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--accent);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;">Allocation</th>
+            </tr>
+          </thead>
+          <tbody id="allocation-body"></tbody>
+        </table>
+      </div>
+
+      <div id="allocation-bars" style="margin-top: 1.2rem;"></div>
+    </div>
+  </div>
+
+  <style>
+    .slider-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .slider-row label { width: 100px; font-size: 0.88rem; color: var(--text); }
+    .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+    .weight-val { width: 36px; text-align: right; font-size: 0.85rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .bar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
+    .bar-label { width: 70px; font-size: 0.82rem; color: var(--text-muted); text-align: right; }
+    .bar-track { flex: 1; height: 20px; background: var(--bg-mid); border-radius: 4px; overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
+    .bar-amount { font-size: 0.75rem; color: white; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+  </style>
+
+  <script>
+    const members = [
+      { name: "Alice", labor: 320, revenue: 18000, cash: 5000, community: 85 },
+      { name: "Bob", labor: 240, revenue: 12000, cash: 8000, community: 60 },
+      { name: "Carol", labor: 400, revenue: 8000, cash: 2000, community: 95 },
+      { name: "David", labor: 180, revenue: 22000, cash: 3000, community: 40 },
+    ];
+    const barColors = ["var(--accent)", "var(--accent-blue)", "var(--accent-orange)", "#7c6b9e"];
+
+    function updateFormula() {
+      const wL = +document.getElementById('w-labor').value;
+      const wR = +document.getElementById('w-revenue').value;
+      const wC = +document.getElementById('w-cash').value;
+      const wM = +document.getElementById('w-community').value;
+      const surplus = +document.getElementById('surplus').value || 0;
+      const total = wL + wR + wC + wM;
+
+      document.getElementById('w-labor-val').textContent = wL + '%';
+      document.getElementById('w-revenue-val').textContent = wR + '%';
+      document.getElementById('w-cash-val').textContent = wC + '%';
+      document.getElementById('w-community-val').textContent = wM + '%';
+
+      const totalEl = document.getElementById('weight-total');
+      totalEl.textContent = `Total: ${total}%`;
+      totalEl.style.color = total === 100 ? 'var(--text-muted)' : 'var(--accent-orange)';
+
+      // Normalize weights
+      const nL = total > 0 ? wL / total : 0;
+      const nR = total > 0 ? wR / total : 0;
+      const nC = total > 0 ? wC / total : 0;
+      const nM = total > 0 ? wM / total : 0;
+
+      // Compute totals per category
+      const totals = members.reduce((acc, m) => ({
+        labor: acc.labor + m.labor,
+        revenue: acc.revenue + m.revenue,
+        cash: acc.cash + m.cash,
+        community: acc.community + m.community
+      }), { labor: 0, revenue: 0, cash: 0, community: 0 });
+
+      // Compute weighted scores
+      const scores = members.map(m => {
+        const lPct = totals.labor > 0 ? m.labor / totals.labor : 0;
+        const rPct = totals.revenue > 0 ? m.revenue / totals.revenue : 0;
+        const cPct = totals.cash > 0 ? m.cash / totals.cash : 0;
+        const mPct = totals.community > 0 ? m.community / totals.community : 0;
+        return (lPct * nL) + (rPct * nR) + (cPct * nC) + (mPct * nM);
+      });
+
+      const scoreTotal = scores.reduce((a, b) => a + b, 0);
+      const shares = scores.map(s => scoreTotal > 0 ? s / scoreTotal : 0);
+      const allocations = shares.map(s => s * surplus);
+
+      // Render table
+      const tbody = document.getElementById('allocation-body');
+      tbody.innerHTML = members.map((m, i) => `
+        <tr>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);font-weight:600;">${m.name}</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">${m.labor}</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${m.revenue.toLocaleString()}</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${m.cash.toLocaleString()}</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">${m.community}</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;color:var(--accent);font-variant-numeric:tabular-nums;">${(shares[i]*100).toFixed(1)}%</td>
+          <td style="padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);text-align:right;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;">$${allocations[i].toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0})}</td>
+        </tr>
+      `).join('');
+
+      // Render bars
+      const barsEl = document.getElementById('allocation-bars');
+      barsEl.innerHTML = members.map((m, i) => `
+        <div class="bar-row">
+          <span class="bar-label">${m.name}</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${shares[i]*100}%;background:${barColors[i]};">
+              ${allocations[i] >= 100 ? `<span class="bar-amount">$${allocations[i].toLocaleString(undefined, {maximumFractionDigits:0})}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', updateFormula);
+  </script>
+
+  <hr class="divider">
+
+  <div class="section">
     <h2><i data-lucide="compass" class="section-icon"></i> Explore</h2>
     <div class="cards">
       <a class="card" href="/habitat/matrix/">
