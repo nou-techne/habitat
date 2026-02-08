@@ -2,20 +2,22 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg-light: #f4f1eb;
-  --bg-mid: #ebe7df;
-  --bg-dark: #e4e0d8;
-  --text: #2c2c2c;
-  --text-muted: #6b6560;
-  --accent: #8b7355;
-  --accent-hover: #6d5a43;
-  --border: #d4cfc7;
-  --card-bg: rgba(255,255,255,0.45);
+  --bg-light: #f0f4ee;
+  --bg-mid: #e3ebe0;
+  --bg-dark: #d6dfd2;
+  --text: #2a2f28;
+  --text-muted: #5a6658;
+  --accent: #4a7c59;
+  --accent-hover: #3a6347;
+  --border: #c2cebb;
+  --card-bg: rgba(255,255,255,0.5);
+  --accent-blue: #4a6f7c;
+  --accent-brown: #7c6b4a;
   --max-width: 860px;
 }
 
 body {
-  background: linear-gradient(145deg, var(--bg-light) 0%, var(--bg-mid) 40%, var(--bg-dark) 100%);
+  background: linear-gradient(160deg, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
   color: var(--text);
   font-family: 'Georgia', 'Times New Roman', serif;
   line-height: 1.7;
