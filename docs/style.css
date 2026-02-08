@@ -12,7 +12,9 @@
   --border: #c2cebb;
   --card-bg: rgba(255,255,255,0.5);
   --accent-blue: #4a6f7c;
-  --accent-brown: #7c6b4a;
+  --accent-blue-hover: #3a5b66;
+  --accent-orange: #b5622a;
+  --accent-orange-muted: #c4875a;
   --max-width: 860px;
 }
 
@@ -121,6 +123,18 @@ nav .links a:hover, nav .links a.active { color: var(--text); }
 
 .card-icon { margin-bottom: 0.8rem; color: var(--accent); }
 .card-icon svg { width: 28px; height: 28px; stroke-width: 1.5; }
+
+/* Color variants for icons and accents */
+.icon-blue { color: var(--accent-blue); }
+.icon-orange { color: var(--accent-orange); }
+.layer-icon.icon-blue { color: var(--accent-blue); border-color: rgba(74, 111, 124, 0.25); }
+.layer-icon.icon-orange { color: var(--accent-orange); border-color: rgba(181, 98, 42, 0.2); }
+.card-icon.icon-blue { color: var(--accent-blue); }
+.card-icon.icon-orange { color: var(--accent-orange); }
+
+/* Blockquote color variants */
+.prose blockquote.blue { border-left-color: var(--accent-blue); }
+.prose blockquote.orange { border-left-color: var(--accent-orange); }
 
 /* Footer */
 footer {

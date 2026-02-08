@@ -50,7 +50,7 @@
 
     <p>The system maintains <strong>dual-basis tracking</strong>: a book capital account (fair market value, for economic rights) and a tax capital account (cost basis, for IRS reporting). Both are updated from the same events, sometimes at different amounts. This dual-basis system is what makes the accounting compliant with IRC Section 704(b).</p>
 
-    <h2><i data-lucide="calculator" class="section-icon"></i> The Patronage Formula</h2>
+    <h2><i data-lucide="calculator" class="section-icon icon-orange"></i> The Patronage Formula</h2>
     <p>At the end of each period, the cooperative's net income is divided among members based on a weighted formula. Each category of contribution — labor, revenue, cash, community involvement — carries a weight reflecting its importance to the organization.</p>
 
     <pre><code>member_allocation = net_income × (member_weighted_contribution / total_weighted_contributions)</code></pre>
@@ -87,7 +87,7 @@
     <h2><i data-lucide="blocks" class="section-icon"></i> Three Tools, One System</h2>
     <p>The patronage system is built from three composable tools:</p>
     <div class="layer">
-      <div class="layer-icon"><i data-lucide="vault"></i></div>
+      <div class="layer-icon icon-blue"><i data-lucide="vault"></i></div>
       <div class="layer-content">
         <h3>Treasury</h3>
         <p>Double-entry accounting, capital accounts, balance computation, reporting.</p>
@@ -101,7 +101,7 @@
       </div>
     </div>
     <div class="layer">
-      <div class="layer-icon"><i data-lucide="file-check"></i></div>
+      <div class="layer-icon icon-orange"><i data-lucide="file-check"></i></div>
       <div class="layer-content">
         <h3>Agreements</h3>
         <p>Patronage formulas, period close, allocation, distribution, K-1 assembly.</p>
@@ -109,7 +109,7 @@
     </div>
     <p>Each tool is independent and event-sourced. They communicate through events, not shared databases. A contribution approved in People automatically creates transactions in Treasury. An allocation calculated in Agreements automatically updates capital accounts. The tools compose.</p>
 
-    <h2><i data-lucide="arrow-up-right" class="section-icon"></i> Beyond Cooperatives</h2>
+    <h2><i data-lucide="arrow-up-right" class="section-icon icon-orange"></i> Beyond Cooperatives</h2>
     <p>The system is designed for cooperatives but works for any organization that distributes value based on contribution. A freelancer collective splitting project revenue. A DAO distributing treasury funds. An employee-owned company calculating profit sharing. Same primitives, different configurations.</p>
     <p>The formula is stored as configuration, not code. Changing it — from weighted patronage to equal allocation, from hours-only to revenue-weighted — requires a governance decision, not a developer.</p>
 
