@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 15 complete. Sprint 16 next: Service Credit Integration. Phases 1-3 complete — core MVP specified.
+Sprint 16 complete. Sprint 17 next: Revaluation Events. Phase 4 (Extensions) underway.
 
 ---
 
