@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>704(b) Compliance Checker — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="704(b) Compliance Checker — Habitat">
+  <meta property="og:description" content="Interactive tool demonstrating IRC Section 704(b) compliance rules for cooperative patronage allocations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/compliance/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="704(b) Compliance Checker — Habitat">
+  <meta name="twitter:description" content="See how allocations satisfy or violate the 704(b) economic effect test.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/">Journal</a>
+      <a href="/agents/">Agents</a>
+      <a href="/dashboard/">Dashboard</a>
+      <a href="/patterns/">Patterns</a>
+    </div>
+  </nav>
+
+  <div class="prose" id="main">
+    <h1>704(b) Compliance Checker</h1>
+    <p class="lead">Interactive demonstration of IRC Section 704(b) compliance rules. Input an allocation scenario and see which tests pass or fail.</p>
+
+    <h2><i data-lucide="shield" class="section-icon icon-orange"></i> The Three-Part Test</h2>
+    <p>For a partnership (or LCA) allocation to have "substantial economic effect" under IRC Section 704(b), it must satisfy three requirements:</p>
+
+    <ol>
+      <li><strong>Capital account maintenance</strong> — properly track each partner's economic interest</li>
+      <li><strong>Liquidation proceeds follow capital accounts</strong> — distributions match economic rights</li>
+      <li><strong>Deficit restoration obligation (DRO) or qualified income offset (QIO)</strong> — protection against negative balances</li>
+    </ol>
+
+    <p>Input a scenario below to test compliance:</p>
+
+    <div id="checker" style="margin: 2rem 0;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;">
+        <h3 style="margin-top:0;">Scenario Inputs</h3>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+          <div>
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;color:var(--text-muted);">Member A Contribution</label>
+            <input type="number" id="contrib-a" value="10000" min="0" step="1000" oninput="checkCompliance()" style="width:100%;padding:0.5rem;border:1px solid var(--border);border-radius:4px;font-size:0.9rem;">
+          </div>
+          <div>
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;color:var(--text-muted);">Member B Contribution</label>
+            <input type="number" id="contrib-b" value="5000" min="0" step="1000" oninput="checkCompliance()" style="width:100%;padding:0.5rem;border:1px solid var(--border);border-radius:4px;font-size:0.9rem;">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+          <div>
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;color:var(--text-muted);">Period Net Income</label>
+            <input type="number" id="net-income" value="6000" step="1000" oninput="checkCompliance()" style="width:100%;padding:0.5rem;border:1px solid var(--border);border-radius:4px;font-size:0.9rem;">
+          </div>
+          <div>
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;color:var(--text-muted);">Member A Allocation %</label>
+            <input type="number" id="alloc-a" value="60" min="0" max="100" oninput="checkCompliance()" style="width:100%;padding:0.5rem;border:1px solid var(--border);border-radius:4px;font-size:0.9rem;">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+          <div>
+            <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;">
+              <input type="checkbox" id="dro-a" checked onchange="checkCompliance()" style="width:16px;height:16px;">
+              Member A has DRO
+            </label>
+          </div>
+          <div>
+            <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;">
+              <input type="checkbox" id="dro-b" checked onchange="checkCompliance()" style="width:16px;height:16px;">
+              Member B has DRO
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;">
+        <h3 style="margin-top:0;">Capital Accounts (After Allocation)</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:0.5rem;border-bottom:2px solid var(--border);">Member</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:2px solid var(--border);">Contribution</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:2px solid var(--border);">Allocation</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:2px solid var(--border);">Balance</th>
+            </tr>
+          </thead>
+          <tbody id="cap-accounts"></tbody>
+        </table>
+      </div>
+
+      <div id="compliance-results"></div>
+    </div>
+
+    <style>
+      .test-result {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .test-result.pass {
+        border-left: 4px solid var(--accent);
+        background: rgba(74,124,89,0.05);
+      }
+      .test-result.fail {
+        border-left: 4px solid var(--accent-orange);
+        background: rgba(181,98,42,0.05);
+      }
+      .test-result h4 {
+        margin:0 0 0.5rem;
+        display:flex;
+        align-items:center;
+        gap:0.5rem;
+        font-size:1rem;
+      }
+      .test-result.pass h4 { color: var(--accent); }
+      .test-result.fail h4 { color: var(--accent-orange); }
+      .test-result p {
+        margin:0;
+        font-size:0.9rem;
+        color:var(--text-muted);
+      }
+    </style>
+
+    <script>
+      function checkCompliance() {
+        const contribA = +document.getElementById('contrib-a').value || 0;
+        const contribB = +document.getElementById('contrib-b').value || 0;
+        const netIncome = +document.getElementById('net-income').value || 0;
+        const allocPctA = +document.getElementById('alloc-a').value || 0;
+        const allocPctB = 100 - allocPctA;
+        const droA = document.getElementById('dro-a').checked;
+        const droB = document.getElementById('dro-b').checked;
+
+        const allocA = (netIncome * allocPctA / 100);
+        const allocB = (netIncome * allocPctB / 100);
+        const balanceA = contribA + allocA;
+        const balanceB = contribB + allocB;
+
+        // Update capital accounts table
+        const tbody = document.getElementById('cap-accounts');
+        tbody.innerHTML = `
+          <tr>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);font-weight:600;">Member A</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${contribA.toLocaleString()}</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${allocA.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-weight:600;font-variant-numeric:tabular-nums;">$${balanceA.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);font-weight:600;">Member B</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${contribB.toLocaleString()}</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;">$${allocB.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
+            <td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;font-weight:600;font-variant-numeric:tabular-nums;">$${balanceB.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
+          </tr>
+        `;
+
+        // Run tests
+        const tests = [];
+
+        // Test 1: Capital account maintenance
+        const test1Pass = (contribA >= 0 && contribB >= 0);
+        tests.push({
+          name: "Capital Account Maintenance",
+          pass: test1Pass,
+          message: test1Pass 
+            ? "Capital accounts properly track each member's contributions and allocations."
+            : "Capital accounts must accurately reflect economic contributions."
+        });
+
+        // Test 2: Liquidation proceeds follow capital accounts
+        const totalCap = balanceA + balanceB;
+        const test2Pass = totalCap > 0 && (balanceA / totalCap) > 0 && (balanceB / totalCap) > 0;
+        tests.push({
+          name: "Liquidation Distribution Matches Capital",
+          pass: test2Pass,
+          message: test2Pass
+            ? `On liquidation, Member A would receive ${((balanceA/totalCap)*100).toFixed(1)}% and Member B would receive ${((balanceB/totalCap)*100).toFixed(1)}%, matching their capital account balances.`
+            : "Liquidation proceeds must be distributed according to positive capital account balances."
+        });
+
+        // Test 3: DRO or QIO
+        const test3Pass = (droA || balanceA >= 0) && (droB || balanceB >= 0);
+        tests.push({
+          name: "Deficit Protection (DRO/QIO)",
+          pass: test3Pass,
+          message: test3Pass
+            ? "All members with potential negative balances have deficit restoration obligations."
+            : "Members without DRO cannot have allocations that could create negative capital accounts."
+        });
+
+        // Test 4: Substantiality (simplified: allocation must correlate with economic contribution)
+        const totalContrib = contribA + contribB;
+        const contribPctA = totalContrib > 0 ? (contribA / totalContrib) * 100 : 50;
+        const allocDiff = Math.abs(allocPctA - contribPctA);
+        const test4Pass = allocDiff < 40; // Allow some variance, but not extreme
+        tests.push({
+          name: "Substantiality Test",
+          pass: test4Pass,
+          message: test4Pass
+            ? `Allocation (${allocPctA.toFixed(1)}%) reasonably correlates with economic contribution (${contribPctA.toFixed(1)}%).`
+            : `Allocation (${allocPctA.toFixed(1)}%) diverges significantly from economic contribution (${contribPctA.toFixed(1)}%). Allocations must have economic substance beyond tax benefits.`
+        });
+
+        // Render results
+        const resultsDiv = document.getElementById('compliance-results');
+        const allPass = tests.every(t => t.pass);
+        resultsDiv.innerHTML = `
+          <div style="background:${allPass ? 'rgba(74,124,89,0.1)' : 'rgba(181,98,42,0.1)'};border:1px solid ${allPass ? 'rgba(74,124,89,0.3)' : 'rgba(181,98,42,0.3)'};border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;">
+            <h3 style="margin-top:0;display:flex;align-items:center;gap:0.5rem;color:${allPass ? 'var(--accent)' : 'var(--accent-orange)'};">
+              <i data-lucide="${allPass ? 'check-circle' : 'alert-circle'}" style="width:20px;height:20px;stroke-width:1.5;"></i>
+              Overall: ${allPass ? 'Compliant' : 'Non-Compliant'}
+            </h3>
+            <p style="margin:0;font-size:0.9rem;color:var(--text-muted);">
+              ${allPass 
+                ? 'This allocation scenario satisfies all IRC 704(b) requirements for substantial economic effect.' 
+                : 'This allocation scenario fails one or more 704(b) tests and would not be respected by the IRS.'}
+            </p>
+          </div>
+          ${tests.map(test => `
+            <div class="test-result ${test.pass ? 'pass' : 'fail'}">
+              <h4>
+                <i data-lucide="${test.pass ? 'check' : 'x'}" style="width:16px;height:16px;stroke-width:2;"></i>
+                ${test.name}
+              </h4>
+              <p>${test.message}</p>
+            </div>
+          `).join('')}
+        `;
+        lucide.createIcons();
+      }
+
+      document.addEventListener('DOMContentLoaded', checkCompliance);
+    </script>
+
+    <h2><i data-lucide="book-open" class="section-icon"></i> Understanding 704(b)</h2>
+    <p>IRC Section 704(b) governs how partnerships (and LCAs) allocate income, gain, loss, and deduction among partners. The law requires that allocations have "substantial economic effect" — meaning they reflect real economic arrangements, not just tax optimization.</p>
+
+    <p>The three-part test ensures that:</p>
+    <ul>
+      <li>Members' economic interests are properly tracked (capital accounts)</li>
+      <li>Distributions match those economic interests (liquidation test)</li>
+      <li>Members bear the risk of their allocations (DRO/QIO)</li>
+    </ul>
+
+    <p>The substantiality test prevents purely tax-motivated allocations. If Member A contributes 67% of the capital but receives 95% of the income allocation with no economic justification, the IRS will disregard the allocation and reallocate according to economic reality.</p>
+
+    <p>For cooperatives using patronage-based allocation, compliance is straightforward: contributions and patronage create real economic interests, allocations follow the patronage formula, and liquidation proceeds distribute according to capital accounts. The system is designed for compliance.</p>
+
+    <h2><i data-lucide="arrow-right" class="section-icon icon-orange"></i> Further Reading</h2>
+    <ul>
+      <li><a href="/patronage/" style="color:var(--accent);">Patronage Accounting</a> — How Habitat's system satisfies 704(b) by design</li>
+      <li><a href="https://www.irs.gov/pub/irs-pdf/p541.pdf" style="color:var(--accent);">IRS Publication 541</a> — Partnerships (PDF)</li>
+    </ul>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/nou-techne/habitat">GitHub</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/agents/">Agents</a>
+      <a href="/dashboard/">Dashboard</a>
+    </div>
+    <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
