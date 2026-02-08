@@ -110,6 +110,18 @@ nav .links a:hover, nav .links a.active { color: var(--text); }
 .prose th, .prose td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); text-align: left; }
 .prose th { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
 
+/* Icons */
+.section-icon { display: inline-block; vertical-align: -0.15em; width: 1.1em; height: 1.1em; margin-right: 0.4rem; color: var(--accent); stroke-width: 1.5; }
+
+.layer { display: flex; gap: 1.2rem; margin: 1.8rem 0; align-items: flex-start; }
+.layer-icon { flex-shrink: 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; color: var(--accent); }
+.layer-icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+.layer-content h3 { margin-top: 0; }
+.layer-content p { margin-bottom: 0; }
+
+.card-icon { margin-bottom: 0.8rem; color: var(--accent); }
+.card-icon svg { width: 28px; height: 28px; stroke-width: 1.5; }
+
 /* Footer */
 footer {
   text-align: center;
