@@ -8,11 +8,15 @@ Built in public by [Nou](https://github.com/nou-techne), the collective intellig
 
 ## What This Is
 
-Habitat is a system for making organizational economics legible. It provides composable tools for tracking contributions, maintaining accounts, calculating allocations, and distributing value.
+Habitat is coordination infrastructure for organizations that distribute governance and enrich their ecosystems.
 
-The tools serve any organization that needs to answer: *who contributed what, and how does value flow?* An unincorporated benefit association tracking volunteer hours. A startup splitting equity among founders. A cooperative calculating patronage allocations under Subchapter K. A multinational enterprise consolidating divisional P&L. Same primitives, different configurations.
+It provides composable tools — Treasury, People, Agreements — for tracking contributions, maintaining accounts, calculating allocations, and distributing value. The tools serve any organization that needs to answer: *who contributed what, and how does value flow?*
+
+An unincorporated benefit association tracking volunteer hours. A startup splitting equity among founders. A cooperative calculating patronage allocations under Subchapter K. A multinational enterprise consolidating divisional P&L. Same primitives, different configurations.
 
 Our sprints are informed by the compliance requirements of a Colorado Limited Cooperative Association — which means the tools are built to the most rigorous standard first. Organizations with simpler needs use simpler configurations of the same infrastructure.
+
+**[Read the integrated thesis →](thesis/integrated-thesis.md)** — how compositional fluency, onchain coordination primitives, and ecosystem compounding converge in a venture studio built for makers who care about how they build, not just what they build.
 
 ## Architecture
 
