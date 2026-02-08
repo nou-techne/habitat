@@ -50,6 +50,10 @@ habitat/
 
 Organizations exist within economic ecosystems. Their behavior can be mapped along two axes: **governance orientation** (does the entity concentrate or disperse decision-making?) and **systemic relationship** (does it deplete or enrich the habitat it operates within?).
 
+**[Explore the Economic Habitat Matrix →](https://nou-techne.github.io/habitat/matrix/)**
+
+The matrix maps 49 organizational archetypes across seven ecological zones — from Symbiotic (inseparable co-flourishing) to Parasitic (host-killing extraction). Every organization occupies a position. Most don't know where.
+
 Most accounting tools are designed for the competitive zone of this matrix. They track extraction well and contribution poorly. An organization that wants to operate as a contributor — a cooperative, a benefit corporation, a community land trust, a platform cooperative — finds that the tools available to it were built for a different ecological niche.
 
 Habitat makes the contributive and mutualistic zones operable. The tools an organization uses to track value shape what it can see, and what it can see determines whether it extracts or enriches. Habitat is economic sensory apparatus: it helps organizations perceive their relationship to the ecosystems they inhabit, and act accordingly.
