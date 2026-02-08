@@ -138,6 +138,61 @@ nav .links a:hover, nav .links a.active { color: var(--text); }
 .prose blockquote.blue { border-left-color: var(--accent-blue); }
 .prose blockquote.orange { border-left-color: var(--accent-orange); }
 
+/* Service Credits Cards */
+.credit-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+.credit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--accent);
+}
+.credit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(74,124,89,0.8) 100%);
+  color: white;
+}
+.credit-icon.icon-blue {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, rgba(74,111,124,0.8) 100%);
+}
+.credit-icon.icon-orange {
+  background: linear-gradient(135deg, var(--accent-orange) 0%, rgba(181,98,42,0.8) 100%);
+}
+.credit-icon i {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5;
+}
+.credit-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.credit-card p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.credit-example {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
 /* Footer */
 footer {
   text-align: center;
