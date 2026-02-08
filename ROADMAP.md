@@ -1,71 +1,156 @@
 # Habitat Roadmap
 
-**Method:** Each sprint produces one complete document. Each builds on the last. The sequence follows the dependency chain — you can't build the roof before the walls.
+---
 
-**Implementation reality:** The stack is Glide + Supabase + Make.com. Sprints should land in a way that maps to PostgreSQL tables and automation workflows, not abstract software patterns.
+## Phase 1: Specification (Sprints 0–20) ✓
+
+The initial roadmap produced 20 specification documents across four sub-phases: Foundation (Treasury MVP), Contribution Recognition (People MVP), Allocation (Agreements MVP), and Extensions. Each sprint produced one complete document. Each built on the last.
+
+<details>
+<summary>Phase 1 sprint history</summary>
+
+### Foundation (Treasury MVP)
+
+| Sprint | Focus | Output |
+|--------|-------|--------|
+| 0 | Project setup | README.md |
+| 1 | Context ingestion | Foundational documents indexed |
+| 2 | 704(b) compliance mapping | Legal requirements → tool components, gaps identified |
+| 3 | Capital account mechanics | Book/tax dual-basis tracking, transaction schema |
+| 4 | Chart of accounts | Complete account structure for a Colorado LCA |
+| 5 | Transaction model | How value moves: logging, double-entry, event schema |
+| 6 | Balance computation | Deriving current state from transaction history |
+| 7 | Treasury reporting | Member statements, period summaries, balance sheet |
+
+### Contribution Recognition (People MVP)
+
+| Sprint | Focus | Output |
+|--------|-------|--------|
+| 8 | Contribution lifecycle | Types, logging, the path from entry to capital account |
+| 9 | Valuation rules | How labor, in-kind, and cash contributions are valued |
+| 10 | Approval workflow | Pending → approved → applied, authority model |
+| 11 | People-Treasury integration | Approved contributions automatically create transactions |
+
+### Allocation (Agreements MVP)
+
+| Sprint | Focus | Output |
+|--------|-------|--------|
+| 12 | Patronage formula | Weighted calculation: labor, revenue, cash, community |
+| 13 | Period close process | Finalize, calculate, lock — the quarter-end workflow |
+| 14 | K-1 data assembly | Schedule K-1 output from period close data |
+| 15 | Member allocation statements | Human-readable allocation reports |
+
+### Extensions
+
+| Sprint | Focus | Output |
+|--------|-------|--------|
+| 16 | Service credit integration | Credit issuance/redemption as Treasury revenue |
+| 17 | Revaluation events | Book-up/book-down for new member admission |
+| 18 | Superfluid mapping | Continuous streams → discrete accounting events |
+| 19 | Distribution mechanics | Policy, calculation, execution |
+| 20 | Governance controls | Approval workflows, access rules, audit trail |
+
+</details>
 
 ---
 
-## Phase 1: Foundation (Treasury MVP)
+## Phase 2: Build in Public (Sprints 21+)
 
-| Sprint | Focus | Depends On | Output |
-|--------|-------|-----------|--------|
-| 0 | Project setup | — | README.md |
-| 1 | Context ingestion | 0 | Foundational documents indexed |
-| 2 | 704(b) compliance mapping | 1 | Legal requirements → tool components, gaps identified |
-| 3 | Capital account mechanics | 2 | Book/tax dual-basis tracking, transaction schema |
-| 4 | Chart of accounts | 3 | Complete account structure for a Colorado LCA |
-| 5 | Transaction model | 4 | How value moves: logging, double-entry, event schema |
-| 6 | Balance computation | 5 | Deriving current state from transaction history |
-| 7 | Treasury reporting | 6 | Member statements, period summaries, balance sheet |
+Phase 1 produced the specification. Phase 2 makes Habitat real across every dimension — technical depth, protocol formalization, communications, legal, design, and community. The sprints no longer follow a single thread. They draw from five workstreams based on what is most needed.
 
-**Validation:** Can we produce an accurate balance sheet?
+### Workstreams
 
-## Phase 2: Contribution Recognition (People MVP)
+**Technical Deepening.** Implementation-ready documentation that bridges specification to code. The artifacts a full-stack engineer would want before writing a line:
 
-| Sprint | Focus | Depends On | Output |
-|--------|-------|-----------|--------|
-| 8 | Contribution lifecycle | 7 | Types, logging, the path from entry to capital account |
-| 9 | Valuation rules | 8 | How labor, in-kind, and cash contributions are valued |
-| 10 | Approval workflow | 9 | Pending → approved → applied, authority model |
-| 11 | People-Treasury integration | 10 | Approved contributions automatically create transactions |
+- Database schemas (DDL for Supabase/PostgreSQL, derived from specs)
+- Entity-relationship diagrams (visual, versioned)
+- API contracts (endpoints, events, pub/sub interfaces)
+- Sequence diagrams (critical workflows: contribution lifecycle, period close, distribution)
+- Data dictionary (every field, every type, every constraint)
+- Multi-entity composition protocol (how ventures and studio share infrastructure)
+- Interoperability specification (service credit clearing, cross-ENS resolution)
 
-**Validation:** Do members see contributions reflected in their capital accounts?
+**Protocol and Standards.** Formalizing Habitat as composable infrastructure, not just a tool:
 
-## Phase 3: Allocation (Agreements MVP)
+- REA event grammar as open specification
+- Service credit protocol (standalone, implementable by any organization)
+- Agent integration protocol (query interfaces, event subscriptions, governance constraints)
+- Pattern library templates (configuration profiles: freelancer, startup, cooperative, enterprise)
+- Matrix scoring methodology (deriving habitat position from accounting data)
 
-| Sprint | Focus | Depends On | Output |
-|--------|-------|-----------|--------|
-| 12 | Patronage formula | 11 | Weighted calculation: labor, revenue, cash, community |
-| 13 | Period close process | 12 | Finalize, calculate, lock — the quarter-end workflow |
-| 14 | K-1 data assembly | 13 | Schedule K-1 output from period close data |
-| 15 | Member allocation statements | 14 | Human-readable allocation reports |
+**Communications and Design.** A public face beyond a GitHub repo:
 
-**Validation:** Does the calculation match manual verification?
+- Project narrative (readable, non-technical introduction)
+- Visual identity (logo, color system, typography — extending the matrix aesthetic)
+- Diagram library (consistent visual language across all documentation)
+- Pitch materials (for contributors, cooperatives, investors)
+- Build in Public reflections (what was built, what was learned, what changed)
+- README as living entry point
 
-## Phase 4: Extensions
+**Legal and Compliance.** The accounting system interfaces with legal reality:
 
-| Sprint | Focus | Depends On | Output |
-|--------|-------|-----------|--------|
-| 16 | Service credit integration | 15 | Credit issuance/redemption as Treasury revenue |
-| 17 | Revaluation events | 3 | Book-up/book-down for new member admission |
-| 18 | Superfluid mapping | 16 | Continuous streams → discrete accounting events |
-| 19 | Distribution mechanics | 15 | Policy, calculation, execution |
-| 20 | Governance controls | 13 | Approval workflows, access rules, audit trail |
+- Operating agreement template sections (patronage mechanics, distribution policies, capital account provisions, withdrawal terms)
+- Compliance checklist (704(b) safe harbor, QIO provisions, tax reporting obligations)
+- Service credit legal analysis (Howey test walkthrough, securities exemptions, state-specific considerations)
+- ENS namespace governance resolution (the cooperative document authorizing subname issuance)
+- Privacy and data handling policy (member financial data — storage, access, controls)
 
-**Validation:** Can a new organization onboard without hand-holding?
+**Community and Engagement.** Infrastructure needs users:
 
-## Principles
+- Contributor onboarding guide (what to read, where to start, how contributions are recognized)
+- Member education materials (plain-language patronage, capital accounts, service credits)
+- Feedback protocol (how potential adopters evaluate the spec and provide input)
+- Cooperative formation toolkit (what Habitat provides, what you still need, how tools connect to formation documents)
+- Discord channels as community surface (#ventures, #operations)
 
-- **Each sprint is a complete document.** Stands alone, gains depth from prior sprints.
-- **Each sprint builds on the prior.** Back references create coherence.
+### Sprint Sequence
+
+Each sprint picks from any workstream. Every sprint produces a durable artifact committed to the repo. The README reflects what exists.
+
+| Sprint | Workstream | Deliverable |
+|--------|-----------|-------------|
+| 21 | Technical | Database schema: Treasury tables (DDL) |
+| 22 | Communications | Project narrative: non-technical introduction |
+| 23 | Technical | Entity-relationship diagram: full system |
+| 24 | Legal | Operating agreement template: patronage provisions |
+| 25 | Protocol | REA event grammar: open specification draft |
+| 26 | Design | Diagram library: visual language guide |
+| 27 | Technical | Sequence diagrams: contribution lifecycle, period close |
+| 28 | Community | Contributor onboarding guide |
+| 29 | Protocol | Service credit protocol: standalone specification |
+| 30 | Communications | Pitch materials: cooperative adoption |
+
+This sequence is a starting point. The roadmap regenerates based on what is learned, what is needed, and what opportunities emerge.
+
+### Directory Structure
+
+```
+habitat/
+├── spec/              Phase 1 specification documents
+├── thesis/            Strategic thinking (Craft of Coordination, Identity as Infrastructure)
+├── schema/            Database schemas, DDL, data dictionary
+├── diagrams/          ER diagrams, sequence diagrams, visual language
+├── protocol/          Open protocol specifications (REA grammar, service credits, agent integration)
+├── templates/         Pattern library configuration profiles
+├── legal/             Operating agreement sections, compliance checklists, legal analysis
+├── community/         Onboarding, education, feedback, formation toolkit
+├── comms/             Project narrative, pitch materials, design assets
+├── matrix/            Economic Habitat Matrix interactive visualization
+└── README.md          Living entry point — always current
+```
+
+### Principles
+
+Carried forward from Phase 1, expanded:
+
+- **Each sprint produces a durable artifact.** Committed to the repo, referenced in the README.
+- **Workstreams interleave.** No single dimension dominates. Technical, legal, communications, community, and protocol sprints alternate based on need.
+- **Implementation-ready.** Technical deliverables target the Supabase + Glide + Make.com stack. A full-stack engineer or a data engineer with rapid-prototyping tools should be able to build from what the repo provides.
 - **Retroactive resonance.** When a sprint changes assumptions, prior documents are updated in the same commit.
-- **Implementation-aware.** Concepts should map to Supabase tables, Glide interfaces, Make.com workflows.
-- **The roadmap regenerates.** When Phase 4 completes, a new roadmap grows from what we've learned.
+- **The roadmap regenerates.** When this sequence completes, a new one grows from what was learned.
+- **Build in Public.** Every sprint is visible. The repo is the project. The process is the product.
 
-## Open Questions (Surfaced for Group Decision)
-
-These should not be assumed. The system must be flexible enough to accommodate different answers:
+### Open Questions (Carried Forward)
 
 1. Valuation rates per contribution type
 2. Approval authority model
@@ -74,11 +159,10 @@ These should not be assumed. The system must be flexible enough to accommodate d
 5. Post-close error correction process
 6. Multi-class allocation formulas
 7. Blockchain integration timeline
-
-## Current Position
-
-Sprint 19 complete. Sprint 20 next: Governance Controls. Phase 4 (Extensions) nearing completion.
+8. Contributor compensation model (retroactive patronage for commons assets)
+9. Adoption pathway (which organization type first?)
+10. Governance tool scope (embedded vs. standalone)
 
 ---
 
-*Updated as sprints complete.*
+*Updated as sprints complete. Current position: Sprint 20 complete. Phase 2 beginning.*
