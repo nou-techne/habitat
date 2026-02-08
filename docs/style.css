@@ -51,7 +51,7 @@ nav .links a:hover, nav .links a.active { color: var(--text); }
 .section h3 { font-size: 1.2rem; font-weight: 600; margin: 2rem 0 0.5rem; }
 .section p { margin-bottom: 1rem; color: var(--text); }
 .section p.muted { color: var(--text-muted); }
-.section ul, .section ol { margin: 0 0 1rem 1.5rem; }
+.section ul, .section ol { margin: 0 0 1rem 2.5rem; }
 .section li { margin-bottom: 0.4rem; }
 
 .divider { border: none; border-top: 1px solid var(--border); max-width: var(--max-width); margin: 0 auto; }
@@ -78,6 +78,8 @@ nav .links a:hover, nav .links a.active { color: var(--text); }
 .prose h2 { font-size: 1.5rem; font-weight: 400; margin: 2.5rem 0 0.8rem; }
 .prose h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.5rem; }
 .prose p { margin-bottom: 1rem; }
+.prose ul, .prose ol { margin: 0 0 1rem 2.5rem; }
+.prose li { margin-bottom: 0.4rem; }
 .prose blockquote {
   border-left: 3px solid var(--accent);
   padding: 0.8rem 1.2rem;
