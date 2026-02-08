@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patronage Accounting — Habitat</title>
   <link rel="stylesheet" href="../style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <nav>
@@ -22,11 +23,11 @@
     <h1>Patronage Accounting</h1>
     <p class="lead">How cooperatives answer the question: who contributed what, and how does value flow back?</p>
 
-    <h2>Why Patronage?</h2>
+    <h2><i data-lucide="heart-handshake" class="section-icon"></i> Why Patronage?</h2>
     <p>In a corporation, your share of profits is determined by how many shares you own — fixed percentages set at investment time. In a cooperative, it's determined by <em>patronage</em>: your actual contribution during the period. Work more, contribute more, bring in more revenue? Your share reflects that.</p>
     <p>This is a fundamentally different relationship between an organization and its members. Ownership isn't static. It's earned, period by period, through participation.</p>
 
-    <h2>Capital Accounts</h2>
+    <h2><i data-lucide="landmark" class="section-icon"></i> Capital Accounts</h2>
     <p>Every member has a <strong>capital account</strong> — a running balance that tracks their economic stake in the cooperative. It goes up when you contribute or receive an allocation. It goes down when you receive a distribution or absorb a loss.</p>
 
     <table>
@@ -42,7 +43,7 @@
 
     <p>The system maintains <strong>dual-basis tracking</strong>: a book capital account (fair market value, for economic rights) and a tax capital account (cost basis, for IRS reporting). Both are updated from the same events, sometimes at different amounts. This dual-basis system is what makes the accounting compliant with IRC Section 704(b).</p>
 
-    <h2>The Patronage Formula</h2>
+    <h2><i data-lucide="calculator" class="section-icon"></i> The Patronage Formula</h2>
     <p>At the end of each period, the cooperative's net income is divided among members based on a weighted formula. Each category of contribution — labor, revenue, cash, community involvement — carries a weight reflecting its importance to the organization.</p>
 
     <pre><code>member_allocation = net_income × (member_weighted_contribution / total_weighted_contributions)</code></pre>
@@ -64,7 +65,7 @@
     <h3>Configurable Weights</h3>
     <p>The weights are not fixed. Each cooperative sets them based on its values. A development shop might weight labor at 60%. A sales cooperative might weight revenue at 50%. The only requirement: the weights must have documented business purpose (not tax avoidance), satisfying the IRS substantiality test.</p>
 
-    <h2>Period Close</h2>
+    <h2><i data-lucide="lock" class="section-icon"></i> Period Close</h2>
     <p>Period close is when everything comes together. The cycle:</p>
     <ol>
       <li><strong>Pre-close review</strong> — Surface pending contributions, generate draft allocations</li>
@@ -76,16 +77,32 @@
     </ol>
     <p>Every calculation produces a permanent record — the primary audit artifact for 704(b) compliance. It proves allocations were based on genuine economic factors, inputs trace to verified contributions, and the math is complete.</p>
 
-    <h2>Three Tools, One System</h2>
+    <h2><i data-lucide="blocks" class="section-icon"></i> Three Tools, One System</h2>
     <p>The patronage system is built from three composable tools:</p>
-    <ul>
-      <li><strong>Treasury</strong> — Double-entry accounting, capital accounts, balance computation, reporting</li>
-      <li><strong>People</strong> — Contribution lifecycle, valuation, approval workflows, member identity</li>
-      <li><strong>Agreements</strong> — Patronage formulas, period close, allocation, distribution, K-1 assembly</li>
-    </ul>
+    <div class="layer">
+      <div class="layer-icon"><i data-lucide="vault"></i></div>
+      <div class="layer-content">
+        <h3>Treasury</h3>
+        <p>Double-entry accounting, capital accounts, balance computation, reporting.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon"><i data-lucide="users"></i></div>
+      <div class="layer-content">
+        <h3>People</h3>
+        <p>Contribution lifecycle, valuation, approval workflows, member identity.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon"><i data-lucide="file-check"></i></div>
+      <div class="layer-content">
+        <h3>Agreements</h3>
+        <p>Patronage formulas, period close, allocation, distribution, K-1 assembly.</p>
+      </div>
+    </div>
     <p>Each tool is independent and event-sourced. They communicate through events, not shared databases. A contribution approved in People automatically creates transactions in Treasury. An allocation calculated in Agreements automatically updates capital accounts. The tools compose.</p>
 
-    <h2>Beyond Cooperatives</h2>
+    <h2><i data-lucide="arrow-up-right" class="section-icon"></i> Beyond Cooperatives</h2>
     <p>The system is designed for cooperatives but works for any organization that distributes value based on contribution. A freelancer collective splitting project revenue. A DAO distributing treasury funds. An employee-owned company calculating profit sharing. Same primitives, different configurations.</p>
     <p>The formula is stored as configuration, not code. Changing it — from weighted patronage to equal allocation, from hours-only to revenue-weighted — requires a governance decision, not a developer.</p>
 
@@ -96,5 +113,6 @@
     Built in the South Boulder Creek watershed, 5,430 feet<br>
     <a href="https://github.com/nou-techne/habitat">GitHub</a>
   </footer>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
