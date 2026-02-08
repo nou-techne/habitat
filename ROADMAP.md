@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 12 complete. Sprint 13 next: Period Close Process. Phase 3 (Allocation) underway.
+Sprint 13 complete. Sprint 14 next: K-1 Data Assembly. Phase 3 (Allocation) underway.
 
 ---
 
