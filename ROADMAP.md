@@ -77,7 +77,7 @@ These should not be assumed. The system must be flexible enough to accommodate d
 
 ## Current Position
 
-Sprint 16 complete. Sprint 17 next: Revaluation Events. Phase 4 (Extensions) underway.
+Sprint 17 complete. Sprint 18 next: Superfluid Mapping. Phase 4 (Extensions) underway.
 
 ---
 

@@ -22,6 +22,7 @@ A capital account is a running balance that increases and decreases over the lif
 | Cash distribution | Decrease by amount distributed | − |
 | Property distribution | Decrease by FMV at time of distribution | − |
 | Allocation of loss or deduction | Decrease by member's allocated share | − |
+| Revaluation adjustment | Increase or decrease by share of unrealized gain/loss (book basis only) | +/− |
 
 When a member joins, their capital account starts at zero (or at the value of their initial contribution). When a member exits, their capital account determines their liquidation entitlement.
 
