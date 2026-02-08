@@ -45,6 +45,201 @@
     </ol>
     <p>Each layer depends on the ones beneath it. The stack reads from the bottom up, like sedimentary rock. If information systems are fully decomposable, and the decomposition follows this progressive ordering, then the fundamental materials of software are finite and learnable — and the real work is <strong>composition</strong>: selecting the right patterns and configuring them for a specific context.</p>
 
+    <div id="pattern-stack" style="margin: 2.5rem 0;">
+      <div id="stack-layers" style="display: flex; flex-direction: column-reverse; gap: 0.5rem; margin-bottom: 1.5rem;">
+        <!-- Layers rendered bottom-up by JavaScript -->
+      </div>
+      <div id="stack-detail" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; min-height: 200px;">
+        <p style="color: var(--text-muted); font-style: italic;">Click a layer to see how it appears in the Habitat system.</p>
+      </div>
+    </div>
+
+    <style>
+      .stack-layer {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .stack-layer:hover {
+        transform: translateX(4px);
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      .stack-layer.active {
+        border-color: var(--accent);
+        background: linear-gradient(90deg, var(--card-bg) 0%, rgba(74, 124, 89, 0.08) 100%);
+        box-shadow: 0 2px 12px rgba(74, 124, 89, 0.15);
+      }
+      .stack-layer-number {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        width: 32px;
+        text-align: center;
+      }
+      .stack-layer.active .stack-layer-number {
+        color: var(--accent);
+      }
+      .stack-layer-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .stack-layer-icon {
+        margin-left: auto;
+        color: var(--text-muted);
+      }
+      .stack-layer.active .stack-layer-icon {
+        color: var(--accent);
+      }
+      #stack-detail h3 {
+        margin-top: 0;
+        color: var(--accent);
+      }
+      #stack-detail ul {
+        margin-top: 0.8rem;
+      }
+    </style>
+
+    <script>
+      const layers = [
+        {
+          number: 1,
+          name: "Identity",
+          icon: "fingerprint",
+          color: "var(--accent-blue)",
+          description: "Distinguishing one thing from another. Without identity, nothing else is possible.",
+          examples: [
+            "Member records in the People database — each has a unique UUID",
+            "ENS names like alice.habitat.eth — human-readable addresses for members, ventures, and agents",
+            "Chart of accounts in Treasury — each account has a unique code (1000, 2000, 3000...)",
+            "Transaction IDs, contribution IDs, allocation calculation IDs"
+          ]
+        },
+        {
+          number: 2,
+          name: "State",
+          icon: "database",
+          color: "var(--accent-blue)",
+          description: "Recording attributes of identifiable things. Once you can distinguish entities, you can describe them.",
+          examples: [
+            "Member profiles — legal name, email, membership tier, tax ID",
+            "Account balances — each account stores its current balance",
+            "Contribution records — amount, type, date, status",
+            "Operating agreement versions — weights, thresholds, effective dates"
+          ]
+        },
+        {
+          number: 3,
+          name: "Relationship",
+          icon: "git-branch",
+          color: "var(--accent)",
+          description: "Connecting identifiable things to each other. Systems emerge from relationships.",
+          examples: [
+            "REA ontology — every Economic Event connects a Resource to an Agent",
+            "Member-to-contribution — linking a contribution to the member who submitted it",
+            "Parent-child accounts — organizing the chart of accounts hierarchically",
+            "Allocation-to-member — connecting each allocation calculation to the members who received shares"
+          ]
+        },
+        {
+          number: 4,
+          name: "Event",
+          icon: "zap",
+          color: "var(--accent-orange)",
+          description: "Recording that something happened at a point in time. Events are immutable facts.",
+          examples: [
+            "ContributionApproved — a bookkeeper approved a member's contribution",
+            "TransactionRecorded — a journal entry was posted to the ledger",
+            "AllocationApplied — patronage allocations were credited to member capital accounts",
+            "PeriodClosed — a fiscal period was finalized and locked"
+          ]
+        },
+        {
+          number: 5,
+          name: "Flow",
+          icon: "move",
+          color: "var(--accent-orange)",
+          description: "Value or information moving between agents. Flows create the dynamics of a system.",
+          examples: [
+            "Patronage allocation — surplus flows from the cooperative to members based on contribution",
+            "Service credit distribution — prepaid units flow from issuer to recipient",
+            "Event bus messages — events flow between Treasury, People, and Agreements tools",
+            "Capital account changes — value flows in (contributions, allocations) and out (distributions, losses)"
+          ]
+        },
+        {
+          number: 6,
+          name: "Constraint",
+          icon: "shield",
+          color: "var(--accent)",
+          description: "Rules governing valid states and transitions. Constraints define what the system allows.",
+          examples: [
+            "IRC 704(b) compliance rules — allocations must have economic effect and substantiality",
+            "Double-entry accounting — every transaction must balance (debits = credits)",
+            "Formula weight sum = 1.0 — patronage weights must total 100%",
+            "Period sequential integrity — can't close period N+1 until period N is closed"
+          ]
+        },
+        {
+          number: 7,
+          name: "View",
+          icon: "eye",
+          color: "var(--accent-blue)",
+          description: "Presenting information for a purpose. Views make the system legible to humans.",
+          examples: [
+            "Member allocation statements — explains how patronage was calculated",
+            "Balance sheets and income statements — financial position and performance",
+            "The Habitat homepage — presents the ideas behind the system",
+            "K-1 tax forms — IRS-required view of a member's allocations and capital account"
+          ]
+        }
+      ];
+
+      let activeLayer = null;
+
+      function renderStack() {
+        const container = document.getElementById('stack-layers');
+        container.innerHTML = layers.map(layer => `
+          <div class="stack-layer" data-layer="${layer.number}" onclick="selectLayer(${layer.number})">
+            <span class="stack-layer-number">${layer.number}</span>
+            <span class="stack-layer-name">${layer.name}</span>
+            <i data-lucide="${layer.icon}" class="stack-layer-icon" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      }
+
+      function selectLayer(num) {
+        activeLayer = layers.find(l => l.number === num);
+        
+        // Update active state
+        document.querySelectorAll('.stack-layer').forEach(el => {
+          el.classList.toggle('active', el.dataset.layer == num);
+        });
+
+        // Update detail panel
+        const detail = document.getElementById('stack-detail');
+        detail.innerHTML = `
+          <h3><i data-lucide="${activeLayer.icon}" style="width:20px;height:20px;vertical-align:-3px;margin-right:8px;stroke-width:1.5;"></i> ${activeLayer.number}. ${activeLayer.name}</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1rem;">${activeLayer.description}</p>
+          <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">Examples from Habitat:</p>
+          <ul style="margin-top: 0.5rem;">
+            ${activeLayer.examples.map(ex => `<li style="margin-bottom: 0.5rem;">${ex}</li>`).join('')}
+          </ul>
+        `;
+        lucide.createIcons();
+      }
+
+      document.addEventListener('DOMContentLoaded', renderStack);
+    </script>
+
     <h2><i data-lucide="trending-up" class="section-icon icon-blue"></i> II. The Structural Opportunity</h2>
     <p>Craft needs a context in which it compounds. Three structural shifts create that context now.</p>
 
