@@ -154,6 +154,7 @@ footer a:hover { text-decoration: underline; }
   nav .links { gap: 1rem; justify-content: center; }
   .hero { padding: 3rem 1.2rem 2rem; }
   .hero h1 { font-size: 2.2rem; }
-  .section, .prose { padding: 2rem 1.2rem; }
+  .section, .prose { padding: 2rem 1.5rem; }
+  .section ul, .section ol, .prose ul, .prose ol { margin-left: 1.8rem; padding-left: 0.5rem; }
   .cards { grid-template-columns: 1fr; }
 }
