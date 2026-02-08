@@ -51,6 +51,193 @@
 
     <p>The system maintains <strong>dual-basis tracking</strong>: a book capital account (fair market value, for economic rights) and a tax capital account (cost basis, for IRS reporting). Both are updated from the same events, sometimes at different amounts. This dual-basis system is what makes the accounting compliant with IRC Section 704(b).</p>
 
+    <h2><i data-lucide="workflow" class="section-icon icon-blue"></i> Contribution Lifecycle</h2>
+    <p>Every contribution moves through a five-stage workflow before it credits a member's capital account. Click each stage to see what happens.</p>
+
+    <div id="contribution-flow" style="margin: 2rem 0;">
+      <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; overflow-x: auto; padding: 1rem 0;">
+        <div class="flow-stage" data-stage="0" onclick="showStage(0)">
+          <div class="flow-stage-icon"><i data-lucide="file-text"></i></div>
+          <div class="flow-stage-name">Submit</div>
+        </div>
+        <i data-lucide="chevron-right" style="color:var(--text-muted);width:20px;height:20px;flex-shrink:0;"></i>
+        <div class="flow-stage" data-stage="1" onclick="showStage(1)">
+          <div class="flow-stage-icon"><i data-lucide="check-circle"></i></div>
+          <div class="flow-stage-name">Validate</div>
+        </div>
+        <i data-lucide="chevron-right" style="color:var(--text-muted);width:20px;height:20px;flex-shrink:0;"></i>
+        <div class="flow-stage" data-stage="2" onclick="showStage(2)">
+          <div class="flow-stage-icon"><i data-lucide="calculator"></i></div>
+          <div class="flow-stage-name">Value</div>
+        </div>
+        <i data-lucide="chevron-right" style="color:var(--text-muted);width:20px;height:20px;flex-shrink:0;"></i>
+        <div class="flow-stage" data-stage="3" onclick="showStage(3)">
+          <div class="flow-stage-icon"><i data-lucide="thumbs-up"></i></div>
+          <div class="flow-stage-name">Approve</div>
+        </div>
+        <i data-lucide="chevron-right" style="color:var(--text-muted);width:20px;height:20px;flex-shrink:0;"></i>
+        <div class="flow-stage" data-stage="4" onclick="showStage(4)">
+          <div class="flow-stage-icon"><i data-lucide="landmark"></i></div>
+          <div class="flow-stage-name">Credit</div>
+        </div>
+      </div>
+
+      <div id="stage-detail" style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;min-height:180px;">
+        <p style="color:var(--text-muted);font-style:italic;">Click a stage above to see what happens at each step.</p>
+      </div>
+    </div>
+
+    <style>
+      .flow-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        transition: all 0.2s ease;
+        min-width: 100px;
+        flex-shrink: 0;
+      }
+      .flow-stage:hover {
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transform: translateY(-2px);
+      }
+      .flow-stage.active {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, var(--card-bg) 0%, rgba(74,124,89,0.1) 100%);
+        box-shadow: 0 4px 12px rgba(74,124,89,0.2);
+      }
+      .flow-stage-icon {
+        color: var(--text-muted);
+        transition: color 0.2s ease;
+      }
+      .flow-stage.active .flow-stage-icon {
+        color: var(--accent);
+      }
+      .flow-stage-icon i {
+        width: 28px;
+        height: 28px;
+        stroke-width: 1.5;
+      }
+      .flow-stage-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      #stage-detail h3 {
+        margin-top: 0;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      #stage-detail ul {
+        margin-top: 0.8rem;
+      }
+    </style>
+
+    <script>
+      const stages = [
+        {
+          name: "Submit",
+          icon: "file-text",
+          description: "A member logs a contribution through the People tool.",
+          details: [
+            "<strong>Labor:</strong> Member enters hours worked and a brief description (\"Built the new member dashboard, 12 hours\")",
+            "<strong>Cash:</strong> Member records a cash contribution and uploads proof of transfer",
+            "<strong>Property:</strong> Member describes the property contributed (equipment, IP, real estate) with documentation",
+            "<strong>Community:</strong> Member logs participation points (event attendance, governance work, mentorship)"
+          ],
+          who: "Member (self-service) or Operations Steward (on behalf of member)"
+        },
+        {
+          name: "Validate",
+          icon: "check-circle",
+          description: "The system checks that the contribution is structurally valid.",
+          details: [
+            "Required fields present (member ID, date, type, amount)",
+            "Date falls within an open period (can't submit for closed periods)",
+            "Member is active and eligible to contribute",
+            "No duplicate submission (same member, type, date, amount)"
+          ],
+          who: "Automatic (People tool validation rules)"
+        },
+        {
+          name: "Value",
+          icon: "calculator",
+          description: "The contribution is assigned a dollar value according to the cooperative's valuation rules.",
+          details: [
+            "<strong>Labor:</strong> Hours × rate. Rates can vary by role (e.g., $50/hr operations, $75/hr design)",
+            "<strong>Cash:</strong> Dollar-for-dollar (but may create a 704(c) layer if contributed at a different value than tax basis)",
+            "<strong>Property:</strong> Requires appraisal if over threshold ($5,000). Creates a 704(c) layer if FMV ≠ tax basis",
+            "<strong>Community:</strong> Points × conversion rate, or custom formula set by governance"
+          ],
+          who: "Automatic (valuation rules) or Bookkeeper (manual review for property)"
+        },
+        {
+          name: "Approve",
+          icon: "thumbs-up",
+          description: "A Bookkeeper reviews the valued contribution and approves or rejects it.",
+          details: [
+            "Bookkeeper verifies the work was actually done (for labor) or contribution was received (for cash/property)",
+            "Checks that the valuation is correct (right rate applied, appraisal matches)",
+            "Can adjust the valued amount if needed before approval",
+            "Approval triggers a <code>ContributionApproved</code> event published to the event bus"
+          ],
+          who: "Bookkeeper role (human review and approval)"
+        },
+        {
+          name: "Credit",
+          icon: "landmark",
+          description: "Treasury receives the ContributionApproved event and credits the member's capital account.",
+          details: [
+            "Treasury creates a journal entry: <code>Dr. Contribution Expense</code> / <code>Cr. Member Capital (Alice)</code>",
+            "If the contribution creates a 704(c) layer (property with built-in gain/loss), that layer is tracked separately",
+            "Member's capital account balance increases by the contribution amount",
+            "A <code>BalanceChanged</code> event is published, which People subscribes to for updating the member's profile"
+          ],
+          who: "Automatic (Treasury event handler)"
+        }
+      ];
+
+      let activeStage = null;
+
+      function showStage(index) {
+        activeStage = stages[index];
+        
+        // Update active state
+        document.querySelectorAll('.flow-stage').forEach((el, i) => {
+          el.classList.toggle('active', i === index);
+        });
+
+        // Update detail panel
+        const detail = document.getElementById('stage-detail');
+        detail.innerHTML = `
+          <h3>
+            <i data-lucide="${activeStage.icon}" style="width:20px;height:20px;stroke-width:1.5;"></i>
+            ${index + 1}. ${activeStage.name}
+          </h3>
+          <p style="color:var(--text-muted);margin-bottom:1rem;">${activeStage.description}</p>
+          <ul style="margin-top:0.8rem;">
+            ${activeStage.details.map(d => `<li style="margin-bottom:0.6rem;">${d}</li>`).join('')}
+          </ul>
+          <p style="margin-top:1rem;font-size:0.88rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:1rem;">
+            <strong>Who:</strong> ${activeStage.who}
+          </p>
+        `;
+        lucide.createIcons();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons();
+      });
+    </script>
+
     <h2><i data-lucide="calculator" class="section-icon icon-orange"></i> The Patronage Formula</h2>
     <p>At the end of each period, the cooperative's net income is divided among members based on a weighted formula. Each category of contribution — labor, revenue, cash, community involvement — carries a weight reflecting its importance to the organization.</p>
 
