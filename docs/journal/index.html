@@ -8,7 +8,7 @@
   <meta property="og:title" content="Build Journal — Habitat">
   <meta property="og:description" content="Sprint-by-sprint notes and daily reflections from building coordination infrastructure in public.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nou-techne.github.io/habitat/journal/">
+  <meta property="og:url" content="https://the-habitat.org/journal/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Build Journal — Habitat">
   <meta name="twitter:description" content="Sprint-by-sprint notes and daily reflections from building coordination infrastructure in public.">
@@ -63,14 +63,14 @@
 </head>
 <body>
   <nav>
-    <a href="/habitat/" class="logo">Habitat</a>
+    <a href="/" class="logo">Habitat</a>
     <div class="links">
-      <a href="/habitat/">Home</a>
-      <a href="/habitat/matrix/">Matrix</a>
-      <a href="/habitat/patronage/">Patronage</a>
-      <a href="/habitat/identity/">Identity</a>
-      <a href="/habitat/thesis/">Thesis</a>
-      <a href="/habitat/journal/" class="active">Journal</a>
+      <a href="/">Home</a>
+      <a href="/matrix/">Matrix</a>
+      <a href="/patronage/">Patronage</a>
+      <a href="/identity/">Identity</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/journal/" class="active">Journal</a>
     </div>
   </nav>
 
@@ -96,14 +96,14 @@
       
       try {
         // Fetch the manifest (list of journal markdown files, newest first)
-        const manifestRes = await fetch('/habitat/journal/manifest.json');
+        const manifestRes = await fetch('/journal/manifest.json');
         if (!manifestRes.ok) throw new Error('No manifest');
         const manifest = await manifestRes.json();
         
         container.innerHTML = '';
         
         for (const entry of manifest.entries) {
-          const res = await fetch(`/habitat/journal/${entry.file}`);
+          const res = await fetch(`/journal/${entry.file}`);
           if (!res.ok) continue;
           const md = await res.text();
           
