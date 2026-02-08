@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patronage Accounting — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <nav>
+    <a href="/habitat/" class="logo">Habitat</a>
+    <div class="links">
+      <a href="/habitat/">Home</a>
+      <a href="/habitat/matrix/">Matrix</a>
+      <a href="/habitat/patronage/" class="active">Patronage</a>
+      <a href="/habitat/thesis/">Thesis</a>
+      <a href="/habitat/journal/">Journal</a>
+    </div>
+  </nav>
+
+  <div class="prose">
+    <h1>Patronage Accounting</h1>
+    <p class="lead">How cooperatives answer the question: who contributed what, and how does value flow back?</p>
+
+    <h2>Why Patronage?</h2>
+    <p>In a corporation, your share of profits is determined by how many shares you own — fixed percentages set at investment time. In a cooperative, it's determined by <em>patronage</em>: your actual contribution during the period. Work more, contribute more, bring in more revenue? Your share reflects that.</p>
+    <p>This is a fundamentally different relationship between an organization and its members. Ownership isn't static. It's earned, period by period, through participation.</p>
+
+    <h2>Capital Accounts</h2>
+    <p>Every member has a <strong>capital account</strong> — a running balance that tracks their economic stake in the cooperative. It goes up when you contribute or receive an allocation. It goes down when you receive a distribution or absorb a loss.</p>
+
+    <table>
+      <thead><tr><th>Event</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td>Cash contribution</td><td>Account increases</td></tr>
+        <tr><td>Property contribution</td><td>Account increases (at fair market value)</td></tr>
+        <tr><td>Income allocation</td><td>Account increases by your share</td></tr>
+        <tr><td>Cash distribution</td><td>Account decreases</td></tr>
+        <tr><td>Loss allocation</td><td>Account decreases by your share</td></tr>
+      </tbody>
+    </table>
+
+    <p>The system maintains <strong>dual-basis tracking</strong>: a book capital account (fair market value, for economic rights) and a tax capital account (cost basis, for IRS reporting). Both are updated from the same events, sometimes at different amounts. This dual-basis system is what makes the accounting compliant with IRC Section 704(b).</p>
+
+    <h2>The Patronage Formula</h2>
+    <p>At the end of each period, the cooperative's net income is divided among members based on a weighted formula. Each category of contribution — labor, revenue, cash, community involvement — carries a weight reflecting its importance to the organization.</p>
+
+    <pre><code>member_allocation = net_income × (member_weighted_contribution / total_weighted_contributions)</code></pre>
+
+    <h3>Example</h3>
+    <p>Three members, one quarter. Weights: Labor 40%, Revenue 30%, Cash 20%, Community 10%.</p>
+
+    <table>
+      <thead><tr><th>Member</th><th>Labor</th><th>Revenue</th><th>Cash</th><th>Community</th><th>Weighted Total</th></tr></thead>
+      <tbody>
+        <tr><td>Alice</td><td>$6,000</td><td>$4,000</td><td>$2,000</td><td>$500</td><td>$4,050</td></tr>
+        <tr><td>Bob</td><td>$4,000</td><td>$1,000</td><td>$5,000</td><td>$1,000</td><td>$3,000</td></tr>
+        <tr><td>Carol</td><td>$3,000</td><td>$2,000</td><td>$1,000</td><td>$2,000</td><td>$2,200</td></tr>
+      </tbody>
+    </table>
+
+    <p>With $12,000 in net income: Alice receives 43.8% ($5,254), Bob receives 32.4% ($3,892), Carol receives 23.8% ($2,854). The weights are the cooperative's value statement expressed as arithmetic.</p>
+
+    <h3>Configurable Weights</h3>
+    <p>The weights are not fixed. Each cooperative sets them based on its values. A development shop might weight labor at 60%. A sales cooperative might weight revenue at 50%. The only requirement: the weights must have documented business purpose (not tax avoidance), satisfying the IRS substantiality test.</p>
+
+    <h2>Period Close</h2>
+    <p>Period close is when everything comes together. The cycle:</p>
+    <ol>
+      <li><strong>Pre-close review</strong> — Surface pending contributions, generate draft allocations</li>
+      <li><strong>Finalize contributions</strong> — Lock the period's contribution data</li>
+      <li><strong>Run the formula</strong> — Calculate each member's allocation</li>
+      <li><strong>Generate transactions</strong> — Credit member capital accounts in Treasury</li>
+      <li><strong>Lock the period</strong> — No further changes without audit trail</li>
+      <li><strong>Produce reports</strong> — Member statements, K-1 data, balance verification</li>
+    </ol>
+    <p>Every calculation produces a permanent record — the primary audit artifact for 704(b) compliance. It proves allocations were based on genuine economic factors, inputs trace to verified contributions, and the math is complete.</p>
+
+    <h2>Three Tools, One System</h2>
+    <p>The patronage system is built from three composable tools:</p>
+    <ul>
+      <li><strong>Treasury</strong> — Double-entry accounting, capital accounts, balance computation, reporting</li>
+      <li><strong>People</strong> — Contribution lifecycle, valuation, approval workflows, member identity</li>
+      <li><strong>Agreements</strong> — Patronage formulas, period close, allocation, distribution, K-1 assembly</li>
+    </ul>
+    <p>Each tool is independent and event-sourced. They communicate through events, not shared databases. A contribution approved in People automatically creates transactions in Treasury. An allocation calculated in Agreements automatically updates capital accounts. The tools compose.</p>
+
+    <h2>Beyond Cooperatives</h2>
+    <p>The system is designed for cooperatives but works for any organization that distributes value based on contribution. A freelancer collective splitting project revenue. A DAO distributing treasury funds. An employee-owned company calculating profit sharing. Same primitives, different configurations.</p>
+    <p>The formula is stored as configuration, not code. Changing it — from weighted patronage to equal allocation, from hours-only to revenue-weighted — requires a governance decision, not a developer.</p>
+
+    <blockquote>The accounting system is, in a sense, a way of reading the economic watershed — tracking what's stored, what flows, and whether the system can sustain what's growing in it.</blockquote>
+  </div>
+
+  <footer>
+    Built in the South Boulder Creek watershed, 5,430 feet<br>
+    <a href="https://github.com/nou-techne/habitat">GitHub</a>
+  </footer>
+</body>
+</html>

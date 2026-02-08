@@ -1,0 +1,129 @@
+/* Habitat Site — Shared Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-light: #f4f1eb;
+  --bg-mid: #ebe7df;
+  --bg-dark: #e4e0d8;
+  --text: #2c2c2c;
+  --text-muted: #6b6560;
+  --accent: #8b7355;
+  --accent-hover: #6d5a43;
+  --border: #d4cfc7;
+  --card-bg: rgba(255,255,255,0.45);
+  --max-width: 860px;
+}
+
+body {
+  background: linear-gradient(145deg, var(--bg-light) 0%, var(--bg-mid) 40%, var(--bg-dark) 100%);
+  color: var(--text);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Nav */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+}
+nav .logo { font-size: 1.1rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
+nav .links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+nav .links a { color: var(--text-muted); text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
+nav .links a:hover, nav .links a.active { color: var(--text); }
+
+/* Hero */
+.hero { text-align: center; padding: 5rem 2rem 3rem; max-width: var(--max-width); margin: 0 auto; }
+.hero h1 { font-size: 3rem; font-weight: 400; letter-spacing: 0.06em; margin-bottom: 1rem; }
+.hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+/* Sections */
+.section { max-width: var(--max-width); margin: 0 auto; padding: 3rem 2rem; }
+.section h2 { font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; }
+.section h3 { font-size: 1.2rem; font-weight: 600; margin: 2rem 0 0.5rem; }
+.section p { margin-bottom: 1rem; color: var(--text); }
+.section p.muted { color: var(--text-muted); }
+.section ul, .section ol { margin: 0 0 1rem 1.5rem; }
+.section li { margin-bottom: 0.4rem; }
+
+.divider { border: none; border-top: 1px solid var(--border); max-width: var(--max-width); margin: 0 auto; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.card h3 { font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 600; }
+.card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+/* Prose page (thesis, patronage, journal) */
+.prose { max-width: var(--max-width); margin: 0 auto; padding: 3rem 2rem 4rem; }
+.prose h1 { font-size: 2.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+.prose .lead { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; font-style: italic; }
+.prose h2 { font-size: 1.5rem; font-weight: 400; margin: 2.5rem 0 0.8rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.5rem; }
+.prose p { margin-bottom: 1rem; }
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.8rem 1.2rem;
+  margin: 1.5rem 0;
+  background: var(--card-bg);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.prose code {
+  background: rgba(0,0,0,0.05);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+.prose pre {
+  background: rgba(0,0,0,0.05);
+  padding: 1.2rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.prose pre code { background: none; padding: 0; }
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.92rem;
+}
+.prose th, .prose td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); text-align: left; }
+.prose th { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Mobile */
+@media (max-width: 600px) {
+  nav { flex-direction: column; gap: 0.8rem; padding: 1rem; }
+  nav .links { gap: 1rem; justify-content: center; }
+  .hero { padding: 3rem 1.2rem 2rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .section, .prose { padding: 2rem 1.2rem; }
+  .cards { grid-template-columns: 1fr; }
+}
