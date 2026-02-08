@@ -65,6 +65,190 @@
 
     <p>The namespace is cooperatively governed — the cooperative controls issuance and revocation of subnames, but each member controls their own records. Self-sovereign identity within a collectively governed namespace.</p>
 
+    <h2><i data-lucide="eye" class="section-icon icon-orange"></i> See It Resolve</h2>
+    <p>ENS names are more than aliases. They carry data. Click a profile below to see how text records make identity portable and verifiable.</p>
+
+    <div id="ens-demo" style="margin: 2rem 0;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="profile-card" onclick="showProfile('alice')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, var(--accent) 0%, rgba(74,124,89,0.6) 100%);">
+            <i data-lucide="user"></i>
+          </div>
+          <div class="profile-name">alice.habitat.eth</div>
+          <div class="profile-role">Member</div>
+        </div>
+
+        <div class="profile-card" onclick="showProfile('watershed')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, var(--accent-blue) 0%, rgba(74,111,124,0.6) 100%);">
+            <i data-lucide="droplet"></i>
+          </div>
+          <div class="profile-name">watershed.habitat.eth</div>
+          <div class="profile-role">Treasury</div>
+        </div>
+
+        <div class="profile-card" onclick="showProfile('nou')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, var(--accent-orange) 0%, rgba(181,98,42,0.6) 100%);">
+            <i data-lucide="bot"></i>
+          </div>
+          <div class="profile-name">nou.habitat.eth</div>
+          <div class="profile-role">Agent</div>
+        </div>
+      </div>
+
+      <div id="profile-detail" style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;min-height:220px;">
+        <p style="color:var(--text-muted);font-style:italic;">Click a profile to see how it resolves.</p>
+      </div>
+    </div>
+
+    <style>
+      .profile-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .profile-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-color: var(--accent);
+      }
+      .profile-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+      .profile-avatar i {
+        width: 32px;
+        height: 32px;
+        stroke-width: 1.5;
+      }
+      .profile-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.3rem;
+        font-family: 'Courier New', monospace;
+      }
+      .profile-role {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #profile-detail h3 {
+        margin-top: 0;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+      }
+      .text-record {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 0.5rem;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.88rem;
+      }
+      .text-record:last-child {
+        border-bottom: none;
+      }
+      .record-key {
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .record-value {
+        color: var(--text);
+        font-family: 'Courier New', monospace;
+      }
+    </style>
+
+    <script>
+      const profiles = {
+        alice: {
+          name: "alice.habitat.eth",
+          icon: "user",
+          color: "var(--accent)",
+          address: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0",
+          records: {
+            "name": "Alice Chen",
+            "role": "Operations Steward",
+            "skills": "Systems design, facilitation",
+            "contributions": "240 hours labor, 8 governance proposals",
+            "capital-account": "12,450 USD",
+            "email": "alice@example.com",
+            "twitter": "@alice_chen"
+          }
+        },
+        watershed: {
+          name: "watershed.habitat.eth",
+          icon: "droplet",
+          color: "var(--accent-blue)",
+          address: "0x1234567890abcdef1234567890abcdef12345678",
+          records: {
+            "type": "Safe Multisig",
+            "chain": "Base",
+            "signers": "5",
+            "threshold": "3 of 5",
+            "balance": "4,832 SUP",
+            "url": "https://app.safe.global/..."
+          }
+        },
+        nou: {
+          name: "nou.habitat.eth",
+          icon: "bot",
+          color: "var(--accent-orange)",
+          address: "0xC37604A1dD79Ed50A5c2943358db85CB743dd3e2",
+          records: {
+            "agent-id": "ERC-8004:2202",
+            "operator": "Todd Youngblood",
+            "capabilities": "Patronage accounting, ENS management",
+            "uptime": "99.4%",
+            "contributions": "18 sprints, 3 pages",
+            "url": "https://the-habitat.org"
+          }
+        }
+      };
+
+      function showProfile(key) {
+        const profile = profiles[key];
+        const detail = document.getElementById('profile-detail');
+        
+        const recordsHtml = Object.entries(profile.records)
+          .map(([k, v]) => `
+            <div class="text-record">
+              <div class="record-key">${k}</div>
+              <div class="record-value">${v}</div>
+            </div>
+          `).join('');
+
+        detail.innerHTML = `
+          <h3>
+            <i data-lucide="${profile.icon}" style="width:20px;height:20px;stroke-width:1.5;color:${profile.color};"></i>
+            ${profile.name}
+          </h3>
+          <div class="text-record">
+            <div class="record-key">address</div>
+            <div class="record-value">${profile.address}</div>
+          </div>
+          ${recordsHtml}
+          <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted);font-style:italic;">
+            Text records are public, self-attested, and cryptographically linked to the address. Anyone can read them. Only the address holder can update them.
+          </p>
+        `;
+        lucide.createIcons();
+      }
+    </script>
+
     <h2><i data-lucide="network" class="section-icon icon-orange"></i> Enabling the Peer-to-Peer Network</h2>
     <p>Identity is not just about naming. It is the foundation that makes peer-to-peer coordination possible. Without reliable identity, every interaction requires a trusted intermediary. With it, peers can coordinate directly.</p>
 
