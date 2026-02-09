@@ -91,9 +91,11 @@
     });
   </script>
 
-  <div class="hero" id="main">
-    <h1>Habitat</h1>
-    <p class="subtitle">Composable coordination infrastructure for organizations that enrich their ecosystems.</p>
+  <div class="band band-dark-section">
+    <div class="hero" id="main">
+      <h1>Habitat</h1>
+      <p class="subtitle">Composable coordination infrastructure for organizations that enrich their ecosystems.</p>
+    </div>
   </div>
 
   <hr class="divider">
@@ -387,11 +389,13 @@
     </div>
   </div>
 
-  <div class="section">
-    <h2>Context</h2>
-    <p>Habitat is built in public by a Colorado Limited Cooperative Association. We needed these tools ourselves — and designed them so any organization can use them.</p>
-    <p>The system satisfies the most demanding compliance requirements (IRC 704(b), Subchapter K), which means every simpler use case is already covered. A freelancer needs Treasury. A startup needs Treasury + People. A cooperative needs all three configured for patronage-based allocation. Same primitives, different compositions.</p>
-    <p class="muted">Open source. Built in public. The repo is the project.</p>
+  <div class="band band-dark-section">
+    <div class="band-inner">
+      <h2>Context</h2>
+      <p>Habitat is built in public by a Colorado Limited Cooperative Association. We needed these tools ourselves — and designed them so any organization can use them.</p>
+      <p>The system satisfies the most demanding compliance requirements (IRC 704(b), Subchapter K), which means every simpler use case is already covered. A freelancer needs Treasury. A startup needs Treasury + People. A cooperative needs all three configured for patronage-based allocation. Same primitives, different compositions.</p>
+      <p style="font-style: italic; margin-bottom: 0;">Open source. Built in public. The repo is the project.</p>
+    </div>
   </div>
 
   <footer>
@@ -405,6 +409,70 @@
     <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
     <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">&copy; 2026 Techne / RegenHub, LCA</div>
   </footer>
+
+  <!-- Text Size Adjustment Tool -->
+  <div class="text-size-control">
+    <button class="text-size-btn" onclick="adjustTextSize('decrease')" aria-label="Decrease text size">
+      <i data-lucide="minus"></i>
+    </button>
+    <button class="text-size-btn active" onclick="adjustTextSize('reset')" aria-label="Reset text size">
+      <i data-lucide="type"></i>
+    </button>
+    <button class="text-size-btn" onclick="adjustTextSize('increase')" aria-label="Increase text size">
+      <i data-lucide="plus"></i>
+    </button>
+  </div>
+  <script>
+  (function() {
+    const sizes = ['small', 'normal', 'large'];
+    const fontSizes = { small: '15px', normal: '16px', large: '18px' };
+    
+    function adjustTextSize(action) {
+      let currentSize = localStorage.getItem('textSize') || 'normal';
+      let newSize = currentSize;
+      
+      if (action === 'decrease') {
+        if (currentSize === 'normal') newSize = 'small';
+        else if (currentSize === 'large') newSize = 'normal';
+      } else if (action === 'increase') {
+        if (currentSize === 'small') newSize = 'normal';
+        else if (currentSize === 'normal') newSize = 'large';
+      } else if (action === 'reset') {
+        newSize = 'normal';
+      }
+      
+      localStorage.setItem('textSize', newSize);
+      applyTextSize(newSize);
+      updateButtons(newSize);
+    }
+    
+    function applyTextSize(size) {
+      document.documentElement.style.fontSize = fontSizes[size];
+    }
+    
+    function updateButtons(size) {
+      const buttons = document.querySelectorAll('.text-size-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      if (size === 'small') buttons[0].classList.add('active');
+      else if (size === 'normal') buttons[1].classList.add('active');
+      else if (size === 'large') buttons[2].classList.add('active');
+    }
+    
+    // Initialize on page load
+    const savedSize = localStorage.getItem('textSize') || 'normal';
+    applyTextSize(savedSize);
+    
+    // Update buttons after lucide icons are loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      updateButtons(savedSize);
+    });
+    
+    // Make function globally available
+    window.adjustTextSize = adjustTextSize;
+  })();
+  </script>
+
   <script>lucide.createIcons();</script>
 </body>
 </html>
