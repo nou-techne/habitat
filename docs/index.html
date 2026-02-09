@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Composable coordination infrastructure for cooperatives. Patronage accounting, composable tools, and service credits — built for organizations that enrich their ecosystems.">
+  <meta name="description" content="Composable coordination infrastructure for cooperatives. Patronage accounting, composable tools, and $CLOUD credits — built for organizations that enrich their ecosystems.">
   <link rel="canonical" href="https://the-habitat.org/">
   <title>Habitat — Composable coordination infrastructure</title>
   <link rel="stylesheet" href="style.css">
   <meta property="og:title" content="Habitat — Composable coordination infrastructure">
-  <meta property="og:description" content="Composable coordination infrastructure for organizations that enrich their ecosystems. Patronage accounting, composable tools, and service credits.">
+  <meta property="og:description" content="Composable coordination infrastructure for organizations that enrich their ecosystems. Patronage accounting, composable tools, and $CLOUD credits.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://the-habitat.org/">
   <meta name="twitter:card" content="summary">
@@ -23,7 +23,7 @@
     "@type": "WebSite",
     "name": "Habitat",
     "url": "https://the-habitat.org",
-    "description": "Composable coordination infrastructure for cooperatives. Patronage accounting, composable tools, and service credits.",
+    "description": "Composable coordination infrastructure for cooperatives. Patronage accounting, composable tools, and $CLOUD credits.",
     "publisher": {
       "@type": "Organization",
       "name": "Techne / RegenHub, LCA",
@@ -139,58 +139,80 @@
     </div>
 
     <div class="layer">
-      <div class="layer-icon icon-orange"><i data-lucide="coins"></i></div>
+      <div class="layer-icon icon-orange"><i data-lucide="cloud"></i></div>
       <div class="layer-content">
-        <h3>Service Credits</h3>
-        <p>A prepaid medium for information economy infrastructure. Four resource primitives — compute, transfer, long-term memory, short-term memory. The postage stamp of cooperative infrastructure: simple, fungible, useful.</p>
+        <h3>$CLOUD Credits</h3>
+        <p>A prepaid medium for cooperative infrastructure, minted against USD held for service delivery. Four resource primitives — compute, transfer, long-term memory, short-term memory. Like a postage stamp: backed by the commitment to perform, not by speculation. 1 CLOUD = 10 USDC.</p>
       </div>
     </div>
   </div>
 
   <div class="band band-blue" style="padding: 3rem 2rem;">
-    <h2 style="text-align: center; margin-bottom: 2rem;">Service Credits: The Postage Stamp Model</h2>
-    <p style="text-align: center; max-width: 720px; margin: 0 auto 2.5rem; color: var(--text-muted);">A prepaid unit redeemable against four resource primitives. Simple. Fungible. Useful. No speculation, no staking — just infrastructure you can use.</p>
+    <h2 style="text-align: center; margin-bottom: 2rem;"><i data-lucide="cloud" style="width:28px;height:28px;vertical-align:middle;margin-right:0.4rem;"></i> $CLOUD Credits</h2>
+    <p style="text-align: center; max-width: 720px; margin: 0 auto 2.5rem; color: var(--text-muted);">A prepaid credit minted against USD held for service delivery. Backed by Techne's commitment to perform — like a postage stamp backed by the postal service's commitment to deliver mail.</p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
       <div class="credit-card">
         <div class="credit-icon"><i data-lucide="cpu"></i></div>
         <h3>Compute</h3>
         <p>CPU cycles, inference calls, function execution. The work the machine does on your behalf.</p>
-        <div class="credit-example">1 credit ≈ 1,000 tokens processed</div>
+        <div class="credit-example">Redeemable against processing capacity</div>
       </div>
 
       <div class="credit-card">
         <div class="credit-icon icon-blue"><i data-lucide="activity"></i></div>
         <h3>Transfer</h3>
         <p>Bandwidth, API calls, network egress. The movement of information from one place to another.</p>
-        <div class="credit-example">1 credit ≈ 100 MB transferred</div>
+        <div class="credit-example">Redeemable against data movement</div>
       </div>
 
       <div class="credit-card">
         <div class="credit-icon icon-orange"><i data-lucide="archive"></i></div>
         <h3>Long-Term Memory</h3>
         <p>Object storage, document archives, vector embeddings. Persistent state that survives across sessions.</p>
-        <div class="credit-example">1 credit ≈ 1 GB stored per month</div>
+        <div class="credit-example">Redeemable against durable storage</div>
       </div>
 
       <div class="credit-card">
         <div class="credit-icon"><i data-lucide="zap"></i></div>
         <h3>Short-Term Memory</h3>
         <p>Cache, session state, hot storage. Fast, ephemeral memory for active operations.</p>
-        <div class="credit-example">1 credit ≈ 10 GB-hours</div>
+        <div class="credit-example">Redeemable against active memory</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="banknote" style="width:18px;height:18px;color:var(--accent);"></i> How It Works</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+          <li><strong>USD-backed</strong> — minted against dollars held in trust for service delivery</li>
+          <li><strong>Stable conversion</strong> — 1 CLOUD = 10 USDC at initial offering</li>
+          <li><strong>Invoice medium</strong> — primary currency for Techne project work</li>
+          <li><strong>Interoperable</strong> — Stripe (payments) + Mercury (banking) + Ethereum (ledger)</li>
+        </ul>
+      </div>
+
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="lock" style="width:18px;height:18px;color:var(--accent);"></i> Staking &amp; Revenue Share</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+          <li><strong>Member-investors stake $CLOUD</strong> for a chosen duration</li>
+          <li><strong>Compounding curve</strong> — longer lock = higher revenue share</li>
+          <li><strong>Capital access</strong> — liquidity commitments fund operations</li>
+          <li><strong>Multi-year commitments</strong> deepen the deposit pool, stabilizing the cooperative</li>
+        </ul>
       </div>
     </div>
 
     <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; max-width: 800px; margin: 0 auto;">
-      <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">Why "Postage Stamp"?</h3>
-      <p style="margin-bottom: 1rem;">A postage stamp is prepaid, fungible, and redeemable against a specific service (mail delivery). Service credits work the same way:</p>
+      <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="cloud-rain" style="width:18px;height:18px;color:var(--accent-blue);"></i> Why "Cloud"?</h3>
+      <p style="margin-bottom: 1rem;">The cloud is both technological infrastructure and a natural phenomenon. Water evaporates, condenses, precipitates, nourishes. Compute resources pool, distribute, serve, return. The name holds both meanings:</p>
       <ul style="margin-left: 2.5rem;">
-        <li><strong>Prepaid</strong> — you buy credits before consuming resources, avoiding billing complexity</li>
-        <li><strong>Fungible</strong> — one credit is interchangeable with another; they compose freely across resource types</li>
-        <li><strong>Redeemable</strong> — credits are spent when you use infrastructure, not held for speculation</li>
-        <li><strong>Interoperable</strong> — multiple cooperatives can issue credits against the same shared grammar, enabling cross-organizational resource exchange</li>
+        <li><strong>Ecological</strong> — clouds are the atmosphere's commons: shared, cyclical, life-sustaining</li>
+        <li><strong>Technological</strong> — "the cloud" is pooled infrastructure: compute, storage, and transfer available on demand</li>
+        <li><strong>Economic</strong> — $CLOUD credits make this infrastructure legible and exchangeable, backed by real operational capacity</li>
+        <li><strong>Educational</strong> — the metaphor teaches what cloud computing actually is: shared resources, not magic</li>
       </ul>
-      <p style="margin-top: 1rem; color: var(--text-muted); font-style: italic;">This design avoids securities classification (no expectation of profit), enables patronage-based distribution (allocations can be paid in credits), and makes cooperative infrastructure legible as a service layer.</p>
+      <p style="margin-top: 1rem; color: var(--text-muted); font-style: italic;">Like a postage stamp backed by the postal service, $CLOUD is backed by Techne's commitment to deliver infrastructure services. The conversion to USDC maintains stability. The staking curve rewards long-term alignment with the cooperative.</p>
     </div>
   </div>
 
