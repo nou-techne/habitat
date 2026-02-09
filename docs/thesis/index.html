@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.setAttribute("data-theme","dark")})()</script>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -366,6 +367,11 @@
     <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">&copy; 2026 Techne / RegenHub, LCA</div>
   </footer>
   <!-- Text Size Adjustment Tool -->
+  <div class="site-controls">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <span class="icon-sun"><i data-lucide="sun"></i></span>
+    <span class="icon-moon"><i data-lucide="moon"></i></span>
+  </button>
   <div class="text-size-control">
     <button class="text-size-btn" onclick="adjustTextSize('decrease')" aria-label="Decrease text size">
       <i data-lucide="minus"></i>
@@ -425,6 +431,24 @@
     
     // Make function globally available
     window.adjustTextSize = adjustTextSize;
+  })();
+  </script>
+
+  </div><!-- /site-controls -->
+  <script>
+  (function() {
+    function toggleTheme() {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      var newTheme = isDark ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      lucide.createIcons();
+    }
+    var saved = localStorage.getItem("theme");
+    if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+    window.toggleTheme = toggleTheme;
   })();
   </script>
 
