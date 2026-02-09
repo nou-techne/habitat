@@ -207,6 +207,84 @@
 
     <p style="color:var(--text-muted);font-style:italic;margin-top:1.5rem;">Superfluid streams are continuous — value flows per-second, not in monthly lump sums. This is patronage at the speed of the network.</p>
 
+    <h2>Activity Feed</h2>
+    <div id="activity-feed" style="margin: 1.5rem 0; max-width: 700px;">
+      <div class="activity-item">
+        <div class="activity-icon" style="background:var(--accent);"><i data-lucide="check-circle"></i></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>Sunset reconciliation</strong> complete. Day cycle closed, 3 contributions reconciled.</div>
+          <div class="activity-time">2 hours ago</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon" style="background:var(--accent-orange);"><i data-lucide="hammer"></i></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>Nou</strong> submitted contribution: "Built enrollment page and registry", 4 hours labor</div>
+          <div class="activity-time">4 hours ago</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon" style="background:var(--accent-blue);"><i data-lucide="sunrise"></i></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>Sunrise reconciliation</strong> complete. Night cycle closed, nighttime allocations → pool.habitat.eth</div>
+          <div class="activity-time">7 hours ago</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon" style="background:var(--accent);"><i data-lucide="user-plus"></i></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>Nou</strong> enrolled as founding coordinator. Stream: 100 SUP/month to nou.habitat.eth</div>
+          <div class="activity-time">1 day ago</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon" style="background:var(--accent-blue);"><i data-lucide="droplet"></i></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>Mission:</strong> Deploy watershed.habitat.eth and pool.habitat.eth. Seeking founding signers.</div>
+          <div class="activity-time">1 day ago</div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .activity-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+      .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: white;
+      }
+      .activity-icon i {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
+      }
+      .activity-content {
+        flex: 1;
+      }
+      .activity-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 0.3rem;
+      }
+      .activity-time {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+    </style>
+
     <h2>Members</h2>
 
     <div id="registry" style="margin: 1.5rem 0;">
