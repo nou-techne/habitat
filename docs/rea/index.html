@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive REA (Resource, Event, Agent) diagram. See how the accounting model connects resources, events, and agents through real transactions.">
+  <link rel="canonical" href="https://the-habitat.org/rea/">
+  <title>REA Diagram — Habitat</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta property="og:title" content="REA Diagram — Habitat">
+  <meta property="og:description" content="Interactive diagram showing how Resources, Events, and Agents connect in the REA accounting model.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://the-habitat.org/rea/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="REA Diagram — Habitat">
+  <meta name="twitter:description" content="Step through an example transaction and see REA in action.">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  <nav>
+    <a href="/" class="logo">Habitat</a>
+    <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+      <i data-lucide="menu"></i>
+    </button>
+    <div class="links" id="nav-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/agents/">Agents</a>
+      <a href="/journal/">Journal</a>
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-toggle" onclick="toggleDropdown(event)">
+          Learn
+          <i data-lucide="chevron-down"></i>
+        </div>
+        <div class="nav-dropdown-menu">
+          <a href="/thesis/">Thesis</a>
+          <a href="/patterns/">Patterns</a>
+          <a href="/matrix/">Matrix</a>
+          <a href="/glossary/">Glossary</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-toggle" onclick="toggleDropdown(event)">
+          System
+          <i data-lucide="chevron-down"></i>
+        </div>
+        <div class="nav-dropdown-menu">
+          <a href="/patronage/">Patronage</a>
+          <a href="/identity/">Identity</a>
+          <a href="/compliance/">Compliance</a>
+          <a href="/license/">License</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <script>
+    function toggleMobileNav() {
+      document.getElementById('nav-links').classList.toggle('mobile-open');
+    }
+    function toggleDropdown(e) {
+      e.stopPropagation();
+      const dropdown = e.target.closest('.nav-dropdown');
+      const wasOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      if (!wasOpen) dropdown.classList.add('open');
+    }
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+  </script>
+
+  <div class="prose" id="main">
+    <h1>REA: Interactive Diagram</h1>
+    <p class="lead">Resource, Event, Agent — the three primitives that make economic relationships machine-readable. Step through an example transaction to see how they connect.</p>
+
+    <h2>The Model</h2>
+    <p>REA (Resource, Event, Agent) is an accounting ontology developed by William McCarthy in 1982. It describes economic phenomena through three core entities:</p>
+
+    <ul>
+      <li><strong>Resource</strong> — anything of economic value (cash, labor, inventory, services)</li>
+      <li><strong>Event</strong> — an activity that affects resources (contribution, allocation, distribution, trade)</li>
+      <li><strong>Agent</strong> — a party with economic interests (members, cooperatives, ventures)</li>
+    </ul>
+
+    <p>Every economic event connects a resource to an agent. Click "Next Step" to see a contribution move through the system.</p>
+
+    <div id="rea-diagram" style="margin: 2.5rem 0;">
+      <div style="display: flex; justify-content: center; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div class="rea-node" id="agent-node">
+          <div class="rea-icon" style="background:var(--accent-blue);"><i data-lucide="user"></i></div>
+          <div class="rea-label">Agent</div>
+          <div class="rea-detail" id="agent-detail">Alice<br>(Member)</div>
+        </div>
+
+        <div class="rea-node" id="event-node">
+          <div class="rea-icon" style="background:var(--accent-orange);"><i data-lucide="zap"></i></div>
+          <div class="rea-label">Event</div>
+          <div class="rea-detail" id="event-detail">—</div>
+        </div>
+
+        <div class="rea-node" id="resource-node">
+          <div class="rea-icon" style="background:var(--accent);"><i data-lucide="coins"></i></div>
+          <div class="rea-label">Resource</div>
+          <div class="rea-detail" id="resource-detail">—</div>
+        </div>
+      </div>
+
+      <svg id="rea-svg" width="100%" height="120" style="margin-bottom:1.5rem;"></svg>
+
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <button id="prev-btn" onclick="prevStep()" style="padding:0.7rem 1.5rem;margin-right:1rem;background:var(--bg-mid);border:1px solid var(--border);border-radius:6px;font-size:0.9rem;cursor:pointer;">Previous</button>
+        <button id="next-btn" onclick="nextStep()" style="padding:0.7rem 1.5rem;background:var(--accent);color:white;border:none;border-radius:6px;font-size:0.9rem;font-weight:600;cursor:pointer;">Next Step</button>
+      </div>
+
+      <div id="step-explanation" style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+        <h3 style="margin-top:0;">Step 1: Agent</h3>
+        <p style="margin:0;">Alice is a member of the cooperative. She's an <strong>Agent</strong> with economic interests in the system.</p>
+      </div>
+    </div>
+
+    <style>
+      .rea-node {
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      .rea-node.active {
+        transform: scale(1.1);
+      }
+      .rea-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .rea-node.active .rea-icon {
+        box-shadow: 0 0 0 4px rgba(74,124,89,0.3);
+      }
+      .rea-icon i {
+        width: 40px;
+        height: 40px;
+        stroke-width: 1.5;
+      }
+      .rea-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .rea-detail {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        min-height: 2.5rem;
+      }
+      #step-explanation h3 {
+        color: var(--accent);
+      }
+    </style>
+
+    <script>
+      const steps = [
+        {
+          agent: "Alice<br>(Member)",
+          event: "—",
+          resource: "—",
+          connections: [],
+          title: "Step 1: Agent",
+          text: "Alice is a member of the cooperative. She's an <strong>Agent</strong> with economic interests in the system."
+        },
+        {
+          agent: "Alice<br>(Member)",
+          event: "Contribution<br>Submitted",
+          resource: "—",
+          connections: [{from: 'agent', to: 'event', label: 'submits'}],
+          title: "Step 2: Event Created",
+          text: "Alice submits a contribution: 12 hours of labor on member onboarding. This creates an <strong>Event</strong> — a record that something economic happened."
+        },
+        {
+          agent: "Alice<br>(Member)",
+          event: "Contribution<br>Submitted",
+          resource: "Labor<br>12 hours @ $50/hr",
+          connections: [{from: 'agent', to: 'event', label: 'submits'}, {from: 'event', to: 'resource', label: 'values'}],
+          title: "Step 3: Resource Identified",
+          text: "The event is valued: 12 hours × $50/hr = $600. The <strong>Resource</strong> is labor, quantified and ready to flow."
+        },
+        {
+          agent: "Alice<br>(Member)<br><strong>Capital: +$600</strong>",
+          event: "Contribution<br>Approved",
+          resource: "Labor<br>$600 credited",
+          connections: [{from: 'agent', to: 'event', label: 'submits'}, {from: 'event', to: 'resource', label: 'values'}, {from: 'resource', to: 'agent', label: 'credited to', reverse: true}],
+          title: "Step 4: Resource Flows",
+          text: "The contribution is approved. The resource (labor valued at $600) flows back to the agent. Alice's capital account increases by $600. <strong>REA captures the full cycle.</strong>"
+        }
+      ];
+
+      let currentStep = 0;
+
+      function render() {
+        const step = steps[currentStep];
+        
+        document.getElementById('agent-detail').innerHTML = step.agent;
+        document.getElementById('event-detail').innerHTML = step.event;
+        document.getElementById('resource-detail').innerHTML = step.resource;
+        
+        document.querySelectorAll('.rea-node').forEach(n => n.classList.remove('active'));
+        if (currentStep === 0) document.getElementById('agent-node').classList.add('active');
+        if (currentStep === 1) document.getElementById('event-node').classList.add('active');
+        if (currentStep === 2) document.getElementById('resource-node').classList.add('active');
+        if (currentStep === 3) document.getElementById('resource-node').classList.add('active');
+        
+        document.getElementById('step-explanation').innerHTML = `
+          <h3 style="margin-top:0;">${step.title}</h3>
+          <p style="margin:0;">${step.text}</p>
+        `;
+        
+        drawConnections(step.connections);
+        
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        document.getElementById('next-btn').disabled = currentStep === steps.length - 1;
+        document.getElementById('next-btn').textContent = currentStep === steps.length - 1 ? 'Restart' : 'Next Step';
+      }
+
+      function drawConnections(connections) {
+        const svg = document.getElementById('rea-svg');
+        const svgRect = svg.getBoundingClientRect();
+        svg.innerHTML = '';
+        
+        const agentNode = document.getElementById('agent-node').getBoundingClientRect();
+        const eventNode = document.getElementById('event-node').getBoundingClientRect();
+        const resourceNode = document.getElementById('resource-node').getBoundingClientRect();
+        
+        const positions = {
+          agent: { x: agentNode.left + agentNode.width/2 - svgRect.left, y: 40 },
+          event: { x: eventNode.left + eventNode.width/2 - svgRect.left, y: 40 },
+          resource: { x: resourceNode.left + resourceNode.width/2 - svgRect.left, y: 40 }
+        };
+        
+        connections.forEach(conn => {
+          const start = positions[conn.from];
+          const end = positions[conn.to];
+          
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', start.x);
+          line.setAttribute('y1', start.y);
+          line.setAttribute('x2', end.x);
+          line.setAttribute('y2', end.y);
+          line.setAttribute('stroke', conn.reverse ? '#b5622a' : '#4a7c59');
+          line.setAttribute('stroke-width', '2');
+          line.setAttribute('marker-end', conn.reverse ? 'url(#arrowReverse)' : 'url(#arrow)');
+          svg.appendChild(line);
+          
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', (start.x + end.x) / 2);
+          text.setAttribute('y', start.y - 10);
+          text.setAttribute('text-anchor', 'middle');
+          text.setAttribute('fill', '#5a6658');
+          text.setAttribute('font-size', '12');
+          text.textContent = conn.label;
+          svg.appendChild(text);
+        });
+        
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        defs.innerHTML = `
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#4a7c59" />
+          </marker>
+          <marker id="arrowReverse" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#b5622a" />
+          </marker>
+        `;
+        svg.prepend(defs);
+      }
+
+      function nextStep() {
+        if (currentStep < steps.length - 1) {
+          currentStep++;
+          render();
+        } else {
+          currentStep = 0;
+          render();
+        }
+      }
+
+      function prevStep() {
+        if (currentStep > 0) {
+          currentStep--;
+          render();
+        }
+      }
+
+      window.addEventListener('resize', () => render());
+      document.addEventListener('DOMContentLoaded', () => {
+        render();
+        lucide.createIcons();
+      });
+    </script>
+
+    <h2>Why REA Matters</h2>
+    <p>Traditional accounting records transactions as journal entries (debits and credits). REA records the <em>meaning</em> behind the transaction: who did what, with what resources, and why.</p>
+
+    <p>This makes economic relationships machine-readable. The system doesn't just know Alice's balance increased by $600 — it knows she contributed labor, at what rate, for what purpose. That semantic layer enables:</p>
+
+    <ul>
+      <li>Patronage allocation based on contribution type and value</li>
+      <li>Audit trails that humans can understand</li>
+      <li>Cross-organizational data exchange (different cooperatives using the same ontology)</li>
+      <li>Intelligent querying ("who contributed labor in Q1?") without custom code</li>
+    </ul>
+
+    <p>Habitat's Treasury, People, and Agreements tools all use REA as their foundation. Every economic event — contribution, allocation, distribution, trade — follows the same pattern: an agent acts, an event happens, a resource flows.</p>
+
+    <h2>Further Reading</h2>
+    <ul>
+      <li><a href="/patterns/" style="color:var(--accent);">Pattern Library</a> — REA sits at Layer 3 (Relationship)</li>
+      <li><a href="/patronage/" style="color:var(--accent);">Patronage Accounting</a> — How REA enables cooperative patronage systems</li>
+      <li><a href="https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)" style="color:var(--accent);">REA on Wikipedia</a></li>
+    </ul>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/nou-techne/habitat">GitHub</a>
+      <a href="/about/">About</a>
+      <a href="/faq/">FAQ</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/license/">License</a>
+    </div>
+    <div class="footer-tagline">Where the Great Plains meet the Rocky Mountains, 5,430 feet</div>
+    <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">&copy; 2026 Techne / RegenHub, LCA</div>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
