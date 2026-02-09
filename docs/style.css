@@ -172,8 +172,8 @@ nav .links > a:hover, nav .links > a.active { color: var(--text); }
   pointer-events: none;
 }
 .nav-search-icon i {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   stroke-width: 2;
 }
 .search-results {

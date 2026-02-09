@@ -199,6 +199,48 @@
       return `${diffYears} years ago`;
     }
     
+    function reorderSunsetFirst(container) {
+      // Group content by h2 sections, then place Sunset before Sunrise
+      const children = Array.from(container.childNodes);
+      const sections = [];
+      let current = null;
+      
+      for (const node of children) {
+        if (node.nodeType === 1 && node.tagName === 'H2') {
+          current = { heading: node, nodes: [node] };
+          sections.push(current);
+        } else if (current) {
+          current.nodes.push(node);
+        } else {
+          // Before any h2 (e.g., h1 title, intro)
+          sections.push({ heading: null, nodes: [node] });
+        }
+      }
+      
+      // Sort: preamble first, then Sunset sections, then everything else
+      sections.sort((a, b) => {
+        const aText = a.heading ? a.heading.textContent : '';
+        const bText = b.heading ? b.heading.textContent : '';
+        const aIsPre = !a.heading;
+        const bIsPre = !b.heading;
+        const aIsSunset = /sunset/i.test(aText);
+        const bIsSunset = /sunset/i.test(bText);
+        
+        if (aIsPre && !bIsPre) return -1;
+        if (!aIsPre && bIsPre) return 1;
+        if (aIsSunset && !bIsSunset) return -1;
+        if (!aIsSunset && bIsSunset) return 1;
+        return 0;
+      });
+      
+      container.innerHTML = '';
+      for (const section of sections) {
+        for (const node of section.nodes) {
+          container.appendChild(node);
+        }
+      }
+    }
+
     async function loadJournal() {
       const container = document.getElementById('journal-entries');
       
@@ -248,6 +290,10 @@
         
         const content = document.createElement('div');
         content.innerHTML = marked.parse(md);
+        
+        // Reorder so Sunset sections appear before Sunrise
+        reorderSunsetFirst(content);
+        
         div.appendChild(content);
         
         container.appendChild(div);
