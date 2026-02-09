@@ -54,7 +54,7 @@ Accounts are organized hierarchically. Parent accounts aggregate their children.
 ├── 1500  Digital Assets
 │   ├── 1510  Cryptocurrency Holdings
 │   ├── 1520  Wrapped/Streaming Tokens
-│   └── 1530  Service Credits Held
+│   └── 1530  $CLOUD Credits Held
 └── 1900  Other Assets
 ```
 
@@ -69,7 +69,7 @@ Accounts are organized hierarchically. Parent accounts aggregate their children.
 │   └── 2140  Sales Tax Payable
 ├── 2200  Deferred Revenue
 │   ├── 2210  Prepaid Memberships
-│   ├── 2220  Service Credits Outstanding
+│   ├── 2220  $CLOUD Credits Outstanding
 │   └── 2230  Event Deposits
 ├── 2300  Member Obligations
 │   ├── 2310  Member Loans Payable
@@ -129,7 +129,7 @@ This is where the cooperative's distinctive structure lives. Standard corporatio
 │   ├── 4310  Equity Returns
 │   ├── 4320  Revenue Share / Reciprocity
 │   └── 4330  Consulting to Ventures
-├── 4400  Service Credit Revenue
+├── 4400  $CLOUD Credit Revenue
 │   ├── 4410  Credit Issuance (contra: 2220)
 │   └── 4420  Credit Redemption (recognized revenue)
 ├── 4500  Digital Asset Revenue
@@ -142,7 +142,7 @@ This is where the cooperative's distinctive structure lives. Standard corporatio
     └── 4930  Grant Income
 ```
 
-**Service credit note:** Issuance (4410) creates a liability (2220), not revenue. Revenue is recognized at redemption (4420), when infrastructure service is actually delivered. This distinction matters for 704(b) — only recognized revenue flows through the patronage allocation.
+**$CLOUD credit note:** Issuance (4410) creates a liability (2220), not revenue. Revenue is recognized at redemption (4420), when infrastructure service is actually delivered. This distinction matters for 704(b) — only recognized revenue flows through the patronage allocation.
 
 **Streaming income note:** Superfluid streams (4510) present an accounting challenge: they are continuous, not discrete. The system must periodically sample stream balances and record the accumulated income as discrete transactions. Sprint 18 (Superfluid Mapping) will address this in detail.
 
@@ -186,7 +186,7 @@ This is where the cooperative's distinctive structure lives. Standard corporatio
 
 **Guaranteed payments note (5210):** Under Subchapter K, payments to members for services rendered are "guaranteed payments" (IRC § 707(c)), not wages. They are deductible by the partnership and taxable to the member regardless of partnership income. The chart separates these from contractor payments (5220) because they receive different tax treatment.
 
-**Infrastructure costs (5500):** These accounts map directly to the four service credit primitives — compute, transfer, long-term memory (storage), short-term memory (not separately tracked at this level). When the service credit system is operational, these costs become the basis for rate card pricing.
+**Infrastructure costs (5500):** These accounts map directly to the four $CLOUD credit primitives — compute, transfer, long-term memory (storage), short-term memory (not separately tracked at this level). When the $CLOUD credit system is operational, these costs become the basis for rate card pricing.
 
 ## Account Properties
 
@@ -207,7 +207,7 @@ Every account in the system carries:
 
 ## Configuring for Different Organizations
 
-The full chart above serves a cooperative with space operations, service revenue, venture participation, and service credits. Simpler organizations use subsets:
+The full chart above serves a cooperative with space operations, service revenue, venture participation, and $CLOUD credits. Simpler organizations use subsets:
 
 | Organization Type | Accounts Needed |
 |-------------------|----------------|

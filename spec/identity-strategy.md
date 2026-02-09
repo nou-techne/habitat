@@ -25,7 +25,7 @@ habitat.eth                          (root — the cooperative itself)
 │   └── ...
 ├── Infrastructure
 │   ├── treasury.habitat.eth         (cooperative treasury)
-│   ├── credits.habitat.eth          (service credit issuance)
+│   ├── credits.habitat.eth          ($CLOUD credit issuance)
 │   └── commons.habitat.eth          (shared pattern library / commons fund)
 └── Functional
     ├── studio.habitat.eth           (the venture studio identity)
@@ -96,11 +96,11 @@ The ENS name becomes the member's public identifier. Internal records reference 
 
 ### Wallet-to-Identity Resolution
 
-For onchain operations (Superfluid streams, token distributions, service credit transfers), the system resolves `{name}.habitat.eth` to an Ethereum address. This means:
+For onchain operations (Superfluid streams, token distributions, $CLOUD credit transfers), the system resolves `{name}.habitat.eth` to an Ethereum address. This means:
 
 - Distributions can be sent to `alice.habitat.eth` instead of `0x7a3b...`
 - Superfluid streams flow to ENS names
-- Service credit transfers reference names, not addresses
+- $CLOUD credit transfers reference names, not addresses
 - The treasury dashboard shows names, not hex strings
 
 ## The Social Graph
@@ -136,16 +136,16 @@ Ventures incubated by the studio receive subnames. The subname signals: "this ve
 
 **Root security:** `habitat.eth` should be held by a multi-sig (Safe) controlled by the cooperative's governance body. No single person should be able to issue or revoke subnames unilaterally.
 
-## Service Credits and Identity
+## $CLOUD Credits and Identity
 
-The service credit protocol (Sprint 16) requires member identity for closed-loop enforcement. ENS subnames provide this naturally:
+The $CLOUD credit protocol (Sprint 16) requires member identity for closed-loop enforcement. ENS subnames provide this naturally:
 
 - Credits are issued to `{name}.habitat.eth`
 - Transfers occur between subname holders
 - The credit ledger references ENS names
 - Cross-network redemption (interoperability) uses ENS for identity resolution across issuers
 
-An organization adopting the service credit protocol that also uses ENS subnames gets identity infrastructure for free. The credit system and the identity system compose without integration work.
+An organization adopting the $CLOUD credit protocol that also uses ENS subnames gets identity infrastructure for free. The credit system and the identity system compose without integration work.
 
 ## Interoperability Across Habitats
 
@@ -153,7 +153,7 @@ If other cooperatives adopt the pattern — `otherco.eth` with `{name}.otherco.e
 
 - Each cooperative controls its own namespace
 - Cross-cooperative recognition is bilateral (like diplomatic recognition)
-- Service credit clearing (Sprint 16) can use ENS resolution for counterparty identification
+- $CLOUD credit clearing (Sprint 16) can use ENS resolution for counterparty identification
 - The social graph extends across cooperatives through shared venture relationships
 
 This is the coordination infrastructure thesis (Venture Commons) made concrete: identity that is self-sovereign at the individual level, curated at the organizational level, and composable at the network level.
@@ -168,7 +168,7 @@ This is the coordination infrastructure thesis (Venture Commons) made concrete: 
 | 4 | Integrate ENS resolution into Habitat treasury dashboard | Treasury reporting (Sprint 7) |
 | 5 | Route Superfluid streams to ENS names | Superfluid mapping (Sprint 18) |
 | 6 | Issue venture subnames as ventures form | Venture formation process |
-| 7 | Integrate credit ledger with ENS identity | Service credits (Sprint 16) |
+| 7 | Integrate credit ledger with ENS identity | $CLOUD credits (Sprint 16) |
 
 ## Connection to the Pattern Stack
 

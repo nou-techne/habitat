@@ -93,24 +93,24 @@ The 704(c) entry records the $3,000 difference for future tax allocation trackin
 
 Simple revenue. No capital account impact until period-end allocation.
 
-### Service Credit Issuance
+### $CLOUD Credit Issuance
 
-*A member purchases 100 service credits at $10/unit = $1,000.*
+*A member purchases 100 $CLOUD credits at $10/unit = $1,000.*
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
 | 1 | 1110 Operating Checking | $1,000 | |
-| 2 | 2220 Service Credits Outstanding | | $1,000 |
+| 2 | 2220 $CLOUD Credits Outstanding | | $1,000 |
 
 This is a **liability**, not revenue. The organization owes infrastructure services. Revenue is not recognized until redemption.
 
-### Service Credit Redemption
+### $CLOUD Credit Redemption
 
 *A member redeems 20 credits worth of compute services.*
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
-| 1 | 2220 Service Credits Outstanding | $200 | |
+| 1 | 2220 $CLOUD Credits Outstanding | $200 | |
 | 2 | 4420 Credit Redemption Revenue | | $200 |
 
 Now it's revenue. The liability decreases, recognized revenue increases. This revenue will flow through the patronage allocation at period end.

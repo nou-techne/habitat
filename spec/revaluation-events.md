@@ -1,6 +1,6 @@
 # Revaluation Events
 
-*Sprint 17 — Building on: [Service Credit Integration](service-credit-integration.md)*
+*Sprint 17 — Building on: [$CLOUD Credit Integration](service-credit-integration.md)*
 
 ---
 
@@ -47,7 +47,7 @@ The organization must determine the FMV of all partnership assets. Methods, in o
 
 **Digital assets:** Cryptocurrency and streaming tokens are valued at market price on the revaluation date, sourced from a documented exchange or oracle.
 
-**Service credits outstanding:** The liability (2220) is already at face value — no revaluation needed on the liability side.
+**$CLOUD credits outstanding:** The liability (2220) is already at face value — no revaluation needed on the liability side.
 
 ### Step 2: Calculate Unrealized Gain or Loss
 

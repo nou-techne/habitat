@@ -83,14 +83,14 @@ At each period close, the system should validate:
 
 ---
 
-## Connection to Service Credits
+## Connection to $CLOUD Credits
 
-Service credits (the postage stamp layer) interact with 704(b) through the revenue stream. When the cooperative issues and redeems service credits:
+Service credits (the postage stamp layer) interact with 704(b) through the revenue stream. When the cooperative issues and redeems $CLOUD credits:
 - **Issuance** is a liability event (prepaid obligation) — Treasury records credit issued as liability
 - **Redemption** is revenue recognition — Treasury records revenue when infrastructure service is delivered
 - **Allocation** of that revenue follows the patronage formula, flowing through the 704(b)-compliant allocation calculation
 
-The service credit system must integrate with Treasury in a way that properly times revenue recognition and routes it through the allocation engine.
+The $CLOUD credit system must integrate with Treasury in a way that properly times revenue recognition and routes it through the allocation engine.
 
 ---
 

@@ -1,4 +1,4 @@
-# Service Credit Integration
+# $CLOUD Credit Integration
 
 *Sprint 16 — Building on: [Member Allocation Statements](member-allocation-statements.md)*
 
@@ -6,24 +6,27 @@
 
 ## Overview
 
-Phase 4 begins. The three-phase core (Treasury, People, Agreements) is specified. This sprint integrates the service credit protocol (context document 13) into the accounting system — connecting the postage stamp layer to the ledger that tracks it.
+Phase 4 begins. The three-phase core (Treasury, People, Agreements) is specified. This sprint integrates the $CLOUD credit protocol (context document 13) into the accounting system — connecting the postage stamp layer to the ledger that tracks it.
 
-Service credits are a prepaid medium for information economy infrastructure. A member buys credits. Credits are redeemable against four resource primitives: compute, transfer, long-term memory, short-term memory. The issuing organization publishes a rate card mapping credits to resource units. Credits are transferable within the network but not tradeable on external markets.
+$CLOUD credits are a prepaid medium for information economy infrastructure, minted against USD held for service delivery. A member purchases credits (1 CLOUD = 10 USDC). Credits are redeemable against four resource primitives: compute, transfer, long-term memory, short-term memory. The issuing organization publishes a rate card mapping credits to resource units. Credits are transferable within the network but not tradeable on external markets. The name carries an ecological duality — cloud as technological infrastructure and natural phenomenon.
 
-For the accounting system, service credits create a specific pattern: **liability at issuance, revenue at redemption.** Getting this right matters for two reasons — accurate financial reporting and regulatory classification. Credits designed to avoid securities classification under the Howey test must behave as prepaid consumption instruments, not investment vehicles. The accounting must reflect this.
+Fiat enters through **Stripe** (payments) and **Mercury** (banking/custody). $CLOUD credits are minted against held USD and their lifecycle is tracked on **Ethereum** (identity and ledger). The architecture is custodial and orchestrated by the cooperative.
+
+For the accounting system, $CLOUD credits create a specific pattern: **liability at issuance, revenue at redemption.** Getting this right matters for two reasons — accurate financial reporting and regulatory classification. Credits designed to avoid securities classification under the Howey test must behave as prepaid consumption instruments, not investment vehicles. The accounting must reflect this.
 
 ## Credit Lifecycle in Treasury
 
 ### Issuance
 
-A member purchases 100 credits at the fixed issuance rate (10 credits per $1 = $10 purchase).
+A member purchases 100 CLOUD credits at the fixed conversion rate (1 CLOUD = 10 USDC, so 100 CLOUD = $1,000 USDC). Payment flows through Stripe or direct Mercury deposit; USD is held in the cooperative's Mercury deposit account as backing for the minted credits.
 
 ```
 Event: credit.issued
 ├── member_id
 ├── quantity: 100
-├── amount_paid: $10.00
-├── issuance_rate: 10 credits / $1
+├── amount_paid: $1,000.00 USDC
+├── conversion_rate: 1 CLOUD = 10 USDC
+├── payment_method: stripe | mercury_deposit
 └── timestamp
 ```
 
@@ -31,22 +34,22 @@ Event: credit.issued
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
-| 1 | 1110 Operating Checking | $10.00 | |
-| 2 | 2220 Service Credits Outstanding | | $10.00 |
+| 1 | 1110 Operating Checking (Mercury) | $1,000.00 | |
+| 2 | 2220 CLOUD Credits Outstanding | | $1,000.00 |
 
-Cash increases. Liability increases. No revenue yet — the organization owes infrastructure services.
+Cash increases (USD held in Mercury). Liability increases. No revenue yet — the organization owes infrastructure services.
 
 ### Redemption
 
-The member uses 20 credits for compute services. Current rate card: 1 credit = 0.1 compute-hours.
+The member uses 20 CLOUD credits for compute services. Current rate card: 1 CLOUD = 0.1 compute-hours. At the 1:10 USDC conversion, 20 CLOUD = $200 USDC.
 
 ```
 Event: credit.redeemed
 ├── member_id
-├── quantity: 20
+├── quantity: 20 CLOUD
 ├── primitive: compute
 ├── resource_units: 2.0 compute-hours
-├── credit_value: $2.00
+├── credit_value: $200.00
 └── timestamp
 ```
 
@@ -54,10 +57,10 @@ Event: credit.redeemed
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
-| 1 | 2220 Service Credits Outstanding | $2.00 | |
-| 2 | 4420 Credit Redemption Revenue | | $2.00 |
+| 1 | 2220 CLOUD Credits Outstanding | $200.00 | |
+| 2 | 4420 Credit Redemption Revenue | | $200.00 |
 
-Liability decreases. Revenue recognized. This revenue flows through the patronage allocation at period end — it is real income from services delivered.
+Liability decreases. Revenue recognized. This revenue flows through the patronage allocation at period end — it is real income from services delivered. $CLOUD credits are also the primary invoice medium for engaging Techne for project work — invoices denominated in CLOUD credits follow the same redemption accounting.
 
 **Corresponding expense** (the cost of providing the compute):
 
@@ -66,33 +69,33 @@ Liability decreases. Revenue recognized. This revenue flows through the patronag
 | 1 | 5510 Compute | $X.XX | |
 | 2 | 1110 Operating Checking (or 2110 AP) | | $X.XX |
 
-The margin between redemption revenue ($2.00) and infrastructure cost ($X.XX) is the organization's operating margin on service credits.
+The margin between redemption revenue ($200.00) and infrastructure cost ($X.XX) is the organization's operating margin on $CLOUD credits.
 
 ### Transfer
 
-A member transfers 30 credits to another member within the network.
+A member transfers 30 CLOUD credits to another member within the network.
 
 ```
 Event: credit.transferred
 ├── from_member_id
 ├── to_member_id
-├── quantity: 30
+├── quantity: 30 CLOUD
 └── timestamp
 ```
 
-**Treasury transactions:** None. Transfers are ledger movements within the credit system, not economic events for the organization. The liability (2220) remains unchanged — the organization still owes 30 credits worth of services, just to a different member.
+**Treasury transactions:** None. Transfers are ledger movements within the CLOUD credit system, not economic events for the organization. The liability (2220) remains unchanged — the organization still owes 30 CLOUD credits worth of services, just to a different member.
 
-The credit ledger (not Treasury) tracks the per-member credit balance.
+The credit ledger (not Treasury) tracks the per-member CLOUD credit balance.
 
 ### Expiration (if configured)
 
-If credits expire after a defined period:
+If CLOUD credits expire after a defined period:
 
 ```
 Event: credit.expired
 ├── member_id
-├── quantity: 10
-├── credit_value: $1.00
+├── quantity: 10 CLOUD
+├── credit_value: $100.00
 └── timestamp
 ```
 
@@ -100,14 +103,14 @@ Event: credit.expired
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
-| 1 | 2220 Service Credits Outstanding | $1.00 | |
-| 2 | 4420 Credit Redemption Revenue | | $1.00 |
+| 1 | 2220 CLOUD Credits Outstanding | $100.00 | |
+| 2 | 4420 Credit Redemption Revenue | | $100.00 |
 
 Expired credits become revenue — the obligation is extinguished. This is standard breakage accounting, similar to gift card expiration. Note: frequent expiration undermines the consumption-instrument argument for Howey test purposes. Expiration should be long (recommended: 24 months minimum) or absent.
 
-## The Credit Ledger
+## The CLOUD Credit Ledger
 
-Treasury tracks the aggregate liability (2220). The credit ledger tracks per-member balances and transaction history:
+Treasury tracks the aggregate liability (2220). The CLOUD credit ledger tracks per-member balances and transaction history:
 
 ```
 CreditLedger
@@ -125,7 +128,7 @@ CreditLedger
 └── history_hash          (rolling hash for audit integrity)
 ```
 
-**Reconciliation invariant:** Sum of all member credit balances = 2220 Service Credits Outstanding balance in Treasury, converted at issuance rate. This is checked daily.
+**Reconciliation invariant:** Sum of all member credit balances = 2220 $CLOUD Credits Outstanding balance in Treasury, converted at issuance rate. This is checked daily.
 
 ## Rate Card
 
@@ -158,13 +161,13 @@ RateCard
 The protocol requires a public reserve ratio: liquid reserves divided by outstanding credit liabilities.
 
 ```
-Reserve ratio = Liquid assets (1100) / Service Credits Outstanding (2220)
+Reserve ratio = Liquid assets (1100) / $CLOUD Credits Outstanding (2220)
 ```
 
 This is computed daily and displayed on the reserve dashboard (a View-layer report added to Sprint 7's catalog):
 
 ```
-Service Credit Reserve Dashboard
+$CLOUD Credit Reserve Dashboard
 
 Credits outstanding:     5,000 credits ($500.00)
 Liquid reserves:         $11,550
@@ -177,16 +180,16 @@ A ratio below 1.0x means the organization cannot honor all outstanding credits a
 
 ## Patronage Interaction
 
-Service credit revenue flows through the standard patronage allocation:
+$CLOUD credit revenue flows through the standard patronage allocation:
 
 1. Credits are redeemed → revenue recognized (4420)
 2. Period closes → 4420 balance included in total revenue
 3. Net income calculated (revenue - expenses)
 4. Patronage formula allocates net income to members
 
-Service credit revenue is not attributed to the member who redeemed the credits — it is organizational revenue allocated by the patronage formula like any other revenue. The member who redeemed credits received infrastructure services, not an allocation claim.
+$CLOUD credit revenue is not attributed to the member who redeemed the credits — it is organizational revenue allocated by the patronage formula like any other revenue. The member who redeemed credits received infrastructure services, not an allocation claim.
 
-However, if the organization wants to attribute service credit *sales* (issuance) as a contribution type for patronage purposes — "this member brought in $500 in credit purchases" — that is handled through the revenue attribution contribution type (Sprint 8), not through the credit system itself.
+However, if the organization wants to attribute $CLOUD credit *sales* (issuance) as a contribution type for patronage purposes — "this member brought in $500 in credit purchases" — that is handled through the revenue attribution contribution type (Sprint 8), not through the credit system itself.
 
 ## Interoperability
 

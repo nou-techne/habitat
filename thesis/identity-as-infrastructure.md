@@ -8,7 +8,7 @@
 
 Most organizations identify their members in a database. The database lives on a server the organization controls. The member's identity exists only within that system — it cannot be verified, carried, or composed with anything outside it.
 
-This is fine for a single firm. It breaks down the moment organizations need to coordinate. A member of one cooperative who contributes to a venture incubated by another has no portable proof of either relationship. A service credit issued by one organization cannot be redeemed at another without a bilateral integration project. A social graph of contributors, ventures, and shared infrastructure exists only as scattered spreadsheets and memory.
+This is fine for a single firm. It breaks down the moment organizations need to coordinate. A member of one cooperative who contributes to a venture incubated by another has no portable proof of either relationship. A $CLOUD credit issued by one organization cannot be redeemed at another without a bilateral integration project. A social graph of contributors, ventures, and shared infrastructure exists only as scattered spreadsheets and memory.
 
 The coordination infrastructure described in [The Craft of Coordination](integrated-thesis.md) requires an identity layer that is public, composable, and self-sovereign. Not identity *for* the organization. Identity *of* the organization — its members, its ventures, its agents, its infrastructure — legible to anyone, controlled by the holders themselves, governed at the collective level.
 
@@ -52,7 +52,7 @@ The subname structure maps directly to the seven-layer pattern stack:
 | **State** | Text records carry attributes: role, skills, join date, affiliated ventures |
 | **Relationship** | The subname → parent relationship *is* membership. Venture records create cross-links |
 | **Event** | Onchain transactions referencing the name create an auditable history |
-| **Flow** | Superfluid streams, token transfers, and service credits route to the name |
+| **Flow** | Superfluid streams, token transfers, and $CLOUD credits route to the name |
 | **Constraint** | Issuance and revocation are governance acts — the cooperative controls who enters the namespace |
 | **View** | ENS-aware interfaces render the name, its records, and its relationships as a readable profile |
 
@@ -99,7 +99,7 @@ Distributions route to `{name}.habitat.eth` instead of raw addresses. The treasu
 
 Superfluid streams flow to and from ENS names. A continuous patronage distribution to `alice.habitat.eth` is legible in a way that a stream to `0x7a3b...` is not. The economic watershed becomes readable.
 
-### Service Credits
+### $CLOUD Credits
 
 Credits transfer between `{name}.habitat.eth` holders. The credit ledger references names. For cross-network interoperability — credits issued by one cooperative, redeemed at another — ENS provides identity resolution without a central authority. If `otherco.eth` issues credits to `alice.otherco.eth`, and Alice is also `alice.habitat.eth`, the clearing agreement between the two cooperatives can resolve her identity across both namespaces through ENS.
 

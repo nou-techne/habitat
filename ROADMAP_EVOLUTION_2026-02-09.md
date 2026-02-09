@@ -18,7 +18,7 @@ Phase 1 (Sprints 0-20) delivered the full specification. The recent interface wo
 **Impact:** Medium-High. Without formal protocols, Habitat remains a Techne-specific tool rather than composable cooperative infrastructure.
 
 ### 3. Legal Completeness
-**Gap:** Compliance concepts exist, but no operating agreement templates, no formation guide, no legal analysis of service credits under securities law. A cooperative can read about patronage accounting but can't use the documents to form their entity.
+**Gap:** Compliance concepts exist, but no operating agreement templates, no formation guide, no legal analysis of $CLOUD credits under securities law. A cooperative can read about patronage accounting but can't use the documents to form their entity.
 
 **Impact:** High. Legal infrastructure is required for real-world adoption. Without it, early adopters bear all formation risk.
 
@@ -43,7 +43,7 @@ Phase 1 (Sprints 0-20) delivered the full specification. The recent interface wo
 - Enables prototype development
 - **Effort:** 1-2 sprints (schema + indexes + constraints + migrations)
 
-**2. Service Credit Protocol Specification**
+**2. $CLOUD Credit Protocol Specification**
 - Formalizes the four-primitive model as implementable standard
 - Enables interoperability (multiple cooperatives issuing credits against shared grammar)
 - Positions Habitat as protocol, not just tool

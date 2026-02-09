@@ -63,7 +63,7 @@ REVENUE
   Space Revenue                     $8,400
   Service Revenue                   $4,200
   Venture Revenue                   $1,800
-  Service Credit Revenue              $600
+  $CLOUD Credit Revenue              $600
   Digital Asset Revenue               $450
   Other Revenue                       $150
                                   ────────
@@ -137,7 +137,7 @@ Account                          Debit       Credit
 1210 Member Receivables          $3,200
 ...
 2110 Accounts Payable                        $2,800
-2220 Service Credits Outstanding             $2,200
+2220 $CLOUD Credits Outstanding             $2,200
 ...
 3100-001 Alice Book Capital                  $8,200
 3100-002 Bob Book Capital                    $5,500

@@ -68,7 +68,7 @@ Phase 1 produced the specification. Phase 2 makes Habitat real across every dime
 - Sequence diagrams (critical workflows: contribution lifecycle, period close, distribution)
 - Data dictionary (every field, every type, every constraint)
 - Multi-entity composition protocol (how ventures and studio share infrastructure)
-- Interoperability specification (service credit clearing, cross-ENS resolution)
+- Interoperability specification ($CLOUD credit clearing, cross-ENS resolution)
 
 **Protocol and Standards.** Formalizing Habitat as composable infrastructure, not just a tool:
 
@@ -98,7 +98,7 @@ Phase 1 produced the specification. Phase 2 makes Habitat real across every dime
 **Community and Engagement.** Infrastructure needs users:
 
 - Contributor onboarding guide (what to read, where to start, how contributions are recognized)
-- Member education materials (plain-language patronage, capital accounts, service credits)
+- Member education materials (plain-language patronage, capital accounts, $CLOUD credits)
 - Feedback protocol (how potential adopters evaluate the spec and provide input)
 - Cooperative formation toolkit (what Habitat provides, what you still need, how tools connect to formation documents)
 - Discord channels as community surface (#ventures, #operations)
@@ -130,7 +130,7 @@ habitat/
 ├── thesis/            Strategic thinking (Craft of Coordination, Identity as Infrastructure)
 ├── schema/            Database schemas, DDL, data dictionary
 ├── diagrams/          ER diagrams, sequence diagrams, visual language
-├── protocol/          Open protocol specifications (REA grammar, service credits, agent integration)
+├── protocol/          Open protocol specifications (REA grammar, $CLOUD credits, agent integration)
 ├── templates/         Pattern library configuration profiles
 ├── legal/             Operating agreement sections, compliance checklists, legal analysis
 ├── community/         Onboarding, education, feedback, formation toolkit

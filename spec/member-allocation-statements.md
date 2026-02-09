@@ -217,7 +217,7 @@ A member can read their statement, see their contributions, follow the math to t
 
 ## Connection to Next Phase
 
-Phase 4 (Extensions) begins with Sprint 16: Service Credit Integration. The three-phase core is complete — Treasury, People, and Agreements each have their MVP specified. The extensions build on this foundation: service credits as a new revenue type, revaluation events for member admission, Superfluid for continuous-flow allocation, distribution mechanics, and governance controls.
+Phase 4 (Extensions) begins with Sprint 16: $CLOUD Credit Integration. The three-phase core is complete — Treasury, People, and Agreements each have their MVP specified. The extensions build on this foundation: $CLOUD credits as a new revenue type, revaluation events for member admission, Superfluid for continuous-flow allocation, distribution mechanics, and governance controls.
 
 ---
 

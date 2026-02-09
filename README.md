@@ -26,7 +26,7 @@ Three concentric layers:
 
 **Composable Tools** — Independent, event-sourced tools unified by [REA ontology](https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)). Each tool solves one problem well. Together they compose into organizational infrastructure. Legibility-as-product.
 
-**Service Credits** — A prepaid medium for information economy infrastructure, redeemable against four resource primitives (compute, transfer, long-term memory, short-term memory). The postage stamp of cooperative infrastructure.
+**$CLOUD Credits** — A prepaid medium for information economy infrastructure, redeemable against four resource primitives (compute, transfer, long-term memory, short-term memory). The postage stamp of cooperative infrastructure.
 
 ### Tool Suite
 
@@ -105,7 +105,7 @@ Habitat makes the contributive and mutualistic zones operable. The tools an orga
 
 Coordination infrastructure requires an identity layer that is public, composable, and self-sovereign. `habitat.eth` provides this through ENS subnames: `{name}.habitat.eth` for members, ventures, agents, and infrastructure.
 
-Each subname carries the full pattern stack. The name itself is Identity. Text records carry State (role, skills, join date). The subname→parent relationship is membership. Onchain transactions create Event history. Superfluid streams and service credits route as Flows. Issuance and revocation enforce Constraints through cooperative governance. ENS-aware interfaces render the View.
+Each subname carries the full pattern stack. The name itself is Identity. Text records carry State (role, skills, join date). The subname→parent relationship is membership. Onchain transactions create Event history. Superfluid streams and $CLOUD credits route as Flows. Issuance and revocation enforce Constraints through cooperative governance. ENS-aware interfaces render the View.
 
 The social graph lives on Ethereum — readable by any application, controlled by the name holders, curated by the cooperative. No platform dependency. No central identity authority. Scales across cooperatives through bilateral recognition, not centralized coordination.
 
@@ -136,7 +136,7 @@ This project follows the [Contributor Covenant v2.1](CODE_OF_CONDUCT.md).
 - McCarthy, W. E. (1982). "The REA Accounting Model"
 - Fowler, M. (2005). "Event Sourcing"
 - Evans, E. (2003). "Domain-Driven Design"
-- [Service Credit Protocol Specification](spec/service-credits.md)
+- [$CLOUD Credit Protocol Specification](spec/service-credits.md)
 
 ---
 

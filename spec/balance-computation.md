@@ -164,7 +164,7 @@ External reconciliation compares internal balances against external sources:
 | 1110 Operating Checking | Bank statement | Monthly |
 | 1510 Cryptocurrency Holdings | Blockchain query | Daily |
 | 1520 Streaming Tokens | Superfluid subgraph | Per sampling interval |
-| 2220 Service Credits Outstanding | Credit ledger | On each issuance/redemption |
+| 2220 $CLOUD Credits Outstanding | Credit ledger | On each issuance/redemption |
 
 Discrepancies produce reconciliation events, which generate adjusting transactions through the standard error correction pattern (Sprint 5).
 
