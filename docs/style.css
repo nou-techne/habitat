@@ -1,6 +1,12 @@
 /* Habitat Site — Shared Styles */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem; /* Space above anchored elements */
+}
+
 :root {
   --bg-light: #f0f4ee;
   --bg-mid: #e3ebe0;
