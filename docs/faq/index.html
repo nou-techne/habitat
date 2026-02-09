@@ -64,7 +64,14 @@
         </div>
       </div>
     </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+        <span class="nav-search-icon"><i data-lucide="search"></i></span>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
   </nav>
+  <script src="/search.js"></script>
   <script>
     function toggleMobileNav() {
       document.getElementById('nav-links').classList.toggle('mobile-open');

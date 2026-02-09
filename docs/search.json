@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Home",
+    "url": "/",
+    "keywords": "habitat coordination infrastructure patronage accounting cooperatives composable tools service credits"
+  },
+  {
+    "title": "About",
+    "url": "/about/",
+    "keywords": "techne regenhub lca colorado limited cooperative association open source"
+  },
+  {
+    "title": "Agents",
+    "url": "/agents/",
+    "keywords": "agent enrollment patronage solar audit watershed pool superfluid sup stream"
+  },
+  {
+    "title": "Journal",
+    "url": "/journal/",
+    "keywords": "build journal daily reflections sprints development"
+  },
+  {
+    "title": "Thesis",
+    "url": "/thesis/",
+    "keywords": "craft coordination compositional fluency ecosystem compounding pattern stack"
+  },
+  {
+    "title": "Patterns",
+    "url": "/patterns/",
+    "keywords": "seven progressive design patterns identity state relationship event flow constraint view"
+  },
+  {
+    "title": "Matrix",
+    "url": "/matrix/",
+    "keywords": "economic habitat matrix organizational archetypes governance systemic relationship"
+  },
+  {
+    "title": "Glossary",
+    "url": "/glossary/",
+    "keywords": "glossary definitions terms vocabulary rea patronage capital account"
+  },
+  {
+    "title": "Patronage Accounting",
+    "url": "/patronage/",
+    "keywords": "patronage capital accounts contribution lifecycle allocation formula period close 704b compliance"
+  },
+  {
+    "title": "Identity",
+    "url": "/identity/",
+    "keywords": "ens ethereum name service identity subnames self sovereign cooperative"
+  },
+  {
+    "title": "Compliance",
+    "url": "/compliance/",
+    "keywords": "704b irc compliance checker economic effect test dro qio"
+  },
+  {
+    "title": "License",
+    "url": "/license/",
+    "keywords": "peer production license copyfarleft cooperative commons contributor covenant"
+  },
+  {
+    "title": "FAQ",
+    "url": "/faq/",
+    "keywords": "faq frequently asked questions lca dao cryptocurrency rea solar audit"
+  },
+  {
+    "title": "REA Diagram",
+    "url": "/rea/",
+    "keywords": "rea resource event agent ontology accounting model interactive diagram"
+  }
+]
