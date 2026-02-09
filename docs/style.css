@@ -215,6 +215,58 @@ nav .links > a:hover, nav .links > a.active { color: var(--text); }
 
 .divider { border: none; border-top: 1px solid var(--border); max-width: var(--max-width); margin: 0 auto; }
 
+/* Section background bands */
+.band {
+  padding: 3rem 2rem;
+}
+.band-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.band-green {
+  background: rgba(74, 124, 89, 0.07);
+  border-top: 1px solid rgba(74, 124, 89, 0.12);
+  border-bottom: 1px solid rgba(74, 124, 89, 0.12);
+}
+.band-blue {
+  background: rgba(74, 111, 124, 0.07);
+  border-top: 1px solid rgba(74, 111, 124, 0.12);
+  border-bottom: 1px solid rgba(74, 111, 124, 0.12);
+}
+.band-orange {
+  background: rgba(181, 98, 42, 0.06);
+  border-top: 1px solid rgba(181, 98, 42, 0.1);
+  border-bottom: 1px solid rgba(181, 98, 42, 0.1);
+}
+.band-dark {
+  background: var(--bg-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Inline highlight blocks for prose pages */
+.highlight-green {
+  background: rgba(74, 124, 89, 0.07);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.highlight-blue {
+  background: rgba(74, 111, 124, 0.07);
+  border-left: 3px solid var(--accent-blue);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.highlight-orange {
+  background: rgba(181, 98, 42, 0.06);
+  border-left: 3px solid var(--accent-orange);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
 /* Cards grid */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
 .card {
