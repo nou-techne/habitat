@@ -32,38 +32,6 @@
 /* Dark Mode Color Scheme */
 [data-theme="dark"] {
   --bg-light: #1a2420;
-  --bg-mid: #243029;
-  --bg-dark: #2d3d35;
-  --text: #e8ede8;
-  --text-muted: #a8b5aa;
-  --accent: #6ea57f;
-  --accent-hover: #7fb58f;
-  --border: rgba(255,255,255,0.12);
-  --card-bg: rgba(255,255,255,0.04);
-  --accent-blue: #6b99a8;
-  --accent-blue-hover: #7ba9b8;
-  --accent-orange: #d4925c;
-  --accent-orange-muted: #c88a54;
-  
-  /* Dark section colors (lighter in dark mode for contrast inversion) */
-  --bg-dark-section: #0f1613;
-  --text-on-dark: #f2f6f3;
-  --text-muted-on-dark: #c5d0c7;
-  --border-dark: rgba(255,255,255,0.08);
-  --accent-light: #7fb58f;
-  
-  /* Richer mid-tones */
-  --card-bg-rich: rgba(255,255,255,0.08);
-  --card-border-hover: rgba(110, 165, 127, 0.4);
-}
-
-[data-theme="dark"] body {
-  background: linear-gradient(160deg, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
-}
-
-/* Dark mode overrides */
-[data-theme="dark"] {
-  --bg-light: #1a2420;
   --bg-mid: #1e2a24;
   --bg-dark: #151e19;
   --text: #dde5da;
@@ -76,11 +44,15 @@
   --accent-blue-hover: #5a8494;
   --accent-orange: #d4834a;
   --accent-orange-muted: #b87a52;
+  
+  /* Dark section colors (even darker in dark mode for subtle emphasis) */
   --bg-dark-section: #111a14;
   --text-on-dark: #dde5da;
   --text-muted-on-dark: #8a9b88;
   --border-dark: rgba(255,255,255,0.08);
   --accent-light: #8ec4a0;
+  
+  /* Richer mid-tones */
   --card-bg-rich: rgba(30, 42, 36, 0.9);
   --card-border-hover: rgba(110, 165, 127, 0.3);
 }
@@ -698,13 +670,25 @@ footer a:hover { text-decoration: underline; }
   .section ul, .section ol, .prose ul, .prose ol { margin-left: 1.8rem; padding-left: 0.5rem; }
   .cards { grid-template-columns: 1fr; }
   .footer-links { flex-direction: column; gap: 0.8rem; }
-  .text-size-control {
+  
+  /* Appearance controls on mobile */
+  .site-controls {
     bottom: 1rem;
     right: 1rem;
+  }
+  .text-size-control {
     padding: 0.4rem;
   }
   .text-size-btn {
     width: 32px;
     height: 32px;
+  }
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+  .theme-toggle i {
+    width: 16px;
+    height: 16px;
   }
 }
