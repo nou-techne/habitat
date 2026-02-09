@@ -9,12 +9,12 @@ Numbered for dependency order. Run in sequence.
 | File | Description | Dependencies |
 |------|-------------|--------------|
 | `01_treasury_core.sql` | Core Treasury tables: events, accounts, transactions, entries, periods | None |
-| `02_treasury_capital_accounts.sql` | Member capital accounts (book/tax basis, 704(b) tracking) | 01 |
-| `03_treasury_migrations.sql` | Example migrations and event replay scripts | 01, 02 |
+| `02_treasury_migrations.sql` | Migration templates: 704(c) layers, minimum gain, QIO/DRO, audit trail, event replay | 01 |
+| `03_treasury_seed_data.sql` | Development seed data: sample periods, accounts, transactions | 01 |
 | `04_people_core.sql` | People tool: members, contributions, valuations, approvals | 01 |
 | `05_agreements_core.sql` | Agreements tool: allocations, formulas, distributions | 01, 04 |
 
-**Status:** Sprint 39 complete (`01_treasury_core.sql`). Additional files planned for Sprints 40+.
+**Status:** Sprint 40 complete (`01_treasury_core.sql`, `02_treasury_migrations.sql`, `03_treasury_seed_data.sql`). Additional files planned for Sprints 46-47.
 
 ## Architecture Overview
 
@@ -52,8 +52,43 @@ createdb habitat
 
 # Run schemas in order
 psql habitat < schema/01_treasury_core.sql
-psql habitat < schema/02_treasury_capital_accounts.sql
-# ... etc
+
+# Optional: Load seed data for development/testing
+psql habitat < schema/03_treasury_seed_data.sql
+```
+
+### Applying Migrations
+
+Production migrations should use a migration tool (e.g., Flyway, Liquibase, or custom). The patterns in `02_treasury_migrations.sql` are templates demonstrating:
+
+- How to add 704(c) layer tracking
+- How to add minimum gain tracking (IRC Reg 1.704-2)
+- How to add QIO/DRO tracking (IRC Reg 1.704-1(b)(2)(ii)(d))
+- How to create audit log views
+- How to perform event replay (rebuild state from events)
+
+**Migration discipline:**
+1. Write migration with rollback script
+2. Test migration + rollback on staging database
+3. Apply to production with transaction boundaries
+4. Verify integrity checks pass after migration
+5. Refresh materialized views
+
+### Event Replay
+
+If materialized state becomes corrupted or schema changes require rebuild:
+
+```sql
+-- Caution: this clears all derived state
+psql habitat < schema/02_treasury_migrations.sql  # Run EVENT REPLAY SCRIPT section
+
+-- Or manually:
+BEGIN;
+TRUNCATE accounts, transactions, transaction_entries, periods CASCADE;
+-- Application replays events from the events table
+REFRESH MATERIALIZED VIEW CONCURRENTLY account_balances;
+REFRESH MATERIALIZED VIEW CONCURRENTLY period_account_balances;
+COMMIT;
 ```
 
 ### Posting a Transaction
@@ -157,6 +192,34 @@ Book and tax accounting use the same table structures but separate rows:
 - Simplifies schema (no parallel table sets)
 - Easy to query either ledger independently
 - Supports 704(c) layers (future: `704c_layer_id` column)
+
+## Seed Data
+
+The `03_treasury_seed_data.sql` file provides a working set of sample data for development and testing:
+
+**Periods:**
+- Q1 2026, Q2 2026 (quarters, open)
+- Jan 2026, Feb 2026 (months, closed)
+
+**Chart of Accounts:**
+- Book ledger: complete chart with assets, liabilities, equity, revenue, expenses
+- Tax ledger: member capital accounts (for 704(b) tracking)
+- Member capital accounts for 4 members: Alice, Bob, Carol, David
+
+**Sample Transactions:**
+1. Alice initial cash contribution: $5,000
+2. Bob initial cash contribution: $8,000
+3. Space revenue: $3,500
+4. $CLOUD credit sale: 100 CLOUD ($1,000)
+5. Rent expense: $4,200
+
+**Verification included:**
+- Double-entry balance check (should sum to zero)
+- Account balance report
+- Member capital account balances
+- Cash position summary
+
+After loading seed data, you can immediately query balances, test period close, and prototype allocation calculations.
 
 ## Testing Strategy
 
