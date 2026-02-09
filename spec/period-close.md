@@ -82,7 +82,7 @@ Verify all revenue and expense transactions for the period are posted:
 - Recurring expenses (rent, subscriptions) — confirm they've been recorded
 - Accruals — any earned-but-not-received revenue or incurred-but-not-paid expenses
 - Superfluid streams — final sampling to capture accumulated income through period end
-- Service credit redemptions — all redemptions within the period recorded as revenue
+- $CLOUD credit redemptions — all redemptions within the period recorded as revenue
 - Guaranteed payments — all member payments recorded as expenses
 
 **Adjusting entries:** Any accruals or corrections generate standard transactions (Sprint 5) dated on the last day of the period.

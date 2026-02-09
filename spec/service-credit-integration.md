@@ -169,7 +169,7 @@ This is computed daily and displayed on the reserve dashboard (a View-layer repo
 ```
 $CLOUD Credit Reserve Dashboard
 
-Credits outstanding:     5,000 credits ($500.00)
+Credits outstanding:     5,000 CLOUD ($50,000.00 USDC equivalent)
 Liquid reserves:         $11,550
 Reserve ratio:           23.1x
 

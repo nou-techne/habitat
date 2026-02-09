@@ -13,7 +13,7 @@ Phase 1 (Sprints 0-20) delivered the full specification. The recent interface wo
 **Impact:** High. Without implementation artifacts, the spec remains theoretical. Adoption requires buildable infrastructure.
 
 ### 2. Protocol Formalization
-**Gap:** REA is referenced throughout but never formalized as a standalone specification. Service credits are described in concept docs but lack a protocol spec that another cooperative could implement independently.
+**Gap:** REA is referenced throughout but never formalized as a standalone specification. $CLOUD credits are described in concept docs but lack a protocol spec that another cooperative could implement independently.
 
 **Impact:** Medium-High. Without formal protocols, Habitat remains a Techne-specific tool rather than composable cooperative infrastructure.
 
@@ -94,7 +94,7 @@ Focus on **Implementation Bridge + Protocol Formalization**. These create the mo
 |--------|-----------|-------------|
 | 39 | Technical | Treasury database schema (tables, indexes, constraints) |
 | 40 | Technical | Treasury database schema (migrations, seed data, documentation) |
-| 41 | Protocol | Service credit protocol specification (standalone) |
+| 41 | Protocol | $CLOUD credit protocol specification (standalone) |
 | 42 | Communications | Project narrative (1,500-word introduction) |
 | 43 | Community | Contributor onboarding guide |
 

@@ -28,7 +28,7 @@ Tokens flowing into the cooperative's wallet. Examples:
 - Investor distributions (ETHx, SUP)
 - Revenue share from ventures
 - Grant disbursements structured as streams
-- Service credit redemption flows (future)
+- $CLOUD credit redemption flows (future)
 
 **Accounting treatment:** Revenue, recognized periodically.
 

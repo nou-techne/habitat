@@ -32,7 +32,7 @@ habitat.eth                              The cooperative
 │
 ├── Infrastructure
 │   ├── treasury.habitat.eth             Cooperative treasury
-│   ├── credits.habitat.eth              Service credit issuance
+│   ├── credits.habitat.eth              $CLOUD credit issuance
 │   └── commons.habitat.eth              Shared pattern library
 │
 └── Functional
@@ -126,7 +126,7 @@ If other cooperatives adopt the pattern, the identity system scales horizontally
 
 - Each cooperative controls its own namespace (`otherco.eth`, `thirdco.eth`)
 - Cross-cooperative recognition is bilateral, like diplomatic recognition between states
-- Service credit clearing uses ENS resolution for counterparty identification across namespaces
+- $CLOUD credit clearing uses ENS resolution for counterparty identification across namespaces
 - The social graph extends across cooperatives through shared venture relationships and member cross-listing
 - No central identity authority is needed at any scale
 

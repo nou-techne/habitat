@@ -95,7 +95,7 @@ Simple revenue. No capital account impact until period-end allocation.
 
 ### $CLOUD Credit Issuance
 
-*A member purchases 100 $CLOUD credits at $10/unit = $1,000.*
+*A member purchases 100 $CLOUD credits (1 CLOUD = 10 USDC, so 100 CLOUD = $1,000).*
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|
@@ -106,7 +106,7 @@ This is a **liability**, not revenue. The organization owes infrastructure servi
 
 ### $CLOUD Credit Redemption
 
-*A member redeems 20 credits worth of compute services.*
+*A member redeems 20 CLOUD credits worth of compute services.*
 
 | Entry | Account | Debit | Credit |
 |-------|---------|-------|--------|

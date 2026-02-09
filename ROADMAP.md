@@ -44,7 +44,7 @@ The initial roadmap produced 20 specification documents across four sub-phases: 
 
 | Sprint | Focus | Output |
 |--------|-------|--------|
-| 16 | Service credit integration | Credit issuance/redemption as Treasury revenue |
+| 16 | $CLOUD credit integration | Credit issuance/redemption as Treasury revenue |
 | 17 | Revaluation events | Book-up/book-down for new member admission |
 | 18 | Superfluid mapping | Continuous streams → discrete accounting events |
 | 19 | Distribution mechanics | Policy, calculation, execution |
@@ -73,7 +73,7 @@ Phase 1 produced the specification. Phase 2 makes Habitat real across every dime
 **Protocol and Standards.** Formalizing Habitat as composable infrastructure, not just a tool:
 
 - REA event grammar as open specification
-- Service credit protocol (standalone, implementable by any organization)
+- $CLOUD credit protocol (standalone, implementable by any organization)
 - Agent integration protocol (query interfaces, event subscriptions, governance constraints)
 - Pattern library templates (configuration profiles: freelancer, startup, cooperative, enterprise)
 - Matrix scoring methodology (deriving habitat position from accounting data)
@@ -91,7 +91,7 @@ Phase 1 produced the specification. Phase 2 makes Habitat real across every dime
 
 - Operating agreement template sections (patronage mechanics, distribution policies, capital account provisions, withdrawal terms)
 - Compliance checklist (704(b) safe harbor, QIO provisions, tax reporting obligations)
-- Service credit legal analysis (Howey test walkthrough, securities exemptions, state-specific considerations)
+- $CLOUD credit legal analysis (Howey test walkthrough, securities exemptions, state-specific considerations)
 - ENS namespace governance resolution (the cooperative document authorizing subname issuance)
 - Privacy and data handling policy (member financial data — storage, access, controls)
 
@@ -117,7 +117,7 @@ Each sprint picks from any workstream. Every sprint produces a durable artifact 
 | 26 | Design | Diagram library: visual language guide |
 | 27 | Technical | Sequence diagrams: contribution lifecycle, period close |
 | 28 | Community | Contributor onboarding guide |
-| 29 | Protocol | Service credit protocol: standalone specification |
+| 29 | Protocol | $CLOUD credit protocol: standalone specification |
 | 30 | Communications | Pitch materials: cooperative adoption |
 
 This sequence is a starting point. The roadmap regenerates based on what is learned, what is needed, and what opportunities emerge.

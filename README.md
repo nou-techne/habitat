@@ -26,7 +26,7 @@ Three concentric layers:
 
 **Composable Tools** — Independent, event-sourced tools unified by [REA ontology](https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)). Each tool solves one problem well. Together they compose into organizational infrastructure. Legibility-as-product.
 
-**$CLOUD Credits** — A prepaid medium for information economy infrastructure, redeemable against four resource primitives (compute, transfer, long-term memory, short-term memory). The postage stamp of cooperative infrastructure.
+**$CLOUD Credits** — A prepaid medium for information economy infrastructure, minted against USD held for service delivery (1 CLOUD = 10 USDC). Redeemable against four resource primitives (compute, transfer, long-term memory, short-term memory). Integrated through Stripe (payments), Mercury (banking), and Ethereum (identity/ledger). The postage stamp of cooperative infrastructure.
 
 ### Tool Suite
 
@@ -64,7 +64,7 @@ Treasury ─── People ─── Agreements        Foundation (specified)
 
 | Tool | Purpose |
 |------|---------|
-| **Credits** | Service credit issuance, transfer, redemption, rate cards, clearing between cooperatives. The first tool that must compose across organizations |
+| **Credits** | $CLOUD credit issuance, transfer, redemption, rate cards, clearing between cooperatives. The first tool that must compose across organizations |
 | **Signals** | Pattern recognition across all tools. Organizational health scoring. The Economic Habitat Matrix made operational — deriving an organization's ecological position from its own data |
 
 ## Foundations
@@ -83,7 +83,7 @@ habitat/
     opportunity.md       # The gap and the approach
     legibility.md        # Organizational legibility as product
     architecture.md      # Full conceptual design (REA, event sourcing, tool domains)
-    service-credits.md   # Service credit protocol specification
+    service-credits.md   # $CLOUD credit protocol specification
   diagrams/              # Mermaid architecture diagrams
   compliance/            # Tax compliance mapping (704(b), Subchapter K)
   journal/               # Build-in-public development journal
