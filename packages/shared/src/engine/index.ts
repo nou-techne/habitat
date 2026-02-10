@@ -5,3 +5,4 @@
  */
 
 export * from './balance-computation.js'
+export * from './patronage-formula.js'
