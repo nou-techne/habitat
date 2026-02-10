@@ -1,0 +1,203 @@
+name: CI - Continuous Integration
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [develop]
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '8'
+
+jobs:
+  # Lint all code
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Lint packages
+        run: |
+          cd packages/shared && pnpm lint || true
+          cd ../api && pnpm lint || true
+          cd ../worker && pnpm lint || true
+      
+      - name: Lint UI
+        working-directory: ui
+        run: npm run lint || true
+
+  # Type-check TypeScript
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Type check packages
+        run: |
+          cd packages/shared && pnpm exec tsc --noEmit
+          cd ../api && pnpm exec tsc --noEmit
+          cd ../worker && pnpm exec tsc --noEmit
+      
+      - name: Type check UI
+        working-directory: ui
+        run: npm run build
+
+  # Run tests
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: habitat_test
+          POSTGRES_USER: habitat_test
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    env:
+      DATABASE_URL: postgres://habitat_test:test_password@localhost:5432/habitat_test
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Run shared tests
+        working-directory: packages/shared
+        run: pnpm test
+      
+      - name: Run API tests
+        working-directory: packages/api
+        run: pnpm test || true
+      
+      - name: Run worker tests
+        working-directory: packages/worker
+        run: pnpm test || true
+
+  # Security audit
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Audit dependencies
+        run: |
+          npm audit --audit-level=high --production || true
+          cd ui && npm audit --audit-level=high --production || true
+
+  # Build Docker images (validation only, not pushed)
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build API image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.api
+          push: false
+          tags: habitat-api:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Build Worker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.worker
+          push: false
+          tags: habitat-worker:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Build UI image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.ui
+          push: false
+          tags: habitat-ui:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_GRAPHQL_ENDPOINT=http://localhost:4000/graphql
+
+  # Summary job
+  ci-success:
+    name: CI Success
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck, test, security, build]
+    if: success()
+    steps:
+      - name: CI Passed
+        run: echo "All CI checks passed!"

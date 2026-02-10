@@ -1,0 +1,73 @@
+name: Database Migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      direction:
+        description: 'Migration direction'
+        required: true
+        default: 'up'
+        type: choice
+        options:
+          - up
+          - down
+
+jobs:
+  migrate:
+    name: Run Migration
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets[format('{0}_SSH_KEY', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+      
+      - name: Backup database
+        env:
+          HOST: ${{ secrets[format('{0}_HOST', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          USER: ${{ secrets[format('{0}_USER', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          DEPLOY_PATH: ${{ secrets[format('{0}_DEPLOY_PATH', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+        run: |
+          ssh $USER@$HOST << 'EOF'
+            cd $DEPLOY_PATH
+            docker compose -f docker-compose.prod.yml exec -T postgres \
+              pg_dump -U habitat habitat > migration-backup-$(date +%Y%m%d-%H%M%S).sql
+          EOF
+      
+      - name: Run migration
+        env:
+          HOST: ${{ secrets[format('{0}_HOST', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          USER: ${{ secrets[format('{0}_USER', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          DEPLOY_PATH: ${{ secrets[format('{0}_DEPLOY_PATH', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          DIRECTION: ${{ github.event.inputs.direction }}
+        run: |
+          ssh $USER@$HOST << EOF
+            cd $DEPLOY_PATH
+            
+            if [ "$DIRECTION" = "up" ]; then
+              docker compose -f docker-compose.prod.yml run --rm api npm run migrate
+            else
+              docker compose -f docker-compose.prod.yml run --rm api npm run migrate:rollback
+            fi
+          EOF
+      
+      - name: Verify migration
+        env:
+          HOST: ${{ secrets[format('{0}_HOST', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          USER: ${{ secrets[format('{0}_USER', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+          DEPLOY_PATH: ${{ secrets[format('{0}_DEPLOY_PATH', github.event.inputs.environment == 'production' && 'PRODUCTION' || 'STAGING')] }}
+        run: |
+          ssh $USER@$HOST << 'EOF'
+            cd $DEPLOY_PATH
+            docker compose -f docker-compose.prod.yml run --rm api npm run migrate:status
+          EOF

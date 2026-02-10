@@ -1,0 +1,30 @@
+# CODEOWNERS file
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners
+* @habitat/maintainers
+
+# API and backend
+/packages/api/ @habitat/backend
+/packages/worker/ @habitat/backend
+/packages/shared/ @habitat/backend
+
+# Frontend
+/ui/ @habitat/frontend
+
+# Infrastructure
+/Dockerfile.* @habitat/devops
+/docker-compose*.yml @habitat/devops
+/Caddyfile @habitat/devops
+/.github/workflows/ @habitat/devops
+
+# Database schema
+/habitat/schema/ @habitat/backend @habitat/compliance
+
+# Compliance and security
+/packages/shared/src/compliance/ @habitat/compliance
+/packages/api/src/security/ @habitat/compliance
+
+# Documentation
+/*.md @habitat/maintainers
+/docs/ @habitat/maintainers
