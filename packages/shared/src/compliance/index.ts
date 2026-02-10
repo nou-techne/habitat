@@ -5,3 +5,4 @@
  */
 
 export * from './704b-validator.js'
+export * from './double-entry-checker.js'
