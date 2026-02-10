@@ -1,112 +1,187 @@
 /**
- * Authentication utilities for JWT session handling
+ * Authentication utilities
  * 
- * Supports:
- * - Token storage in httpOnly cookies
- * - Token validation and refresh
- * - User session management
+ * Token management, user session, and protected routes
  */
 
-import jwt from 'jsonwebtoken'
-import Cookies from 'js-cookie'
-
-export interface JWTPayload {
-  sub: string // member id (habitat.eth subname or UUID)
-  cooperativeId: string
+export interface User {
+  userId: string
+  memberId: string
+  name: string
+  email: string
   role: 'member' | 'steward' | 'admin'
-  iat: number
-  exp: number
-}
-
-export interface SessionUser {
-  id: string
-  cooperativeId: string
-  role: string
-  displayName?: string
-  ensName?: string
-}
-
-const TOKEN_KEY = 'habitat_token'
-const TOKEN_EXPIRY = 7 * 24 * 60 * 60 // 7 days in seconds
-
-/**
- * Store authentication token in cookie
- */
-export function setAuthToken(token: string): void {
-  Cookies.set(TOKEN_KEY, token, {
-    expires: TOKEN_EXPIRY / (24 * 60 * 60), // days
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-  })
 }
 
 /**
- * Retrieve authentication token from cookie
+ * Token storage keys
  */
-export function getAuthToken(): string | undefined {
-  return Cookies.get(TOKEN_KEY)
+const ACCESS_TOKEN_KEY = 'authToken'
+const REFRESH_TOKEN_KEY = 'refreshToken'
+const USER_KEY = 'currentUser'
+
+/**
+ * Store authentication token
+ */
+export function setAuthToken(accessToken: string, refreshToken?: string): void {
+  if (typeof window === 'undefined') return
+
+  localStorage.setItem(ACCESS_TOKEN_KEY, accessToken)
+  
+  if (refreshToken) {
+    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
+  }
+}
+
+/**
+ * Get authentication token
+ */
+export function getAuthToken(): string | null {
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(ACCESS_TOKEN_KEY)
+}
+
+/**
+ * Get refresh token
+ */
+export function getRefreshToken(): string | null {
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(REFRESH_TOKEN_KEY)
 }
 
 /**
  * Remove authentication token
  */
-export function clearAuthToken(): void {
-  Cookies.remove(TOKEN_KEY)
+export function removeAuthToken(): void {
+  if (typeof window === 'undefined') return
+  
+  localStorage.removeItem(ACCESS_TOKEN_KEY)
+  localStorage.removeItem(REFRESH_TOKEN_KEY)
 }
 
 /**
- * Decode JWT without verification (client-side only)
- * Server must verify signature
+ * Store current user
  */
-export function decodeToken(token: string): JWTPayload | null {
+export function setCurrentUser(user: User): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(USER_KEY, JSON.stringify(user))
+}
+
+/**
+ * Get current user
+ */
+export function getCurrentUser(): User | null {
+  if (typeof window === 'undefined') return null
+  
+  const userJson = localStorage.getItem(USER_KEY)
+  if (!userJson) return null
+  
   try {
-    return jwt.decode(token) as JWTPayload
+    return JSON.parse(userJson)
   } catch {
     return null
   }
 }
 
 /**
- * Check if token is expired
+ * Remove current user
  */
-export function isTokenExpired(token: string): boolean {
-  const payload = decodeToken(token)
-  if (!payload) return true
-  
-  const now = Math.floor(Date.now() / 1000)
-  return payload.exp < now
+export function removeCurrentUser(): void {
+  if (typeof window === 'undefined') return
+  localStorage.removeItem(USER_KEY)
 }
 
 /**
- * Get current session user from stored token
+ * Check if user is authenticated
  */
-export function getCurrentUser(): SessionUser | null {
-  const token = getAuthToken()
-  if (!token) return null
+export function isAuthenticated(): boolean {
+  return getAuthToken() !== null
+}
+
+/**
+ * Check if user has specific role
+ */
+export function hasRole(role: 'member' | 'steward' | 'admin'): boolean {
+  const user = getCurrentUser()
+  if (!user) return false
   
-  if (isTokenExpired(token)) {
-    clearAuthToken()
+  // Admin has all roles
+  if (user.role === 'admin') return true
+  
+  // Steward has member role
+  if (user.role === 'steward' && role === 'member') return true
+  
+  return user.role === role
+}
+
+/**
+ * Logout user
+ */
+export function logout(): void {
+  removeAuthToken()
+  removeCurrentUser()
+  
+  // Redirect to login
+  if (typeof window !== 'undefined') {
+    window.location.href = '/login'
+  }
+}
+
+/**
+ * Refresh access token using refresh token
+ */
+export async function refreshAccessToken(): Promise<string | null> {
+  const refreshToken = getRefreshToken()
+  if (!refreshToken) return null
+  
+  try {
+    // Call refresh endpoint
+    const response = await fetch('/api/auth/refresh', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refreshToken }),
+    })
+    
+    if (!response.ok) {
+      throw new Error('Refresh failed')
+    }
+    
+    const data = await response.json()
+    
+    if (data.accessToken) {
+      setAuthToken(data.accessToken, data.refreshToken)
+      return data.accessToken
+    }
+    
+    return null
+  } catch (error) {
+    console.error('Token refresh failed:', error)
+    logout()
     return null
   }
-  
-  const payload = decodeToken(token)
-  if (!payload) return null
-  
-  return {
-    id: payload.sub,
-    cooperativeId: payload.cooperativeId,
-    role: payload.role,
-  }
 }
 
 /**
- * Create authorization header for GraphQL requests
+ * Initialize auth on app load
+ * Checks if token is expired and refreshes if needed
  */
-export function getAuthHeaders(): Record<string, string> {
+export async function initializeAuth(): Promise<void> {
   const token = getAuthToken()
-  if (!token) return {}
+  if (!token) return
   
-  return {
-    'Authorization': `Bearer ${token}`,
+  // Decode token to check expiry (simplified - in production use jwt-decode)
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]))
+    const expiresAt = payload.exp * 1000 // Convert to milliseconds
+    const now = Date.now()
+    
+    // Refresh if token expires in less than 5 minutes
+    if (expiresAt - now < 5 * 60 * 1000) {
+      await refreshAccessToken()
+    }
+  } catch (error) {
+    console.error('Token validation failed:', error)
+    logout()
   }
 }
