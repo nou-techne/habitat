@@ -1,0 +1,74 @@
+# Business Metrics Alert Rules
+
+groups:
+  - name: business_alerts
+    interval: 60s
+    rules:
+      # No contributions in 24 hours
+      - alert: NoContributionsSubmitted
+        expr: increase(contributions_submitted_total[24h]) == 0
+        for: 1h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "No contributions submitted in 24 hours"
+          description: "No member contributions have been submitted"
+
+      # High contribution rejection rate
+      - alert: HighContributionRejectionRate
+        expr: |
+          rate(contributions_rejected_total[1h]) / 
+          (rate(contributions_approved_total[1h]) + rate(contributions_rejected_total[1h])) 
+          > 0.5
+        for: 2h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "High contribution rejection rate"
+          description: "{{ $value | humanizePercentage }} of contributions are being rejected"
+
+      # Many pending contributions
+      - alert: ManyPendingContributions
+        expr: contributions_pending > 50
+        for: 6h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "Many contributions awaiting approval"
+          description: "{{ $value }} contributions pending approval for >6 hours"
+
+      # Critical pending contributions
+      - alert: CriticalPendingContributions
+        expr: contributions_pending > 100
+        for: 12h
+        labels:
+          severity: critical
+          service: business
+        annotations:
+          summary: "Critical backlog of pending contributions"
+          description: "{{ $value }} contributions pending approval for >12 hours"
+
+      # No active members
+      - alert: NoActiveMembers
+        expr: members_active == 0
+        for: 1h
+        labels:
+          severity: critical
+          service: business
+        annotations:
+          summary: "No active members detected"
+          description: "System reports 0 active members"
+
+      # Period not closed on time
+      - alert: PeriodNotClosedOnTime
+        expr: periods_active > 0 AND day_of_month() == 1
+        for: 12h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "Allocation period not closed on schedule"
+          description: "Period should have closed by now"

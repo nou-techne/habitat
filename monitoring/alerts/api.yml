@@ -1,0 +1,93 @@
+# API Alert Rules
+
+groups:
+  - name: api_alerts
+    interval: 30s
+    rules:
+      # High error rate
+      - alert: APIHighErrorRate
+        expr: rate(http_request_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High API error rate detected"
+          description: "API error rate is {{ $value | humanizePercentage }} (threshold: 10%)"
+
+      # Very high error rate
+      - alert: APIVeryHighErrorRate
+        expr: rate(http_request_errors_total[5m]) > 0.25
+        for: 2m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: "Very high API error rate detected"
+          description: "API error rate is {{ $value | humanizePercentage }} (threshold: 25%)"
+
+      # Slow response time
+      - alert: APISlowResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "API response time is slow"
+          description: "95th percentile response time is {{ $value }}s (threshold: 1s)"
+
+      # Very slow response time
+      - alert: APIVerySlowResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 5
+        for: 2m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: "API response time is very slow"
+          description: "95th percentile response time is {{ $value }}s (threshold: 5s)"
+
+      # GraphQL high error rate
+      - alert: GraphQLHighErrorRate
+        expr: rate(graphql_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High GraphQL error rate detected"
+          description: "GraphQL error rate is {{ $value | humanizePercentage }}"
+
+      # Database connection pool exhaustion
+      - alert: DBConnectionPoolLow
+        expr: db_connection_pool_size{state="idle"} < 2
+        for: 2m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "Database connection pool running low"
+          description: "Only {{ $value }} idle connections remaining"
+
+      # Authentication failures
+      - alert: HighAuthFailureRate
+        expr: rate(auth_attempts_total{result="failure"}[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High authentication failure rate"
+          description: "{{ $value }} failed auth attempts per second"
+
+      # Rate limit hits
+      - alert: HighRateLimitHits
+        expr: rate(rate_limit_hits_total[5m]) > 1
+        for: 10m
+        labels:
+          severity: info
+          service: api
+        annotations:
+          summary: "High rate of rate limit hits"
+          description: "{{ $value }} rate limits hit per second"

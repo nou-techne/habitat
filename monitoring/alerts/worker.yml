@@ -1,0 +1,93 @@
+# Worker Alert Rules
+
+groups:
+  - name: worker_alerts
+    interval: 30s
+    rules:
+      # High event processing error rate
+      - alert: WorkerHighErrorRate
+        expr: rate(event_processing_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "High event processing error rate"
+          description: "Event processing error rate is {{ $value | humanizePercentage }}"
+
+      # Queue depth growing
+      - alert: QueueDepthHigh
+        expr: queue_depth > 1000
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "Message queue depth is high"
+          description: "Queue {{ $labels.queue_name }} has {{ $value }} messages"
+
+      # Queue depth critical
+      - alert: QueueDepthCritical
+        expr: queue_depth > 10000
+        for: 5m
+        labels:
+          severity: critical
+          service: worker
+        annotations:
+          summary: "Message queue depth is critical"
+          description: "Queue {{ $labels.queue_name }} has {{ $value }} messages"
+
+      # Dead letter queue accumulation
+      - alert: DeadLetterQueueAccumulation
+        expr: rate(dead_letter_queue_total[5m]) > 0.01
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "Messages accumulating in dead letter queue"
+          description: "{{ $value }} messages/sec being sent to DLQ"
+
+      # Workflow failure rate
+      - alert: WorkflowHighFailureRate
+        expr: rate(workflows_completed_total{status="error"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "High workflow failure rate"
+          description: "Workflow {{ $labels.workflow_name }} failing at {{ $value | humanizePercentage }}"
+
+      # Retries exhausted
+      - alert: RetriesExhausted
+        expr: rate(event_retries_exhausted_total[5m]) > 0.01
+        for: 5m
+        labels:
+          severity: critical
+          service: worker
+        annotations:
+          summary: "Events exhausting retries"
+          description: "{{ $value }} events/sec exhausting retries"
+
+      # RabbitMQ disconnected
+      - alert: RabbitMQDisconnected
+        expr: rabbitmq_connected == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: worker
+        annotations:
+          summary: "Worker disconnected from RabbitMQ"
+          description: "Worker has lost connection to RabbitMQ"
+
+      # Low processing rate
+      - alert: LowProcessingRate
+        expr: queue_processing_rate < 1
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "Low message processing rate"
+          description: "Processing {{ $value }} messages/sec (threshold: 1)"

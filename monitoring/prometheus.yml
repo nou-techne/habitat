@@ -1,0 +1,65 @@
+# Prometheus Configuration
+# Scrapes metrics from API and worker services
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'habitat'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Load alerting rules
+rule_files:
+  - 'alerts/*.yml'
+
+# Scrape configurations
+scrape_configs:
+  # API server metrics
+  - job_name: 'habitat-api'
+    static_configs:
+      - targets:
+          - api:4000
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # Worker metrics (if exposed)
+  - job_name: 'habitat-worker'
+    static_configs:
+      - targets:
+          - worker:4001
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # PostgreSQL exporter
+  - job_name: 'postgres'
+    static_configs:
+      - targets:
+          - postgres-exporter:9187
+
+  # RabbitMQ exporter
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets:
+          - rabbitmq:15692
+
+  # Node exporter (system metrics)
+  - job_name: 'node'
+    static_configs:
+      - targets:
+          - node-exporter:9100
+
+  # Caddy metrics (if enabled)
+  - job_name: 'caddy'
+    static_configs:
+      - targets:
+          - caddy:2019
+    metrics_path: '/metrics'

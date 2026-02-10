@@ -1,0 +1,89 @@
+{
+  "dashboard": {
+    "title": "Habitat Business Metrics",
+    "tags": ["habitat", "business"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Contributions per Day",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "increase(contributions_submitted_total[24h])",
+            "legendFormat": "{{contribution_type}}"
+          }
+        ]
+      },
+      {
+        "title": "Contribution Approval Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(contributions_approved_total[1h]) / (rate(contributions_approved_total[1h]) + rate(contributions_rejected_total[1h]))",
+            "legendFormat": "Approval rate"
+          }
+        ]
+      },
+      {
+        "title": "Pending Contributions",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "contributions_pending",
+            "legendFormat": "{{contribution_type}}"
+          }
+        ]
+      },
+      {
+        "title": "Active Members",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "members_active"
+          }
+        ]
+      },
+      {
+        "title": "Total Members",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "members_total"
+          }
+        ]
+      },
+      {
+        "title": "Allocations Distributed (30d)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "increase(allocations_distributed_total[30d])"
+          }
+        ]
+      },
+      {
+        "title": "Average Allocation Amount",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(allocation_amount_usd_bucket[24h]))",
+            "legendFormat": "Median"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(allocation_amount_usd_bucket[24h]))",
+            "legendFormat": "95th percentile"
+          }
+        ]
+      },
+      {
+        "title": "Active Periods",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "periods_active"
+          }
+        ]
+      }
+    ]
+  }
+}

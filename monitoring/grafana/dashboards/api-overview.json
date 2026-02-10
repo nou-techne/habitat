@@ -1,0 +1,68 @@
+{
+  "dashboard": {
+    "title": "Habitat API Overview",
+    "tags": ["habitat", "api"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{method}} {{route}}"
+          }
+        ]
+      },
+      {
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_request_errors_total[5m])",
+            "legendFormat": "{{error_type}}"
+          }
+        ]
+      },
+      {
+        "title": "Response Time (p95)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          }
+        ]
+      },
+      {
+        "title": "GraphQL Operations",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(graphql_operations_total[5m])",
+            "legendFormat": "{{operation_name}} ({{status}})"
+          }
+        ]
+      },
+      {
+        "title": "Database Query Duration",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(db_query_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{query_type}} {{table}}"
+          }
+        ]
+      },
+      {
+        "title": "Active Connections",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "db_connection_pool_size{state=\"active\"}"
+          }
+        ]
+      }
+    ]
+  }
+}
