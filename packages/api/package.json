@@ -16,6 +16,7 @@
     "@habitat/shared": "workspace:*",
     "graphql": "^16.8.1",
     "@apollo/server": "^4.10.0",
+    "@supabase/supabase-js": "^2.39.3",
     "pg": "^8.11.3",
     "dotenv": "^16.4.1"
   },
