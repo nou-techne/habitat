@@ -1,8 +1,9 @@
 name: CD - Continuous Deployment
 
 on:
-  push:
-    branches: [main]
+  # push trigger disabled — re-enable when infrastructure is ready
+  # push:
+  #   branches: [main]
   workflow_dispatch:
     inputs:
       environment:
