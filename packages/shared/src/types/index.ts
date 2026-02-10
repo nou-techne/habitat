@@ -1,7 +1,13 @@
 /**
- * Shared type definitions placeholder
+ * Shared type definitions for Habitat patronage accounting system
  * 
- * Sprint 62 will populate this with REA entity types
+ * REA (Resource-Event-Agent) entity types across all bounded contexts
  */
 
-export type Placeholder = Record<string, never>
+// Common types
+export * from './common.js'
+
+// Bounded context types
+export * from './treasury.js'
+export * from './people.js'
+export * from './agreements.js'
