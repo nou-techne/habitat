@@ -1,0 +1,55 @@
+# API Server Dockerfile
+FROM node:20-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml ./
+COPY packages/api/package.json ./packages/api/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install pnpm and dependencies
+RUN npm install -g pnpm@8
+RUN pnpm install --frozen-lockfile
+
+# Build the app
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages/api/node_modules ./packages/api/node_modules
+COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules
+COPY . .
+
+# Build shared package first
+RUN npm install -g pnpm@8
+RUN cd packages/shared && pnpm build
+
+# Build API
+RUN cd packages/api && pnpm build
+
+# Production image
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 apiuser
+
+# Copy built artifacts
+COPY --from=builder --chown=apiuser:nodejs /app/packages/api/dist ./packages/api/dist
+COPY --from=builder --chown=apiuser:nodejs /app/packages/shared/dist ./packages/shared/dist
+COPY --from=builder --chown=apiuser:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=apiuser:nodejs /app/packages/api/node_modules ./packages/api/node_modules
+COPY --from=builder --chown=apiuser:nodejs /app/packages/shared/node_modules ./packages/shared/node_modules
+
+USER apiuser
+
+EXPOSE 4000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:4000/health', (r) => r.statusCode === 200 ? process.exit(0) : process.exit(1))"
+
+CMD ["node", "packages/api/dist/index.js"]

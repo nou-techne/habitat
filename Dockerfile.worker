@@ -1,0 +1,53 @@
+# Event Worker Dockerfile
+FROM node:20-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml ./
+COPY packages/worker/package.json ./packages/worker/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install pnpm and dependencies
+RUN npm install -g pnpm@8
+RUN pnpm install --frozen-lockfile
+
+# Build the app
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages/worker/node_modules ./packages/worker/node_modules
+COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules
+COPY . .
+
+# Build shared package first
+RUN npm install -g pnpm@8
+RUN cd packages/shared && pnpm build
+
+# Build worker
+RUN cd packages/worker && pnpm build
+
+# Production image
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 workeruser
+
+# Copy built artifacts
+COPY --from=builder --chown=workeruser:nodejs /app/packages/worker/dist ./packages/worker/dist
+COPY --from=builder --chown=workeruser:nodejs /app/packages/shared/dist ./packages/shared/dist
+COPY --from=builder --chown=workeruser:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=workeruser:nodejs /app/packages/worker/node_modules ./packages/worker/node_modules
+COPY --from=builder --chown=workeruser:nodejs /app/packages/shared/node_modules ./packages/shared/node_modules
+
+USER workeruser
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD node -e "console.log('Worker healthy'); process.exit(0)"
+
+CMD ["node", "packages/worker/dist/index.js"]

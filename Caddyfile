@@ -1,0 +1,120 @@
+{
+    # Global options
+    admin off
+    auto_https disable_redirects
+}
+
+# Default site (development)
+:80 {
+    # Reverse proxy to UI
+    handle /* {
+        reverse_proxy ui:3000
+    }
+
+    # API endpoint
+    handle /graphql* {
+        reverse_proxy api:4000
+    }
+
+    # API health check
+    handle /api/health {
+        reverse_proxy api:4000
+    }
+
+    # RabbitMQ management (dev only)
+    handle /rabbitmq/* {
+        reverse_proxy rabbitmq:15672
+    }
+
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+}
+
+# Production site (with TLS)
+{$DOMAIN:localhost} {
+    # TLS configuration
+    tls {
+        # Use Let's Encrypt in production
+        # tls your-email@example.com
+        
+        # For development/staging, use self-signed
+        # tls internal
+    }
+
+    # Security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # Prevent clickjacking
+        X-Frame-Options "DENY"
+        
+        # Prevent MIME sniffing
+        X-Content-Type-Options "nosniff"
+        
+        # XSS protection
+        X-XSS-Protection "1; mode=block"
+        
+        # Referrer policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+        
+        # Permissions policy
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+
+    # Reverse proxy to UI
+    handle /* {
+        reverse_proxy ui:3000 {
+            # Health check
+            health_uri /
+            health_interval 10s
+            health_timeout 5s
+        }
+    }
+
+    # API endpoint
+    handle /graphql* {
+        reverse_proxy api:4000 {
+            # Health check
+            health_uri /health
+            health_interval 10s
+            health_timeout 5s
+        }
+    }
+
+    # API health check
+    handle /api/health {
+        reverse_proxy api:4000
+    }
+
+    # Rate limiting (optional)
+    # rate_limit {
+    #     zone dynamic {
+    #         key {remote_host}
+    #         events 100
+    #         window 1m
+    #     }
+    # }
+
+    # Logging
+    log {
+        output file /data/access.log {
+            roll_size 100mb
+            roll_keep 10
+        }
+        format json
+    }
+
+    # Error logging
+    log {
+        output file /data/error.log {
+            roll_size 100mb
+            roll_keep 10
+        }
+        format json
+        level ERROR
+    }
+}
