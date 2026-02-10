@@ -7,3 +7,4 @@
 export * from './contribution-claim.js'
 export * from './period-close.js'
 export * from './allocation-distribution.js'
+export * from './distribution-payment.js'
