@@ -1,34 +1,32 @@
 {
   "name": "@habitat/api",
-  "version": "0.3.3",
-  "description": "Habitat GraphQL API server",
+  "version": "1.0.0-rc1",
+  "private": true,
   "type": "module",
-  "main": "./dist/index.js",
   "scripts": {
+    "dev": "tsx watch src/index.ts",
     "build": "tsup",
-    "dev": "tsx watch src/server.ts",
-    "dev:health": "tsx watch src/health.ts",
-    "start": "node dist/server.js",
-    "start:health": "node dist/health.js",
-    "seed": "tsx src/data/seed.ts",
-    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
     "test": "vitest",
-    "clean": "rm -rf dist"
+    "test:load": "tsx src/__tests__/performance/load-test.ts",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@habitat/shared": "workspace:*",
-    "graphql": "^16.8.1",
-    "@apollo/server": "^4.10.0",
-    "@supabase/supabase-js": "^2.39.3",
-    "pg": "^8.11.3",
-    "dotenv": "^16.4.1"
+    "@apollo/server": "^4.9.0",
+    "graphql": "^16.8.0",
+    "pg": "^8.11.0",
+    "prom-client": "^15.0.0",
+    "winston": "^3.11.0",
+    "amqplib": "^0.10.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@types/pg": "^8.11.0",
-    "tsup": "^8.0.1",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.10.0",
+    "eslint": "^8.0.0",
+    "tsup": "^8.0.0",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
   }
 }
