@@ -36,7 +36,7 @@ interface NavItem {
 const navigation: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Contributions', href: '/contributions', icon: FileText },
-  { label: 'Members', href: '/members', icon: Users },
+  { label: 'Approvals', href: '/approvals', icon: Users },
   { label: 'Patronage', href: '/patronage', icon: DollarSign },
   { label: 'Settings', href: '/settings', icon: Settings },
 ]

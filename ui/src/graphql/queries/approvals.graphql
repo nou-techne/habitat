@@ -1,0 +1,93 @@
+# Approval queries
+
+query GetPendingContributions($cooperativeId: ID!, $limit: Int, $cursor: String) {
+  pendingContributions(cooperativeId: $cooperativeId, first: $limit, after: $cursor) {
+    edges {
+      node {
+        ...ContributionBasic
+        member {
+          ...MemberBasic
+        }
+        submittedAt
+        patronageEstimate {
+          rawValue
+          weightedValue
+          estimatedAllocation
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    totalCount
+  }
+}
+
+query GetContributionDetail($id: ID!) {
+  contribution(id: $id) {
+    ...ContributionBasic
+    member {
+      ...MemberBasic
+      patronageSummary {
+        totalPatronage
+        byType {
+          type
+          amount
+          count
+        }
+      }
+    }
+    evidence {
+      type
+      url
+      description
+      uploadedAt
+    }
+    approvalHistory {
+      id
+      action
+      actorId
+      actorName
+      comment
+      timestamp
+    }
+    patronageEstimate {
+      rawValue
+      weightedValue
+      estimatedAllocation
+      period {
+        id
+        name
+      }
+    }
+  }
+}
+
+query GetApprovalHistory($cooperativeId: ID!, $limit: Int, $cursor: String) {
+  approvalHistory(cooperativeId: $cooperativeId, first: $limit, after: $cursor) {
+    edges {
+      node {
+        id
+        contributionId
+        contribution {
+          type
+          description
+          monetaryValue
+          hours
+        }
+        memberId
+        memberName
+        action
+        actorId
+        actorName
+        comment
+        timestamp
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
