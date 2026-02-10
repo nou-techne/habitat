@@ -6,8 +6,10 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsup",
-    "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "tsx watch src/server.ts",
+    "dev:health": "tsx watch src/health.ts",
+    "start": "node dist/server.js",
+    "start:health": "node dist/health.js",
     "seed": "tsx src/data/seed.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
