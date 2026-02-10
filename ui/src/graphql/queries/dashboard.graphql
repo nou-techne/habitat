@@ -1,0 +1,72 @@
+# Dashboard queries
+
+query GetMemberDashboard($memberId: ID!) {
+  member(id: $memberId) {
+    ...MemberBasic
+    capitalAccount {
+      ...CapitalAccountBasic
+    }
+    patronageSummary {
+      totalPatronage
+      currentPeriodPatronage
+      lifetimePatronage
+      byType {
+        type
+        amount
+        count
+      }
+      byPeriod {
+        periodId
+        periodName
+        amount
+      }
+    }
+  }
+  
+  contributions(memberId: $memberId, limit: 10, orderBy: SUBMITTED_DESC) {
+    edges {
+      node {
+        ...ContributionBasic
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+  
+  allocations(memberId: $memberId, limit: 5, orderBy: PERIOD_DESC) {
+    edges {
+      node {
+        ...AllocationBasic
+        period {
+          id
+          name
+          startDate
+          endDate
+          status
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+  
+  distributions(memberId: $memberId, status: [SCHEDULED, PROCESSING], limit: 5) {
+    edges {
+      node {
+        ...DistributionBasic
+      }
+    }
+  }
+  
+  currentPeriod {
+    id
+    name
+    startDate
+    endDate
+    status
+  }
+}

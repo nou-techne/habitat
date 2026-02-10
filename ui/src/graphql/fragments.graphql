@@ -1,0 +1,83 @@
+# GraphQL fragments for Habitat entities
+
+fragment MemberBasic on Member {
+  id
+  ensName
+  displayName
+  role
+  joinedAt
+  status
+}
+
+fragment ContributionBasic on Contribution {
+  id
+  type
+  description
+  monetaryValue
+  hours
+  submittedAt
+  approvedAt
+  status
+  evidence {
+    type
+    url
+    description
+  }
+}
+
+fragment PatronageClaimBasic on PatronageClaim {
+  id
+  contributionId
+  memberId
+  patronageValue
+  contributionType
+  period {
+    id
+    name
+    startDate
+    endDate
+  }
+  createdAt
+}
+
+fragment CapitalAccountBasic on CapitalAccount {
+  id
+  memberId
+  bookBalance
+  taxBalance
+  contributedCapital
+  retainedPatronage
+  distributedPatronage
+  lastUpdatedAt
+}
+
+fragment AllocationBasic on Allocation {
+  id
+  memberId
+  periodId
+  totalPatronage
+  cashDistribution
+  retainedAllocation
+  allocationsByType {
+    type
+    patronageValue
+    weight
+    weightedValue
+    allocation
+  }
+  approvedAt
+  status
+}
+
+fragment DistributionBasic on Distribution {
+  id
+  allocationId
+  memberId
+  amount
+  currency
+  method
+  scheduledDate
+  completedDate
+  status
+  transactionId
+}
