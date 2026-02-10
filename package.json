@@ -1,0 +1,25 @@
+{
+  "name": "@habitat/root",
+  "version": "0.3.3",
+  "private": true,
+  "description": "Habitat patronage accounting system - monorepo root",
+  "scripts": {
+    "build": "pnpm --filter='./packages/*' run build",
+    "dev": "pnpm --parallel --filter='./packages/*' run dev",
+    "test": "pnpm --filter='./packages/*' run test",
+    "lint": "pnpm --filter='./packages/*' run lint",
+    "clean": "pnpm --filter='./packages/*' run clean && rm -rf node_modules",
+    "typecheck": "pnpm --filter='./packages/*' run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3",
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "vitest": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  }
+}
