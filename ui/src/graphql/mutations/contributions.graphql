@@ -1,0 +1,96 @@
+# Contribution mutations
+
+mutation CreateContribution($input: CreateContributionInput!) {
+  createContribution(input: $input) {
+    contribution {
+      ...ContributionBasic
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+mutation SubmitContribution($id: ID!) {
+  submitContribution(id: $id) {
+    contribution {
+      ...ContributionBasic
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+mutation ApproveContribution($id: ID!, $comment: String) {
+  approveContribution(id: $id, comment: $comment) {
+    contribution {
+      ...ContributionBasic
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+mutation RejectContribution($id: ID!, $reason: String!) {
+  rejectContribution(id: $id, reason: $reason) {
+    contribution {
+      ...ContributionBasic
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+input CreateContributionInput {
+  memberId: ID!
+  type: ContributionType!
+  description: String!
+  monetaryValue: Float
+  hours: Float
+  expertise: String
+  capitalType: CapitalContributionType
+  relationshipType: RelationshipContributionType
+  evidence: [EvidenceInput!]
+  metadata: JSON
+}
+
+input EvidenceInput {
+  type: EvidenceType!
+  url: String!
+  description: String
+}
+
+enum ContributionType {
+  LABOR
+  EXPERTISE
+  CAPITAL
+  RELATIONSHIP
+}
+
+enum CapitalContributionType {
+  CASH
+  EQUIPMENT
+  SPACE
+  INTELLECTUAL_PROPERTY
+}
+
+enum RelationshipContributionType {
+  PARTNERSHIP
+  CUSTOMER_REFERRAL
+  NETWORK_ACCESS
+  REPUTATION
+}
+
+enum EvidenceType {
+  LINK
+  FILE
+  IMAGE
+  DOCUMENT
+}
