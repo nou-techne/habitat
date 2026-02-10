@@ -5,3 +5,4 @@
  */
 
 export * from './contribution-claim.js'
+export * from './period-close.js'
