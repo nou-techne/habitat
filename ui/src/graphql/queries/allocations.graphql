@@ -1,0 +1,137 @@
+# Allocation queries
+
+query GetCurrentPeriod {
+  currentPeriod {
+    id
+    name
+    startDate
+    endDate
+    status
+    closeStatus {
+      step
+      completedSteps
+      totalSteps
+      canProceed
+      errors
+    }
+    stats {
+      totalMembers
+      totalContributions
+      totalPatronage
+      proposedAllocations
+    }
+  }
+}
+
+query GetProposedAllocations($periodId: ID!, $limit: Int, $cursor: String) {
+  proposedAllocations(periodId: $periodId, first: $limit, after: $cursor) {
+    edges {
+      node {
+        id
+        memberId
+        member {
+          ...MemberBasic
+        }
+        totalPatronage
+        cashDistribution
+        retainedAllocation
+        allocationsByType {
+          type
+          patronageValue
+          weight
+          weightedValue
+          allocation
+        }
+        status
+        proposedAt
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    totalCount
+  }
+  
+  allocationSummary(periodId: $periodId) {
+    totalAllocated
+    totalCash
+    totalRetained
+    averageAllocation
+    memberCount
+    byType {
+      type
+      totalPatronage
+      totalAllocation
+      memberCount
+    }
+  }
+}
+
+query GetPeriodCloseWorkflow($periodId: ID!) {
+  periodCloseWorkflow(periodId: $periodId) {
+    periodId
+    status
+    currentStep
+    steps {
+      name
+      status
+      startedAt
+      completedAt
+      error
+    }
+    canApprove
+    approvals {
+      actorId
+      actorName
+      approvedAt
+      comment
+    }
+    requiredApprovals
+  }
+}
+
+mutation InitiatePeriodClose($periodId: ID!) {
+  initiatePeriodClose(periodId: $periodId) {
+    workflow {
+      periodId
+      status
+      currentStep
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+mutation ApproveAllocations($periodId: ID!, $comment: String) {
+  approveAllocations(periodId: $periodId, comment: $comment) {
+    workflow {
+      periodId
+      status
+      approvals {
+        actorId
+        actorName
+        approvedAt
+      }
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+mutation RejectAllocations($periodId: ID!, $reason: String!) {
+  rejectAllocations(periodId: $periodId, reason: $reason) {
+    workflow {
+      periodId
+      status
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
