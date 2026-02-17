@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Root System: Cooperative Infrastructure for the Mandate Gap</title>
+  <title>The Root System: Cooperative Infrastructure for the Economy We Actually Need</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -17,8 +17,10 @@
       --accent-green: #4ecb71;
       --accent-teal: #3aa89f;
       --accent-blue: #4a90b8;
+      --accent-red: #c75a4a;
       --accent-orange: #c8844a;
       --accent-amber: #d4a44a;
+      --accent-red-muted: #8b4a3f;
       --accent-green-muted: #3a7d52;
       --accent-blue-muted: #3a6a8b;
       --accent-orange-muted: #8b5a3a;
@@ -93,6 +95,7 @@
 
     .hero h1 span.green { color: var(--accent-green); }
     .hero h1 span.orange { color: var(--accent-orange); }
+    .hero h1 span.red { color: var(--accent-red); }
 
     .hero-sub {
       font-family: var(--font-body);
@@ -103,22 +106,6 @@
       max-width: 660px;
       opacity: 0;
       animation: fadeUp 1s ease 0.7s forwards;
-    }
-
-    .hero-context {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      margin-top: 2rem;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.9s forwards;
-    }
-
-    .hero-context a {
-      color: var(--accent-teal);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(58,168,159,0.3);
     }
 
     .scroll-cue {
@@ -166,6 +153,7 @@
       font-style: italic;
     }
 
+    .part-header.critique h2 { color: var(--accent-red); }
     .part-header.forward h2 { color: var(--accent-green); }
     .part-header.venture h2 { color: var(--accent-orange); }
 
@@ -199,6 +187,11 @@
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
+    }
+
+    .section-label.red-label {
+      color: var(--accent-red);
+      border-color: var(--accent-red-muted);
     }
 
     .section-label.green-label {
@@ -236,6 +229,280 @@
       background: linear-gradient(to right, transparent, var(--border), transparent);
     }
 
+    /* — MANDATE CARDS — */
+    .mandate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .mandate-grid { grid-template-columns: 1fr; }
+    }
+
+    .mandate-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mandate-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .mandate-card.stability::before { background: var(--accent-blue); }
+    .mandate-card.employment::before { background: var(--accent-green); }
+
+    .mandate-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mandate-card .label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .mandate-card .verdict {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-red);
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .mandate-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* — METRIC STRIP — */
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .metric-strip { grid-template-columns: 1fr; }
+    }
+
+    .metric {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .metric .number {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric .number.red { color: var(--accent-red); }
+    .metric .number.green { color: var(--accent-green); }
+    .metric .number.orange { color: var(--accent-orange); }
+
+    .metric .desc {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    /* — BAR CHART — */
+    .chart-block {
+      background: var(--bg-section);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .chart-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 60px;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .bar-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-align: right;
+      letter-spacing: 0.05em;
+    }
+
+    .bar-track {
+      height: 28px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .visible .bar-fill { width: var(--w); }
+
+    .bar-fill.critical { background: linear-gradient(90deg, var(--accent-red-muted), var(--accent-red)); }
+    .bar-fill.high { background: linear-gradient(90deg, var(--accent-amber), #c4944a); }
+    .bar-fill.moderate { background: linear-gradient(90deg, var(--accent-green-muted), var(--accent-green)); }
+    .bar-fill.baseline { background: linear-gradient(90deg, var(--accent-blue), #5aa0c8); }
+
+    .bar-value {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .bar-reference {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    /* — FLOW DIAGRAM — */
+    .flow-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 2.5rem 0;
+      align-items: center;
+    }
+
+    .flow-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.25rem 1.75rem;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+    }
+
+    .flow-node h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .flow-node p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .flow-arrow {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--border), var(--accent-teal));
+      position: relative;
+    }
+
+    .flow-arrow::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: -4px;
+      width: 9px; height: 9px;
+      border-right: 1px solid var(--accent-teal);
+      border-bottom: 1px solid var(--accent-teal);
+      transform: rotate(45deg);
+    }
+
+    .flow-node.highlight {
+      border-color: var(--accent-red-muted);
+      background: rgba(199,90,74,0.06);
+    }
+
+    .flow-node.highlight h4 { color: var(--accent-red); }
+
+    .flow-node.green {
+      border-color: var(--accent-green-muted);
+      background: rgba(78,203,113,0.05);
+    }
+
+    .flow-node.green h4 { color: var(--accent-green); }
+
+    .flow-arrow.green {
+      background: linear-gradient(to bottom, var(--border), var(--accent-green));
+    }
+
+    .flow-arrow.green::after {
+      border-right-color: var(--accent-green);
+      border-bottom-color: var(--accent-green);
+    }
+
+    .flow-node.orange {
+      border-color: var(--accent-orange-muted);
+      background: rgba(200,132,74,0.05);
+    }
+
+    .flow-node.orange h4 { color: var(--accent-orange); }
+
+    .flow-arrow.orange {
+      background: linear-gradient(to bottom, var(--border), var(--accent-orange));
+    }
+
+    .flow-arrow.orange::after {
+      border-right-color: var(--accent-orange);
+      border-bottom-color: var(--accent-orange);
+    }
+
     /* — MAPPING GRID — */
     .mapping-grid {
       display: grid;
@@ -265,8 +532,8 @@
       height: 2px;
     }
 
-    .map-card.critique::before { background: var(--accent-blue-muted); }
-    .map-card.ours::before { background: var(--accent-green-muted); }
+    .map-card.problem::before { background: var(--accent-red-muted); }
+    .map-card.solution::before { background: var(--accent-green-muted); }
 
     .map-card .map-label {
       font-family: var(--font-mono);
@@ -276,8 +543,8 @@
       margin-bottom: 0.5rem;
     }
 
-    .map-card.critique .map-label { color: var(--accent-blue); }
-    .map-card.ours .map-label { color: var(--accent-green); }
+    .map-card.problem .map-label { color: var(--accent-red); }
+    .map-card.solution .map-label { color: var(--accent-green); }
 
     .map-card h4 {
       font-family: var(--font-display);
@@ -350,79 +617,6 @@
       color: var(--text-secondary);
       line-height: 1.5;
       margin: 0;
-    }
-
-    /* — FLOW DIAGRAM — */
-    .flow-diagram {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 2.5rem 0;
-      align-items: center;
-    }
-
-    .flow-node {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.25rem 1.75rem;
-      text-align: center;
-      max-width: 480px;
-      width: 100%;
-      position: relative;
-    }
-
-    .flow-node h4 {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .flow-node p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .flow-arrow {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--border), var(--accent-green));
-      position: relative;
-    }
-
-    .flow-arrow::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: -4px;
-      width: 9px; height: 9px;
-      border-right: 1px solid var(--accent-green);
-      border-bottom: 1px solid var(--accent-green);
-      transform: rotate(45deg);
-    }
-
-    .flow-node.green {
-      border-color: var(--accent-green-muted);
-      background: rgba(78,203,113,0.05);
-    }
-
-    .flow-node.green h4 { color: var(--accent-green); }
-
-    .flow-node.orange {
-      border-color: var(--accent-orange-muted);
-      background: rgba(200,132,74,0.05);
-    }
-
-    .flow-node.orange h4 { color: var(--accent-orange); }
-
-    .flow-arrow.orange {
-      background: linear-gradient(to bottom, var(--border), var(--accent-orange));
-    }
-
-    .flow-arrow.orange::after {
-      border-right-color: var(--accent-orange);
-      border-bottom-color: var(--accent-orange);
     }
 
     /* — VENTURE CARDS — */
@@ -500,46 +694,6 @@
       grid-column: 1 / -1;
     }
 
-    /* — METRIC STRIP — */
-    .metric-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 2.5rem 0;
-    }
-
-    @media (max-width: 600px) {
-      .metric-strip { grid-template-columns: 1fr; }
-    }
-
-    .metric {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-
-    .metric .number {
-      font-family: var(--font-mono);
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--accent-green);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .metric .number.orange { color: var(--accent-orange); }
-
-    .metric .desc {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      line-height: 1.5;
-    }
-
     /* — COMPARISON TABLE — */
     .compare-table {
       margin: 2.5rem 0;
@@ -585,8 +739,8 @@
       padding: 0.75rem 1.25rem;
     }
 
-    .compare-cell.header-cell.problem { color: var(--accent-blue); }
-    .compare-cell.header-cell.ours { color: var(--accent-green); }
+    .compare-cell.header-cell.old { color: var(--accent-red); }
+    .compare-cell.header-cell.new { color: var(--accent-green); }
 
     @media (max-width: 600px) {
       .compare-row { grid-template-columns: 100px 1fr 1fr; }
@@ -804,113 +958,306 @@
     <div class="hero-overline">RegenHub &middot; Techne Institute &middot; Boulder, Colorado</div>
     <h1>The <span class="green">Root</span> System</h1>
     <p class="hero-sub">
-      The mandate gap is a design gap. Here is what we are building to close it &mdash;
-      and the ventures that could grow from the infrastructure.
+      The economy works precisely as designed. The design serves the wrong objectives. Here is what we are building instead.
     </p>
-    <div class="hero-context">
-      A response to <em>The Mandate Gap: From Misaligned Success to Regenerative Alternatives</em>
-    </div>
     <div class="scroll-cue">SCROLL</div>
   </header>
 
   <!-- ================================================================ -->
-  <!-- PART I: THE INTERSECTION -->
+  <!-- PART I: THE PROBLEM -->
   <!-- ================================================================ -->
-  <div class="part-header forward" data-reveal>
+  <div class="part-header critique" data-reveal>
     <div class="part-num">Part I</div>
-    <h2>Where our work meets the critique</h2>
+    <h2>The design problem</h2>
   </div>
 
-  <!-- 01: THE PREMISE -->
+  <!-- 01: THE SHAPE OF MISALIGNMENT -->
   <section class="section" data-reveal>
-    <div class="section-label green-label">01 / The Premise</div>
-    <h2>We are not reforming the building. We are growing the forest next to it.</h2>
+    <div class="section-label red-label">01 / The Shape of Misalignment</div>
+    <h2>A system that succeeds at the wrong objectives.</h2>
     <p>
-      <em>The Mandate Gap</em> identifies four structural failures in centralized monetary governance: <strong>captured governance</strong>, <strong>self-referential measurement</strong>, <strong>asymmetric liquidity</strong>, and an <strong>anti-labor feedback loop</strong>. It then proposes four design principles for a balancing counter-architecture.
+      The dominant economic infrastructure &mdash; centralized monetary policy, corporate accounting standards, capital-market-first liquidity channels &mdash; is not broken. It performs exactly as designed. Liquidity flows to capital holders. Metrics are managed to show stability. Labor's share of productivity gains is structurally constrained. The institution succeeds with remarkable consistency at its <em>actual</em> objectives, which diverge significantly from its <em>stated</em> ones.
     </p>
     <p>
-      What follows is not a rebuttal or a theoretical exercise. It is a map of work already underway &mdash; legal structures already filed, accounting systems already designed, credit instruments already specified &mdash; and the ventures that could grow from this infrastructure if we build with the discipline the critique demands.
+      Consider the Federal Reserve's dual mandate: <strong>price stability</strong> and <strong>maximum employment</strong>. The critique is not that these goals are ignored, but that they have been redefined in ways that serve institutional convenience over lived reality.
     </p>
+
+    <div class="mandate-grid">
+      <div class="mandate-card stability">
+        <div class="label">Stated Objective</div>
+        <h3>Price Stability</h3>
+        <p>The 2% inflation target uses CPI, a metric re-methodologized repeatedly since the 1980s. Substitution effects, hedonic adjustments, and geometric weighting systematically dampen reported price growth.</p>
+        <div class="verdict">Metric stabilized. Prices not.</div>
+      </div>
+      <div class="mandate-card employment">
+        <div class="label">Stated Objective</div>
+        <h3>Maximum Employment</h3>
+        <p>Headline U-3 unemployment excludes discouraged workers and the involuntarily underemployed. The broader U-6 measure consistently runs 3-5 points higher, painting a very different picture of labor health.</p>
+        <div class="verdict">Headline managed. Precarity ignored.</div>
+      </div>
+    </div>
+
     <p>
-      <strong>RegenHub, LCA</strong> was filed as a Colorado Limited Cooperative Association in February 2026. <strong>Techne Institute</strong> is its operational identity: a venture studio on the third floor of 1515 Walnut Street, Boulder, Colorado, where the Great Plains meet the Rocky Mountains at 5,430 feet. The thesis is that the tools an organization uses to track value shape what it can see, and what it can see determines whether it extracts or enriches.
+      If the problem were incompetence, the solution would be better people in the same chairs. But this is a <em>design</em> problem. The economic infrastructure we inherited optimizes for capital accumulation, metric management, and institutional self-preservation. It cannot serve households, labor, or living systems because it was not built to see them.
     </p>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 02: THE FOUR INTERSECTIONS -->
+  <!-- 02: THE COST OF BEING ALIVE -->
   <section class="section" data-reveal>
-    <div class="section-label green-label">02 / Root Cause Mapping</div>
-    <h2>Four failures. Four things we are already building.</h2>
+    <div class="section-label red-label">02 / The Cost of Being Alive</div>
+    <h2>Where managed metrics meet the grocery bill.</h2>
     <p>
-      Each structural failure identified in <em>The Mandate Gap</em> has a corresponding component in our architecture. This was not designed as a response to the critique &mdash; it emerged from the same root cause analysis applied to a different scale. The problems are fractal: what is true of the Fed is true of most organizational accounting.
+      Official inflation metrics suggest prices have been broadly under control for decades. The costs that define whether a household can sustain itself tell a different story.
+    </p>
+
+    <div class="chart-block">
+      <div class="chart-title">Cumulative Cost Growth by Category</div>
+      <div class="chart-subtitle">Approximate 2000&ndash;2024, selected necessities vs. official CPI</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">Healthcare</div>
+          <div class="bar-track"><div class="bar-fill critical" style="--w: 95%"></div></div>
+          <div class="bar-value">~280%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Housing</div>
+          <div class="bar-track"><div class="bar-fill critical" style="--w: 78%"></div></div>
+          <div class="bar-value">~230%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Childcare</div>
+          <div class="bar-track"><div class="bar-fill high" style="--w: 72%"></div></div>
+          <div class="bar-value">~210%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Education</div>
+          <div class="bar-track"><div class="bar-fill high" style="--w: 68%"></div></div>
+          <div class="bar-value">~200%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Food</div>
+          <div class="bar-track"><div class="bar-fill moderate" style="--w: 38%"></div></div>
+          <div class="bar-value">~110%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Official CPI</div>
+          <div class="bar-track"><div class="bar-fill baseline" style="--w: 28%"></div></div>
+          <div class="bar-value">~82%</div>
+        </div>
+      </div>
+      <div class="bar-reference">Sources: BLS sector data, Kaiser Family Foundation, National Association of Realtors. Official CPI shown for reference.</div>
+    </div>
+
+    <div class="metric-strip">
+      <div class="metric">
+        <div class="number red">62%</div>
+        <div class="desc">of Americans live<br>paycheck to paycheck</div>
+      </div>
+      <div class="metric">
+        <div class="number red">5.7x</div>
+        <div class="desc">home price-to-income<br>ratio (vs. 3.5x in 2000)</div>
+      </div>
+      <div class="metric">
+        <div class="number red">~144%</div>
+        <div class="desc">productivity-compensation<br>gap since 1979</div>
+      </div>
+    </div>
+
+    <p>
+      An economy can report strong GDP growth, low official unemployment, and controlled headline inflation while a growing share of the population cannot afford housing, healthcare, or an unexpected $500 expense. <strong>If the metrics say things are fine and people's lives say otherwise, the question is which measurement is broken.</strong>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 03: THE LIQUIDITY PIPELINE -->
+  <section class="section" data-reveal>
+    <div class="section-label red-label">03 / The Liquidity Pipeline</div>
+    <h2>Where the money actually goes.</h2>
+    <p>
+      Monetary easing is framed as economic stimulus. But the mechanism matters. Liquidity enters through capital markets and credit facilities. The path from there to wage earners is indirect at best. The path to asset holders is immediate.
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-node">
+        <h4>Central Bank Injects Liquidity</h4>
+        <p>Rate cuts, quantitative easing, credit facilities</p>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <h4>Capital Markets Absorb</h4>
+        <p>Banks, funds, institutional investors access cheap capital first</p>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node highlight">
+        <h4>Asset Prices Inflate</h4>
+        <p>Equities, real estate, and financial instruments rise. Wealth concentrates upward.</p>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <h4>The &ldquo;Trickle&rdquo; to Labor</h4>
+        <p>Some job creation. Wages lag. Benefits erode. Gig work expands.</p>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node highlight">
+        <h4>When Wages Finally Rise&hellip;</h4>
+        <p>Policy tightens. Rates go up. &ldquo;Cooling the labor market&rdquo; is the stated goal.</p>
+      </div>
+    </div>
+
+    <p>
+      The pattern reveals a structural asymmetry: aggressive intervention to protect asset values, restrained response (or active opposition) when labor begins to capture gains. This is not a conspiracy. It is a design consequence. The system's governance, networks, and incentive structures are aligned with the financial sector because they were built by and for the financial sector.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 04: FOUR ROOT CAUSES -->
+  <section class="section" data-reveal>
+    <div class="section-label red-label">04 / Root Causes</div>
+    <h2>Four structural failures. Four design opportunities.</h2>
+    <p>
+      Before reaching for solutions, it is worth being precise about what went wrong at the design level. Each structural failure implies a design principle for what could balance or replace it.
     </p>
 
     <div class="mapping-grid">
-      <div class="map-card critique">
-        <div class="map-label">Mandate Gap &middot; Root Cause 1</div>
+      <div class="map-card problem">
+        <div class="map-label">Structural Failure</div>
         <h4>Captured Governance</h4>
-        <p>Decision-makers drawn from the financial sector, insulated from those their decisions affect most.</p>
+        <p>Decision-makers drawn from the financial sector, accountable to capital, insulated from the populations their decisions affect most.</p>
       </div>
       <div class="mapping-arrow-col">&rarr;</div>
-      <div class="map-card ours">
-        <div class="map-label">Techne &middot; In Place</div>
-        <h4>Colorado LCA + Three-Tier Membership</h4>
-        <p>Multi-stakeholder cooperative. Community, co-working, and cooperative tiers distribute governance across those who use, inhabit, and steward the studio. Democratic process is the default, not the exception.</p>
+      <div class="map-card solution">
+        <div class="map-label">Design Principle</div>
+        <h4>Distributed Governance</h4>
+        <p>Decision-making power distributed across stakeholder classes. Those most affected have proportional voice.</p>
       </div>
     </div>
 
     <div class="mapping-grid">
-      <div class="map-card critique">
-        <div class="map-label">Mandate Gap &middot; Root Cause 2</div>
+      <div class="map-card problem">
+        <div class="map-label">Structural Failure</div>
         <h4>Self-Referential Measurement</h4>
-        <p>The institution defines the metrics by which it is judged. CPI methodology and U-3 framing are controlled by the system being evaluated.</p>
+        <p>The institution defines the metrics by which it is judged. CPI methodology, unemployment framing, and inflation targets are all set by the same system being evaluated.</p>
       </div>
       <div class="mapping-arrow-col">&rarr;</div>
-      <div class="map-card ours">
-        <div class="map-label">Techne &middot; Designed</div>
-        <h4>REA Accounting + Convergence Chain</h4>
-        <p>Resource-Event-Agent ontology tracks actual flows of labor, resources, and value &mdash; not dollar abstractions. Append-only convergence chain provides cryptographic verification. The ledger measures what happened, not what the institution says happened.</p>
+      <div class="map-card solution">
+        <div class="map-label">Design Principle</div>
+        <h4>Transparent, Exogenous Measurement</h4>
+        <p>Economic health measured by instruments the institution cannot control. Open data, community-validated indices, accounting that tracks real flows.</p>
       </div>
     </div>
 
     <div class="mapping-grid">
-      <div class="map-card critique">
-        <div class="map-label">Mandate Gap &middot; Root Cause 3</div>
+      <div class="map-card problem">
+        <div class="map-label">Structural Failure</div>
         <h4>Asymmetric Liquidity</h4>
-        <p>Money enters through capital markets. The path to households is indirect, slow, and lossy.</p>
+        <p>Money enters through capital markets. Asset holders benefit first and most. The path to labor and households is indirect, slow, and lossy.</p>
       </div>
       <div class="mapping-arrow-col">&rarr;</div>
-      <div class="map-card ours">
-        <div class="map-label">Techne &middot; Specified</div>
-        <h4>$CLOUD Credits + Superfluid Streams</h4>
-        <p>Service credits minted against deposits, denominated in four resource primitives (compute, transfer, long-term memory, short-term memory). Superfluid streams deliver continuous-flow allocation directly to contributors. No intermediary extraction. No trickle.</p>
+      <div class="map-card solution">
+        <div class="map-label">Design Principle</div>
+        <h4>Direct-to-Household Channels</h4>
+        <p>Financial infrastructure that reaches households and local economies without routing through extractive intermediaries. Credit as a commons, not a product.</p>
       </div>
     </div>
 
     <div class="mapping-grid">
-      <div class="map-card critique">
-        <div class="map-label">Mandate Gap &middot; Root Cause 4</div>
+      <div class="map-card problem">
+        <div class="map-label">Structural Failure</div>
         <h4>Anti-Labor Feedback Loop</h4>
-        <p>Wage growth triggers tightening. The system structurally suppresses labor's share of productivity gains.</p>
+        <p>Wage growth triggers tightening. The system structurally suppresses labor's share of productivity gains while protecting returns to capital.</p>
       </div>
       <div class="mapping-arrow-col">&rarr;</div>
-      <div class="map-card ours">
-        <div class="map-label">Techne &middot; Designed</div>
-        <h4>Patronage Accounting System</h4>
-        <p>Weighted allocation formula structurally couples productivity to contributors. When cooperative surplus grows, capital accounts grow proportionally. No mechanism exists to suppress labor's share &mdash; the opposite is encoded as the default.</p>
+      <div class="map-card solution">
+        <div class="map-label">Design Principle</div>
+        <h4>Productivity-Linked Distribution</h4>
+        <p>Mechanisms that structurally couple productivity gains to the people generating them. Patronage, surplus sharing, and cooperative ownership as defaults.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- THE PIVOT -->
+  <!-- ================================================================ -->
+  <div class="divider"></div>
+
+  <section class="section pivot" data-reveal>
+    <blockquote>
+      &ldquo;The tools an organization uses to track value shape what it can see. What it can see determines whether it extracts or enriches.&rdquo;
+    </blockquote>
+    <div class="attribution">The design thesis</div>
+    <p>
+      The mandate gap is a perception gap. The dominant economic infrastructure cannot serve households because it cannot <em>see</em> them through its measurement instruments. The work ahead is not reform. It is the construction of balancing institutions &mdash; cooperative structures, transparent measurement, direct financial channels, and governance models that encode different objectives into their foundations.
+    </p>
+    <p>
+      Not a revolution. A root system, growing underneath.
+    </p>
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- PART II: THE ARCHITECTURE -->
+  <!-- ================================================================ -->
+  <div class="part-header forward" data-reveal>
+    <div class="part-num">Part II</div>
+    <h2>The infrastructure we are building</h2>
+  </div>
+
+  <!-- 05: WHO WE ARE -->
+  <section class="section" data-reveal>
+    <div class="section-label green-label">05 / The Foundation</div>
+    <h2>A cooperative venture studio in a specific place.</h2>
+    <p>
+      <strong>RegenHub, LCA</strong> was filed as a Colorado Limited Cooperative Association in February 2026. <strong>Techne Institute</strong> is its operational identity: a venture studio on the third floor of 1515 Walnut Street, Boulder, Colorado, where the Great Plains meet the Rocky Mountains at 5,430 feet.
+    </p>
+    <p>
+      The model is a venture studio, distributed not concentrated. Techne provides infrastructure &mdash; space, legal, planning, capital access &mdash; for autonomous ventures. It is soil, not plant. The cooperative structure is not decorative; it is the mechanism by which each of the four design principles is enacted.
+    </p>
+
+    <div class="compare-table">
+      <div class="compare-row header">
+        <div class="compare-cell dim-label"></div>
+        <div class="compare-cell header-cell old">Conventional Studio</div>
+        <div class="compare-cell header-cell new">Cooperative Studio</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell dim-label">Governance</div>
+        <div class="compare-cell">Founder/investor control. Board appointed by capital.</div>
+        <div class="compare-cell">Multi-stakeholder. Three membership tiers with democratic governance.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell dim-label">Surplus</div>
+        <div class="compare-cell">Returns to shareholders proportional to capital invested.</div>
+        <div class="compare-cell">Returns to members proportional to patronage (contribution of labor, purchases, resources).</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell dim-label">Measurement</div>
+        <div class="compare-cell">Revenue, margins, valuation. Dollar abstractions.</div>
+        <div class="compare-cell">REA accounting: actual resource flows, labor contributions, ecological impact.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell dim-label">Liquidity</div>
+        <div class="compare-cell">VC rounds. Capital markets. Equity dilution.</div>
+        <div class="compare-cell">Service credits ($CLOUD). Continuous-flow streams. No extractive intermediation.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell dim-label">Time horizon</div>
+        <div class="compare-cell">Exit-oriented. 5-7 year fund cycle.</div>
+        <div class="compare-cell">Purpose trust stewardship. Intergenerational mission lock.</div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 03: THE PATTERN STACK -->
+  <!-- 06: THE PATTERN STACK -->
   <section class="section" data-reveal>
-    <div class="section-label green-label">03 / The Pattern Stack</div>
+    <div class="section-label green-label">06 / The Pattern Stack</div>
     <h2>Seven layers. One compositional grammar.</h2>
     <p>
-      Techne's core competency is the recognition that all information systems decompose into a progressive set of design patterns. Systems are <em>complicated</em> &mdash; engineered from known primitives &mdash; not complex. Complexity arises when systems couple with social and ecological context. The pattern stack is the grammar; the ventures are the sentences.
+      Our core competency is the recognition that all information systems decompose into a progressive set of design patterns. Systems are <em>complicated</em> &mdash; engineered from known primitives &mdash; not complex. Complexity arises when systems couple with social and ecological context. The pattern stack is the grammar; the ventures are the sentences.
     </p>
 
     <div class="layer-stack">
@@ -918,7 +1265,7 @@
         <div class="layer-num">1</div>
         <div class="layer-content">
           <h4>Identity</h4>
-          <p>Distinguishing one thing from another. <code>habitat.eth</code> ENS namespace. Self-sovereign records, cooperative-governed issuance.</p>
+          <p>Distinguishing one thing from another. ENS namespace. Self-sovereign records, cooperative-governed issuance.</p>
         </div>
       </div>
       <div class="layer-item">
@@ -946,65 +1293,111 @@
         <div class="layer-num">5</div>
         <div class="layer-content">
           <h4>Flow</h4>
-          <p>Value or information moving between agents. Superfluid streams. $CLOUD credit transfers. Patronage allocations.</p>
+          <p>Value or information moving between agents. Continuous-flow streams. Credit transfers. Patronage allocations.</p>
         </div>
       </div>
       <div class="layer-item">
         <div class="layer-num">6</div>
         <div class="layer-content">
           <h4>Constraint</h4>
-          <p>Rules governing valid states and transitions. IRC 704(b) compliance. LCA statutory requirements. Purpose trust lock.</p>
+          <p>Rules governing valid states and transitions. Tax compliance. Statutory requirements. Purpose trust lock.</p>
         </div>
       </div>
       <div class="layer-item">
         <div class="layer-num">7</div>
         <div class="layer-content">
           <h4>View</h4>
-          <p>Presenting information for a purpose. Dashboards, reports, the Economic Habitat Matrix. Making flows visible.</p>
+          <p>Presenting information for a purpose. Dashboards, reports, diagnostic tools. Making flows visible to those who need to see them.</p>
         </div>
       </div>
     </div>
 
     <p>
-      Every venture Techne incubates is composed from these layers. The pattern library is a cooperative commons. The moat is compositional fluency &mdash; experiential, organizational, compounding. Value recirculates: venture engagement refines the library, which scopes the next venture faster, which generates surplus that recirculates.
+      Every venture we incubate is composed from these layers. The pattern library is a cooperative commons. The moat is compositional fluency &mdash; experiential, organizational, compounding. Value recirculates: venture engagement refines the library, which scopes the next venture faster, which generates surplus that recirculates.
     </p>
   </section>
 
-  <!-- ================================================================ -->
-  <!-- THE PIVOT -->
-  <!-- ================================================================ -->
   <div class="divider"></div>
 
-  <section class="section pivot" data-reveal>
-    <blockquote>
-      &ldquo;The tools an organization uses to track value shape what it can see. What it can see determines whether it extracts or enriches.&rdquo;
-    </blockquote>
-    <div class="attribution">The Techne thesis</div>
+  <!-- 07: HOW THE ARCHITECTURE MAPS -->
+  <section class="section" data-reveal>
+    <div class="section-label green-label">07 / Architecture Meets Root Cause</div>
+    <h2>How each component addresses a structural failure.</h2>
     <p>
-      Most accounting tools are designed for the Competitive zone of the Economic Habitat Matrix. They track extraction well and contribution poorly. The mandate gap is ultimately a <em>perception</em> gap: the Fed cannot serve households because it literally cannot see them through its measurement instruments.
+      This is not theoretical alignment. Each component was designed from the same root cause analysis that reveals the failures of the dominant system. The problems are fractal: what is true of centralized monetary policy is true of most organizational accounting.
     </p>
-    <p>
-      What follows are the specific ventures and projects that grow from this infrastructure &mdash; each one an application of the pattern stack to a real coordination problem, each one designed to make visible what the current system is structurally blind to.
-    </p>
+
+    <div class="mapping-grid">
+      <div class="map-card problem">
+        <div class="map-label">Captured Governance</div>
+        <h4>Power concentrated in a professional class aligned with capital</h4>
+        <p></p>
+      </div>
+      <div class="mapping-arrow-col">&rarr;</div>
+      <div class="map-card solution">
+        <div class="map-label">Our Response</div>
+        <h4>Colorado LCA + Three-Tier Membership</h4>
+        <p>Community, co-working, and cooperative tiers distribute governance across those who use, inhabit, and steward the studio. Democratic process is the default.</p>
+      </div>
+    </div>
+
+    <div class="mapping-grid">
+      <div class="map-card problem">
+        <div class="map-label">Self-Referential Measurement</div>
+        <h4>Institutions define and control the metrics by which they are judged</h4>
+        <p></p>
+      </div>
+      <div class="mapping-arrow-col">&rarr;</div>
+      <div class="map-card solution">
+        <div class="map-label">Our Response</div>
+        <h4>REA Accounting + Convergence Chain</h4>
+        <p>Resource-Event-Agent ontology tracks actual flows of labor, resources, and value. Append-only hash chain provides cryptographic verification. The ledger measures what happened, not what the institution says happened.</p>
+      </div>
+    </div>
+
+    <div class="mapping-grid">
+      <div class="map-card problem">
+        <div class="map-label">Asymmetric Liquidity</div>
+        <h4>Value enters through capital markets, trickles (lossy) to households</h4>
+        <p></p>
+      </div>
+      <div class="mapping-arrow-col">&rarr;</div>
+      <div class="map-card solution">
+        <div class="map-label">Our Response</div>
+        <h4>$CLOUD Credits + Continuous-Flow Streams</h4>
+        <p>Service credits minted against deposits, denominated in resource primitives. Continuous-flow streams deliver allocation directly to contributors. No intermediary extraction. No trickle.</p>
+      </div>
+    </div>
+
+    <div class="mapping-grid">
+      <div class="map-card problem">
+        <div class="map-label">Anti-Labor Feedback Loop</div>
+        <h4>Wage growth triggers tightening; labor's share structurally suppressed</h4>
+        <p></p>
+      </div>
+      <div class="mapping-arrow-col">&rarr;</div>
+      <div class="map-card solution">
+        <div class="map-label">Our Response</div>
+        <h4>Patronage Accounting System</h4>
+        <p>Weighted allocation formula couples productivity to contributors. When cooperative surplus grows, capital accounts grow proportionally. No mechanism to suppress labor's share &mdash; the opposite is the default.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ================================================================ -->
-  <!-- PART II: THE VENTURES -->
+  <!-- PART III: THE VENTURES -->
   <!-- ================================================================ -->
   <div class="part-header venture" data-reveal>
-    <div class="part-num">Part II</div>
-    <h2>Ventures and projects for our focus</h2>
+    <div class="part-num">Part III</div>
+    <h2>Ventures and projects</h2>
   </div>
 
-  <!-- 04: PATRONAGE RAILS -->
+  <!-- 08: PATRONAGE RAILS -->
   <section class="section" data-reveal>
-    <div class="section-label orange-label">04 / Cooperative Patronage Rails</div>
-    <h2>The accounting system the cooperative economy doesn't have yet.</h2>
+    <div class="section-label orange-label">08 / Cooperative Patronage Rails</div>
+    <h2>The accounting system the cooperative economy does not have yet.</h2>
     <p>
-      <strong>Root cause addressed:</strong> Anti-labor feedback loop. Surplus flows to capital by default because the tools make capital legible and labor invisible.
-    </p>
-    <p>
-      The patronage accounting system is Techne's principal project: REA-based, event-sourced, Subchapter K / IRC 704(b) compliant cooperative accounting. Three composable bounded contexts &mdash; <strong>Treasury</strong>, <strong>People</strong>, <strong>Agreements</strong> &mdash; that any cooperative can deploy independently or together. The design phase is complete. The interface sprint is underway.
+      REA-based, event-sourced, tax-compliant cooperative accounting. Three composable bounded contexts &mdash; <strong>Treasury</strong>, <strong>People</strong>, <strong>Agreements</strong> &mdash; that any cooperative can deploy independently or together.
     </p>
 
     <div class="flow-diagram">
@@ -1012,17 +1405,17 @@
         <h4>Contribution Events</h4>
         <p>Labor, purchases, resource provision &mdash; recorded as REA events with cryptographic attestation</p>
       </div>
-      <div class="flow-arrow"></div>
+      <div class="flow-arrow green"></div>
       <div class="flow-node green">
         <h4>Weighted Patronage Calculation</h4>
-        <p>Configurable formula: contribution type &times; weight &times; time factor. Transparent. Auditable. On-chain anchor.</p>
+        <p>Configurable formula: contribution type &times; weight &times; time factor. Transparent. Auditable.</p>
       </div>
-      <div class="flow-arrow"></div>
+      <div class="flow-arrow green"></div>
       <div class="flow-node green">
         <h4>Capital Account Credits</h4>
         <p>Surplus flows to contributors proportional to patronage. Double-entry. Temporal queries via event sourcing.</p>
       </div>
-      <div class="flow-arrow"></div>
+      <div class="flow-arrow green"></div>
       <div class="flow-node green">
         <h4>Distribution / Reinvestment</h4>
         <p>Members decide: distribute, reinvest, or allocate to community grants. Cooperative governance, not board fiat.</p>
@@ -1030,24 +1423,24 @@
     </div>
 
     <p>
-      <strong>The product opportunity:</strong> There are approximately 65,000 cooperatives in the United States. Most use accounting tools designed for corporations. The gap between what cooperatives need (patronage tracking, contribution weighting, democratic allocation) and what existing tools provide (shareholder equity, profit maximization) is a market. Legibility-as-product.
+      <strong>The market:</strong> There are approximately 65,000 cooperatives in the United States. Most use accounting tools designed for corporations. The gap between what cooperatives need (patronage tracking, contribution weighting, democratic allocation) and what existing tools provide (shareholder equity, profit maximization) is a product opportunity. Legibility-as-product.
     </p>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 05: $CLOUD NETWORK -->
+  <!-- 09: $CLOUD NETWORK -->
   <section class="section" data-reveal>
-    <div class="section-label orange-label">05 / The $CLOUD Credit Network</div>
-    <h2>Direct-channel financial infrastructure. No intermediary extraction.</h2>
+    <div class="section-label orange-label">09 / The $CLOUD Credit Network</div>
+    <h2>Direct-channel financial infrastructure.</h2>
     <p>
-      <strong>Root cause addressed:</strong> Asymmetric liquidity. Current monetary infrastructure routes value through capital markets before it reaches households. $CLOUD bypasses the pipeline entirely.
+      Service credits minted against transparent reserves, denominated in four resource primitives: <strong>compute</strong>, <strong>transfer</strong>, <strong>long-term memory</strong>, and <strong>short-term memory</strong>. Every identity in the network holds a balance. Using applications, hiring engineers, running infrastructure &mdash; all denominated in a common medium that flows directly to contributors.
     </p>
 
     <div class="metric-strip">
       <div class="metric">
         <div class="number orange">1:10</div>
-        <div class="desc">1 CLOUD = 10 USDC<br>transparent peg</div>
+        <div class="desc">credit-to-dollar peg<br>transparent reserves</div>
       </div>
       <div class="metric">
         <div class="number orange">4</div>
@@ -1060,138 +1453,58 @@
     </div>
 
     <p>
-      $CLOUD is not a token. It is a <strong>common medium</strong> through which all Techne economic activity flows. Every <code>habitat.eth</code> identity holds a balance. Using apps, hiring engineers, running infrastructure &mdash; all denominated in $CLOUD. Minted against USD deposited into a transparent Mercury account; the mint mechanism is how the cooperative accesses capital without extractive intermediation.
+      The grammar is designed for interoperability. Any cooperative can issue credits against their own reserves, creating a network of mutual liquidity without a central mint. Shared grammar enables cross-cooperative exchange while maintaining local sovereignty.
     </p>
     <p>
       <strong>The ecological connection:</strong> Cloud as natural and technological duality. Water cycle as value cycle. Evaporation (deposits) &rarr; condensation (minting) &rarr; precipitation (distribution) &rarr; watershed (circulation). The metaphor is structural, not decorative.
     </p>
-    <p>
-      <strong>Venture potential:</strong> The $CLOUD grammar is designed for interoperability. Any cooperative can issue $CLOUD credits against their own reserves, creating a network of mutual liquidity without a central mint. The shared grammar enables cross-cooperative exchange while maintaining local sovereignty. Think WIR Bank, but transparent and composable.
-    </p>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 06: COMMONS.ID -->
+  <!-- 10: COMMUNITY ECONOMIC MEASUREMENT -->
   <section class="section" data-reveal>
-    <div class="section-label orange-label">06 / commons.id &mdash; Convergence Infrastructure</div>
-    <h2>Transparent, exogenous measurement for collective knowledge.</h2>
+    <div class="section-label orange-label">10 / Community Economic Measurement</div>
+    <h2>Breaking the self-referential loop.</h2>
     <p>
-      <strong>Root cause addressed:</strong> Self-referential measurement. When institutions control what gets recorded and how, the record serves the institution. commons.id is measurement infrastructure the institution cannot control.
-    </p>
-    <p>
-      commons.id is a knowledge-graph-backed living archive for convergence events &mdash; conferences, hackathons, unconferences, any gathering where people produce shared knowledge. Its first deployment is ETHBoulder 2026. The stack: Supabase, Claude API, React, Bonfire AI integration. An append-only convergence chain provides cryptographic verification of every contribution.
-    </p>
-    <p>
-      <strong>Why it matters for the mandate gap:</strong> The document proposes "community-validated indices anchored to what people actually pay." commons.id is the infrastructure pattern for community-validated <em>anything</em>. The convergence chain that tracks knowledge contributions today can track cost-of-living data tomorrow. The architecture is the same: append-only, community-attested, cryptographically verifiable, resistant to methodological capture.
-    </p>
-    <div class="tension-block">
-      <h4>Venture Path: Community Economic Oracles</h4>
-      <p>
-        Extend commons.id's convergence chain architecture to track real household costs at the local level. Community validators with skin in the game of accuracy. Think Chainlink oracle networks, but configured for rent, groceries, childcare, and healthcare &mdash; not DeFi price feeds. A Boulder pilot could produce the first community-owned alternative to CPI within 12 months.
-      </p>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 07: ECOSYSTEM DASHBOARD -->
-  <section class="section" data-reveal>
-    <div class="section-label orange-label">07 / Ecosystem Dashboard</div>
-    <h2>Making the watershed visible in real time.</h2>
-    <p>
-      <strong>Root cause addressed:</strong> All four, simultaneously. A view layer (Pattern 7) that renders the flows tracked by layers 1-6 into something humans can perceive, decide against, and hold accountable.
-    </p>
-    <p>
-      An interactive dashboard tracking the living fundamentals of the Gitcoin / Allo.Capital / RegenHub / Techne ecosystem. Not financial reporting &mdash; <em>flow reporting</em>. Where is value being created? Where is it concentrating? Where is it circulating? Where are the leaks?
-    </p>
-
-    <div class="compare-table">
-      <div class="compare-row header">
-        <div class="compare-cell dim-label"></div>
-        <div class="compare-cell header-cell problem">Traditional Dashboard</div>
-        <div class="compare-cell header-cell ours">Ecosystem Dashboard</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-label">Unit</div>
-        <div class="compare-cell">Dollars, tokens, TVL</div>
-        <div class="compare-cell">Resource flows, labor contributions, ecological impact</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-label">Measures</div>
-        <div class="compare-cell">Accumulation (how much?)</div>
-        <div class="compare-cell">Circulation (where does it go?)</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-label">Optimizes</div>
-        <div class="compare-cell">Growth, extraction, shareholder return</div>
-        <div class="compare-cell">Distribution, contribution, systemic health</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-label">Time horizon</div>
-        <div class="compare-cell">Quarterly</div>
-        <div class="compare-cell">Seasonal, intergenerational</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-label">Accountability</div>
-        <div class="compare-cell">Board review, post-hoc audit</div>
-        <div class="compare-cell">Real-time transparency, stakeholder access</div>
-      </div>
-    </div>
-
-    <p>
-      <strong>Bridge token model:</strong> Shadow pricing before any token exists. Map the value flows between projects, identify the connective tissue, and design a bridge instrument that makes cross-project coordination legible. If $CLOUD is the credit within the cooperative, the bridge token is the signal between cooperatives.
-    </p>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 08: MUTUAL CREDIT INTEGRATION -->
-  <section class="section" data-reveal>
-    <div class="section-label orange-label">08 / Mutual Credit Integration</div>
-    <h2>Credit as a commons. Not a product.</h2>
-    <p>
-      <strong>Root cause addressed:</strong> Asymmetric liquidity + anti-labor feedback loop. Mutual credit networks create liquidity from trust, not from capital markets.
-    </p>
-    <p>
-      <em>The Mandate Gap</em> cites Grassroots Economics' Sarafu Network as a precedent for blockchain-based mutual credit. This is not theoretical for us &mdash; Grassroots Economics analysis is an active commons commitment (due February 19, 2026). The integration path:
+      If the dominant system's metrics are structurally unable to measure what matters &mdash; actual housing costs, real employment quality, household viability &mdash; then the alternative must build its own measurement infrastructure. Not better models of the same thing, but different instruments measuring different things.
     </p>
 
     <div class="venture-grid">
       <div class="venture-card">
         <div class="v-num">01</div>
-        <div class="v-tag">Research Phase</div>
-        <h4>Grassroots Economics Analysis</h4>
-        <p>Deep analysis of the Sarafu Network's mutual credit architecture, token velocity patterns, and community governance models. What worked, what didn't, what translates to a Colorado context.</p>
+        <div class="v-tag">Knowledge Infrastructure</div>
+        <h4>Convergence Archives</h4>
+        <p>Knowledge-graph-backed living archives for events where people produce shared knowledge. Append-only hash chain verifies every contribution. Community-attested, cryptographically verifiable.</p>
         <div class="v-detail">
-          <strong>Status:</strong> Active commitment. Due Feb 19, 2026.
+          <strong>Live:</strong> First deployment at ETHBoulder 2026. Stack: Supabase, Claude API, React, Bonfire AI.
         </div>
       </div>
       <div class="venture-card">
         <div class="v-num">02</div>
-        <div class="v-tag">Design Phase</div>
-        <h4>Boulder Mutual Credit Pilot</h4>
-        <p>A local mutual credit network connecting Techne members, neighboring businesses on Walnut Street, and cooperative enterprises. $CLOUD as the unit of account. Trust as collateral.</p>
+        <div class="v-tag">Economic Measurement</div>
+        <h4>Community Cost-of-Living Oracles</h4>
+        <p>Decentralized networks that aggregate real price data for housing, food, healthcare, and childcare at the local level. Community-owned alternatives to CPI, anchored to what people actually pay.</p>
         <div class="v-detail">
-          <strong>Pattern layers:</strong> Identity (1) + Relationship (3) + Flow (5) + Constraint (6)
+          <strong>Architecture:</strong> Same convergence chain pattern. Community validators with skin in the game of accuracy.
         </div>
       </div>
       <div class="venture-card">
         <div class="v-num">03</div>
-        <div class="v-tag">Infrastructure</div>
-        <h4>REA Clearing Engine</h4>
-        <p>Multilateral clearing system built on REA ontology. Balances clear across the network, not bilaterally. Every clearing event is an REA event on the convergence chain.</p>
+        <div class="v-tag">Flow Visibility</div>
+        <h4>Ecosystem Dashboard</h4>
+        <p>Interactive dashboard tracking living fundamentals: where value is created, where it concentrates, where it circulates, where it leaks. Flow reporting, not financial reporting.</p>
         <div class="v-detail">
-          <strong>Precedent:</strong> Sardex multilateral clearing. WIR Bank reciprocal exchange.
+          <strong>Measures:</strong> Resource flows, labor contributions, distribution patterns, systemic health.
         </div>
       </div>
       <div class="venture-card">
         <div class="v-num">04</div>
-        <div class="v-tag">Scale</div>
-        <h4>Inter-Cooperative Credit Network</h4>
-        <p>Federated mutual credit across cooperatives. Each maintains local sovereignty and credit limits. Shared $CLOUD grammar enables cross-network exchange. Liquidity from trust at scale.</p>
+        <div class="v-tag">Organizational Diagnostic</div>
+        <h4>Economic Habitat Matrix</h4>
+        <p>49 organizational archetypes across governance orientation and systemic relationship. Any organization can see where it stands &mdash; and whether its tools are optimizing for what its mission statement claims.</p>
         <div class="v-detail">
-          <strong>Addresses:</strong> The Mandate Gap's "direct-to-household channels" principle at regional scale.
+          <strong>Insight:</strong> Extraction and enrichment are observable patterns, not moral categories.
         </div>
       </div>
     </div>
@@ -1199,74 +1512,88 @@
 
   <div class="divider"></div>
 
-  <!-- 09: ECONOMIC HABITAT MATRIX -->
+  <!-- 11: MUTUAL CREDIT -->
   <section class="section" data-reveal>
-    <div class="section-label orange-label">09 / The Economic Habitat Matrix</div>
-    <h2>49 archetypes. A map of what's possible.</h2>
+    <div class="section-label orange-label">11 / Mutual Credit Infrastructure</div>
+    <h2>Credit as a commons. Not a product.</h2>
     <p>
-      <strong>Root cause addressed:</strong> The deeper pattern beneath all four. Organizations cannot choose to be regenerative if they cannot see where they stand.
-    </p>
-    <p>
-      The Economic Habitat Matrix maps organizational behavior across two axes: <strong>governance orientation</strong> (dispersive to concentrative) and <strong>systemic relationship</strong> (extractive to contributive). The result is 49 archetypes distributed across 7 ecological zones, from Symbiotic to Parasitic.
-    </p>
-    <p>
-      The Fed, in this framework, occupies the <strong>Competitive-Concentrative</strong> zone: governance concentrated in a professional class, systemic relationship that stabilizes the existing distribution of capital. The mandate gap is visible on the matrix as a governance-orientation mismatch: an institution in the Concentrative column claiming objectives that require Dispersive design.
-    </p>
-    <p>
-      <strong>The venture:</strong> An interactive diagnostic tool. Any organization inputs its governance structure, surplus distribution patterns, and stakeholder relationships. The matrix places them, shows their neighbors, and maps the path from where they are to where they claim to want to be. Not prescriptive &mdash; descriptive. A mirror, not a manual.
+      Peer-to-peer credit systems where trust is the collateral and the network itself provides liquidity. Members extend credit to each other within agreed limits. No bank intermediary. No interest extraction. The network clears balances multilaterally.
     </p>
 
-    <div class="tension-block">
-      <h4>Why This Matters Beyond Techne</h4>
-      <p>
-        The matrix is the argument, made visual, that economic systems are ecological. Extraction and enrichment are not moral categories &mdash; they are observable patterns with predictable consequences. When an organization can see itself on the matrix, it can see what its tools are optimizing for, regardless of what its mission statement claims. The mandate gap, at every scale, is a gap between stated objectives and structural design.
-      </p>
+    <div class="venture-grid">
+      <div class="venture-card">
+        <div class="v-num">01</div>
+        <div class="v-tag">Research</div>
+        <h4>Precedent Analysis</h4>
+        <p>Deep analysis of existing mutual credit systems: Sardex (Sardinia), WIR Bank (Switzerland), Grassroots Economics' Sarafu Network. What worked, what didn't, what translates.</p>
+        <div class="v-detail">
+          <strong>Precedent:</strong> WIR Bank has operated since 1934. Sardex cleared &euro;50M+ annually before acquisition.
+        </div>
+      </div>
+      <div class="venture-card">
+        <div class="v-num">02</div>
+        <div class="v-tag">Pilot</div>
+        <h4>Local Mutual Credit Network</h4>
+        <p>A Boulder pilot connecting cooperative members, neighboring businesses, and local enterprises. Service credits as the unit of account. Trust as collateral. REA-based multilateral clearing.</p>
+        <div class="v-detail">
+          <strong>Pattern layers:</strong> Identity (1) + Relationship (3) + Flow (5) + Constraint (6)
+        </div>
+      </div>
+      <div class="venture-card full-width">
+        <div class="v-num">03</div>
+        <div class="v-tag">Scale</div>
+        <h4>Inter-Cooperative Credit Network</h4>
+        <p>Federated mutual credit across cooperatives. Each maintains local sovereignty and credit limits. Shared grammar enables cross-network exchange. Liquidity from trust at scale. This is the direct-to-household channel that bypasses capital-market intermediation entirely.</p>
+        <div class="v-detail">
+          <strong>The long game:</strong> A complementary financial layer that can reach households and local economies without routing through the institutions that created the mandate gap.
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 10: LEARNVIBE.BUILD -->
+  <!-- 12: LEARNVIBE.BUILD -->
   <section class="section" data-reveal>
-    <div class="section-label orange-label">10 / LearnVibe.Build</div>
+    <div class="section-label orange-label">12 / The Bootstrap Engine</div>
     <h2>The bootstrap problem is a training problem.</h2>
     <p>
-      <strong>Root cause addressed:</strong> The bootstrap problem (Section 10 of <em>The Mandate Gap</em>). Networks need participation to create value, but participation requires value. The solution: invest in the capacity of participants.
+      Networks gain value with participation, but participation requires value. This is the honest challenge of any alternative economic infrastructure. The solution: invest in the capacity of participants.
     </p>
     <p>
-      LearnVibe.Build (LVB) is Techne's educational engine. It addresses the bootstrap problem directly: by training people in the compositional patterns, cooperative governance, and technical infrastructure that the ventures require, LVB creates the initial participant base that makes the network valuable.
+      Our educational engine addresses the bootstrap directly: by training people in the compositional patterns, cooperative governance, and technical infrastructure that the ventures require, we create the initial participant base that makes the network valuable.
     </p>
     <p>
-      The pipeline: LVB participants learn the pattern stack &rarr; apply it in Techne ventures &rarr; their contributions generate patronage &rarr; patronage builds capital accounts &rarr; capital accounts fund the next cohort. The bootstrap is a spiral, not a chicken-and-egg problem, when education and economic participation are the same system.
+      The pipeline: participants learn the pattern stack &rarr; apply it in ventures &rarr; contributions generate patronage &rarr; patronage builds capital accounts &rarr; capital accounts fund the next cohort. The bootstrap is a spiral, not a chicken-and-egg problem, when education and economic participation are the same system.
     </p>
 
     <div class="metric-strip">
       <div class="metric">
-        <div class="number">7</div>
+        <div class="number green">7</div>
         <div class="desc">pattern layers<br>taught as compositional grammar</div>
       </div>
       <div class="metric">
-        <div class="number">3</div>
-        <div class="desc">membership tiers<br>LVB is the on-ramp</div>
+        <div class="number green">3</div>
+        <div class="desc">membership tiers<br>education is the on-ramp</div>
       </div>
       <div class="metric">
-        <div class="number">1%</div>
+        <div class="number green">1%</div>
         <div class="desc">venture reciprocity<br>graduates define their own terms</div>
       </div>
     </div>
   </section>
 
   <!-- ================================================================ -->
-  <!-- PART III: THE PATH -->
+  <!-- PART IV: HONEST TENSIONS -->
   <!-- ================================================================ -->
   <div class="part-header" data-reveal>
-    <div class="part-num">Part III</div>
+    <div class="part-num">Part IV</div>
     <h2>Sequencing and honest tensions</h2>
   </div>
 
-  <!-- 11: SEQUENCING -->
+  <!-- 13: SEQUENCING -->
   <section class="section" data-reveal>
-    <div class="section-label">11 / The Sequence</div>
+    <div class="section-label">13 / The Sequence</div>
     <h2>What comes first. What depends on what.</h2>
     <p>
       Infrastructure before ventures. Ventures before network effects. The temptation is to announce the network; the discipline is to lay the pipe first.
@@ -1275,67 +1602,74 @@
     <div class="timeline">
       <div class="timeline-item active">
         <div class="t-phase">Foundation &mdash; Now</div>
-        <h4>LCA filed. Patronage system designed. Identity layer live.</h4>
-        <p>RegenHub, LCA is a legal entity. habitat.eth namespace is operational. Patronage accounting design phase complete. commons.id MVP deployed for ETHBoulder. $CLOUD specification written.</p>
+        <h4>Legal entity filed. Accounting system designed. Identity layer live.</h4>
+        <p>Colorado LCA is a legal entity. Identity namespace is operational. Patronage accounting design phase complete. Knowledge archive MVP deployed. Credit specification written.</p>
       </div>
       <div class="timeline-item active">
         <div class="t-phase">Infrastructure &mdash; Q1-Q2 2026</div>
-        <h4>Patronage Rails v1. $CLOUD mint. Ecosystem Dashboard prototype.</h4>
-        <p>Financial Engineering Committee parameterizes the patronage system. First $CLOUD credits minted. Dashboard tracks real flows across the Gitcoin/Allo/Techne ecosystem. LVB first cohort.</p>
+        <h4>Patronage Rails v1. First credits minted. Ecosystem dashboard prototype.</h4>
+        <p>Financial Engineering Committee parameterizes the patronage system. First service credits minted. Dashboard tracks real flows across the ecosystem. Educational program launches first cohort.</p>
       </div>
       <div class="timeline-item future">
         <div class="t-phase">Ventures &mdash; Q3-Q4 2026</div>
-        <h4>Mutual credit pilot. Economic Habitat Matrix diagnostic. commons.id v2.</h4>
-        <p>Boulder mutual credit pilot with neighboring businesses. Matrix diagnostic tool for external cooperatives. commons.id extended to community economic oracles. Grassroots Economics integration research applied.</p>
+        <h4>Mutual credit pilot. Habitat Matrix diagnostic. Economic measurement v1.</h4>
+        <p>Local mutual credit pilot with neighboring businesses. Matrix diagnostic tool for external cooperatives. Knowledge archive extended to community economic measurement.</p>
       </div>
       <div class="timeline-item future">
         <div class="t-phase">Network &mdash; 2027</div>
-        <h4>Inter-cooperative credit. Patronage Rails as product. Federated $CLOUD.</h4>
-        <p>Multiple cooperatives on patronage rails. Cross-cooperative $CLOUD exchange. Community cost-of-living oracle producing data. The root system begins to surface.</p>
+        <h4>Inter-cooperative credit. Patronage Rails as product. Federated credits.</h4>
+        <p>Multiple cooperatives on patronage rails. Cross-cooperative credit exchange. Community cost-of-living oracle producing data. The root system begins to surface.</p>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- 12: HONEST TENSIONS -->
+  <!-- 14: HONEST TENSIONS -->
   <section class="section" data-reveal>
-    <div class="section-label">12 / What We Don't Know Yet</div>
-    <h2>The hard questions we owe honest answers to.</h2>
+    <div class="section-label">14 / What We Don't Know Yet</div>
+    <h2>A credible proposal has to be honest about its own failure modes.</h2>
     <p>
-      <em>The Mandate Gap</em> names four tensions: scale, governance complexity, interoperability, and the bootstrap problem. We inherit all of them, plus some of our own.
+      Decentralized and cooperative systems introduce new categories of difficulty that centralized systems handle (however imperfectly) by default. Ignoring these would repeat the same mistake: optimizing for one set of objectives while leaving others structurally unaddressed.
     </p>
+
+    <div class="tension-block">
+      <h4>Scale and Crisis Response</h4>
+      <p>
+        Mutual credit networks and cooperative structures work well at community scale. National and global economic coordination requires mechanisms that decentralized systems are still learning to provide. A central bank can move markets in an afternoon. A network of cooperatives cannot, and perhaps shouldn't &mdash; but the gap in crisis-response capacity is real.
+      </p>
+    </div>
+
+    <div class="tension-block">
+      <h4>Governance Complexity</h4>
+      <p>
+        Multi-stakeholder governance is harder than board governance. It is slower, more contentious, and requires higher levels of civic participation. History shows that participatory systems can suffer from fatigue, capture by the most persistent voices, or paralysis. The design challenge is building structures that are democratic without being exhausting.
+      </p>
+    </div>
 
     <div class="tension-block">
       <h4>Parameterization Is Governance</h4>
       <p>
-        The Financial Engineering Committee will set the patronage allocation formula, contribution weights, investor-member terms, and distribution schedules. Every parameter is a governance decision about who the economy is for. We have the architecture. We do not yet have consensus on the parameters. This is the hardest near-term work, and it cannot be automated away.
+        The patronage allocation formula, contribution weights, credit terms, and distribution schedules are all governance decisions about who the economy is for. We have the architecture. We do not yet have consensus on the parameters. This is the hardest near-term work, and it cannot be automated away.
       </p>
     </div>
 
     <div class="tension-block">
-      <h4>Legal-Technical Interface</h4>
+      <h4>Interoperability with Existing Systems</h4>
       <p>
-        Colorado LCA statute provides a favorable legal framework. But encoding patronage allocation as smart contract logic while maintaining Subchapter K compliance is untested territory. Securities law, tax treatment, and banking regulation were not written for these structures. We need the attorney team (Pote Law Firm) and the engineering team in the same room, not the same Zoom call.
+        Any alternative financial infrastructure will operate alongside (not instead of) the existing system for a long time. The interface layer between cooperative economies and the dollar-denominated financial system is a hard engineering and legal problem. Securities law, tax treatment, and banking regulation were not written for these structures.
       </p>
     </div>
 
     <div class="tension-block">
-      <h4>The $CLOUD Bootstrapping Sequence</h4>
+      <h4>Community Economic Oracles Are Hard</h4>
       <p>
-        $CLOUD credits need a sufficient base of services to be valuable, and services need a sufficient base of $CLOUD holders to be sustainable. The investor-member staking curve (longer lock = higher revenue share) is designed to solve this, but the initial deposits require trust in infrastructure that does not yet have a track record. Kevin's investment and the 1% venture reciprocity model are bootstrap mechanisms. They need to work before the flywheel spins.
-      </p>
-    </div>
-
-    <div class="tension-block">
-      <h4>Community Cost-of-Living Oracles Are Hard</h4>
-      <p>
-        The CPI critique in <em>The Mandate Gap</em> is precise. But building a community-validated alternative that is actually more accurate &mdash; not just differently biased &mdash; requires solving the oracle problem at a level the crypto ecosystem has not yet achieved for non-financial data. We can prototype in Boulder. We should be honest that scaling it is a research problem, not an engineering problem.
+        Building a community-validated cost-of-living index that is actually more accurate &mdash; not just differently biased &mdash; requires solving the oracle problem at a level that has not yet been achieved for non-financial data. We can prototype locally. We should be honest that scaling it is a research problem, not an engineering problem.
       </p>
     </div>
 
     <p>
-      These are design constraints, not disqualifications. The difference between this approach and the one <em>The Mandate Gap</em> critiques is that we are naming what we don't know before we build, not after.
+      None of these tensions are disqualifying. They are design constraints. The difference between this approach and the one it critiques is that we are naming what we don't know <em>before</em> we build, not after.
     </p>
   </section>
 
@@ -1345,12 +1679,12 @@
   <div class="divider"></div>
 
   <section class="section closing" data-reveal>
-    <h2>The mandate gap is a design gap. We are closing it with infrastructure.</h2>
+    <h2>The question was never whether the system works.</h2>
     <p>
-      Not a manifesto. Not a whitepaper. A studio, in a specific place, building specific tools that address specific structural failures. The cooperative is filed. The accounting system is designed. The identity layer is live. The first convergence has been recorded.
+      It works precisely as designed. Liquidity flows to capital. Metrics are managed. Labor's share is structurally constrained. The institution succeeds at its actual objectives with remarkable consistency.
     </p>
     <p>
-      The root system grows slowly. It is invisible long before it is undeniable. But it is the part of the forest that holds the soil together when the storms arrive.
+      The work ahead is not reform. It is the patient, unglamorous construction of balancing institutions: cooperative structures, transparent measurement systems, direct financial channels, and governance models that encode different objectives into their foundations.
     </p>
     <p>
       The ventures described here are not predictions. They are invitations. Each one requires people who care enough to do the unglamorous work of parameterization, legal compliance, community validation, and sustained participation. Someone has to go first. Going first is expensive. But the cooperative impulse is older than any crisis and will outlast the current one.
@@ -1366,21 +1700,18 @@
 
   <!-- FOOTNOTES -->
   <div class="footnotes">
-    <h3>Architecture and References</h3>
+    <h3>Sources and References</h3>
+    <p>
+      Productivity-compensation data from the Economic Policy Institute. Housing price-to-income ratios from the National Association of Realtors and FRED. Healthcare cost data from the Kaiser Family Foundation. CPI methodology critiques reference work by John Williams (ShadowStats) and the BLS Handbook of Methods. Institutional capture arguments draw on scholarship by Nomi Prins, Nathan Tankus, and Wright Patman's Congressional record.
+    </p>
     <p>
       REA (Resource-Event-Agent) ontology from McCarthy (1982) and subsequent work by Geerts and McCarthy. Colorado LCA statutory framework: C.R.S. 7-58-101 et seq. Subchapter K partnership taxation: IRC Sections 701-761. Patronage allocation under IRC 704(b) substantial economic effect regulations.
     </p>
     <p>
-      Superfluid protocol for continuous-flow token distribution. ENS (Ethereum Name Service) for the habitat.eth identity namespace. ERC-8004 agent identity standard. Grassroots Economics and the Sarafu Network mutual credit architecture (Ruddick et al., 2015). Sardex complementary currency (Ferraro et al., 2020). WIR Bank reciprocal exchange system (Stodder, 2009).
+      Mutual credit precedents: Sardex (Ferraro et al., 2020), WIR Bank (Stodder, 2009), Grassroots Economics (Ruddick et al., 2015). Cooperative governance models reference the Mondragon Corporation, Emilia-Romagna cooperative networks, and Purpose Foundation steward-ownership. On-chain governance precedents from Aragon, MolochDAO, and Colony frameworks.
     </p>
     <p>
-      Economic Habitat Matrix and Seven-Layer Pattern Stack are original frameworks developed within Techne Institute. The "Craft of Coordination" thesis synthesizes these into a unified strategic argument. The Scenius concept after Brian Eno. H-LAM/T framework after Douglas Engelbart (1962).
-    </p>
-    <p>
-      commons.id: knowledge-graph-backed convergence archive. First deployment: ETHBoulder 2026 (February 13-16, Boulder, Colorado). Convergence chain: append-only hash chain providing cryptographic verification of contributions. Architecture documented at commons.id.
-    </p>
-    <p>
-      This document responds to "The Mandate Gap: From Misaligned Success to Regenerative Alternatives" (2026). The ventures described are at varying stages of maturity, from legally filed (RegenHub, LCA) to specified ($CLOUD, patronage system) to proposed (community cost-of-living oracles, inter-cooperative credit network). Timelines are intentions, not commitments.
+      The Seven-Layer Pattern Stack and Economic Habitat Matrix are original frameworks. H-LAM/T framework after Douglas Engelbart (1962). Scenius concept after Brian Eno. All quantitative figures in Part I are approximate and intended to illustrate structural trends, not precise point estimates. The ventures described are at varying stages of maturity, from legally filed to specified to proposed. Timelines are intentions, not commitments.
     </p>
   </div>
 
