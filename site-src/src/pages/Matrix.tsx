@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useTheme } from '../ThemeContext';
+import type { Theme } from '../theme';
 
 interface Cell {
   x: number;
@@ -82,53 +84,100 @@ function getZoneLabel(sum: number): Zone {
   return ZONES[3];
 }
 
-function getCellColor(x: number, y: number, isSelected: boolean, isHovered: boolean): string {
+// Cell color: mutualistic (bottom-left) = glowGreen/glowCyan, parasitic (top-right) = accentOrange/warm
+function getCellColor(x: number, y: number, isSelected: boolean, isHovered: boolean, isDark: boolean): string {
   const sum = x + y;
+  // t: 0 = mutualistic (-6), 1 = parasitic (+6)
   const t = (sum + 6) / 12;
+
   let h: number, s: number, l: number;
-  if (t <= 0.33) {
-    const p = t / 0.33;
-    h = 160 - p * 30; s = 42 - p * 10; l = 32 + p * 20;
-  } else if (t <= 0.5) {
-    const p = (t - 0.33) / 0.17;
-    h = 130 - p * 80; s = 32 - p * 18; l = 52 + p * 16;
-  } else if (t <= 0.67) {
-    const p = (t - 0.5) / 0.17;
-    h = 50 - p * 20; s = 14 + p * 20; l = 68 - p * 10;
+
+  if (isDark) {
+    // Dark mode: deep greens → muted mid → warm darks
+    if (t <= 0.33) {
+      const p = t / 0.33;
+      h = 140 - p * 20;   // 140 (green) → 120
+      s = 35 - p * 8;
+      l = 22 + p * 8;     // deep forest
+    } else if (t <= 0.5) {
+      const p = (t - 0.33) / 0.17;
+      h = 120 - p * 60;   // 120 → 60
+      s = 27 - p * 10;
+      l = 30 + p * 4;
+    } else if (t <= 0.67) {
+      const p = (t - 0.5) / 0.17;
+      h = 60 - p * 30;    // 60 → 30
+      s = 17 + p * 12;
+      l = 34 - p * 2;
+    } else {
+      const p = (t - 0.67) / 0.33;
+      h = 30 - p * 10;    // 30 → 20 (warm amber/rust)
+      s = 29 + p * 16;
+      l = 32 - p * 8;     // darker at extremes
+    }
+    if (isSelected) { s += 14; l += 6; }
+    else if (isHovered) { s += 8; l += 3; }
   } else {
-    const p = (t - 0.67) / 0.33;
-    h = 30 - p * 25; s = 34 + p * 22; l = 58 - p * 20;
+    // Light mode: moss greens → parchment mid → warm terracotta
+    if (t <= 0.33) {
+      const p = t / 0.33;
+      h = 140 - p * 20;   // 140 → 120 (moss green)
+      s = 38 - p * 8;
+      l = 42 + p * 14;
+    } else if (t <= 0.5) {
+      const p = (t - 0.33) / 0.17;
+      h = 120 - p * 70;   // 120 → 50
+      s = 30 - p * 16;
+      l = 56 + p * 12;
+    } else if (t <= 0.67) {
+      const p = (t - 0.5) / 0.17;
+      h = 50 - p * 20;    // 50 → 30
+      s = 14 + p * 18;
+      l = 68 - p * 6;
+    } else {
+      const p = (t - 0.67) / 0.33;
+      h = 30 - p * 8;     // 30 → 22 (terracotta)
+      s = 32 + p * 20;
+      l = 62 - p * 14;
+    }
+    if (isSelected) { s += 12; l -= 8; }
+    else if (isHovered) { s += 6; l -= 4; }
   }
-  if (isSelected) { s += 12; l -= 8; }
-  else if (isHovered) { s += 6; l -= 4; }
+
   return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
 }
 
-function getCellTextColor(x: number, y: number): string {
+function getCellTextColor(x: number, y: number, isDark: boolean): string {
+  if (isDark) return "#d8e8cc";
   const sum = x + y;
   if (sum <= -4 || sum >= 5) return "#f8f6f2";
-  return "#1a1a1a";
+  return "#2a1e14";
 }
 
-function getCellBorder(x: number, y: number, isSelected: boolean): string {
+function getCellBorder(x: number, y: number, isSelected: boolean, isDark: boolean): string {
   const sum = x + y;
   const t = (sum + 6) / 12;
-  const alpha = isSelected ? 0.6 : 0.25;
-  if (t <= 0.4) return `rgba(30, 80, 60, ${alpha})`;
-  if (t <= 0.6) return `rgba(80, 70, 50, ${alpha})`;
-  return `rgba(120, 40, 30, ${alpha})`;
+  const alpha = isSelected ? 0.6 : (isDark ? 0.35 : 0.25);
+  if (isDark) {
+    if (t <= 0.4) return `rgba(124, 200, 104, ${alpha})`;
+    if (t <= 0.6) return `rgba(140, 160, 120, ${alpha})`;
+    return `rgba(200, 132, 74, ${alpha})`;
+  }
+  if (t <= 0.4) return `rgba(93, 164, 72, ${alpha})`;
+  if (t <= 0.6) return `rgba(120, 112, 96, ${alpha})`;
+  return `rgba(176, 112, 64, ${alpha})`;
 }
 
-function HealthBar({ score }: { score: number }) {
+function HealthBar({ score, theme }: { score: number; theme: Theme }) {
   const w = Math.abs(score) * 100;
   const isPositive = score >= 0;
   return (
     <div style={{ display:"flex", alignItems:"center", gap:8, marginTop:8 }}>
-      <span style={{ fontSize:11, color:"#777", width:80, textAlign:"right" }}>
+      <span style={{ fontSize:11, color: theme.bodyMuted, width:80, textAlign:"right" }}>
         {isPositive ? "Symbiotic" : "Parasitic"}
       </span>
       <div style={{
-        flex:1, height:6, background:"#e8e4de", borderRadius:3,
+        flex:1, height:6, background: theme.border, borderRadius:3,
         position:"relative", overflow:"hidden"
       }}>
         <div style={{
@@ -136,15 +185,16 @@ function HealthBar({ score }: { score: number }) {
           [isPositive ? "left" : "right"]: "50%",
           width: `${w/2}%`, height:"100%",
           background: isPositive
-            ? "linear-gradient(90deg, #a8c4a0, #3d7a4a)"
-            : "linear-gradient(270deg, #c4a08a, #a04030)",
+            ? `linear-gradient(90deg, ${theme.glowCyan}, ${theme.glowGreen})`
+            : `linear-gradient(270deg, ${theme.accentOrange}, #a04030)`,
           borderRadius:3, transition:"width 0.3s ease"
         }} />
         <div style={{
-          position:"absolute", left:"50%", top:0, width:1, height:"100%", background:"#999"
+          position:"absolute", left:"50%", top:0, width:1, height:"100%",
+          background: theme.bodyMuted
         }} />
       </div>
-      <span style={{ fontSize:11, color:"#777", width:20 }}>
+      <span style={{ fontSize:11, color: theme.bodyMuted, width:20 }}>
         {score > 0 ? "+" : ""}{(score * 100).toFixed(0)}
       </span>
     </div>
@@ -152,6 +202,7 @@ function HealthBar({ score }: { score: number }) {
 }
 
 export default function Matrix() {
+  const { theme, isDark } = useTheme();
   const [selected, setSelected] = useState<Cell | null>(null);
   const [hovered, setHovered] = useState<Cell | null>(null);
 
@@ -172,27 +223,36 @@ export default function Matrix() {
   const healthScore = activeCell ? -((activeCell.x + activeCell.y) / 6) : 0;
   const zone = activeCell ? getZoneLabel(activeCell.x + activeCell.y) : null;
 
+  const axisLabel: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+    color: theme.bodyMuted
+  };
+  const axisValue: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+    color: theme.bodyMuted, textAlign: "right", width: 20
+  };
+  const panelBg = isDark ? theme.cardBg : 'rgba(255,253,249,0.85)';
+  const panelBorder = isDark ? theme.border : '#ddd8d0';
+
   return (
     <div style={{
-      fontFamily: "'Crimson Pro', 'Georgia', serif",
-      background: "linear-gradient(145deg, #f4f1eb 0%, #ebe7df 40%, #e4e0d8 100%)",
-      minHeight: "100vh", padding: "24px 28px", color: "#1a1a1a"
+      fontFamily: "'Playfair Display', 'Georgia', serif",
+      background: isDark
+        ? `radial-gradient(ellipse at 30% 40%, rgba(124,200,104,0.04) 0%, transparent 60%), ${theme.bg}`
+        : `linear-gradient(145deg, ${theme.bg} 0%, ${theme.bgMid} 40%, ${theme.bg} 100%)`,
+      minHeight: "100vh", padding: "24px 28px", color: theme.body
     }}>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      />
-
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h1 style={{
-          fontSize: 28, fontWeight: 600, color: "#2a2a2a",
-          letterSpacing: "-0.02em", marginBottom: 4
+          fontSize: 28, fontWeight: 600, color: theme.heading,
+          letterSpacing: "-0.02em", marginBottom: 4,
+          fontFamily: "'Playfair Display', serif"
         }}>
           Economic Habitat Matrix
         </h1>
         <p style={{
-          fontFamily: "'Nunito Sans', sans-serif", fontSize: 13,
-          color: "#6b6560", marginBottom: 20, lineHeight: 1.5, maxWidth: 640
+          fontFamily: "'Source Serif 4', serif", fontSize: 13,
+          color: theme.bodyMuted, marginBottom: 20, lineHeight: 1.5, maxWidth: 640
         }}>
           Mapping organizational behavior as ecological relationship. Each cell represents
           an archetype defined by how an entity distributes governance and whether it
@@ -210,8 +270,8 @@ export default function Matrix() {
               }}>
                 <div style={{
                   writingMode: "vertical-rl", transform: "rotate(180deg)",
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: 10,
-                  fontWeight: 600, color: "#7a756e", letterSpacing: "0.08em",
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+                  fontWeight: 600, color: theme.bodyMuted, letterSpacing: "0.08em",
                   textTransform: "uppercase", textAlign: "center"
                 }}>
                   Systemic Relationship
@@ -223,24 +283,15 @@ export default function Matrix() {
                 display: "flex", flexDirection: "column", justifyContent: "space-around",
                 marginRight: 4, paddingTop: 2, paddingBottom: 2
               }}>
-                <span style={{
-                  fontFamily: "'Nunito Sans',sans-serif", fontSize: 9,
-                  color: "#a09890", textAlign: "center"
-                }}>
+                <span style={{ ...axisLabel, fontSize: 9, textAlign: "center" }}>
                   extractive
                 </span>
                 {[3,2,1,0,-1,-2,-3].map(v => (
-                  <span key={v} style={{
-                    fontFamily: "'Nunito Sans',sans-serif", fontSize: 10,
-                    color: "#8a857e", textAlign: "right", width: 20
-                  }}>
+                  <span key={v} style={axisValue}>
                     {v > 0 ? `+${v}` : v}
                   </span>
                 ))}
-                <span style={{
-                  fontFamily: "'Nunito Sans',sans-serif", fontSize: 9,
-                  color: "#a09890", textAlign: "center"
-                }}>
+                <span style={{ ...axisLabel, fontSize: 9, textAlign: "center" }}>
                   contributive
                 </span>
               </div>
@@ -252,9 +303,9 @@ export default function Matrix() {
                     {row.map((cell) => {
                       const isSel = selected?.x === cell.x && selected?.y === cell.y;
                       const isHov = hovered?.x === cell.x && hovered?.y === cell.y;
-                      const bg = getCellColor(cell.x, cell.y, isSel, isHov);
-                      const textCol = getCellTextColor(cell.x, cell.y);
-                      const border = getCellBorder(cell.x, cell.y, isSel);
+                      const bg = getCellColor(cell.x, cell.y, isSel, isHov, isDark);
+                      const textCol = getCellTextColor(cell.x, cell.y, isDark);
+                      const border = getCellBorder(cell.x, cell.y, isSel, isDark);
                       return (
                         <div
                           key={`${cell.x},${cell.y}`}
@@ -269,22 +320,22 @@ export default function Matrix() {
                             transition: "all 0.2s ease",
                             transform: (isSel || isHov) ? "scale(1.04)" : "scale(1)",
                             boxShadow: isSel
-                              ? "0 2px 8px rgba(0,0,0,0.15)"
+                              ? `0 2px 8px rgba(0,0,0,${isDark ? 0.4 : 0.15})`
                               : isHov
-                                ? "0 1px 4px rgba(0,0,0,0.1)"
-                                : "0 0.5px 1px rgba(0,0,0,0.06)",
+                                ? `0 1px 4px rgba(0,0,0,${isDark ? 0.3 : 0.1})`
+                                : `0 0.5px 1px rgba(0,0,0,${isDark ? 0.2 : 0.06})`,
                             position: "relative",
                             zIndex: (isSel || isHov) ? 2 : 1
                           }}
                         >
                           <div style={{
-                            fontFamily: "'Crimson Pro', serif", fontSize: 11,
+                            fontFamily: "'Playfair Display', serif", fontSize: 11,
                             fontWeight: 600, color: textCol, lineHeight: 1.2, marginBottom: 1
                           }}>
                             {cell.label}
                           </div>
                           <div style={{
-                            fontFamily: "'Nunito Sans', sans-serif", fontSize: 8,
+                            fontFamily: "'Source Serif 4', serif", fontSize: 8,
                             color: textCol, opacity: 0.7, lineHeight: 1.25,
                             overflow: "hidden", display: "-webkit-box",
                             WebkitLineClamp: 2, WebkitBoxOrient: "vertical"
@@ -304,8 +355,7 @@ export default function Matrix() {
                 }}>
                   {[-3,-2,-1,0,1,2,3].map(v => (
                     <span key={v} style={{
-                      fontFamily: "'Nunito Sans',sans-serif", fontSize: 10,
-                      color: "#8a857e", width: 108, textAlign: "center"
+                      ...axisLabel, width: 108, textAlign: "center"
                     }}>
                       {v > 0 ? `+${v}` : v}
                     </span>
@@ -317,20 +367,16 @@ export default function Matrix() {
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   marginTop: 4, paddingLeft: 8, paddingRight: 8
                 }}>
-                  <span style={{
-                    fontFamily: "'Nunito Sans',sans-serif", fontSize: 9, color: "#a09890"
-                  }}>
+                  <span style={{ ...axisLabel, fontSize: 9 }}>
                     dispersive
                   </span>
                   <span style={{
-                    fontFamily: "'Nunito Sans',sans-serif", fontSize: 10, fontWeight: 600,
-                    color: "#7a756e", letterSpacing: "0.08em", textTransform: "uppercase"
+                    fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600,
+                    color: theme.bodyMuted, letterSpacing: "0.08em", textTransform: "uppercase"
                   }}>
                     Governance Orientation
                   </span>
-                  <span style={{
-                    fontFamily: "'Nunito Sans',sans-serif", fontSize: 9, color: "#a09890"
-                  }}>
+                  <span style={{ ...axisLabel, fontSize: 9 }}>
                     concentrative
                   </span>
                 </div>
@@ -342,24 +388,26 @@ export default function Matrix() {
           <div style={{ flex: 1, minWidth: 240, maxWidth: 320, position: "sticky", top: 24 }}>
             {activeCell ? (
               <div style={{
-                background: "rgba(255,253,249,0.85)", backdropFilter: "blur(8px)",
-                border: `1.5px solid ${getCellBorder(activeCell.x, activeCell.y, true)}`,
+                background: panelBg, backdropFilter: "blur(8px)",
+                border: `1.5px solid ${getCellBorder(activeCell.x, activeCell.y, true, isDark)}`,
                 borderRadius: 8, padding: "16px 18px",
-                boxShadow: "0 2px 12px rgba(0,0,0,0.08)"
+                boxShadow: `0 2px 12px rgba(0,0,0,${isDark ? 0.3 : 0.08})`
               }}>
                 <div style={{
                   display: "flex", justifyContent: "space-between",
                   alignItems: "flex-start", marginBottom: 8
                 }}>
                   <h2 style={{
-                    fontSize: 20, fontWeight: 600, color: "#2a2a2a", lineHeight: 1.2, flex: 1
+                    fontSize: 20, fontWeight: 600, color: theme.heading,
+                    lineHeight: 1.2, flex: 1, fontFamily: "'Playfair Display', serif"
                   }}>
                     {activeCell.label}
                   </h2>
                   <span style={{
-                    fontFamily: "'Nunito Sans', sans-serif", fontSize: 10,
-                    color: "#999", marginLeft: 8, whiteSpace: "nowrap",
-                    background: "#f0ece6", padding: "2px 6px", borderRadius: 3
+                    fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+                    color: theme.bodyMuted, marginLeft: 8, whiteSpace: "nowrap",
+                    background: isDark ? theme.bgMid : '#f0ece6',
+                    padding: "2px 6px", borderRadius: 3
                   }}>
                     ({activeCell.x > 0 ? "+" : ""}{activeCell.x}, {activeCell.y > 0 ? "+" : ""}{activeCell.y})
                   </span>
@@ -367,8 +415,8 @@ export default function Matrix() {
 
                 {zone && (
                   <div style={{
-                    fontFamily: "'Nunito Sans', sans-serif", fontSize: 11, fontWeight: 600,
-                    color: healthScore >= 0 ? "#3d6b45" : "#8b4030",
+                    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 600,
+                    color: healthScore >= 0 ? theme.glowGreen : theme.accentOrange,
                     textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4
                   }}>
                     {zone.label} Zone
@@ -376,32 +424,32 @@ export default function Matrix() {
                 )}
                 {zone && (
                   <div style={{
-                    fontFamily: "'Nunito Sans', sans-serif", fontSize: 11,
-                    color: "#8a857e", marginBottom: 10, fontStyle: "italic"
+                    fontFamily: "'Source Serif 4', serif", fontSize: 11,
+                    color: theme.bodyMuted, marginBottom: 10, fontStyle: "italic"
                   }}>
                     {zone.sub}
                   </div>
                 )}
 
-                <HealthBar score={healthScore} />
+                <HealthBar score={healthScore} theme={theme} />
 
                 <p style={{
-                  fontFamily: "'Crimson Pro', serif", fontSize: 14,
-                  lineHeight: 1.55, color: "#3a3530", marginTop: 14
+                  fontFamily: "'Source Serif 4', serif", fontSize: 14,
+                  lineHeight: 1.55, color: theme.body, marginTop: 14
                 }}>
                   {activeCell.desc}
                 </p>
 
                 <div style={{
-                  marginTop: 14, paddingTop: 12, borderTop: "1px solid #e4e0d8"
+                  marginTop: 14, paddingTop: 12, borderTop: `1px solid ${theme.border}`
                 }}>
                   <div style={{
-                    fontFamily: "'Nunito Sans', sans-serif", fontSize: 10,
-                    color: "#999", lineHeight: 1.6
+                    fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+                    color: theme.bodyMuted, lineHeight: 1.6
                   }}>
                     <div style={{ display:"flex", justifyContent:"space-between" }}>
                       <span>Governance:</span>
-                      <span style={{ color:"#666" }}>
+                      <span style={{ color: theme.body }}>
                         {activeCell.x <= -2 ? "Highly dispersed"
                           : activeCell.x === -1 ? "Slightly dispersed"
                           : activeCell.x === 0 ? "Self-governed"
@@ -411,7 +459,7 @@ export default function Matrix() {
                     </div>
                     <div style={{ display:"flex", justifyContent:"space-between" }}>
                       <span>Systemic role:</span>
-                      <span style={{ color:"#666" }}>
+                      <span style={{ color: theme.body }}>
                         {activeCell.y >= 2 ? "Net extractor"
                           : activeCell.y === 1 ? "Slight extractor"
                           : activeCell.y === 0 ? "Neutral exchange"
@@ -421,7 +469,7 @@ export default function Matrix() {
                     </div>
                     <div style={{ display:"flex", justifyContent:"space-between" }}>
                       <span>Ecological health:</span>
-                      <span style={{ color:"#666" }}>
+                      <span style={{ color: theme.body }}>
                         {(healthScore * 100).toFixed(0)}%
                       </span>
                     </div>
@@ -430,12 +478,13 @@ export default function Matrix() {
               </div>
             ) : (
               <div style={{
-                background: "rgba(255,253,249,0.6)", border: "1.5px dashed #d4d0c8",
+                background: isDark ? `${theme.cardBg}99` : "rgba(255,253,249,0.6)",
+                border: `1.5px dashed ${theme.border}`,
                 borderRadius: 8, padding: "20px 18px", textAlign: "center"
               }}>
                 <p style={{
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: 12,
-                  color: "#999", lineHeight: 1.5
+                  fontFamily: "'Source Serif 4', serif", fontSize: 12,
+                  color: theme.bodyMuted, lineHeight: 1.5
                 }}>
                   Hover or click any cell to explore its ecological archetype,
                   systemic role, and habitat impact.
@@ -445,12 +494,12 @@ export default function Matrix() {
 
             {/* Zone Legend */}
             <div style={{
-              marginTop: 16, background: "rgba(255,253,249,0.7)",
-              border: "1px solid #ddd8d0", borderRadius: 8, padding: "14px 16px"
+              marginTop: 16, background: isDark ? `${theme.cardBg}bb` : "rgba(255,253,249,0.7)",
+              border: `1px solid ${panelBorder}`, borderRadius: 8, padding: "14px 16px"
             }}>
               <h3 style={{
-                fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, fontWeight: 600,
-                color: "#7a756e", textTransform: "uppercase",
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600,
+                color: theme.bodyMuted, textTransform: "uppercase",
                 letterSpacing: "0.08em", marginBottom: 10
               }}>
                 Ecological Zones (diagonal bands)
@@ -463,13 +512,13 @@ export default function Matrix() {
                       <div style={{
                         width: 14, height: 14, borderRadius: 3, flexShrink: 0,
                         background: getCellColor(
-                          Math.round(mid/2), Math.round(mid/2), false, false
+                          Math.round(mid/2), Math.round(mid/2), false, false, isDark
                         ),
-                        border: "1px solid rgba(0,0,0,0.1)"
+                        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
                       }} />
-                      <div style={{ fontFamily: "'Nunito Sans',sans-serif", fontSize: 11 }}>
-                        <span style={{ fontWeight: 600, color: "#4a4540" }}>{z.label}</span>
-                        <span style={{ color: "#999", marginLeft: 4 }}>{z.sub}</span>
+                      <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 11 }}>
+                        <span style={{ fontWeight: 600, color: theme.heading }}>{z.label}</span>
+                        <span style={{ color: theme.bodyMuted, marginLeft: 4 }}>{z.sub}</span>
                       </div>
                     </div>
                   );
@@ -479,19 +528,19 @@ export default function Matrix() {
 
             {/* Axes info */}
             <div style={{
-              marginTop: 12, background: "rgba(255,253,249,0.5)",
-              border: "1px solid #ddd8d0", borderRadius: 8, padding: "14px 16px"
+              marginTop: 12, background: isDark ? `${theme.cardBg}88` : "rgba(255,253,249,0.5)",
+              border: `1px solid ${panelBorder}`, borderRadius: 8, padding: "14px 16px"
             }}>
               <h3 style={{
-                fontFamily: "'Nunito Sans', sans-serif", fontSize: 10, fontWeight: 600,
-                color: "#7a756e", textTransform: "uppercase",
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600,
+                color: theme.bodyMuted, textTransform: "uppercase",
                 letterSpacing: "0.08em", marginBottom: 8
               }}>
                 Reading the Axes
               </h3>
               <div style={{
-                fontFamily: "'Crimson Pro', serif", fontSize: 12.5,
-                color: "#5a554e", lineHeight: 1.55
+                fontFamily: "'Source Serif 4', serif", fontSize: 12.5,
+                color: theme.body, lineHeight: 1.55
               }}>
                 <p style={{ marginBottom: 8 }}>
                   <strong>X: Governance Orientation.</strong> Does this entity concentrate
