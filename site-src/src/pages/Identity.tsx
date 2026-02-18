@@ -1,7 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
-import { Fingerprint, Globe } from 'lucide-react';
+import { Fingerprint, Globe, Building2, Bot, Send, BadgeCheck, Handshake, Network, BarChart3 } from 'lucide-react';
 
 export default function Identity() {
   const { theme } = useTheme();
@@ -70,7 +70,7 @@ export default function Identity() {
               background: `linear-gradient(135deg, ${theme.glowGreen} 0%, rgba(74,124,89,0.6) 100%)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🏢</div>
+            }}><Building2 size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Ventures</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -88,7 +88,7 @@ export default function Identity() {
               background: 'linear-gradient(135deg, #B5622A 0%, rgba(181,98,42,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🤖</div>
+            }}><Bot size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Agents</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -110,35 +110,35 @@ export default function Identity() {
           every interaction requires a trusted intermediary. With it, peers can coordinate directly.
         </p>
 
-        <h3 style={s.h3}>📤 Direct Value Transfer</h3>
+        <h3 style={s.h3}><Send size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Direct Value Transfer</h3>
         <p>
           When every member has a resolvable address, value can flow directly between peers. Service credits, patronage distributions, 
           and collaborative payments resolve to <code>alice.habitat.eth</code> rather than routing through a central treasury. 
           The cooperative's accounting system tracks these flows — it doesn't intermediate them.
         </p>
 
-        <h3 style={s.h3}>✅ Portable Reputation</h3>
+        <h3 style={s.h3}><BadgeCheck size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Portable Reputation</h3>
         <p>
           Contribution history, allocation records, and skill attestations are linked to a member's ENS name through text records. 
           When Alice collaborates with another cooperative that uses Habitat, her record travels with her. Reputation is earned, 
           portable, and verifiable — not locked inside a single organization's database.
         </p>
 
-        <h3 style={s.h3}>🤝 Cross-Cooperative Agreements</h3>
+        <h3 style={s.h3}><Handshake size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Cross-Cooperative Agreements</h3>
         <p>
           Two cooperatives can form agreements referencing each other's members by name. <code>alice.habitat.eth</code> agrees to provide 
           design services to <code>bob.partner.eth</code> for a defined amount of $CLOUD credits. The agreement is legible to both 
           cooperatives' accounting systems without requiring a shared database or a platform in the middle.
         </p>
 
-        <h3 style={s.h3}>🌐 Composable Networks</h3>
+        <h3 style={s.h3}><Network size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Composable Networks</h3>
         <p>
           Each cooperative operates its own <code>.eth</code> namespace. Habitat provides the tools — patronage accounting, 
           contribution tracking, allocation formulas — and the identity grammar that makes them interoperable. A network of cooperatives 
           emerges not from a shared platform, but from a shared language.
         </p>
 
-        <h2 style={s.h2}>📊 The Identity Stack</h2>
+        <h2 style={s.h2}><BarChart3 size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> The Identity Stack</h2>
         <p>Identity in Habitat operates at three layers, each building on the one below:</p>
 
         <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.5rem 0' }}>

@@ -1,7 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
-import { Wallet, PieChart } from 'lucide-react';
+import { Wallet, PieChart, Landmark, Users, ClipboardList } from 'lucide-react';
 
 export default function Patronage() {
   const { theme } = useTheme();
@@ -176,7 +176,7 @@ export default function Patronage() {
               background: 'linear-gradient(135deg, #4A6F7C 0%, rgba(74,111,124,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🏦</div>
+            }}><Landmark size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Treasury</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -193,7 +193,7 @@ export default function Patronage() {
               background: `linear-gradient(135deg, ${theme.glowGreen} 0%, rgba(74,124,89,0.6) 100%)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>👥</div>
+            }}><Users size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>People</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -210,7 +210,7 @@ export default function Patronage() {
               background: 'linear-gradient(135deg, #B5622A 0%, rgba(181,98,42,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>📋</div>
+            }}><ClipboardList size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Agreements</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>

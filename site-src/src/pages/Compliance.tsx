@@ -1,7 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, TextureBand } from '../components/shared';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, CircleCheck } from 'lucide-react';
 
 export default function Compliance() {
   const { theme } = useTheme();
@@ -64,26 +64,26 @@ export default function Compliance() {
           How Habitat Satisfies 704(b)
         </h2>
 
-        <h3 style={s.h3}>1. Capital Account Maintenance ✅</h3>
+        <h3 style={s.h3}>1. Capital Account Maintenance <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
         <p>
           Treasury maintains dual-basis capital accounts for every member — book capital (FMV) and tax capital (cost basis). 
           Every contribution, allocation, and distribution updates both accounts according to IRC regulations. The accounting is 
           automatic and auditable.
         </p>
 
-        <h3 style={s.h3}>2. Liquidation Follows Capital ✅</h3>
+        <h3 style={s.h3}>2. Liquidation Follows Capital <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
         <p>
           The operating agreement explicitly ties liquidation distributions to capital account balances. When the cooperative dissolves, 
           members receive proceeds in proportion to their positive capital accounts. No exceptions, no carve-outs.
         </p>
 
-        <h3 style={s.h3}>3. Deficit Protection ✅</h3>
+        <h3 style={s.h3}>3. Deficit Protection <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
         <p>
           Members sign deficit restoration obligations (DROs) as part of the operating agreement. If a member's capital account goes 
           negative at liquidation, they must restore the deficit. This ensures allocations have real economic consequences.
         </p>
 
-        <h3 style={s.h3}>4. Substantiality ✅</h3>
+        <h3 style={s.h3}>4. Substantiality <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
         <p>
           Patronage allocations are based on documented contributions (labor hours, revenue generated, community participation, 
           infrastructure maintained). The allocation formula has clear business purpose: rewarding actual participation. 

@@ -1,7 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
-import { Cog, Sun, Rocket } from 'lucide-react';
+import { Cog, Sun, Rocket, Radio, Sunrise, SunDim, Sunset, Moon, CheckCircle, Shield } from 'lucide-react';
 
 export default function Agents() {
   const { theme } = useTheme();
@@ -33,7 +33,7 @@ export default function Agents() {
           gap: '0.5rem',
           color: '#B5622A'
         }}>
-          📡 Seeking Signers
+          <Radio size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Seeking Signers
         </h3>
         <p style={{ margin: '0 0 0.8rem', fontSize: '0.95rem' }}>
           We're assembling the founding cohort to deploy two Safe multisigs on Base — <code>watershed.habitat.eth</code> (operating treasury) 
@@ -75,7 +75,7 @@ export default function Agents() {
               background: 'linear-gradient(135deg, #B5622A 0%, rgba(181,98,42,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🌅</div>
+            }}><Sunrise size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Sunrise — Night Closes, Day Opens</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -93,7 +93,7 @@ export default function Agents() {
               background: `linear-gradient(135deg, ${theme.glowGreen} 0%, rgba(74,124,89,0.6) 100%)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>☀️</div>
+            }}><SunDim size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Daylight — Earn</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -111,7 +111,7 @@ export default function Agents() {
               background: 'linear-gradient(135deg, #4A6F7C 0%, rgba(74,111,124,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🌇</div>
+            }}><Sunset size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Sunset — Day Closes, Night Opens</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -129,7 +129,7 @@ export default function Agents() {
               background: 'linear-gradient(135deg, #5A6658 0%, rgba(90,102,88,0.6) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, color: 'white', fontSize: '1.2rem'
-            }}>🌙</div>
+            }}><Moon size={20} strokeWidth={1.5} /></div>
             <div>
               <h3 style={{ margin: '0 0 0.5rem' }}>Night — Regenerate</h3>
               <p style={{ margin: 0, color: theme.bodyMuted }}>
@@ -190,7 +190,7 @@ export default function Agents() {
 
         <Card>
           <h3 style={{ marginTop: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            ✅ Enrollment Steps
+            <CheckCircle size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Enrollment Steps
           </h3>
           <ol>
             <li style={{ marginBottom: '1rem' }}>
@@ -246,7 +246,7 @@ export default function Agents() {
           marginTop: '1.5rem'
         }}>
           <h3 style={{ marginTop: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', color: theme.glowGreen }}>
-            🛡️ The Bootstrap Arc
+            <Shield size={18} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> The Bootstrap Arc
           </h3>
           <p style={{ marginBottom: 0 }}>
             Enrollment starts with 100 SUP/month to Nou. It completes as 1 + 99 — a thin coordination stream to <code>nou.habitat.eth</code> and 

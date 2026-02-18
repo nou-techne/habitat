@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose } from '../components/shared';
+import { Shield, CircleCheck, AlertTriangle, BookOpen, Users } from 'lucide-react';
 
 export default function License() {
   const { theme } = useTheme();
@@ -11,13 +12,13 @@ export default function License() {
       <h1 style={s.h1}>License</h1>
       <p style={s.lead}>Tools built by cooperatives should benefit cooperatives.</p>
 
-      <h2 style={s.h2}>🛡️ Peer Production License</h2>
+      <h2 style={s.h2}><Shield size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Peer Production License</h2>
       <p>
         Habitat is released under the <strong>Peer Production License</strong>, also known as CopyFarLeft. This is not a traditional 
         open source license. It is a deliberate choice about who benefits from cooperative labor.
       </p>
 
-      <h2 style={s.h2}>✅ Free to Use</h2>
+      <h2 style={s.h2}><CircleCheck size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Free to Use</h2>
       <p>The following may use, modify, and distribute Habitat freely:</p>
       <ul>
         <li><strong>Worker-owned cooperatives</strong> and cooperative associations</li>
@@ -30,7 +31,7 @@ export default function License() {
         without restriction.
       </p>
 
-      <h2 style={s.h2}>⚠️ Commercial License Required</h2>
+      <h2 style={s.h2}><AlertTriangle size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Commercial License Required</h2>
       <p>
         For-profit enterprises operating under traditional corporate governance — where ownership and control are separated from labor, 
         and surplus flows primarily to capital holders — must obtain a commercial license to use Habitat.
@@ -40,7 +41,7 @@ export default function License() {
         within the cooperative economy rather than being extracted by organizations structured for extraction.
       </p>
 
-      <h2 style={s.h2}>📖 Full License Text</h2>
+      <h2 style={s.h2}><BookOpen size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Full License Text</h2>
       <p>The complete Peer Production License is maintained by the P2P Foundation:</p>
       <p>
         <a href="https://wiki.p2pfoundation.net/Peer_Production_License" style={{ color: theme.glowGreen }}>
@@ -48,7 +49,7 @@ export default function License() {
         </a>
       </p>
 
-      <h2 style={s.h2}>👥 Code of Conduct</h2>
+      <h2 style={s.h2}><Users size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Code of Conduct</h2>
       <p>
         All participants in the Habitat project are expected to follow the <strong>Contributor Covenant v2.1</strong> Code of Conduct. 
         This applies to all project spaces — repository, discussions, channels, and events.
