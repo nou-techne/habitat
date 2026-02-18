@@ -29,6 +29,12 @@ style.textContent = `
   body { overflow-x: hidden; }
   a { text-decoration: none; }
   ::selection { background: rgba(124, 200, 104, 0.3); }
+  p { margin-bottom: 1.2em; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { margin-bottom: 1.2em; padding-left: 1.5em; }
+  ul:last-child, ol:last-child { margin-bottom: 0; }
+  li { margin-bottom: 0.4em; }
+  blockquote { margin-bottom: 1.5em; }
 `;
 document.head.appendChild(style);
 
