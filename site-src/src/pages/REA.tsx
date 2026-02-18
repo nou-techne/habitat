@@ -19,6 +19,7 @@ export default function REA() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <FL>Interactive</FL>
       <h1 style={s.h1}>REA: Interactive Diagram</h1>
       <p style={s.lead}>Resource, Event, Agent — the three primitives that make economic relationships machine-readable.</p>

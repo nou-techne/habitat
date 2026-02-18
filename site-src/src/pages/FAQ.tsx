@@ -72,6 +72,7 @@ export default function FAQ() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <h1 style={s.h1}>Frequently Asked Questions</h1>
       <p style={s.lead}>Common questions about Habitat, cooperative coordination, and how the system works.</p>
 

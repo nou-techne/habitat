@@ -9,6 +9,7 @@ export default function License() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <h1 style={s.h1}>License</h1>
       <p style={s.lead}>Tools built by cooperatives should benefit cooperatives.</p>
 

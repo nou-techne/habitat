@@ -10,11 +10,36 @@ export default function Compliance() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={s.h1}>704(b) Compliance</h1>
-          <p style={s.lead}>
-            How patronage allocations satisfy IRC Section 704(b) economic effect requirements.
-          </p>
+        <div style={{ 
+          maxWidth: '860px', 
+          margin: '0 auto', 
+          padding: '5rem 2rem',
+          position: 'relative',
+        }}>
+          {/* Shield outline decoration */}
+          <div style={{
+            position: 'absolute',
+            bottom: '2rem',
+            right: '2rem',
+            width: '120px',
+            height: '140px',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }}>
+            <svg viewBox="0 0 120 140" fill="none" stroke={theme.glowGreen} strokeWidth="3">
+              <path d="M60 5 L10 25 L10 70 Q10 110 60 135 Q110 110 110 70 L110 25 Z" />
+              <path d="M60 20 L25 35 L25 70 Q25 100 60 120 Q95 100 95 70 L95 35 Z" />
+            </svg>
+          </div>
+          
+          <div style={{ maxWidth: '700px' }}>
+            <div style={{ fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: theme.bodyMuted, marginBottom: '0.5rem' }}>System</div>
+            <div style={{ width: 4, height: 60, background: theme.glowGreen, borderRadius: 2, marginBottom: '1.5rem' }} />
+            <h1 style={{ ...s.h1, textAlign: 'left' }}>704(b) Compliance</h1>
+            <p style={{ ...s.lead, textAlign: 'left' }}>
+              How patronage allocations satisfy IRC Section 704(b) economic effect requirements.
+            </p>
+          </div>
         </div>
       </TextureBand>
 

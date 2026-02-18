@@ -5,22 +5,96 @@ import { Prose, TextureBand, Card, FL } from '../components/shared';
 import { Landmark, Puzzle, Cloud, Cpu, ArrowLeftRight, Database, Zap, ArrowRight } from 'lucide-react';
 
 export default function Home() {
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
   const s = globalStyles(theme);
 
   return (
     <>
+      <style>{`
+        @keyframes meshShift {
+          0% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+          33% { background-position: 100% 0%, 0% 100%, 50% 0%; }
+          66% { background-position: 50% 100%, 50% 0%, 0% 50%; }
+          100% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+        }
+      `}</style>
+      
       {/* Hero */}
       <div style={{
-        textAlign: 'center', padding: '6rem 2rem',
-        background: 'transparent',
+        minHeight: '80vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '4rem 2rem',
+        position: 'relative',
+        background: isDark 
+          ? `
+            radial-gradient(circle at 20% 30%, rgba(124, 200, 104, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 60%, rgba(88, 200, 168, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 50% 80%, rgba(200, 132, 74, 0.08) 0%, transparent 50%)
+          `
+          : `
+            radial-gradient(circle at 20% 30%, rgba(93, 164, 72, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 60%, rgba(62, 168, 152, 0.06) 0%, transparent 50%),
+            radial-gradient(circle at 50% 80%, rgba(176, 112, 64, 0.04) 0%, transparent 50%)
+          `,
+        backgroundSize: '200% 200%',
+        animation: 'meshShift 20s ease-in-out infinite',
       }}>
-        <h1 style={{ ...s.h1, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', marginBottom: '1.5rem' }}>
-          Habitat
-        </h1>
-        <p style={{ ...s.lead, maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem' }}>
-          Composable coordination infrastructure for organizations that enrich their ecosystems.
-        </p>
+        <div style={{ maxWidth: '800px' }}>
+          <h1 style={{ 
+            ...s.h1, 
+            fontSize: 'clamp(3rem, 8vw, 5rem)', 
+            marginBottom: '1.5rem',
+            textShadow: isDark ? `0 0 40px ${theme.glowGreen}40` : 'none',
+          }}>
+            Habitat
+          </h1>
+          <p style={{ ...s.lead, fontSize: '1.3rem', marginBottom: '2rem' }}>
+            Composable coordination infrastructure for organizations that enrich their ecosystems.
+          </p>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            justifyContent: 'center', 
+            marginTop: '2rem', 
+            flexWrap: 'wrap' 
+          }}>
+            {['3 Infrastructure Layers', 'IRC 704(b) Compliant', 'Peer Production Licensed'].map(s => (
+              <span key={s} style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.7rem',
+                letterSpacing: '0.05em',
+                padding: '0.4rem 1rem',
+                border: `1px solid ${theme.border}`,
+                borderRadius: '100px',
+                color: theme.bodyMuted,
+              }}>{s}</span>
+            ))}
+          </div>
+        </div>
+        
+        <div style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          opacity: 0.4,
+          animation: 'bounce 2s ease-in-out infinite',
+        }}>
+          <style>{`
+            @keyframes bounce {
+              0%, 100% { transform: translateX(-50%) translateY(0); }
+              50% { transform: translateX(-50%) translateY(10px); }
+            }
+          `}</style>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={theme.body} strokeWidth="2">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
 
       <Prose>

@@ -10,11 +10,44 @@ export default function Patronage() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={s.h1}>Patronage Accounting</h1>
-          <p style={s.lead}>
-            How cooperatives answer the question: who contributed what, and how does value flow back?
-          </p>
+        <div style={{ 
+          maxWidth: '860px', 
+          margin: '0 auto', 
+          padding: '5rem 2rem',
+          position: 'relative',
+        }}>
+          {/* Diagonal lines pattern decoration */}
+          <div style={{
+            position: 'absolute',
+            bottom: '2rem',
+            left: '2rem',
+            width: '150px',
+            height: '150px',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }}>
+            {[0, 1, 2, 3, 4].map(i => (
+              <div key={i} style={{
+                position: 'absolute',
+                left: `${i * 20}px`,
+                top: 0,
+                width: '2px',
+                height: '150px',
+                background: theme.glowCyan,
+                transform: 'rotate(-45deg)',
+                transformOrigin: 'top left',
+              }} />
+            ))}
+          </div>
+          
+          <div style={{ maxWidth: '700px' }}>
+            <div style={{ fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: theme.bodyMuted, marginBottom: '0.5rem' }}>System</div>
+            <div style={{ width: 4, height: 60, background: theme.glowCyan, borderRadius: 2, marginBottom: '1.5rem' }} />
+            <h1 style={{ ...s.h1, textAlign: 'left' }}>Patronage Accounting</h1>
+            <p style={{ ...s.lead, textAlign: 'left' }}>
+              How cooperatives answer the question: who contributed what, and how does value flow back?
+            </p>
+          </div>
         </div>
       </TextureBand>
 

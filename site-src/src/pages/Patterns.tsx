@@ -20,6 +20,7 @@ export default function Patterns() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <FL>Patterns</FL>
       <h1 style={s.h1}>Pattern Library</h1>
       <p style={s.lead}>The seven progressive design patterns that compose all information systems. A practical framework for building coordination infrastructure.</p>

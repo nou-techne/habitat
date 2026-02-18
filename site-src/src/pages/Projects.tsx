@@ -10,6 +10,7 @@ export default function Projects() {
   return (
     <>
       <Prose>
+        <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
         <FL>Projects</FL>
         <h1 style={s.h1}>System & Projects</h1>
         <p style={s.lead}>The infrastructure layers and applied ventures that compose Habitat's coordination stack.</p>

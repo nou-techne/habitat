@@ -9,10 +9,37 @@ export default function Thesis() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-          <FL>Thesis</FL>
-          <h1 style={s.h1}>The Craft of Coordination</h1>
-          <p style={s.lead}>An integrated thesis on compositional fluency, coordination infrastructure, and ecosystem compounding.</p>
+        <div style={{ 
+          maxWidth: '860px', 
+          margin: '0 auto', 
+          padding: '5rem 2rem',
+          position: 'relative',
+        }}>
+          {/* Stacked horizontal lines decoration */}
+          <div style={{
+            position: 'absolute',
+            top: '2rem',
+            left: '2rem',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }}>
+            {[80, 60, 100, 70, 90].map((width, i) => (
+              <div key={i} style={{
+                width: `${width}px`,
+                height: '3px',
+                background: theme.accentOrange,
+                marginBottom: '12px',
+              }} />
+            ))}
+          </div>
+          
+          <div style={{ maxWidth: '700px' }}>
+            <div style={{ fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: theme.bodyMuted, marginBottom: '0.5rem' }}>Framework</div>
+            <div style={{ width: 4, height: 60, background: theme.accentOrange, borderRadius: 2, marginBottom: '1.5rem' }} />
+            <FL>Thesis</FL>
+            <h1 style={{ ...s.h1, textAlign: 'left' }}>The Craft of Coordination</h1>
+            <p style={{ ...s.lead, textAlign: 'left' }}>An integrated thesis on compositional fluency, coordination infrastructure, and ecosystem compounding.</p>
+          </div>
         </div>
       </TextureBand>
 

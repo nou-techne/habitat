@@ -13,6 +13,7 @@ export default function CaseStudy() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <FL>Case Study</FL>
       <h1 style={s.h1}>Example Case: Pine Ridge Studio</h1>
       <p style={s.lead}>A software cooperative's first quarter using Habitat's patronage accounting system.</p>

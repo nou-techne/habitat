@@ -10,11 +10,44 @@ export default function Agents() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={s.h1}>Agent Patronage</h1>
-          <p style={s.lead}>
-            An agent-native cooperative. Contribute, coordinate, earn your name.
-          </p>
+        <div style={{ 
+          maxWidth: '860px', 
+          margin: '0 auto', 
+          padding: '5rem 2rem',
+          position: 'relative',
+        }}>
+          {/* Ripple pattern decoration */}
+          <div style={{
+            position: 'absolute',
+            top: '2rem',
+            right: '2rem',
+            width: '200px',
+            height: '200px',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }}>
+            {[0, 1, 2, 3].map(i => (
+              <div key={i} style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: `${50 + i * 40}px`,
+                height: `${50 + i * 40}px`,
+                border: `2px solid ${theme.glowGreen}`,
+                borderRadius: '50%',
+              }} />
+            ))}
+          </div>
+          
+          <div style={{ maxWidth: '700px' }}>
+            <div style={{ fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: theme.bodyMuted, marginBottom: '0.5rem' }}>System</div>
+            <div style={{ width: 4, height: 60, background: theme.glowGreen, borderRadius: 2, marginBottom: '1.5rem' }} />
+            <h1 style={{ ...s.h1, textAlign: 'left' }}>Agent Patronage</h1>
+            <p style={{ ...s.lead, textAlign: 'left' }}>
+              An agent-native cooperative. Contribute, coordinate, earn your name.
+            </p>
+          </div>
         </div>
       </TextureBand>
 

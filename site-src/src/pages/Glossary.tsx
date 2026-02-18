@@ -41,6 +41,7 @@ export default function Glossary() {
 
   return (
     <Prose>
+      <div style={{ width: 3, height: 40, background: theme.glowGreen, borderRadius: 2, marginBottom: '0.8rem' }} />
       <FL>Reference</FL>
       <h1 style={s.h1}>Glossary</h1>
       <p style={s.lead}>Key terms used throughout the Habitat system.</p>

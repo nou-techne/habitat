@@ -10,11 +10,34 @@ export default function Identity() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={s.h1}>Identity</h1>
-          <p style={s.lead}>
-            Self-sovereign identity for cooperative networks. The foundation for peer-to-peer coordination.
-          </p>
+        <div style={{ 
+          maxWidth: '860px', 
+          margin: '0 auto', 
+          padding: '5rem 2rem',
+          position: 'relative',
+        }}>
+          {/* Circle outline decoration */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            right: '2rem',
+            transform: 'translateY(-50%)',
+            width: '180px',
+            height: '180px',
+            border: `3px solid ${theme.glowGreen}`,
+            borderRadius: '50%',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }} />
+          
+          <div style={{ maxWidth: '700px' }}>
+            <div style={{ fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: theme.bodyMuted, marginBottom: '0.5rem' }}>System</div>
+            <div style={{ width: 4, height: 60, background: theme.glowGreen, borderRadius: 2, marginBottom: '1.5rem' }} />
+            <h1 style={{ ...s.h1, textAlign: 'left' }}>Identity</h1>
+            <p style={{ ...s.lead, textAlign: 'left' }}>
+              Self-sovereign identity for cooperative networks. The foundation for peer-to-peer coordination.
+            </p>
+          </div>
         </div>
       </TextureBand>
 
