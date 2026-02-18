@@ -22,7 +22,7 @@ describe('K1DataAssembler', () => {
   const partnership: PartnershipInfo = {
     ein: '12-3456789',
     name: 'Techne Cooperative',
-    address: '1515 Walnut St, Boulder, CO',
+    address: 'Boulder, CO',
     irsCenter: 'Ogden, UT',
   }
 
