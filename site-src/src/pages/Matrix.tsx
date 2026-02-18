@@ -1,6 +1,6 @@
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, FL } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, FL } from '../components/shared';
 
 export default function Matrix() {
   const { theme } = useTheme();

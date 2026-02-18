@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, Card, FL } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, Card, FL } from '../components/shared';
 
 const STEPS = [
   { agent: 'Alice (Member)', event: '—', resource: '—', title: 'Step 1: Agent', text: 'Alice is a member of the cooperative. She\'s an Agent with economic interests in the system.' },

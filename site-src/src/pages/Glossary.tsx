@@ -1,6 +1,6 @@
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, FL } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, FL } from '../components/shared';
 
 const TERMS = [
   { term: '704(b) Compliance', def: 'The IRS regulation under Subchapter K that governs how partnership allocations must have "substantial economic effect." Habitat\'s patronage formulas are designed to satisfy 704(b) requirements.' },

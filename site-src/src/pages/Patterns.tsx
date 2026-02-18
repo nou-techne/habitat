@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, Card, FL } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, Card, FL } from '../components/shared';
 
 const PATTERNS = [
   { num: 1, name: 'Identity', desc: 'Distinguishing one thing from another. Without identity, nothing else is possible.', habitat: 'Member UUIDs, ENS names (alice.habitat.eth), account codes, transaction IDs', general: 'Product SKUs, customer IDs, order numbers, user handles' },

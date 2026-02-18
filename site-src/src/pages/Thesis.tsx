@@ -1,6 +1,6 @@
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, Card, FL, TextureBand } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, Card, FL, TextureBand } from '../components/shared';
 
 export default function Thesis() {
   const { theme } = useTheme();

@@ -159,7 +159,7 @@ export default function Writing() {
                     fontFamily: "'JetBrains Mono', monospace",
                     fontSize: '0.7rem',
                     letterSpacing: '1px',
-                    color: theme.label,
+                    color: theme.bodyMuted,
                     textTransform: 'uppercase',
                   }}>
                     {timeAgo(entry.date)}

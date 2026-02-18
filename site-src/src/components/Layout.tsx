@@ -6,18 +6,23 @@ import { globalStyles } from '../styles';
 const NAV_ITEMS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/writing', label: 'Writing' },
-  { to: '/connect', label: 'Connect' },
+  { to: '/agents', label: 'Agents' },
+  { to: '/journal', label: 'Journal' },
 ];
 
 const LEARN_ITEMS = [
-  { to: '/learn/thesis', label: 'Thesis' },
-  { to: '/learn/patterns', label: 'Patterns' },
-  { to: '/learn/glossary', label: 'Glossary' },
-  { to: '/learn/case-study', label: 'Case Study' },
-  { to: '/learn/rea', label: 'REA Diagram' },
-  { to: '/learn/matrix', label: 'Matrix' },
+  { to: '/thesis', label: 'Thesis' },
+  { to: '/patterns', label: 'Patterns' },
+  { to: '/matrix', label: 'Matrix' },
+  { to: '/glossary', label: 'Glossary' },
+  { to: '/case-study', label: 'Example Case' },
+];
+
+const SYSTEM_ITEMS = [
+  { to: '/patronage', label: 'Patronage' },
+  { to: '/identity', label: 'Identity' },
+  { to: '/compliance', label: 'Compliance' },
+  { to: '/license', label: 'License' },
 ];
 
 export default function Layout() {
@@ -26,11 +31,14 @@ export default function Layout() {
   const loc = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [learnOpen, setLearnOpen] = useState(false);
+  const [systemOpen, setSystemOpen] = useState(false);
   const learnRef = useRef<HTMLDivElement>(null);
+  const systemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
     setLearnOpen(false);
+    setSystemOpen(false);
   }, [loc.pathname]);
 
   useEffect(() => {
@@ -38,12 +46,17 @@ export default function Layout() {
       if (learnRef.current && !learnRef.current.contains(e.target as Node)) {
         setLearnOpen(false);
       }
+      if (systemRef.current && !systemRef.current.contains(e.target as Node)) {
+        setSystemOpen(false);
+      }
     };
     document.addEventListener('click', handler);
     return () => document.removeEventListener('click', handler);
   }, []);
 
   const isActive = (path: string) => loc.pathname === path || (path !== '/' && loc.pathname.startsWith(path));
+  const isLearnActive = () => LEARN_ITEMS.some(item => isActive(item.to));
+  const isSystemActive = () => SYSTEM_ITEMS.some(item => isActive(item.to));
 
   return (
     <div style={s.body as any}>
@@ -98,13 +111,13 @@ export default function Layout() {
           {/* Learn dropdown */}
           <div ref={learnRef} style={{ position: 'relative' }}>
             <button
-              onClick={(e) => { e.stopPropagation(); setLearnOpen(!learnOpen); }}
+              onClick={(e) => { e.stopPropagation(); setLearnOpen(!learnOpen); setSystemOpen(false); }}
               style={{
                 ...s.navLink,
                 background: 'none', border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '0.3rem',
                 padding: 0,
-                ...(loc.pathname.startsWith('/learn') ? s.navLinkActive : {}),
+                ...(isLearnActive() ? s.navLinkActive : {}),
               }}
             >
               Learn <span style={{ fontSize: '0.6rem' }}>▼</span>
@@ -117,6 +130,45 @@ export default function Layout() {
                 boxShadow: '0 8px 24px rgba(0,0,0,0.2)', zIndex: 200,
               }}>
                 {LEARN_ITEMS.map(item => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    style={{
+                      display: 'block', padding: '0.5rem 1.2rem',
+                      color: isActive(item.to) ? theme.glowGreen : theme.body,
+                      textDecoration: 'none', fontSize: '0.85rem',
+                      fontFamily: "'JetBrains Mono', monospace",
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* System dropdown */}
+          <div ref={systemRef} style={{ position: 'relative' }}>
+            <button
+              onClick={(e) => { e.stopPropagation(); setSystemOpen(!systemOpen); setLearnOpen(false); }}
+              style={{
+                ...s.navLink,
+                background: 'none', border: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: '0.3rem',
+                padding: 0,
+                ...(isSystemActive() ? s.navLinkActive : {}),
+              }}
+            >
+              System <span style={{ fontSize: '0.6rem' }}>▼</span>
+            </button>
+            {systemOpen && (
+              <div style={{
+                position: 'absolute', top: '100%', left: '-1rem',
+                background: theme.cardBg, border: `1px solid ${theme.border}`,
+                borderRadius: '6px', padding: '0.5rem 0', minWidth: '160px',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.2)', zIndex: 200,
+              }}>
+                {SYSTEM_ITEMS.map(item => (
                   <Link
                     key={item.to}
                     to={item.to}
@@ -161,9 +213,10 @@ export default function Layout() {
         <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
           <a href="https://github.com/nou-techne/habitat" style={s.a}>GitHub</a>
           <Link to="/about" style={s.a}>About</Link>
-          <Link to="/connect" style={s.a}>Connect</Link>
-          <Link to="/learn/glossary" style={s.a}>Glossary</Link>
-          <Link to="/learn/case-study" style={s.a}>Case Study</Link>
+          <Link to="/faq" style={s.a}>FAQ</Link>
+          <Link to="/glossary" style={s.a}>Glossary</Link>
+          <Link to="/case-study" style={s.a}>Example Case</Link>
+          <Link to="/license" style={s.a}>License</Link>
         </div>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem', color: theme.bodyMuted }}>
           Where the Great Plains meet the Rocky Mountains, 5,430 feet

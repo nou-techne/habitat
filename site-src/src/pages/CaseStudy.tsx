@@ -1,6 +1,6 @@
-import { useTheme } from '../../ThemeContext';
-import { globalStyles } from '../../styles';
-import { Prose, Card, FL } from '../../components/shared';
+import { useTheme } from '../ThemeContext';
+import { globalStyles } from '../styles';
+import { Prose, Card, FL } from '../components/shared';
 
 export default function CaseStudy() {
   const { theme } = useTheme();
