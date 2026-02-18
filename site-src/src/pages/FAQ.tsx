@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose } from '../components/shared';
+import { HelpCircle } from 'lucide-react';
 
 interface FAQItemProps {
   question: string;
@@ -36,7 +37,10 @@ function FAQItem({ question, children }: FAQItemProps) {
         onMouseEnter={(e) => (e.currentTarget.style.background = theme.bg)}
         onMouseLeave={(e) => (e.currentTarget.style.background = theme.cardBg)}
       >
-        <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{question}</h3>
+        <h3 style={{ margin: 0, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <HelpCircle size={16} strokeWidth={1.5} color={theme.bodyMuted} style={{ verticalAlign: 'middle', flexShrink: 0 }} />
+          {question}
+        </h3>
         <span
           style={{
             transform: open ? 'rotate(180deg)' : 'rotate(0)',

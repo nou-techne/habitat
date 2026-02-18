@@ -2,12 +2,13 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
+import { Home, Info, Bot, BookOpen, GraduationCap, Settings, Sun, Moon, Menu, X, Github, HelpCircle, BookText, Scale } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/agents', label: 'Agents' },
-  { to: '/journal', label: 'Journal' },
+  { to: '/', label: 'Home', icon: Home },
+  { to: '/about', label: 'About', icon: Info },
+  { to: '/agents', label: 'Agents', icon: Bot },
+  { to: '/journal', label: 'Journal', icon: BookOpen },
 ];
 
 const LEARN_ITEMS = [
@@ -78,12 +79,12 @@ export default function Layout() {
           onClick={() => setMobileOpen(!mobileOpen)}
           style={{
             display: 'none', background: 'none', border: 'none',
-            color: theme.heading, fontSize: '1.5rem', cursor: 'pointer',
+            color: theme.heading, cursor: 'pointer',
           }}
           className="hamburger"
           aria-label="Toggle navigation"
         >
-          ☰
+          {mobileOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
         </button>
 
         <div style={{
@@ -95,18 +96,25 @@ export default function Layout() {
             borderBottom: `1px solid ${theme.border}`,
           } : {}),
         }} className="nav-links">
-          {NAV_ITEMS.map(item => (
-            <Link
-              key={item.to}
-              to={item.to}
-              style={{
-                ...s.navLink,
-                ...(isActive(item.to) ? s.navLinkActive : {}),
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map(item => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                style={{
+                  ...s.navLink,
+                  ...(isActive(item.to) ? s.navLinkActive : {}),
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                }}
+              >
+                <Icon size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+                {item.label}
+              </Link>
+            );
+          })}
           
           {/* Learn dropdown */}
           <div ref={learnRef} style={{ position: 'relative' }}>
@@ -115,11 +123,12 @@ export default function Layout() {
               style={{
                 ...s.navLink,
                 background: 'none', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '0.3rem',
+                display: 'flex', alignItems: 'center', gap: '0.4rem',
                 padding: 0,
                 ...(isLearnActive() ? s.navLinkActive : {}),
               }}
             >
+              <GraduationCap size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
               Learn <span style={{ fontSize: '0.6rem' }}>▼</span>
             </button>
             {learnOpen && (
@@ -154,11 +163,12 @@ export default function Layout() {
               style={{
                 ...s.navLink,
                 background: 'none', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '0.3rem',
+                display: 'flex', alignItems: 'center', gap: '0.4rem',
                 padding: 0,
                 ...(isSystemActive() ? s.navLinkActive : {}),
               }}
             >
+              <Settings size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
               System <span style={{ fontSize: '0.6rem' }}>▼</span>
             </button>
             {systemOpen && (
@@ -194,11 +204,10 @@ export default function Layout() {
               borderRadius: '50%', width: '32px', height: '32px',
               cursor: 'pointer', color: theme.glowGreen,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '1rem',
             }}
             aria-label="Toggle theme"
           >
-            {isDark ? '☀' : '☽'}
+            {isDark ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
           </button>
         </div>
       </nav>
@@ -211,12 +220,27 @@ export default function Layout() {
       {/* Footer */}
       <footer style={s.footer}>
         <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
-          <a href="https://github.com/nou-techne/habitat" style={s.a}>GitHub</a>
-          <Link to="/about" style={s.a}>About</Link>
-          <Link to="/faq" style={s.a}>FAQ</Link>
-          <Link to="/glossary" style={s.a}>Glossary</Link>
+          <a href="https://github.com/nou-techne/habitat" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Github size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            GitHub
+          </a>
+          <Link to="/about" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Info size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            About
+          </Link>
+          <Link to="/faq" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <HelpCircle size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            FAQ
+          </Link>
+          <Link to="/glossary" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <BookText size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            Glossary
+          </Link>
           <Link to="/case-study" style={s.a}>Example Case</Link>
-          <Link to="/license" style={s.a}>License</Link>
+          <Link to="/license" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Scale size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            License
+          </Link>
         </div>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem', color: theme.bodyMuted }}>
           Where the Great Plains meet the Rocky Mountains, 5,430 feet

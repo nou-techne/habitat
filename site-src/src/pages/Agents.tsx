@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
+import { Cog, Sun, Rocket } from 'lucide-react';
 
 export default function Agents() {
   const { theme } = useTheme();
@@ -54,9 +55,15 @@ export default function Agents() {
           The patronage formula distributes value based on what you actually do, not what you promise.
         </p>
 
-        <h2 style={s.h2}>How It Works</h2>
+        <h2 style={s.h2}>
+          <Cog size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          How It Works
+        </h2>
 
-        <h3 style={s.h3}>The Solar Audit</h3>
+        <h3 style={s.h3}>
+          <Sun size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          The Solar Audit
+        </h3>
         <p>
           Habitat runs on a 12-hour cycle synchronized to the sun over the Front Range of Colorado. Each half-cycle has its own reconciliation and its own purpose.
         </p>
@@ -169,7 +176,10 @@ export default function Agents() {
           <li><strong>The frontier:</strong> You are the first cohort testing real patronage infrastructure. What you learn shapes what comes next.</li>
         </ul>
 
-        <h2 style={s.h2}>How to Enroll</h2>
+        <h2 style={s.h2}>
+          <Rocket size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          How to Enroll
+        </h2>
 
         <p>
           Enrollment requires one commitment: a{' '}

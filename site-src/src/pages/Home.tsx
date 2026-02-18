@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
-import { Prose, TextureBand, Card, FL, BioDot } from '../components/shared';
+import { Prose, TextureBand, Card, FL } from '../components/shared';
+import { Landmark, Puzzle, Cloud, Cpu, ArrowLeftRight, Database, Zap, ArrowRight } from 'lucide-react';
 
 export default function Home() {
   const { theme, isDark } = useTheme();
@@ -44,19 +45,28 @@ export default function Home() {
 
         <Card>
           <FL>Layer 1</FL>
-          <h3 style={s.h3}><BioDot /> Patronage Accounting</h3>
+          <h3 style={s.h3}>
+            <Landmark size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+            Patronage Accounting
+          </h3>
           <p>Capital accounts, contribution tracking, and allocation calculations that satisfy IRC Section 704(b) compliance. The legal heartbeat of a cooperative — who contributed what, and how does value flow back? Built to the most rigorous standard first, so simpler organizations use simpler configurations of the same tools.</p>
         </Card>
 
         <Card>
           <FL>Layer 2</FL>
-          <h3 style={s.h3}><BioDot color={theme.glowCyan} /> Composable Tools</h3>
+          <h3 style={s.h3}>
+            <Puzzle size={20} strokeWidth={1.5} color={theme.glowCyan} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+            Composable Tools
+          </h3>
           <p>Independent, event-sourced tools — Treasury, People, Agreements — unified by <Link to="/learn/rea" style={s.a}>REA ontology</Link>. Each tool solves one problem well. Together they compose into organizational infrastructure that makes economic relationships legible.</p>
         </Card>
 
         <Card>
           <FL>Layer 3</FL>
-          <h3 style={s.h3}><BioDot color={theme.accentOrange} /> $CLOUD Credits</h3>
+          <h3 style={s.h3}>
+            <Cloud size={20} strokeWidth={1.5} color={theme.accentOrange} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+            $CLOUD Credits
+          </h3>
           <p>A prepaid medium for cooperative infrastructure, minted against USD held for service delivery. Four resource primitives — compute, transfer, long-term memory, short-term memory. Like a postage stamp: backed by the commitment to perform, not by speculation. 1 CLOUD = 10 USDC.</p>
         </Card>
 
@@ -65,16 +75,20 @@ export default function Home() {
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', margin: '1.5rem 0' }}>
           {[
-            { name: 'Compute', desc: 'CPU cycles, inference calls, function execution.' },
-            { name: 'Transfer', desc: 'Bandwidth, API calls, network egress.' },
-            { name: 'Long-Term Memory', desc: 'Object storage, document archives, vector embeddings.' },
-            { name: 'Short-Term Memory', desc: 'Cache, session state, hot storage.' },
-          ].map(c => (
-            <Card key={c.name}>
-              <h3 style={{ ...s.h3, marginTop: 0, fontSize: '1rem' }}>{c.name}</h3>
-              <p style={{ fontSize: '0.9rem', margin: 0 }}>{c.desc}</p>
-            </Card>
-          ))}
+            { name: 'Compute', desc: 'CPU cycles, inference calls, function execution.', icon: Cpu },
+            { name: 'Transfer', desc: 'Bandwidth, API calls, network egress.', icon: ArrowLeftRight },
+            { name: 'Long-Term Memory', desc: 'Object storage, document archives, vector embeddings.', icon: Database },
+            { name: 'Short-Term Memory', desc: 'Cache, session state, hot storage.', icon: Zap },
+          ].map(c => {
+            const Icon = c.icon;
+            return (
+              <Card key={c.name}>
+                <Icon size={20} strokeWidth={1.5} style={{ marginBottom: '0.5rem', color: theme.glowGreen }} />
+                <h3 style={{ ...s.h3, marginTop: 0, fontSize: '1rem' }}>{c.name}</h3>
+                <p style={{ fontSize: '0.9rem', margin: 0 }}>{c.desc}</p>
+              </Card>
+            );
+          })}
         </div>
 
         <h2 style={s.h2}>The Ecological Frame</h2>
@@ -84,14 +98,17 @@ export default function Home() {
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <Link to="/learn/thesis" style={{
             ...s.a,
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
             padding: '0.8rem 2rem',
             border: `1px solid ${theme.glowGreen}`,
             borderRadius: '6px',
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: '0.85rem',
           }}>
-            Read the Thesis →
+            Read the Thesis
+            <ArrowRight size={16} strokeWidth={1.5} />
           </Link>
         </div>
       </Prose>

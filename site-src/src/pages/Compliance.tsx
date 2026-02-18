@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, TextureBand } from '../components/shared';
+import { ShieldCheck } from 'lucide-react';
 
 export default function Compliance() {
   const { theme } = useTheme();
@@ -58,7 +59,10 @@ export default function Compliance() {
           The system is designed for compliance.
         </p>
 
-        <h2 style={s.h2}>How Habitat Satisfies 704(b)</h2>
+        <h2 style={s.h2}>
+          <ShieldCheck size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          How Habitat Satisfies 704(b)
+        </h2>
 
         <h3 style={s.h3}>1. Capital Account Maintenance ✅</h3>
         <p>

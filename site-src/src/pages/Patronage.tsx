@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
+import { Wallet, PieChart } from 'lucide-react';
 
 export default function Patronage() {
   const { theme } = useTheme();
@@ -29,7 +30,10 @@ export default function Patronage() {
           It's earned, period by period, through participation.
         </p>
 
-        <h2 style={s.h2}>Capital Accounts</h2>
+        <h2 style={s.h2}>
+          <Wallet size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          Capital Accounts
+        </h2>
         <p>
           Every member has a <strong>capital account</strong> — a running balance that tracks their economic stake in the cooperative. 
           It goes up when you contribute or receive an allocation. It goes down when you receive a distribution or absorb a loss.
@@ -72,7 +76,10 @@ export default function Patronage() {
           This dual-basis system is what makes the accounting compliant with IRC Section 704(b).
         </p>
 
-        <h2 style={s.h2}>The Patronage Formula</h2>
+        <h2 style={s.h2}>
+          <PieChart size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          The Patronage Formula
+        </h2>
         <p>
           At the end of each period, the cooperative's net income is divided among members based on a weighted formula. 
           Each category of contribution — labor, revenue, cash, community involvement — carries a weight reflecting its importance 

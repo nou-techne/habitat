@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, FL } from '../components/shared';
+import { Grid3x3 } from 'lucide-react';
 
 export default function Matrix() {
   const { theme } = useTheme();
@@ -20,7 +21,10 @@ export default function Matrix() {
   return (
     <Prose>
       <FL>Framework</FL>
-      <h1 style={s.h1}>Economic Habitat Matrix</h1>
+      <h1 style={s.h1}>
+        <Grid3x3 size={24} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+        Economic Habitat Matrix
+      </h1>
       <p style={s.lead}>49 organizational archetypes mapped across governance orientation and systemic relationship.</p>
 
       <h2 style={s.h2}>Reading the Axes</h2>

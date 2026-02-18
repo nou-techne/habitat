@@ -48,10 +48,19 @@ export function TextureBand({ children, style }: { children: React.ReactNode; st
   );
 }
 
-export function Card({ children, style }: { children: React.ReactNode; style?: CSSProperties }) {
+export function Card({ children, style, icon: Icon }: { children: React.ReactNode; style?: CSSProperties; icon?: React.ComponentType<any> }) {
   const { theme } = useTheme();
   const s = globalStyles(theme);
-  return <div style={{ ...s.card, ...style }}>{children}</div>;
+  return (
+    <div style={{ ...s.card, ...style }}>
+      {Icon && (
+        <div style={{ marginBottom: '0.5rem' }}>
+          <Icon size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+        </div>
+      )}
+      {children}
+    </div>
+  );
 }
 
 export function Prose({ children }: { children: React.ReactNode }) {

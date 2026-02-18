@@ -1,6 +1,7 @@
 import { useTheme } from '../ThemeContext';
 import { globalStyles } from '../styles';
 import { Prose, Card, TextureBand } from '../components/shared';
+import { Fingerprint, Globe } from 'lucide-react';
 
 export default function Identity() {
   const { theme } = useTheme();
@@ -18,7 +19,10 @@ export default function Identity() {
       </TextureBand>
 
       <Prose>
-        <h2 style={s.h2}>The Problem with Organizational Identity</h2>
+        <h2 style={s.h2}>
+          <Fingerprint size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          The Problem with Organizational Identity
+        </h2>
         <p>
           Most organizations manage identity through centralized systems — employee IDs, database records, platform accounts. 
           The organization controls who you are within its boundaries. Leave the organization, and your identity disappears. 
@@ -29,7 +33,10 @@ export default function Identity() {
           identity from the cooperative. They should bring their identity <em>to</em> it.
         </p>
 
-        <h2 style={s.h2}>ENS as Identity Infrastructure</h2>
+        <h2 style={s.h2}>
+          <Globe size={20} strokeWidth={1.5} color={theme.glowGreen} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+          ENS as Identity Infrastructure
+        </h2>
         <p>
           Habitat uses the{' '}
           <a href="https://ens.domains" style={{ color: theme.glowGreen }}>
