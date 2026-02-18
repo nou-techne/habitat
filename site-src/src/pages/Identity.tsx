@@ -29,8 +29,8 @@ export default function Identity() {
           Your contributions, reputation, and relationships evaporate with your account.
         </p>
         <p>
-          For a cooperative — where members <em>are</em> the organization — this model is backwards. Members shouldn't borrow 
-          identity from the cooperative. They should bring their identity <em>to</em> it.
+          For a cooperative — where members <em>are</em> the organization — this model is backwards. <em>Members shouldn't borrow 
+          identity from the cooperative. They should bring their identity to it.</em>
         </p>
 
         <h2 style={s.h2}>
@@ -101,7 +101,7 @@ export default function Identity() {
 
         <p>
           The namespace is cooperatively governed — the cooperative controls issuance and revocation of subnames, but each member 
-          controls their own records. Self-sovereign identity within a collectively governed namespace.
+          controls their own records. <strong>Self-sovereign identity</strong> within a collectively governed namespace.
         </p>
 
         <h2 style={s.h2}>Enabling the Peer-to-Peer Network</h2>
@@ -221,9 +221,14 @@ export default function Identity() {
         </blockquote>
 
         <p>
-          This is what cooperative infrastructure looks like when identity is self-sovereign, accounting is transparent, and coordination 
-          doesn't require a middleman. The tools shape what you can see. Identity shapes who you can trust. Together, they make 
+          This is what cooperative infrastructure looks like when identity is <strong>self-sovereign</strong>, accounting is transparent, and coordination 
+          doesn't require a middleman. <em>The tools shape what you can see. Identity shapes who you can trust.</em> Together, they make 
           peer-to-peer economic coordination possible at scale.
+        </p>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted, marginTop: '2rem' }}>
+          In ecological terms: identity is the root system that lets organisms recognize kin, coordinate resource exchange, and form 
+          symbiotic relationships across organizational boundaries. Without it, cooperation requires centralized coordination. With it, 
+          peer-to-peer networks become viable at scale.
         </p>
       </Prose>
     </>

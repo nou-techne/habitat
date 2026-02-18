@@ -65,6 +65,9 @@ export default function Compliance() {
         </h2>
 
         <h3 style={s.h3}>1. Capital Account Maintenance <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+          Why it matters: Without accurate capital accounts, members can't trust that allocations reflect genuine economic interests.
+        </p>
         <p>
           Treasury maintains dual-basis capital accounts for every member — book capital (FMV) and tax capital (cost basis). 
           Every contribution, allocation, and distribution updates both accounts according to IRC regulations. The accounting is 
@@ -72,18 +75,27 @@ export default function Compliance() {
         </p>
 
         <h3 style={s.h3}>2. Liquidation Follows Capital <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+          Why it matters: If liquidation proceeds ignore capital accounts, allocations are just accounting fiction with no real consequences.
+        </p>
         <p>
           The operating agreement explicitly ties liquidation distributions to capital account balances. When the cooperative dissolves, 
           members receive proceeds in proportion to their positive capital accounts. No exceptions, no carve-outs.
         </p>
 
         <h3 style={s.h3}>3. Deficit Protection <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+          Why it matters: Members who benefit from loss allocations must bear the real risk — otherwise allocations can be manipulated for tax advantage.
+        </p>
         <p>
           Members sign deficit restoration obligations (DROs) as part of the operating agreement. If a member's capital account goes 
           negative at liquidation, they must restore the deficit. This ensures allocations have real economic consequences.
         </p>
 
         <h3 style={s.h3}>4. Substantiality <CircleCheck size={16} strokeWidth={1.5} style={{ verticalAlign: "middle", marginLeft: "0.4rem", color: theme.glowGreen }} /></h3>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+          Why it matters: The IRS requires that allocations serve genuine business purposes, not just tax optimization.
+        </p>
         <p>
           Patronage allocations are based on documented contributions (labor hours, revenue generated, community participation, 
           infrastructure maintained). The allocation formula has clear business purpose: rewarding actual participation. 

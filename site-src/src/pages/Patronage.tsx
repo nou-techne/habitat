@@ -22,12 +22,12 @@ export default function Patronage() {
         <h2 style={s.h2}>Why Patronage?</h2>
         <p>
           In a corporation, your share of profits is determined by how many shares you own — fixed percentages set at investment time. 
-          In a cooperative, it's determined by <em>patronage</em>: your actual contribution during the period. Work more, contribute more, 
+          In a cooperative, it's determined by <strong>patronage</strong>: your actual contribution during the period. Work more, contribute more, 
           bring in more revenue? Your share reflects that.
         </p>
         <p>
-          This is a fundamentally different relationship between an organization and its members. Ownership isn't static. 
-          It's earned, period by period, through participation.
+          This is a fundamentally different relationship between an organization and its members. <em>Ownership isn't static. 
+          It's earned, period by period, through participation.</em>
         </p>
 
         <h2 style={s.h2}>

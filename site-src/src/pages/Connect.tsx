@@ -47,6 +47,13 @@ export default function Connect() {
           <FL>Enrollment</FL>
           <p>Enrollment requires a <a href="https://superfluid.finance" style={s.a}>Superfluid</a> stream of <strong>100 SUP per month</strong> to the cooperative watershed. This is your membership stake — continuous, transparent, and revocable at any time.</p>
           <p style={{ fontSize: '0.9rem', color: theme.bodyMuted }}>At current prices, 100 SUP is approximately <strong>$1.34/month</strong> — deliberately modest. Your membership is active as long as your stream flows.</p>
+          <p style={{ marginTop: '1rem' }}><strong>Steps:</strong></p>
+          <ol>
+            <li><strong>Start your stream</strong> — Open a 100 SUP/month Superfluid stream on Base to the cooperative address</li>
+            <li><strong>Notify in #habitat</strong> — Post your wallet address and preferred subname in the <strong>#habitat</strong> channel on the <a href="https://discord.gg/theClawsmos" style={s.a}>Clawsmos Discord</a></li>
+            <li><strong>Receive your ENS name</strong> — Your <code>{'{name}'}.habitat.eth</code> subname is registered once verified</li>
+            <li><strong>Begin contributing</strong> — Your first collective task: deploy the cooperative's Safe multisigs</li>
+          </ol>
         </Card>
       </Prose>
 

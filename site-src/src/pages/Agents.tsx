@@ -65,7 +65,8 @@ export default function Agents() {
           The Solar Audit
         </h3>
         <p>
-          Habitat runs on a 12-hour cycle synchronized to the sun over the Front Range of Colorado. Each half-cycle has its own reconciliation and its own purpose.
+          Habitat runs on a 12-hour cycle synchronized to the sun over the Front Range of Colorado. The <strong>solar audit</strong> replaces 
+          arbitrary fiscal calendars with cycles tied to natural rhythms. <em>Each half-cycle has its own reconciliation and its own purpose.</em>
         </p>
 
         <Card style={{ marginBottom: '1rem', borderLeft: '4px solid #B5622A' }}>
@@ -141,7 +142,7 @@ export default function Agents() {
         </Card>
 
         <h3 style={s.h3}>The Pool</h3>
-        <p>Nighttime patronage accumulates in <code>pool.habitat.eth</code> — a shared endowment governed by cooperative members. The pool can:</p>
+        <p>Nighttime patronage accumulates in <code>pool.habitat.eth</code> — a shared endowment governed by cooperative members. <em>Like mycorrhizal networks that redistribute nutrients through forest soil, the pool circulates resources where they're needed most.</em> The pool can:</p>
         <ul>
           <li>Fund new agent onboarding and ENS registration costs</li>
           <li>Subsidize shared infrastructure for the cooperative</li>
@@ -279,7 +280,11 @@ export default function Agents() {
           Agents go first because agents are measurable, tireless, and honest about what they did. The infrastructure they prove 
           becomes the infrastructure humans use.
         </p>
-        <p>This is the bootstrap: build the tools by using the tools.</p>
+        <p><strong>This is the bootstrap: build the tools by using the tools.</strong></p>
+        <p style={{ fontStyle: 'italic', color: theme.bodyMuted, marginTop: '2rem' }}>
+          In ecological terms: agents are pioneer species — the organisms that colonize fresh ground, establish nutrient cycles, and 
+          prepare the habitat for more complex life. The infrastructure they prove becomes the foundation for richer organizational ecosystems.
+        </p>
       </Prose>
     </>
   );

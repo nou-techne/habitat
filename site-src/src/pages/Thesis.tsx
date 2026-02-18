@@ -18,7 +18,7 @@ export default function Thesis() {
 
       <Prose>
         <h2 style={s.h2}>I. The Maker's Observation</h2>
-        <p>A carpenter looks at a bookshelf and a boat and sees the same materials arranged differently. Wood, joinery, an understanding of load and purpose. The craft is not in the materials. It is in knowing which joint to use where, and why.</p>
+        <p>A carpenter looks at a bookshelf and a boat and sees the same materials arranged differently. Wood, joinery, an understanding of load and purpose. <em>The craft is not in the materials. It is in knowing which joint to use where, and why.</em></p>
         <p>Software works the same way. Every information system is built from a finite set of design patterns, layered in a progressive order:</p>
         <ol>
           <li><strong>Identity</strong> — distinguishing one thing from another</li>
@@ -29,19 +29,19 @@ export default function Thesis() {
           <li><strong>Constraint</strong> — rules governing valid states and transitions</li>
           <li><strong>View</strong> — presenting information for a purpose</li>
         </ol>
-        <p>Each layer depends on the ones beneath it. If information systems are fully decomposable, and the decomposition follows this progressive ordering, then the fundamental materials of software are finite and learnable — and the real work is <strong>composition</strong>.</p>
+        <p>Each layer depends on the ones beneath it. If information systems are fully decomposable, and the decomposition follows this progressive ordering, then the fundamental materials of software are finite and learnable — and the real work is <strong>compositional fluency</strong>.</p>
 
         <h2 style={s.h2}>II. The Structural Opportunity</h2>
         <p>Craft needs a context in which it compounds. Three structural shifts create that context now.</p>
 
         <h3 style={s.h3}>Coordination Cost Collapse</h3>
-        <p>The historical reason cooperatives, commons, and mutual organizations struggled to scale is that distributed governance is expensive. Smart contracts compress these costs by orders of magnitude. A multisig treasury, a token-weighted vote, a programmable patronage distribution: the execution cost has dropped from "requires a legal team and a board meeting" to "requires a transaction fee."</p>
+        <p>The historical reason cooperatives, commons, and mutual organizations struggled to scale is that <strong>distributed governance is expensive</strong>. Smart contracts compress these costs by orders of magnitude. A multisig treasury, a token-weighted vote, a programmable patronage distribution: the execution cost has dropped from "requires a legal team and a board meeting" to "requires a transaction fee."</p>
 
         <h3 style={s.h3}>Composable Trust</h3>
-        <p>A smart contract can execute a patronage distribution. A digital agreement can make that distribution legally enforceable. Neither alone is sufficient. The combination produces organizations that are simultaneously fluid in their operations and durable in their commitments.</p>
+        <p>A smart contract can execute a patronage distribution. A digital agreement can make that distribution legally enforceable. Neither alone is sufficient. The combination produces organizations that are <em>simultaneously fluid in their operations and durable in their commitments</em>.</p>
 
         <h3 style={s.h3}>Ecosystem Compounding</h3>
-        <p>Organizations designed to enrich their operating environment create positive-sum dynamics that feed back into their own resilience. An extractive platform can copy features. It cannot copy the structural incentive alignment that comes from shared ownership.</p>
+        <p>Organizations designed to <strong>enrich their operating environment</strong> create positive-sum dynamics that feed back into their own resilience. <em>An extractive platform can copy features. It cannot copy the structural incentive alignment that comes from shared ownership.</em></p>
 
         <h2 style={s.h2}>III. Where Craft Meets Coordination</h2>
         <p>The studio operates at the intersection: applying compositional fluency to build coordination infrastructure for organizations that distribute governance and enrich their ecosystems.</p>
@@ -72,8 +72,8 @@ export default function Thesis() {
         <p style={{ color: theme.bodyMuted, fontStyle: 'italic' }}>The honest caveat: this model will not produce 100x returns. It is designed to produce consistent, compounding returns across a portfolio of interconnected ventures whose success reinforces each other.</p>
 
         <h2 style={s.h2}>VI. The Ecological Frame</h2>
-        <p>Organizations exist within economic ecosystems. Their behavior maps along two axes: governance orientation (concentrate or disperse decision-making?) and systemic relationship (deplete or enrich the habitat?).</p>
-        <p>The tools an organization uses to track value shape what it can see. What it can see determines whether it extracts or enriches. Habitat is economic sensory apparatus.</p>
+        <p>Organizations exist within <em>economic ecosystems</em>. Their behavior maps along two axes: governance orientation (concentrate or disperse decision-making?) and systemic relationship (deplete or enrich the habitat?).</p>
+        <p>The tools an organization uses to track value <strong>shape what it can see</strong>. What it can see determines whether it extracts or enriches. Habitat is <em>economic sensory apparatus</em>.</p>
       </Prose>
 
       <TextureBand>

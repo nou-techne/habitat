@@ -85,10 +85,10 @@ export default function CaseStudy() {
 
       <h2 style={s.h2}>Lessons</h2>
       <ol>
-        <li><strong>Transparency enables debate.</strong> Members argued about weights because they could see the impact.</li>
-        <li><strong>Multi-capital accounting works.</strong> Labor, revenue, cash, and community contributions all mattered.</li>
-        <li><strong>Patronage ≠ payroll.</strong> Allocations are distributions of surplus after expenses, not wages.</li>
-        <li><strong>The system is as fair as the governance.</strong> Habitat calculates. The cooperative decides what to calculate.</li>
+        <li><strong>Transparency</strong> enables debate. Members argued about weights because they could see the impact. <em style={{ color: theme.bodyMuted }}>When allocation consequences are visible, governance becomes meaningful.</em></li>
+        <li><strong>Multi-capital accounting</strong> works. Labor, revenue, cash, and community contributions all mattered. <em style={{ color: theme.bodyMuted }}>Organizations that value diverse forms of contribution need tools that can measure them.</em></li>
+        <li><strong>Patronage ≠ payroll.</strong> Allocations are distributions of surplus after expenses, not wages. <em style={{ color: theme.bodyMuted }}>This distinction keeps the cooperative economically sustainable.</em></li>
+        <li><strong>The system is as fair as the governance.</strong> Habitat calculates. The cooperative decides what to calculate. <em style={{ color: theme.bodyMuted }}>Tools shape perception, but humans make the value judgments.</em></li>
       </ol>
 
       <p style={{ fontSize: '0.9rem', color: theme.bodyMuted, fontStyle: 'italic', marginTop: '2rem' }}>This case study is illustrative. Names, numbers, and decisions are hypothetical but grounded in real cooperative accounting principles and Habitat's design.</p>

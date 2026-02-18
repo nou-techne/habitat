@@ -237,9 +237,7 @@ export default function Matrix() {
   return (
     <div style={{
       fontFamily: "'Playfair Display', 'Georgia', serif",
-      background: isDark
-        ? `radial-gradient(ellipse at 30% 40%, rgba(124,200,104,0.04) 0%, transparent 60%), ${theme.bg}`
-        : `linear-gradient(145deg, ${theme.bg} 0%, ${theme.bgMid} 40%, ${theme.bg} 100%)`,
+      background: 'transparent',
       minHeight: "100vh", padding: "24px 28px", color: theme.body
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>

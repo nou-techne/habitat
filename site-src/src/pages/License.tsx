@@ -17,6 +17,10 @@ export default function License() {
         Habitat is released under the <strong>Peer Production License</strong>, also known as CopyFarLeft. This is not a traditional 
         open source license. It is a deliberate choice about who benefits from cooperative labor.
       </p>
+      <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+        Why this matters: Open source licenses allow anyone to use the code, including corporations that extract value from commons without 
+        contributing back. CopyFarLeft ensures that tools built through cooperative labor enrich the cooperative economy first.
+      </p>
 
       <h2 style={s.h2}><CircleCheck size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Free to Use</h2>
       <p>The following may use, modify, and distribute Habitat freely:</p>
@@ -30,6 +34,10 @@ export default function License() {
         If your organization distributes governance and surplus to those who do the work, you are welcome to use these tools 
         without restriction.
       </p>
+      <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+        This creates a commons within the cooperative economy — shared infrastructure that strengthens mutual organizations while 
+        maintaining boundaries against extractive use.
+      </p>
 
       <h2 style={s.h2}><AlertTriangle size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Commercial License Required</h2>
       <p>
@@ -39,6 +47,30 @@ export default function License() {
       <p>
         This is not anti-business. It is pro-cooperative. The license ensures that the value created by cooperative labor circulates 
         within the cooperative economy rather than being extracted by organizations structured for extraction.
+      </p>
+      <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+        Commercial licensing provides a revenue stream for continued development while ensuring that cooperative infrastructure 
+        remains primarily a cooperative resource.
+      </p>
+
+      <h2 style={s.h2}>Why CopyFarLeft?</h2>
+      <p>
+        Traditional open source licenses (MIT, Apache, BSD) allow unrestricted use. This is fine for general-purpose tools, but for 
+        <strong> coordination infrastructure</strong> — tools that encode economic relationships and governance patterns — unrestricted use 
+        creates a structural problem.
+      </p>
+      <p>
+        When extractive organizations can freely adopt cooperative tooling without adopting cooperative governance, they gain competitive 
+        advantage through <em>efficiency without accountability</em>. They can use patronage accounting to optimize operations while continuing 
+        to concentrate surplus with capital holders. The tools become a source of competitive edge rather than structural transformation.
+      </p>
+      <p>
+        <strong>CopyFarLeft</strong> flips this dynamic. Organizations structured for mutual benefit can use the tools freely. Organizations 
+        structured for extraction must pay. This creates an economic incentive gradient that favors cooperative structures.
+      </p>
+      <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+        The principle: if you want to benefit from tools built through cooperative labor, you should organize cooperatively. Otherwise, 
+        you're welcome to use the tools — at commercial rates that fund their continued development by and for cooperatives.
       </p>
 
       <h2 style={s.h2}><BookOpen size={20} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} /> Full License Text</h2>
@@ -57,6 +89,10 @@ export default function License() {
       <p>
         The Contributor Covenant establishes baseline expectations for respectful, inclusive participation. It is not a substitute for 
         good judgment, but it provides a shared standard when judgment differs.
+      </p>
+      <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>
+        Cooperative infrastructure requires cooperative culture. Shared tools work best when participants bring shared values of mutual 
+        respect and collective care.
       </p>
     </Prose>
   );

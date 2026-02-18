@@ -80,8 +80,8 @@ export default function REA() {
 
       <h2 style={s.h2}>Further Reading</h2>
       <ul>
-        <li><Link to="/learn/patterns" style={s.a}>Pattern Library</Link> — REA sits at Layer 3 (Relationship)</li>
-        <li><Link to="/projects" style={s.a}>Patronage Accounting</Link> — How REA enables cooperative patronage systems</li>
+        <li><Link to="/patterns" style={s.a}>Pattern Library</Link> — REA sits at Layer 3 (Relationship)</li>
+        <li><Link to="/patronage" style={s.a}>Patronage Accounting</Link> — How REA enables cooperative patronage systems</li>
         <li><a href="https://en.wikipedia.org/wiki/Resources,_events,_agents_(accounting_model)" style={s.a}>REA on Wikipedia</a></li>
       </ul>
     </Prose>

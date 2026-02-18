@@ -76,7 +76,7 @@ export default function Projects() {
         <h2 style={s.h2}>Economic Habitat Matrix</h2>
         <p>The two-axis framework mapping organizations by governance orientation (concentrate vs. disperse) and systemic relationship (deplete vs. enrich). Organizations exist within economic ecosystems. Their behavior maps along these two axes.</p>
         <p>Most organizational infrastructure is designed for the competitive zone. It tracks extraction well and contribution poorly. Habitat is designed for the mutualistic quadrant — dispersed governance, ecosystem enrichment.</p>
-        <p><Link to="/learn/matrix" style={s.a}>Explore the interactive matrix →</Link></p>
+        <p><Link to="/matrix" style={s.a}>Explore the interactive matrix →</Link></p>
       </Prose>
 
       {/* Root System */}

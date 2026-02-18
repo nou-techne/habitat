@@ -3,7 +3,8 @@ import type { CSSProperties } from 'react';
 
 export const globalStyles = (t: Theme): Record<string, CSSProperties> => ({
   body: {
-    background: t.bg,
+    background: `linear-gradient(165deg, ${t.bg} 0%, ${t.bgMid} 50%, ${t.bg} 100%)`,
+    backgroundAttachment: 'fixed',
     color: t.body,
     fontFamily: "'Source Serif 4', Georgia, serif",
     fontSize: '17px',
@@ -19,7 +20,7 @@ export const globalStyles = (t: Theme): Record<string, CSSProperties> => ({
     borderBottom: `1px solid ${t.border}`,
     position: 'sticky' as const,
     top: 0,
-    background: t.bg,
+    background: `${t.bg}ee`,
     zIndex: 100,
     backdropFilter: 'blur(12px)',
   },

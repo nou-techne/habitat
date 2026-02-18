@@ -7,7 +7,6 @@ import { Home, Info, Bot, BookOpen, GraduationCap, Settings, Sun, Moon, Menu, X,
 const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: Home },
   { to: '/about', label: 'About', icon: Info },
-  { to: '/agents', label: 'Agents', icon: Bot },
   { to: '/journal', label: 'Journal', icon: BookOpen },
 ];
 
@@ -20,6 +19,7 @@ const LEARN_ITEMS = [
 ];
 
 const SYSTEM_ITEMS = [
+  { to: '/agents', label: 'Agents' },
   { to: '/patronage', label: 'Patronage' },
   { to: '/identity', label: 'Identity' },
   { to: '/compliance', label: 'Compliance' },
@@ -61,15 +61,6 @@ export default function Layout() {
 
   return (
     <div style={s.body as any}>
-      {/* Grain overlay for dark mode */}
-      {isDark && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          pointerEvents: 'none', zIndex: 9999, opacity: 0.03,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }} />
-      )}
-
       {/* Nav */}
       <nav style={s.nav}>
         <Link to="/" style={s.logo}>Habitat</Link>
@@ -227,6 +218,10 @@ export default function Layout() {
           <Link to="/about" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <Info size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
             About
+          </Link>
+          <Link to="/agents" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Bot size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />
+            Agents
           </Link>
           <Link to="/faq" style={{ ...s.a, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <HelpCircle size={16} strokeWidth={1.5} style={{ verticalAlign: 'middle' }} />

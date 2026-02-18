@@ -5,7 +5,7 @@ import { Prose, TextureBand, Card, FL } from '../components/shared';
 import { Landmark, Puzzle, Cloud, Cpu, ArrowLeftRight, Database, Zap, ArrowRight } from 'lucide-react';
 
 export default function Home() {
-  const { theme, isDark } = useTheme();
+  const { theme } = useTheme();
   const s = globalStyles(theme);
 
   return (
@@ -13,9 +13,7 @@ export default function Home() {
       {/* Hero */}
       <div style={{
         textAlign: 'center', padding: '6rem 2rem',
-        background: isDark
-          ? 'radial-gradient(ellipse at 30% 40%, rgba(124,200,104,0.06) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(88,200,168,0.04) 0%, transparent 50%)'
-          : 'radial-gradient(ellipse at 30% 40%, rgba(93,164,72,0.06) 0%, transparent 60%)',
+        background: 'transparent',
       }}>
         <h1 style={{ ...s.h1, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', marginBottom: '1.5rem' }}>
           Habitat
@@ -28,20 +26,27 @@ export default function Home() {
       <Prose>
         <h2 style={s.h2}>The Problem</h2>
         <p>Organizations can't see their own economic relationships. The accounting tools they rely on were built to track extraction — revenue captured, costs minimized, value concentrated. For any organization trying to do something different — a cooperative, a land trust, a mutual aid network — the tools available were designed for a different game entirely.</p>
-        <p style={{ color: theme.bodyMuted, fontStyle: 'italic' }}>When your tools can only measure extraction, extraction is all you can manage.</p>
+        <p style={{ color: theme.bodyMuted, fontStyle: 'italic' }}>When your <strong>tools shape what you can see</strong>, and <strong>extraction is all you can manage</strong>, extraction becomes the only game in town.</p>
       </Prose>
 
       <TextureBand>
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
           <h2 style={s.h2}>The Insight</h2>
-          <p>Tools shape what you can see. What you can see determines whether you extract or enrich.</p>
+          <p><strong>Tools shape what you can see.</strong> What you can see determines whether you extract or enrich.</p>
           <p>An organization that wants to distribute governance, track contributions fairly, and strengthen the ecosystem it operates within needs tools built for that purpose. Not a spreadsheet adapted from corporate finance. Not a DAO dashboard with no legal standing. Infrastructure designed from the ground up for organizations that care about <em>how</em> value flows, not just <em>how much</em>.</p>
         </div>
       </TextureBand>
 
       <Prose>
         <h2 style={s.h2}>What is Habitat</h2>
-        <p>Three concentric layers of coordination infrastructure, each building on the one inside it:</p>
+        <p>Three concentric layers of coordination infrastructure, each building on the one inside it. Habitat enables:</p>
+        <ul>
+          <li><strong>Transparent patronage accounting</strong> — contributions tracked, allocations calculated, value distributed fairly</li>
+          <li><strong>Self-sovereign identity</strong> — portable names and reputation across cooperative networks</li>
+          <li><strong>Real-time value flows</strong> — streaming payments and continuous economic coordination</li>
+          <li><strong>Legal-technical integration</strong> — smart contracts meet enforceable agreements</li>
+          <li><strong>Composable tools</strong> — independent systems that work together without central platforms</li>
+        </ul>
 
         <Card>
           <FL>Layer 1</FL>
@@ -71,7 +76,7 @@ export default function Home() {
         </Card>
 
         <h2 style={s.h2}>$CLOUD Credits</h2>
-        <p style={{ color: theme.bodyMuted }}>A prepaid credit minted against USD held for service delivery. Backed by Techne's commitment to perform — like a postage stamp backed by the postal service's commitment to deliver mail.</p>
+        <p style={{ color: theme.bodyMuted }}>A prepaid credit minted against USD held for service delivery. Backed by Techne's commitment to perform — like a postage stamp backed by the postal service's commitment to deliver mail. <strong>1 CLOUD = 10 USDC.</strong></p>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', margin: '1.5rem 0' }}>
           {[
@@ -84,7 +89,7 @@ export default function Home() {
             return (
               <Card key={c.name}>
                 <Icon size={20} strokeWidth={1.5} style={{ marginBottom: '0.5rem', color: theme.glowGreen }} />
-                <h3 style={{ ...s.h3, marginTop: 0, fontSize: '1rem' }}>{c.name}</h3>
+                <h3 style={{ ...s.h3, marginTop: 0, fontSize: '1rem', fontWeight: 700 }}>{c.name}</h3>
                 <p style={{ fontSize: '0.9rem', margin: 0 }}>{c.desc}</p>
               </Card>
             );
@@ -95,8 +100,10 @@ export default function Home() {
         <p>Organizations exist within economic ecosystems. Their behavior maps along two axes: governance orientation (concentrate or disperse decision-making?) and systemic relationship (deplete or enrich the habitat?).</p>
         <p>Habitat is economic sensory apparatus: it helps organizations perceive their relationship to the ecosystems they inhabit, and act accordingly.</p>
 
+        <p style={{ marginTop: '2rem', color: theme.bodyMuted, fontStyle: 'italic' }}>Built by <strong>Techne</strong> (RegenHub, LCA) — a Colorado Limited Cooperative Association, filed February 2026. Open source, built in public, where the Great Plains meet the Rocky Mountains.</p>
+
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <Link to="/learn/thesis" style={{
+          <Link to="/thesis" style={{
             ...s.a,
             display: 'inline-flex',
             alignItems: 'center',

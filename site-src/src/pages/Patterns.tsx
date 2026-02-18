@@ -55,8 +55,8 @@ export default function Patterns() {
         const p = PATTERNS.find(x => x.num === active)!;
         return (
           <Card>
-            <h3 style={{ ...s.h3, marginTop: 0, color: theme.glowGreen }}>{p.num}. {p.name}</h3>
-            <p style={{ color: theme.bodyMuted }}>{p.desc}</p>
+            <h3 style={{ ...s.h3, marginTop: 0, color: theme.glowGreen }}>{p.num}. <strong>{p.name}</strong></h3>
+            <p style={{ color: theme.bodyMuted, fontStyle: 'italic' }}>{p.desc}</p>
             <FL>Habitat Examples</FL>
             <p>{p.habitat}</p>
             <FL>General Examples</FL>
