@@ -10,7 +10,7 @@ export default function Compliance() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
           <h1 style={s.h1}>704(b) Compliance</h1>
           <p style={s.lead}>
             How patronage allocations satisfy IRC Section 704(b) economic effect requirements.

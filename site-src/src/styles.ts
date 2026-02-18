@@ -49,7 +49,7 @@ export const globalStyles = (t: Theme): Record<string, CSSProperties> => ({
     color: t.glowGreen,
   },
   prose: {
-    maxWidth: '780px',
+    maxWidth: '860px',
     margin: '0 auto',
     padding: '3rem 2rem',
   },

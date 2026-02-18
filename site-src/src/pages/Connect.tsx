@@ -59,7 +59,7 @@ export default function Connect() {
 
       {/* License */}
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <h2 style={s.h2}>License</h2>
           <p style={{ fontStyle: 'italic', color: theme.bodyMuted }}>Tools built by cooperatives should benefit cooperatives.</p>
           <p>Habitat is released under the <strong>Peer Production License</strong> (CopyFarLeft). Free to use for worker-owned cooperatives, collectives, commons-based organizations, and non-profits. For-profit enterprises under traditional corporate governance must obtain a commercial license.</p>

@@ -30,7 +30,7 @@ export default function Home() {
       </Prose>
 
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <h2 style={s.h2}>The Insight</h2>
           <p><strong>Tools shape what you can see.</strong> What you can see determines whether you extract or enrich.</p>
           <p>An organization that wants to distribute governance, track contributions fairly, and strengthen the ecosystem it operates within needs tools built for that purpose. Not a spreadsheet adapted from corporate finance. Not a DAO dashboard with no legal standing. Infrastructure designed from the ground up for organizations that care about <em>how</em> value flows, not just <em>how much</em>.</p>

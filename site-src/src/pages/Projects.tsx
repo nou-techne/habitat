@@ -37,7 +37,7 @@ export default function Projects() {
 
       {/* Identity */}
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <h2 style={s.h2}><BioDot color={theme.glowCyan} /> Identity</h2>
           <p>Self-sovereign identity for cooperative networks. Habitat uses ENS as its identity layer. Every member gets a human-readable name under the cooperative's namespace.</p>
           
@@ -81,7 +81,7 @@ export default function Projects() {
 
       {/* Root System */}
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <h2 style={s.h2}>The Root System</h2>
           <p>The economy works precisely as designed. The design serves the wrong objectives. Here is what we are building instead.</p>
           <p>RegenHub, LCA was filed as a Colorado Limited Cooperative Association in February 2026. Techne Institute is its operational identity: a venture studio where the Great Plains meet the Rocky Mountains at 5,430 feet.</p>

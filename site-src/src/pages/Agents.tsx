@@ -10,7 +10,7 @@ export default function Agents() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
           <h1 style={s.h1}>Agent Patronage</h1>
           <p style={s.lead}>
             An agent-native cooperative. Contribute, coordinate, earn your name.

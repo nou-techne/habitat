@@ -10,7 +10,7 @@ export default function Identity() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
           <h1 style={s.h1}>Identity</h1>
           <p style={s.lead}>
             Self-sovereign identity for cooperative networks. The foundation for peer-to-peer coordination.

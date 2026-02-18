@@ -9,7 +9,7 @@ export default function Thesis() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
           <FL>Thesis</FL>
           <h1 style={s.h1}>The Craft of Coordination</h1>
           <p style={s.lead}>An integrated thesis on compositional fluency, coordination infrastructure, and ecosystem compounding.</p>
@@ -77,7 +77,7 @@ export default function Thesis() {
       </Prose>
 
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <h2 style={s.h2}>VII. Conviction</h2>
           <blockquote style={{
             borderLeft: `3px solid ${theme.glowGreen}`,

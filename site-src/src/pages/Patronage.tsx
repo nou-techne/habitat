@@ -10,7 +10,7 @@ export default function Patronage() {
   return (
     <>
       <TextureBand>
-        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
           <h1 style={s.h1}>Patronage Accounting</h1>
           <p style={s.lead}>
             How cooperatives answer the question: who contributed what, and how does value flow back?
