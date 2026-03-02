@@ -20,3 +20,4 @@ export * from './presence-chat-api.js'
 export * from './patronage.js';
 export * from './patronage-events.js';
 export * from './standing-events.js';
+export * from './moderation-events.js';
