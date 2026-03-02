@@ -23,3 +23,5 @@ export * from './standing-events.js';
 export * from './moderation-events.js';
 export * from './economic-events.js';
 export * from './sprint-workflow.js';
+export * from './contribution-workflow.js';
+export * from './project-workflow.js';
