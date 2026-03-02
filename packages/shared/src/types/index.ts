@@ -25,3 +25,4 @@ export * from './economic-events.js';
 export * from './sprint-workflow.js';
 export * from './contribution-workflow.js';
 export * from './project-workflow.js';
+export * from './venture-patronage-workflow.js';
