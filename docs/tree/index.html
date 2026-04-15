@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<script>(function(){var t=localStorage.getItem('techne-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}})()</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Map — Habitat</title>
+<meta name="description" content="Navigation map of the Habitat ecosystem — composable coordination infrastructure for organizations that enrich their ecosystems.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://the-habitat.org/tree/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Site Map — Habitat">
+<meta property="og:description" content="Navigation map of the Habitat ecosystem — composable coordination infrastructure for organizations that enrich their ecosystems.">
+<meta property="og:url" content="https://the-habitat.org/tree/">
+<meta property="og:site_name" content="Habitat">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens — dark default */
+  :root {
+    --void: #0c0c0c;
+    --surface: #161616;
+    --panel: #222222;
+    --raised: #2a2a2a;
+    --border: #383838;
+    --border-dim: #2a2a2a;
+    --gold: #c4956a;
+    --parchment: #f0f0f0;
+    --warm: #d0d0d0;
+    --muted: #9a9a9a;
+    --dim: #707070;
+    --ghost: #505050;
+    /* Zone accent colors */
+    --z0: #7cc868;   /* coordination — green */
+    --z1: #58c8a8;   /* infrastructure — teal */
+    --z2: #c8844a;   /* economic — amber */
+    --z3: #5898c8;   /* identity — blue */
+    --z4: #a888c8;   /* knowledge — purple */
+    --z5: #c86888;   /* legal/compliance — rose */
+  }
+  [data-theme="light"] {
+    --void: #f5f3f0;
+    --surface: #ffffff;
+    --panel: #f0ede8;
+    --raised: #e8e4dd;
+    --border: rgba(0,0,0,0.12);
+    --border-dim: rgba(0,0,0,0.07);
+    --gold: #a07850;
+    --parchment: #1a1a1a;
+    --warm: #333333;
+    --muted: #666666;
+    --dim: #888888;
+    --ghost: #aaaaaa;
+    --z0: #3a8a28;
+    --z1: #1a7858;
+    --z2: #a06030;
+    --z3: #1a58a8;
+    --z4: #7060a8;
+    --z5: #a03860;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--warm);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.2s, color 0.2s;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Nav */
+  .site-nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 2rem;
+    background: var(--void);
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+  .nav-home {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--dim); transition: color 0.15s;
+  }
+  .nav-home:hover { color: var(--gold); text-decoration: none; }
+  .nav-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ghost);
+  }
+  .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+
+  /* View toggle */
+  .view-tabs {
+    display: flex; gap: 2px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px;
+  }
+  .view-tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 3px; border: none; cursor: pointer;
+    background: transparent; color: var(--dim); transition: all 0.12s;
+  }
+  .view-tab.active { background: var(--raised); color: var(--parchment); }
+  .view-tab:hover:not(.active) { color: var(--warm); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.3rem 0.65rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    cursor: pointer; flex-shrink: 0; transition: background 0.12s, color 0.12s;
+  }
+  .theme-toggle:hover { background: var(--raised); color: var(--parchment); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .theme-icon { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+  .theme-icon-moon { fill: currentColor; stroke: none; }
+
+  /* Page */
+  .page { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+  /* Hero */
+  .hero { margin-bottom: 2.5rem; }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem; display: block;
+  }
+  h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2.2rem; font-weight: 400;
+    color: var(--parchment); line-height: 1.2; letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .hero-body { font-size: 1rem; color: var(--muted); max-width: 560px; }
+
+  /* Legend */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.63rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--dim);
+  }
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* Zone groups */
+  .zone-group { margin-bottom: 2rem; }
+  .zone-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+  .zone-bar { width: 3px; height: 1.1rem; border-radius: 2px; flex-shrink: 0; }
+  .zone-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim);
+  }
+  .zone-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.65rem; }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 1rem 1.1rem;
+    border-left: 3px solid var(--accent, var(--border));
+    transition: border-color 0.12s, background 0.12s;
+    text-decoration: none; display: block; cursor: pointer;
+  }
+  .card:hover { background: var(--panel); text-decoration: none; }
+  .card-path {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em;
+    color: var(--accent, var(--gold)); opacity: 0.75;
+    margin-bottom: 0.35rem;
+  }
+  .card-title {
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--parchment); margin-bottom: 0.3rem;
+  }
+  .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  /* HUD view */
+  #hud-view {
+    display: none;
+    position: fixed; inset: 0; z-index: 50;
+    background: var(--void);
+    font-family: 'IBM Plex Mono', monospace;
+    overflow: hidden;
+  }
+  .hud-shell { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+  .hud-topbar {
+    height: 44px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .hud-title {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hud-controls { display: flex; align-items: center; gap: 0.5rem; }
+  .hud-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 3px; border: 1px solid var(--border);
+    background: transparent; color: var(--dim); cursor: pointer; transition: all 0.12s;
+  }
+  .hud-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .hud-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .hud-zone {
+    background: var(--void);
+    padding: 0.85rem 1rem;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .hud-zone-header {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 0.6rem; flex-shrink: 0;
+  }
+  .hud-zone-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .hud-zone-label {
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim);
+  }
+  .hud-items { display: flex; flex-direction: column; gap: 0.3rem; overflow: hidden; }
+  .hud-item {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    padding: 0.25rem 0.4rem; border-radius: 3px;
+    text-decoration: none; transition: background 0.1s;
+  }
+  .hud-item:hover { background: var(--panel); text-decoration: none; }
+  .hud-item-path {
+    font-size: 0.62rem; color: var(--dim); flex-shrink: 0; letter-spacing: 0.03em;
+    min-width: 80px;
+  }
+  .hud-item-name { font-size: 0.78rem; color: var(--warm); }
+  .hud-statusbar {
+    height: 26px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
+    background: var(--panel); border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .hud-status-left { font-size: 0.6rem; color: var(--ghost); letter-spacing: 0.06em; }
+  .hud-status-right { font-size: 0.6rem; color: var(--ghost); letter-spacing: 0.06em; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 3rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--ghost);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .zone-cards { grid-template-columns: 1fr; }
+    .hud-main { grid-template-columns: 1fr; grid-template-rows: none; }
+    .nav-title { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-home" href="/">← Habitat</a>
+  <span class="nav-title">Site Map</span>
+  <div class="nav-right">
+    <div class="view-tabs" role="tablist" aria-label="View mode">
+      <button class="view-tab active" id="tab-list" role="tab" aria-selected="true" onclick="switchView('list')">List</button>
+      <button class="view-tab" id="tab-hud" role="tab" aria-selected="false" onclick="switchView('hud')">HUD</button>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
+      <svg class="theme-icon" id="icon-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><line x1="8" y1="1" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="1" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="15" y2="8"/><line x1="3.05" y1="3.05" x2="4.46" y2="4.46"/><line x1="11.54" y1="11.54" x2="12.95" y2="12.95"/><line x1="12.95" y1="3.05" x2="11.54" y2="4.46"/><line x1="4.46" y1="11.54" x2="3.05" y2="12.95"/></svg>
+      <svg class="theme-icon theme-icon-moon" id="icon-moon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>
+      <span id="theme-label">Light</span>
+    </button>
+  </div>
+</nav>
+
+<!-- List view -->
+<div id="list-view">
+<main class="page">
+
+  <div class="hero">
+    <span class="hero-eyebrow">Site Map</span>
+    <h1>Habitat</h1>
+    <p class="hero-body">Composable coordination infrastructure for organizations that enrich their ecosystems. Three layers: patronage accounting, composable tools, and cloud credits.</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z0)"></div>Coordination</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z1)"></div>Infrastructure</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z2)"></div>Economics</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z3)"></div>Identity</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z4)"></div>Knowledge</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--z5)"></div>Legal</div>
+  </div>
+
+  <!-- Coordination -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z0)"></div>
+      <span class="zone-name">Coordination</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/" style="--accent:var(--z0)">
+        <div class="card-path">/</div>
+        <div class="card-title">Home</div>
+        <p class="card-desc">Composable coordination infrastructure. The case for organizations that enrich their ecosystems.</p>
+      </a>
+      <a class="card" href="/patterns" style="--accent:var(--z0)">
+        <div class="card-path">/patterns</div>
+        <div class="card-title">Patterns</div>
+        <p class="card-desc">Coordination patterns and anti-patterns. How organizations navigate cooperation, competition, and commons.</p>
+      </a>
+      <a class="card" href="/matrix" style="--accent:var(--z0)">
+        <div class="card-path">/matrix</div>
+        <div class="card-title">Habitat Matrix</div>
+        <p class="card-desc">Interactive visualization of organizational governance modes — from parasitic extraction to regenerative commons.</p>
+      </a>
+      <a class="card" href="/agents" style="--accent:var(--z0)">
+        <div class="card-path">/agents</div>
+        <div class="card-title">Agents</div>
+        <p class="card-desc">AI agents as first-class participants in coordination systems. How autonomous agents interact with cooperative infrastructure.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Infrastructure -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z1)"></div>
+      <span class="zone-name">Infrastructure</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/rea" style="--accent:var(--z1)">
+        <div class="card-path">/rea</div>
+        <div class="card-title">REA Ontology</div>
+        <p class="card-desc">Resource-Event-Agent: the foundational data model for economic activity. How Habitat represents value flows.</p>
+      </a>
+      <a class="card" href="/case-study" style="--accent:var(--z1)">
+        <div class="card-path">/case-study</div>
+        <div class="card-title">Case Study</div>
+        <p class="card-desc">Habitat in practice. A concrete example of coordination infrastructure applied to a real cooperative context.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Economics -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z2)"></div>
+      <span class="zone-name">Economics</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/patronage" style="--accent:var(--z2)">
+        <div class="card-path">/patronage</div>
+        <div class="card-title">Patronage Accounting</div>
+        <p class="card-desc">LCA capital accounts, Subchapter K / IRC 704(b). How cooperatives track and distribute value to members.</p>
+      </a>
+      <a class="card" href="/thesis" style="--accent:var(--z2)">
+        <div class="card-path">/thesis</div>
+        <div class="card-title">Thesis</div>
+        <p class="card-desc">The core argument: why composable coordination infrastructure creates durable value for ecosystems and their participants.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Identity -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z3)"></div>
+      <span class="zone-name">Identity</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/identity" style="--accent:var(--z3)">
+        <div class="card-path">/identity</div>
+        <div class="card-title">Identity</div>
+        <p class="card-desc">On-chain identity for organizations and agents. ERC-8004 and the trust infrastructure beneath coordination.</p>
+      </a>
+      <a class="card" href="/about" style="--accent:var(--z3)">
+        <div class="card-path">/about</div>
+        <div class="card-title">About</div>
+        <p class="card-desc">Who built Habitat and why. The cooperative and individual contributors behind the infrastructure.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Knowledge -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z4)"></div>
+      <span class="zone-name">Knowledge</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/glossary" style="--accent:var(--z4)">
+        <div class="card-path">/glossary</div>
+        <div class="card-title">Glossary</div>
+        <p class="card-desc">Shared definitions for coordination terms. From patronage to REA, from LCA to cloud credits.</p>
+      </a>
+      <a class="card" href="/journal" style="--accent:var(--z4)">
+        <div class="card-path">/journal</div>
+        <div class="card-title">Journal</div>
+        <p class="card-desc">Build journal and working notes. The documented practice behind the infrastructure.</p>
+      </a>
+      <a class="card" href="/faq" style="--accent:var(--z4)">
+        <div class="card-path">/faq</div>
+        <div class="card-title">FAQ</div>
+        <p class="card-desc">Common questions about Habitat, the cooperative model, and how coordination infrastructure works in practice.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Legal -->
+  <div class="zone-group">
+    <div class="zone-header">
+      <div class="zone-bar" style="background:var(--z5)"></div>
+      <span class="zone-name">Legal</span>
+    </div>
+    <div class="zone-cards">
+      <a class="card" href="/compliance" style="--accent:var(--z5)">
+        <div class="card-path">/compliance</div>
+        <div class="card-title">Compliance</div>
+        <p class="card-desc">Legal and regulatory posture. How Habitat structures cooperative operations within applicable law.</p>
+      </a>
+      <a class="card" href="/license" style="--accent:var(--z5)">
+        <div class="card-path">/license</div>
+        <div class="card-title">License</div>
+        <p class="card-desc">Terms of use and licensing for Habitat infrastructure and its constituent components.</p>
+      </a>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>the-habitat.org</span>
+    <span>RegenHub, LCA · Techne Studio · Boulder, CO</span>
+  </footer>
+
+</main>
+</div><!-- /list-view -->
+
+<!-- HUD view -->
+<div id="hud-view">
+  <div class="hud-shell">
+    <div class="hud-topbar">
+      <span class="hud-title">Habitat / Site Map</span>
+      <div class="hud-controls">
+        <button class="hud-btn" id="hud-theme-btn" aria-label="Toggle theme">Theme</button>
+        <button class="hud-btn" onclick="switchView('list')" aria-label="Exit HUD (Escape)">Exit HUD</button>
+      </div>
+    </div>
+    <div class="hud-main">
+
+      <!-- Coordination -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z0)"></div>
+          <span class="hud-zone-label">Coordination</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/"><span class="hud-item-path">/</span><span class="hud-item-name">Home</span></a>
+          <a class="hud-item" href="/patterns"><span class="hud-item-path">/patterns</span><span class="hud-item-name">Patterns</span></a>
+          <a class="hud-item" href="/matrix"><span class="hud-item-path">/matrix</span><span class="hud-item-name">Habitat Matrix</span></a>
+          <a class="hud-item" href="/agents"><span class="hud-item-path">/agents</span><span class="hud-item-name">Agents</span></a>
+        </div>
+      </div>
+
+      <!-- Infrastructure -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z1)"></div>
+          <span class="hud-zone-label">Infrastructure</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/rea"><span class="hud-item-path">/rea</span><span class="hud-item-name">REA Ontology</span></a>
+          <a class="hud-item" href="/case-study"><span class="hud-item-path">/case-study</span><span class="hud-item-name">Case Study</span></a>
+        </div>
+      </div>
+
+      <!-- Economics -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z2)"></div>
+          <span class="hud-zone-label">Economics</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/patronage"><span class="hud-item-path">/patronage</span><span class="hud-item-name">Patronage Accounting</span></a>
+          <a class="hud-item" href="/thesis"><span class="hud-item-path">/thesis</span><span class="hud-item-name">Thesis</span></a>
+        </div>
+      </div>
+
+      <!-- Identity -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z3)"></div>
+          <span class="hud-zone-label">Identity</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/identity"><span class="hud-item-path">/identity</span><span class="hud-item-name">Identity</span></a>
+          <a class="hud-item" href="/about"><span class="hud-item-path">/about</span><span class="hud-item-name">About</span></a>
+        </div>
+      </div>
+
+      <!-- Knowledge -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z4)"></div>
+          <span class="hud-zone-label">Knowledge</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/glossary"><span class="hud-item-path">/glossary</span><span class="hud-item-name">Glossary</span></a>
+          <a class="hud-item" href="/journal"><span class="hud-item-path">/journal</span><span class="hud-item-name">Journal</span></a>
+          <a class="hud-item" href="/faq"><span class="hud-item-path">/faq</span><span class="hud-item-name">FAQ</span></a>
+        </div>
+      </div>
+
+      <!-- Legal -->
+      <div class="hud-zone">
+        <div class="hud-zone-header">
+          <div class="hud-zone-dot" style="background:var(--z5)"></div>
+          <span class="hud-zone-label">Legal</span>
+        </div>
+        <div class="hud-items">
+          <a class="hud-item" href="/compliance"><span class="hud-item-path">/compliance</span><span class="hud-item-name">Compliance</span></a>
+          <a class="hud-item" href="/license"><span class="hud-item-path">/license</span><span class="hud-item-name">License</span></a>
+        </div>
+      </div>
+
+    </div><!-- /hud-main -->
+    <div class="hud-statusbar">
+      <span class="hud-status-left">the-habitat.org / tree</span>
+      <span class="hud-status-right" id="hud-count">15 pages · 6 zones</span>
+    </div>
+  </div>
+</div><!-- /hud-view -->
+
+<script>
+  var currentView = 'list';
+
+  function switchView(mode) {
+    var listView = document.getElementById('list-view');
+    var hudView  = document.getElementById('hud-view');
+    var tabList  = document.getElementById('tab-list');
+    var tabHud   = document.getElementById('tab-hud');
+
+    currentView = mode;
+
+    if (mode === 'hud') {
+      listView.style.display = 'none';
+      hudView.style.display  = 'block';
+      document.body.style.overflow = 'hidden';
+      tabList.classList.remove('active'); tabList.setAttribute('aria-selected', 'false');
+      tabHud.classList.add('active');     tabHud.setAttribute('aria-selected', 'true');
+    } else {
+      listView.style.display = '';
+      hudView.style.display  = 'none';
+      document.body.style.overflow = '';
+      tabHud.classList.remove('active');  tabHud.setAttribute('aria-selected', 'false');
+      tabList.classList.add('active');    tabList.setAttribute('aria-selected', 'true');
+    }
+  }
+
+  // Escape exits HUD
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && currentView === 'hud') switchView('list');
+  });
+
+  // Theme toggle
+  (function() {
+    var html = document.documentElement;
+    var btn  = document.getElementById('theme-toggle');
+    var sun  = document.getElementById('icon-sun');
+    var moon = document.getElementById('icon-moon');
+    var lbl  = document.getElementById('theme-label');
+    var hudBtn = document.getElementById('hud-theme-btn');
+
+    function apply(t) {
+      html.setAttribute('data-theme', t);
+      try { localStorage.setItem('techne-theme', t); } catch(e) {}
+      if (t === 'light') {
+        if (sun)  sun.style.display = 'none';
+        if (moon) moon.style.display = '';
+        if (lbl)  lbl.textContent = 'Dark';
+        if (hudBtn) hudBtn.textContent = 'Dark';
+      } else {
+        if (sun)  sun.style.display = '';
+        if (moon) moon.style.display = 'none';
+        if (lbl)  lbl.textContent = 'Light';
+        if (hudBtn) hudBtn.textContent = 'Light';
+      }
+    }
+
+    apply(html.getAttribute('data-theme') || 'dark');
+
+    if (btn) btn.addEventListener('click', function() {
+      apply(html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    });
+    if (hudBtn) hudBtn.addEventListener('click', function() {
+      apply(html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    });
+  })();
+</script>
+</body>
+</html>
